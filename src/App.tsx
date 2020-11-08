@@ -17,7 +17,7 @@ const App = () => {
       <CSSReset />
       <Flex height="100vh" direction="column">
         <Header />
-        <Container as="main" flexGrow="1">
+        <Container as="main" flexGrow={1}>
           <BreadCalculator />
         </Container>
         <Footer />
