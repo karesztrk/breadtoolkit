@@ -1,0 +1,10 @@
+[build]
+  publish = "build"
+  command = "yarn build"
+
+
+[[headers]]
+  for = "/_dist_/index.js"
+
+  [headers.values]
+    Content-Type = "application/javascript"
