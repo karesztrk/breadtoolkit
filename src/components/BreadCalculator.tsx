@@ -114,11 +114,9 @@ const BreadCalculator = () => {
           <SliderTrack>
             <SliderFilledTrack />
           </SliderTrack>
-          <SliderThumb
-            fontSize="sm"
-            boxSize="32px"
-            children={`${sourdoughRatio}%`}
-          />
+          <SliderThumb fontSize="sm" boxSize="32px">
+            {sourdoughRatio}%
+          </SliderThumb>
         </Slider>
       </Stack>
     </Box>
