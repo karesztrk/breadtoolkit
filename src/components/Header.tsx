@@ -16,14 +16,14 @@ const Header = () => {
       mb="10"
     >
       <Flex align="center" mr={5} justifyContent="space-between">
-        <Flex alignItems="center" direction="row">
-          <Link to="/">
+        <Link to="/">
+          <Flex alignItems="center" direction="row">
             <Image height="60px" src={logo} alt="logo" />
             <Heading as="h1" size="lg" letterSpacing={'-.1rem'} mx="2">
               Bread toolkit
             </Heading>
-          </Link>
-        </Flex>
+          </Flex>
+        </Link>
       </Flex>
 
       <Box alignItems="center">
