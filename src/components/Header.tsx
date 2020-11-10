@@ -1,6 +1,6 @@
 import { Image, Box, Flex, Heading, Text } from '@chakra-ui/core';
 import React from 'react';
-import logo from '../assets/logo.svg';
+import logo from '@app/assets/logo.svg';
 import { Link } from 'react-router-dom';
 
 const Header = () => {

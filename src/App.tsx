@@ -8,10 +8,10 @@ import {
   Flex,
 } from '@chakra-ui/core';
 import { BrowserRouter as Router, Route } from 'react-router-dom';
-import BreadCalculator from './components/BreadCalculator';
-import Header from './components/Header';
-import Footer from './components/Footer';
-import Home from './components/Home';
+import BreadCalculator from '@app/components/BreadCalculator';
+import Header from '@app/components/Header';
+import Footer from '@app/components/Footer';
+import Home from '@app/components/Home';
 
 const App = () => {
   return (
