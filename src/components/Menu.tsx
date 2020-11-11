@@ -1,6 +1,6 @@
 import { changeLanguage } from '@app/util/languageUtil';
 import { Box, Icon, Link, Stack, Text, Select } from '@chakra-ui/core';
-import React from 'react';
+import React, { ChangeEvent } from 'react';
 import { useTranslation } from 'react-i18next';
 
 const Menu = () => {
