@@ -1,9 +1,12 @@
-import { Image, Box, Flex, Heading, Text } from '@chakra-ui/core';
+import { Flex } from '@chakra-ui/core';
 import React from 'react';
-import logo from '@app/assets/logo.svg';
 import { Link } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
+import Menu from './Menu';
+import Brand from './Brand';
 
 const Header = () => {
+  const [t] = useTranslation();
   return (
     <Flex
       as="nav"
@@ -17,20 +20,10 @@ const Header = () => {
     >
       <Flex align="center" mr={5} justifyContent="space-between">
         <Link to="/">
-          <Flex alignItems="center" direction="row">
-            <Image height="60px" src={logo} alt="logo" />
-            <Heading as="h1" size="lg" letterSpacing={'-.1rem'} mx="2">
-              Bread toolkit
-            </Heading>
-          </Flex>
+          <Brand />
         </Link>
       </Flex>
-
-      <Box alignItems="center">
-        <Text mr={6} display="block">
-          <Link to="/calculator">Calculator</Link>
-        </Text>
-      </Box>
+      <Menu />
     </Flex>
   );
 };

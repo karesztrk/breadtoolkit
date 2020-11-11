@@ -1,12 +1,14 @@
 import { Grid, Heading, Box, Text } from '@chakra-ui/core';
 import React from 'react';
 import { Link } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
 
 const Home = () => {
+  const [t] = useTranslation();
   return (
     <>
       <Heading as="h1" size="2xl" mb="10">
-        Baking delicious 🍞 using BreadTookit
+        {t('home.header')}
       </Heading>
       <Grid templateColumns="repeat(2, 1fr)" gap={6}>
         <Link to="/calculator">
@@ -18,11 +20,9 @@ const Home = () => {
             borderColor="gray.200"
           >
             <Heading as="h3" size="lg" mb="3">
-              Calculator
+              {t('home.calculator.title')}
             </Heading>
-            <Text>
-              Calculate your dough hydratation and the amount of ingredients
-            </Text>
+            <Text>{t('home.calculator.description')}</Text>
           </Box>
         </Link>
       </Grid>

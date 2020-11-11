@@ -1,0 +1,15 @@
+{
+    "home.header": "Baking delicious 🍞 using BreadToolkit",
+    "home.calculator.title": "Calculator",
+    "home.calculator.description": "Calculate your dough hydratation and the amount of ingredients",
+    "language.en": "english",
+    "language.hu": "hungarian",
+    "header.calculator.title": "Calculator",
+    "calculator.doughWeight.text": "Dough weights",
+    "calculator.gram.text": "gram",
+    "calculator.hydratation.text": "Hydratation is",
+    "calculator.flour.label": "Flour",
+    "calculator.water.label": "Water",
+    "calculator.salt.label": "Salt",
+    "calculator.sourdough.label": "Sourdough"
+}

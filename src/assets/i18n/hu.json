@@ -1,0 +1,15 @@
+{
+    "home.header": "Süssünk 🍞 a BreadToolkit-el",
+    "home.calculator.title": "Kalkulátor",
+    "home.calculator.description": "Kalkuláld ki a tészta hidratáltságát és a hozzávalókat",
+    "language.en": "angol",
+    "language.hu": "magyar",
+    "header.calculator.title": "Kalkulátor",
+    "calculator.doughWeight.text": "A tészta súlya",
+    "calculator.gram.text": "gramm",
+    "calculator.hydratation.text": "Víztartalom",
+    "calculator.flour.label": "Liszt",
+    "calculator.water.label": "Víz",
+    "calculator.salt.label": "Só",
+    "calculator.sourdough.label": "Kovász"
+}

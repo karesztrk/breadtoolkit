@@ -7,12 +7,12 @@ import {
   FlexProps,
 } from '@chakra-ui/core';
 import React from 'react';
-import facebook from '@app/assets/facebook.svg';
-import gitHub from '@app/assets/github.svg';
-import google from '@app/assets/google.svg';
-import instagram from '@app/assets/instagram.svg';
-import skype from '@app/assets/skype.svg';
-import youtube from '@app/assets/youtube.svg';
+import facebook from '@app/assets/icons/facebook.svg';
+import gitHub from '@app/assets/icons/github.svg';
+import google from '@app/assets/icons/google.svg';
+import instagram from '@app/assets/icons/instagram.svg';
+import skype from '@app/assets/icons/skype.svg';
+import youtube from '@app/assets/icons/youtube.svg';
 
 const Footer = () => {
   const variant = useBreakpointValue({ base: 'column', md: 'row' });
