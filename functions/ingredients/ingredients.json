@@ -1,0 +1,24 @@
+[
+    {
+       "key": "egg",
+       "name":"ingredient.egg.name",
+       "water": 75,
+       "calories": 143,
+       "macros":{
+          "protein": 12.6,
+          "fat": 9.5,
+          "carb": 0.7
+       }
+    },
+    {
+       "key": "butter",
+       "name":"ingredient.butter.name",
+       "water": 16,
+       "calories": 742,
+       "macros":{
+          "protein": 0.4,
+          "fat": 80,
+          "carb": 0.5
+       }
+    }
+ ]

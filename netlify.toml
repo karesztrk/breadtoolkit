@@ -1,7 +1,15 @@
 [build]
   publish = "build"
   command = "yarn build"
+  functions = "functions"
 
+[dev]
+  framework = "#custom"
+  command = "yarn start"
+  targetPort = 3000
+  port = 8888
+  publish = "build"
+  autoLaunch = false
 
 [[headers]]
   for = "/_dist_/index.js"

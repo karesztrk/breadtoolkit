@@ -22,7 +22,7 @@ module.exports = {
     /* ... */
   },
   proxy: {
-    /* ... */
+    '/api': 'http://localhost:8888/api',
   },
   alias: {
     '@app': './src',

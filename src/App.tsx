@@ -12,8 +12,14 @@ import BreadCalculator from '@app/components/BreadCalculator';
 import Header from '@app/components/Header';
 import Footer from '@app/components/Footer';
 import Home from '@app/components/Home';
+import axios from 'axios';
+
+const call = async () => {
+  axios.get('/api/ingredients').then((response) => console.log(response.data));
+};
 
 const App = () => {
+  call();
   return (
     <Router>
       <ThemeProvider theme={theme}>
