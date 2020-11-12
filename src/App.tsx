@@ -12,12 +12,14 @@ import BreadCalculator from '@app/components/BreadCalculator';
 import Header from '@app/components/Header';
 import Footer from '@app/components/Footer';
 import Home from '@app/components/Home';
+import Meta from './components/Meta';
 
 const App = () => {
   return (
     <Router>
       <ThemeProvider theme={theme}>
         <CSSReset />
+        <Meta />
         <Flex height="100vh" direction="column">
           <Header />
           <Container as="main" flexGrow={1}>
