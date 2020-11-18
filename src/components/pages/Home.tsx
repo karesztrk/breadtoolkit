@@ -1,6 +1,8 @@
-import { Heading, Text, Container } from '@chakra-ui/core';
+import { Heading, Text, Container, Grid, Box } from '@chakra-ui/core';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
+import { Link } from 'react-router-dom';
+import ToolCard from '../common/ToolCard';
 
 const Home = () => {
   const [t] = useTranslation();
@@ -8,6 +10,7 @@ const Home = () => {
     <Container maxW="xl" my="20">
       <Heading
         as="h1"
+        fontFamily="hero"
         fontSize={['5rem', '7rem', '9rem']}
         textTransform="uppercase"
         color="brand.300"
@@ -19,35 +22,29 @@ const Home = () => {
       <Heading
         as="h2"
         size="xl"
+        fontFamily="hero"
         textTransform="uppercase"
         color="brand.300"
         ml={['1rem', '4rem']}
+        mb={2}
+        textShadow="1px 1px 3px white"
       >
         {t('home.title.suffix')}
       </Heading>
       <Text color="brand.400">{t('home.description')}</Text>
 
-      {/* <Grid templateColumns="repeat(2, 1fr)" gap={6}>
+      <Grid
+        my={20}
+        templateColumns={['1fr', 'repeat(2, 1fr)', 'repeat(3, 1fr)']}
+        gap={6}
+      >
         <Link to="/calculator">
-          <Box
-            borderWidth="1px"
-            rounded="md"
-            p="3"
-            boxShadow="sm"
-            borderColor="gray.200"
-            transition="all 0.15s ease"
-            _hover={{
-              transform: 'scale(1.1)',
-              boxShadow: 'md',
-            }}
-          >
-            <Heading as="h3" size="lg" mb="3">
-              {t('home.calculator.title')}
-            </Heading>
-            <Text>{t('home.calculator.description')}</Text>
-          </Box>
+          <ToolCard
+            title={t('home.calculator.title')}
+            description={t('home.calculator.description')}
+          />
         </Link>
-      </Grid> */}
+      </Grid>
     </Container>
   );
 };

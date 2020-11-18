@@ -24,6 +24,22 @@
 
 @font-face {
   font-family: 'Montserrat';
+  font-weight: 500;
+  font-style: normal;
+  font-display: fallback;
+  src: url('../fonts/Montserrat-Medium.ttf') format('truetype');
+}
+
+@font-face {
+  font-family: 'Montserrat';
+  font-weight: 600;
+  font-style: normal;
+  font-display: fallback;
+  src: url('../fonts/Montserrat-SemiBold.ttf') format('truetype');
+}
+
+@font-face {
+  font-family: 'Montserrat';
   font-weight: 700;
   font-style: normal;
   font-display: fallback;

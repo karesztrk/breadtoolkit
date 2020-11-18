@@ -47,6 +47,10 @@ declare module '*.jpg' {
   const ref: string;
   export default ref;
 }
+declare module '*.webp' {
+  const ref: string;
+  export default ref;
+}
 declare module '*.jpeg' {
   const ref: string;
   export default ref;
