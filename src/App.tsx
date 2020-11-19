@@ -1,6 +1,5 @@
 import React from 'react';
 import './App.css';
-import './fonts.css';
 import { ChakraProvider, Box, Flex } from '@chakra-ui/core';
 import { BrowserRouter as Router, Route } from 'react-router-dom';
 import BreadCalculator from '@app/components/pages/BreadCalculator';
