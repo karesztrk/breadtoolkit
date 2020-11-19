@@ -6,7 +6,8 @@
     "home.calculator.description": "Kalkuláld ki a tésztád hidratáltságát és a hozzávalókat.",
     "language.en": "en",
     "language.hu": "hu",
-    "header.calculator.title": "Kalkulátor",
+    "header.calculator.link": "Kalkulátor",
+    "footer.contact.link": "Kapcsolat",
     "calculator.title": "Kalkulátor",
     "calculator.doughWeight.text": "A tészta súlya",
     "calculator.gram.text": "gramm",
@@ -15,5 +16,6 @@
     "calculator.water.label": "Víz",
     "calculator.salt.label": "Só",
     "calculator.sourdough.label": "Kovász",
-    "calculator.sourdough.help.text": "Kovász mennyisége és hidratáltsága"
+    "calculator.sourdough.help.text": "Kovász mennyisége és hidratáltsága",
+    "contact.title": "Kapcsolat"
 }

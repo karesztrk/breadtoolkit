@@ -1,4 +1,4 @@
-import { Heading, Text, Container, Grid, Box } from '@chakra-ui/core';
+import { Heading, Text, Container, Grid } from '@chakra-ui/core';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { Link } from 'react-router-dom';

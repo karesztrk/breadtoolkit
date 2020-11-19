@@ -13,6 +13,7 @@ import background4K from '@app/assets/images/bg/light/4k.webp';
 import backgroundFHD from '@app/assets/images/bg/light/fhd.webp';
 import backgroundHD from '@app/assets/images/bg/light/hd.webp';
 import theme from './theme';
+import Contact from './components/pages/Contact';
 
 const App = () => {
   return (
@@ -35,6 +36,7 @@ const App = () => {
           <Box as="main" flexGrow={1}>
             <Route path="/" component={Home} exact />
             <Route path="/calculator" component={BreadCalculator} />
+            <Route path="/contact" component={Contact} />
           </Box>
           <Divider color="white" />
           <Footer />

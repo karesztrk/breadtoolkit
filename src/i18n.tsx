@@ -2,7 +2,7 @@ import i18n from 'i18next';
 import { initReactI18next } from 'react-i18next';
 import en from '@app/assets/i18n/en.json';
 import hu from '@app/assets/i18n/hu.json';
-import { loadLanguage } from './util/languageUtil';
+import { loadLanguage } from '@app/util/languageUtil';
 
 const resources = {
   en: {

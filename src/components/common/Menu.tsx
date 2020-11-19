@@ -11,7 +11,7 @@ const Menu = () => {
   return (
     <Stack alignItems="center" direction="row">
       <Text mr={6} display="block">
-        <Link to="/calculator">{t('header.calculator.title')}</Link>
+        <Link to="/calculator">{t('header.calculator.link')}</Link>
       </Text>
       <Box fill="white">
         <Icon boxSize={5} color="white">

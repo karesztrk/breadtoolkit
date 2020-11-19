@@ -138,7 +138,7 @@ const BreadCalculator = () => {
         </Flex>
 
         <Stack>
-          <FormControl>
+          <FormControl mb={2}>
             <FormLabel>{`${t('calculator.flour.label')} (${Math.floor(
               (flour / dough) * 100,
             )}%)`}</FormLabel>
@@ -158,7 +158,7 @@ const BreadCalculator = () => {
             </NumberInput>
           </FormControl>
 
-          <FormControl>
+          <FormControl mb={2}>
             <FormLabel>{`${t('calculator.water.label')} (${Math.floor(
               (water / dough) * 100,
             )}%)`}</FormLabel>
@@ -178,7 +178,7 @@ const BreadCalculator = () => {
             </NumberInput>
           </FormControl>
 
-          <FormControl>
+          <FormControl mb={2}>
             <FormLabel>{`${t('calculator.salt.label')} (${Math.floor(
               (salt / dough) * 100,
             )}%)`}</FormLabel>
@@ -198,7 +198,7 @@ const BreadCalculator = () => {
             </NumberInput>
           </FormControl>
 
-          <FormControl>
+          <FormControl mb={2}>
             <FormLabel>{`${t('calculator.sourdough.label')} (${Math.floor(
               (sourdough / dough) * 100,
             )}%)`}</FormLabel>
