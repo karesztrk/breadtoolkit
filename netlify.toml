@@ -10,6 +10,11 @@
   publish = "build"
   autoLaunch = false
 
+[[redirects]]
+  from =  "/*"
+  to = "/index.html"
+  status = 200
+
 [[headers]]
   for = "/_dist_/index.js"
 
