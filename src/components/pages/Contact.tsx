@@ -45,14 +45,14 @@ const Contact = () => {
         </Text>
         <form name="contact" method="post">
           <input type="hidden" name="form-name" value="contact" />
-          <FormControl id="email" isRequired mb={2} name="email">
+          <FormControl id="email" isRequired mb={2}>
             <FormLabel req>Email address</FormLabel>
-            <Input type="email" />
+            <Input type="email" name="email" />
             <FormHelperText>We'll never share your email.</FormHelperText>
           </FormControl>
-          <FormControl id="comment" name="comment" isRequired mb={5}>
+          <FormControl id="comment" isRequired mb={5}>
             <FormLabel req>Comment</FormLabel>
-            <Textarea placeholder="Tell your oppinion" />
+            <Textarea placeholder="Tell your oppinion" name="comment" />
           </FormControl>
           <Button colorScheme="orange" type="submit">
             Submit
