@@ -43,14 +43,14 @@ const Contact = () => {
           Do you have any suggestion? Are you eager to have another kind of
           tool? Give us a comment.
         </Text>
-        <form name="contact" method="POST" data-netlify="true">
+        <form name="contact" method="post">
           <input type="hidden" name="form-name" value="contact" />
-          <FormControl id="email" isRequired mb={2}>
+          <FormControl id="email" isRequired mb={2} name="email">
             <FormLabel req>Email address</FormLabel>
             <Input type="email" />
             <FormHelperText>We'll never share your email.</FormHelperText>
           </FormControl>
-          <FormControl id="comment" isRequired mb={5}>
+          <FormControl id="comment" name="comment" isRequired mb={5}>
             <FormLabel req>Comment</FormLabel>
             <Textarea placeholder="Tell your oppinion" />
           </FormControl>
