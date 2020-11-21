@@ -17,5 +17,11 @@
     "calculator.salt.label": "Salt",
     "calculator.sourdough.label": "Sourdough",
     "calculator.sourdough.help.text": "Weight and hydratation of sourdough",
-    "contact.title": "Contact"
+    "contact.title": "Contact",
+    "contact.description": "Do you have any suggestion? Are you eager to have another kind of tool? Give us a comment.",
+    "contact.email.label": "Email address",
+    "contact.email.hint": "We'll never share your email.",
+    "contact.comment.label": "Comment",
+    "contact.comment.placeholder": "Tell your oppinion",
+    "contact.submit.button": "Submit"
 }

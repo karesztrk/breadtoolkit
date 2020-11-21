@@ -40,22 +40,24 @@ const Contact = () => {
         margin="0 auto"
       >
         <Text fontSize="sm" textAlign="justify" mb={2}>
-          Do you have any suggestion? Are you eager to have another kind of
-          tool? Give us a comment.
+          {t('contact.description')}
         </Text>
         <form name="contact" method="post">
           <input type="hidden" name="form-name" value="contact" />
           <FormControl id="email" isRequired mb={2}>
-            <FormLabel req>Email address</FormLabel>
+            <FormLabel req>{t('contact.email.label')}</FormLabel>
             <Input type="email" name="email" />
-            <FormHelperText>We'll never share your email.</FormHelperText>
+            <FormHelperText>{t('contact.email.hint')}</FormHelperText>
           </FormControl>
           <FormControl id="comment" isRequired mb={5}>
-            <FormLabel req>Comment</FormLabel>
-            <Textarea placeholder="Tell your oppinion" name="comment" />
+            <FormLabel req>{t('contact.comment.label')}</FormLabel>
+            <Textarea
+              placeholder={t('contact.comment.placeholder')}
+              name="comment"
+            />
           </FormControl>
           <Button colorScheme="orange" type="submit">
-            Submit
+            {t('contact.submit.button')}
           </Button>
         </form>
       </Box>

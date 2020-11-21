@@ -17,5 +17,11 @@
     "calculator.salt.label": "Só",
     "calculator.sourdough.label": "Kovász",
     "calculator.sourdough.help.text": "Kovász mennyisége és hidratáltsága",
-    "contact.title": "Kapcsolat"
+    "contact.title": "Kapcsolat",
+    "contact.description": "Van egy jó ötleted? Valamilyen másik eszközt is szívesen igénybe vennél? Küdlj egy kommentet.",
+    "contact.email.label": "Email cím",
+    "contact.email.hint": "Email címed biztonságosan kezeljük",
+    "contact.comment.label": "Komment",
+    "contact.comment.placeholder": "Mond el a véleményed",
+    "contact.submit.button": "Küldés"
 }
