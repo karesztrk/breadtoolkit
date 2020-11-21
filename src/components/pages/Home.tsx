@@ -1,8 +1,8 @@
 import { Heading, Text, Container, Grid } from '@chakra-ui/core';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
-import { Link } from 'react-router-dom';
-import ToolCard from '@app/components/common/ToolCard';
+import GridItem from '@app/components/common/ToolCard';
+import CalculatorCard from '../common/CalculatorCard';
 
 const Home = () => {
   const [t] = useTranslation();
@@ -38,12 +38,9 @@ const Home = () => {
         templateColumns={['1fr', 'repeat(2, 1fr)', 'repeat(3, 1fr)']}
         gap={6}
       >
-        <Link to="/calculator">
-          <ToolCard
-            title={t('home.calculator.title')}
-            description={t('home.calculator.description')}
-          />
-        </Link>
+        <GridItem>
+          <CalculatorCard />
+        </GridItem>
       </Grid>
     </Container>
   );
