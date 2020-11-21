@@ -1,17 +1,20 @@
-import { Box } from '@chakra-ui/core';
+import { Box, useColorMode } from '@chakra-ui/core';
 import React, { FC, ReactNode } from 'react';
 import { Link } from 'react-router-dom';
 
-const GridItem: FC<{ children: ReactNode[] | ReactNode }> = ({ children }) => {
+const GridItem: FC<{ to: string; children: ReactNode[] | ReactNode }> = ({
+  to,
+  children,
+}) => {
+  const { colorMode } = useColorMode();
   return (
-    <Link to="/calculator">
+    <Link to={to}>
       <Box
-        bg="white"
+        bg={colorMode === 'light' ? 'white' : '#393432'}
         borderWidth="1px"
         rounded="xl"
         p={[5, 8, 10]}
         boxShadow="md"
-        borderColor="gray.200"
         role="group"
         position="relative"
         zIndex={1}

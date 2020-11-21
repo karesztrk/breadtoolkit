@@ -1,20 +1,39 @@
 import { changeLanguage } from '@app/util/languageUtil';
-import { Box, Icon, Link, Stack, Text, Select } from '@chakra-ui/core';
+import {
+  Box,
+  Icon,
+  Link,
+  Stack,
+  Text,
+  Select,
+  Switch,
+  useColorMode,
+} from '@chakra-ui/core';
 import React, { ChangeEvent } from 'react';
 import { useTranslation } from 'react-i18next';
 
 const Menu = () => {
   const [t, i18n] = useTranslation();
+  const {} = useColorMode();
   const { language } = i18n;
   const onChangeLanguage = (e: ChangeEvent<HTMLSelectElement>) =>
     changeLanguage(e.target.value);
+  const { colorMode, toggleColorMode } = useColorMode();
   return (
-    <Stack alignItems="center" direction="row">
-      <Text mr={6} display="block">
+    <Stack alignItems="center" direction="row" justify="center">
+      <Text mr={6} display={['none', 'inline']}>
         <Link to="/calculator">{t('header.calculator.link')}</Link>
       </Text>
-      <Box fill="white">
-        <Icon boxSize={5} color="white">
+      <Text display={['none', 'inline']} mx={0}>
+        {colorMode === 'light' ? '🌞' : '🌜'}
+      </Text>
+      <Switch
+        colorScheme="orange"
+        onChange={toggleColorMode}
+        lineHeight={1}
+      ></Switch>
+      <Box>
+        <Icon boxSize={5} color="brand.100">
           <path fill="none" d="M0 0h24v24H0V0z" />
           <path
             fill="currentColor"

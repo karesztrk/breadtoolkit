@@ -8,7 +8,6 @@ import {
   NumberInputStepper,
   NumberIncrementStepper,
   NumberDecrementStepper,
-  Text,
   Stack,
   Slider,
   SliderTrack,
@@ -20,10 +19,11 @@ import {
   StatHelpText,
   IconButton,
   Flex,
-  Tooltip,
   FormControl,
   FormLabel,
   FormHelperText,
+  Text,
+  useColorMode,
 } from '@chakra-ui/core';
 import { RepeatClockIcon } from '@chakra-ui/icons';
 import { useTranslation } from 'react-i18next';
@@ -36,6 +36,8 @@ import {
 
 const BreadCalculator = () => {
   const [t] = useTranslation();
+  const { colorMode } = useColorMode();
+
   const [flour, setFlour] = useState(0);
   const [water, setWater] = useState(0);
   const [salt, setSalt] = useState(0);
@@ -101,27 +103,25 @@ const BreadCalculator = () => {
         fontFamily="hero"
         fontSize={['3rem', '4rem', '5rem']}
         textTransform="uppercase"
-        color="brand.300"
-        opacity={0.3}
+        color={colorMode === 'light' ? 'brand.300' : 'brand.100'}
+        opacity={colorMode === 'light' ? 0.3 : 0.8}
         my={10}
         lineHeight={1}
       >
         {t('calculator.title')}
       </Heading>
       <Box
-        border="1px"
-        boxShadow="md"
-        borderColor="gray.200"
+        boxShadow="2xl"
         p="6"
         rounded="xl"
-        bg="white"
-        color="brand.400"
+        bg={colorMode === 'light' ? 'white' : '#393432'}
+        color={colorMode === 'light' ? 'brand.400' : 'brand.100'}
         maxWidth="md"
         margin="0 auto"
       >
         <Flex justify="space-between" mb={5}>
           <Stat>
-            <StatLabel> {t('calculator.doughWeight.text')}</StatLabel>
+            <StatLabel>{t('calculator.doughWeight.text')}</StatLabel>
             <StatNumber>
               {dough}&nbsp;{gramText}
             </StatNumber>
@@ -229,7 +229,7 @@ const BreadCalculator = () => {
                   <SliderFilledTrack />
                 </SliderTrack>
                 <SliderThumb fontSize="sm" boxSize="32px">
-                  {sourdoughRatio}%
+                  <Text color="brand.400">{sourdoughRatio}%</Text>
                 </SliderThumb>
               </Slider>
             </Stack>

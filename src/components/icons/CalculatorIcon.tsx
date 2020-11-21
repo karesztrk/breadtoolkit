@@ -1,23 +1,24 @@
-import { ChakraProps, Icon } from '@chakra-ui/core';
+import { ChakraProps, Icon, useColorMode } from '@chakra-ui/core';
 import React from 'react';
 
 const CalculatorIcon = (props: ChakraProps) => {
+  const { colorMode } = useColorMode();
   return (
     <Icon viewBox="0 0 64 64" {...props}>
       <path
-        fill="#ffa88a"
+        fill={colorMode === 'light' ? '#ffa88a' : '#fbd38d'}
         d="M57,5V59a2,2,0,0,1-4,0V5a2,2,0,0,1,2-2,2,2,0,0,1,2,2Z"
       />
       <path
-        fill="#fd9467"
+        fill={colorMode === 'light' ? '#ffa88a' : '#fbd38d'}
         d="M57,5V41.9a27.37,27.37,0,0,1-4,2.93V5a2,2,0,0,1,2-2,2,2,0,0,1,2,2Z"
       />
       <path
-        fill="#ffa88a"
+        fill={colorMode === 'light' ? '#ffa88a' : '#fbd38d'}
         d="M11,5V59a2,2,0,0,1-4,0V5A2,2,0,0,1,9,3a2,2,0,0,1,2,2Z"
       />
       <path
-        fill="#fd9467"
+        fill={colorMode === 'light' ? '#ffa88a' : '#fbd38d'}
         d="M11,5V41.9a27.37,27.37,0,0,1-4,2.93V5A2,2,0,0,1,9,3a2,2,0,0,1,2,2Z"
       />
       <circle cx="18" cy="14" r="3" fill="#61c3b6" />

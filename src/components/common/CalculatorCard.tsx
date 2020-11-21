@@ -1,10 +1,11 @@
-import { Heading, Text } from '@chakra-ui/core';
+import { Heading, Text, Box, useColorMode } from '@chakra-ui/core';
 import React, { FC } from 'react';
 import { useTranslation } from 'react-i18next';
 import CalculatorIcon from '../icons/CalculatorIcon';
 
 const CalculatorCard: FC = () => {
   const [t] = useTranslation();
+  const { colorMode } = useColorMode();
   return (
     <>
       <CalculatorIcon
@@ -14,12 +15,14 @@ const CalculatorCard: FC = () => {
         _groupHover={{
           transform: 'translateY(-200%)',
         }}
+        position="relative"
+        zIndex={1}
       />
       <Heading
         as="h3"
         size="2xl"
-        color="brand.300"
-        opacity={0.3}
+        color={colorMode === 'light' ? 'brand.300' : 'white'}
+        opacity={colorMode === 'light' ? 0.3 : 0.8}
         position="absolute"
         bottom="1rem"
         transition="inherit"
@@ -29,6 +32,7 @@ const CalculatorCard: FC = () => {
         _groupHover={{
           transform: 'translateY(-150%)',
         }}
+        zIndex={0}
       >
         {t('home.calculator.title')}
       </Heading>

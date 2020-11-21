@@ -9,33 +9,33 @@ import {
   Input,
   Text,
   Textarea,
+  useColorMode,
 } from '@chakra-ui/core';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
 
 const Contact = () => {
   const [t] = useTranslation();
+  const { colorMode } = useColorMode();
   return (
     <Container maxW="xl">
       <Heading
         fontFamily="hero"
         fontSize={['3rem', '4rem', '5rem']}
         textTransform="uppercase"
-        color="brand.300"
-        opacity={0.3}
+        color={colorMode === 'light' ? 'brand.300' : 'brand.100'}
+        opacity={colorMode === 'light' ? 0.3 : 0.8}
         my={10}
         lineHeight={1}
       >
         {t('contact.title')}
       </Heading>
       <Box
-        border="1px"
         boxShadow="md"
-        borderColor="gray.200"
         p="6"
         rounded="xl"
-        bg="white"
-        color="brand.400"
+        bg={colorMode === 'light' ? 'white' : '#393432'}
+        color={colorMode === 'light' ? 'brand.400' : 'brand.100'}
         maxWidth="md"
         margin="0 auto"
       >
