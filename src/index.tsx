@@ -1,9 +1,9 @@
 // @ts-nocheck
 import React from 'react';
 import ReactDOM from 'react-dom';
-import App from './App';
-import './index.css';
-import './i18n';
+import App from '@app/App';
+import '@app/index.css';
+import '@app/i18n';
 
 ReactDOM.render(
   <React.StrictMode>

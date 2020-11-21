@@ -2,7 +2,7 @@ import { Heading, Text, Container, Grid } from '@chakra-ui/core';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { Link } from 'react-router-dom';
-import ToolCard from '../common/ToolCard';
+import ToolCard from '@app/components/common/ToolCard';
 
 const Home = () => {
   const [t] = useTranslation();

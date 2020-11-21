@@ -1,6 +1,6 @@
 import React from 'react';
-import './App.css';
-import './fonts.css';
+import '@app/App.css';
+import '@app/fonts.css';
 import { ChakraProvider, Box, Flex } from '@chakra-ui/core';
 import { BrowserRouter as Router, Route } from 'react-router-dom';
 import BreadCalculator from '@app/components/pages/BreadCalculator';
@@ -12,8 +12,8 @@ import Divider from '@app/components/common/Divider';
 import background4K from '@app/assets/images/bg/light/4k.webp';
 import backgroundFHD from '@app/assets/images/bg/light/fhd.webp';
 import backgroundHD from '@app/assets/images/bg/light/hd.webp';
-import theme from './theme';
-import Contact from './components/pages/Contact';
+import theme from '@app/theme';
+import Contact from '@app/components/pages/Contact';
 
 const App = () => {
   return (

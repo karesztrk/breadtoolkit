@@ -1,5 +1,4 @@
 import { extendTheme, Theme, theme } from '@chakra-ui/core';
-import { mode } from '@chakra-ui/theme-tools';
 
 import colors from './colors';
 import Stat from './components/Stat';
