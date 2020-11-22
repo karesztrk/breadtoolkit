@@ -24,6 +24,7 @@ import {
   FormHelperText,
   Text,
   useColorMode,
+  Kbd,
 } from '@chakra-ui/core';
 import { RepeatClockIcon } from '@chakra-ui/icons';
 import { useTranslation } from 'react-i18next';
@@ -156,6 +157,11 @@ const BreadCalculator = () => {
                 <NumberDecrementStepper />
               </NumberInputStepper>
             </NumberInput>
+            <span>
+              (<Kbd>{t('calculator.flour.hint')}</Kbd> + ) <Kbd>&uarr;</Kbd>
+              &nbsp;or&nbsp;
+              <Kbd>&darr;</Kbd>
+            </span>
           </FormControl>
 
           <FormControl mb={2}>
@@ -233,9 +239,7 @@ const BreadCalculator = () => {
                 </SliderThumb>
               </Slider>
             </Stack>
-            <FormHelperText>
-              {t('calculator.sourdough.help.text')}
-            </FormHelperText>
+            <FormHelperText>{t('calculator.sourdough.hint')}</FormHelperText>
           </FormControl>
         </Stack>
       </Box>

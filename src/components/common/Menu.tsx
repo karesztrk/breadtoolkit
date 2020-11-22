@@ -27,11 +27,7 @@ const Menu = () => {
       <Text display={['none', 'inline']} mx={0}>
         {colorMode === 'light' ? '🌞' : '🌜'}
       </Text>
-      <Switch
-        colorScheme="orange"
-        onChange={toggleColorMode}
-        lineHeight={1}
-      ></Switch>
+      <Switch colorScheme="orange" onChange={toggleColorMode} lineHeight={1} />
       <Box>
         <Icon boxSize={5} color="brand.100">
           <path fill="none" d="M0 0h24v24H0V0z" />

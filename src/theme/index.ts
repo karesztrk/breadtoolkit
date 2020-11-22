@@ -1,9 +1,10 @@
-import { extendTheme, Theme, theme } from '@chakra-ui/core';
+import { extendTheme } from '@chakra-ui/core';
 
-import colors from './colors';
-import Stat from './components/Stat';
-import Heading from './components/Heading';
-import Text from './components/Text';
+import colors from '@app/theme/colors';
+import Stat from '@app/theme/components/Stat';
+import Heading from '@app/theme/components/Heading';
+import Text from '@app/theme/components/Text';
+import Select from '@app/theme/components/Select';
 
 const overrides = {
   colors,
@@ -16,6 +17,7 @@ const overrides = {
     Heading,
     Text,
     Stat,
+    Select,
   },
 };
 
