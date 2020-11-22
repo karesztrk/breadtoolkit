@@ -86,10 +86,16 @@ const BreadCalculator = () => {
   }, [bakersMath, flour, water, salt, sourdough, sourdoughRatio]);
 
   useEffect(() => {
-    const sourDoughLiquid = (sourdough * sourdoughRatio) / 100;
-    const sourDoughFlour = sourdough - sourDoughLiquid;
-    setLiquids(water + sourDoughLiquid);
-  }, [water, sourdoughRatio, sourdough]);
+    if (bakersMath) {
+      const sourDoughFlour = sourdough / (1 + sourdoughRatio / 100);
+      const sourDoughLiquid = sourdough - sourDoughFlour;
+      setLiquids(water + sourDoughLiquid);
+    } else {
+      const sourDoughLiquid = (sourdough * sourdoughRatio) / 100;
+      const sourDoughFlour = sourdough - sourDoughLiquid;
+      setLiquids(water + sourDoughLiquid);
+    }
+  }, [water, sourdoughRatio, sourdough, bakersMath]);
 
   const onResetClick = () => loadSettings(defaultSettings);
 
