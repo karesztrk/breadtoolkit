@@ -1,4 +1,5 @@
 export interface Settings {
+  bakersMath: boolean;
   flour: number;
   water: number;
   salt: number;
@@ -7,6 +8,7 @@ export interface Settings {
 }
 
 export const defaultSettings: Settings = {
+  bakersMath: true,
   flour: 500,
   water: 325,
   salt: 10,

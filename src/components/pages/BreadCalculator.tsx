@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import {
+  Divider,
+  Badge,
   Container,
   Heading,
   Box,
@@ -25,6 +27,9 @@ import {
   Text,
   useColorMode,
   Kbd,
+  Switch,
+  HStack,
+  VStack,
 } from '@chakra-ui/core';
 import { RepeatClockIcon } from '@chakra-ui/icons';
 import { useTranslation } from 'react-i18next';
@@ -39,6 +44,7 @@ const BreadCalculator = () => {
   const [t] = useTranslation();
   const { colorMode } = useColorMode();
 
+  const [bakersMath, setBakersMath] = useState(true);
   const [flour, setFlour] = useState(0);
   const [water, setWater] = useState(0);
   const [salt, setSalt] = useState(0);
@@ -46,6 +52,13 @@ const BreadCalculator = () => {
   const [sourdoughRatio, setSourdoughRatio] = useState(0);
   const dough = flour + water + salt + sourdough;
   const [liquids, setLiquids] = useState(water);
+
+  const flourPercent = bakersMath ? 100 : Math.floor((flour / dough) * 100);
+  const waterPercent = Math.floor((water / (bakersMath ? flour : dough)) * 100);
+  const saltPercent = Math.floor((salt / (bakersMath ? flour : dough)) * 100);
+  const sourDoughPercent = Math.floor(
+    (sourdough / (bakersMath ? flour : dough)) * 100,
+  );
 
   let hydratation: string;
   if (flour < 1) {
@@ -63,13 +76,14 @@ const BreadCalculator = () => {
 
   useEffect(() => {
     saveCalculatorSettings({
+      bakersMath,
       flour,
       water,
       salt,
       sourdough,
       sourdoughRatio,
     });
-  }, [flour, water, salt, sourdough, sourdoughRatio]);
+  }, [bakersMath, flour, water, salt, sourdough, sourdoughRatio]);
 
   useEffect(() => {
     const sourDoughLiquid = (sourdough * sourdoughRatio) / 100;
@@ -80,12 +94,14 @@ const BreadCalculator = () => {
   const onResetClick = () => loadSettings(defaultSettings);
 
   const loadSettings = ({
+    bakersMath,
     flour,
     water,
     salt,
     sourdough,
     sourdoughRatio,
   }: Settings) => {
+    setBakersMath(bakersMath);
     setFlour(flour);
     setWater(water);
     setSalt(salt);
@@ -137,12 +153,11 @@ const BreadCalculator = () => {
             icon={<RepeatClockIcon />}
           />
         </Flex>
-
         <Stack>
           <FormControl mb={2}>
-            <FormLabel>{`${t('calculator.flour.label')} (${Math.floor(
-              (flour / dough) * 100,
-            )}%)`}</FormLabel>
+            <FormLabel>{`${t(
+              'calculator.flour.label',
+            )} (${flourPercent}%)`}</FormLabel>
             <NumberInput
               value={format(flour)}
               min={1}
@@ -159,15 +174,15 @@ const BreadCalculator = () => {
             </NumberInput>
             <span>
               (<Kbd>{t('calculator.flour.hint')}</Kbd> + ) <Kbd>&uarr;</Kbd>
-              &nbsp;or&nbsp;
+              &nbsp;{t('calculator.flour.hint.separator')}&nbsp;
               <Kbd>&darr;</Kbd>
             </span>
           </FormControl>
 
           <FormControl mb={2}>
-            <FormLabel>{`${t('calculator.water.label')} (${Math.floor(
-              (water / dough) * 100,
-            )}%)`}</FormLabel>
+            <FormLabel>{`${t(
+              'calculator.water.label',
+            )} (${waterPercent}%)`}</FormLabel>
             <NumberInput
               value={format(water)}
               min={1}
@@ -185,9 +200,9 @@ const BreadCalculator = () => {
           </FormControl>
 
           <FormControl mb={2}>
-            <FormLabel>{`${t('calculator.salt.label')} (${Math.floor(
-              (salt / dough) * 100,
-            )}%)`}</FormLabel>
+            <FormLabel>{`${t(
+              'calculator.salt.label',
+            )} (${saltPercent}%)`}</FormLabel>
             <NumberInput
               value={format(salt)}
               min={1}
@@ -204,10 +219,10 @@ const BreadCalculator = () => {
             </NumberInput>
           </FormControl>
 
-          <FormControl mb={2}>
-            <FormLabel>{`${t('calculator.sourdough.label')} (${Math.floor(
-              (sourdough / dough) * 100,
-            )}%)`}</FormLabel>
+          <FormControl mb={5}>
+            <FormLabel>{`${t(
+              'calculator.sourdough.label',
+            )} (${sourDoughPercent}%)`}</FormLabel>
 
             <Stack direction={['column', 'row']} spacing={5}>
               <NumberInput
@@ -241,6 +256,19 @@ const BreadCalculator = () => {
             </Stack>
             <FormHelperText>{t('calculator.sourdough.hint')}</FormHelperText>
           </FormControl>
+          <Divider mb={2} />
+          <HStack>
+            <Switch
+              isChecked={bakersMath}
+              onChange={(e) => setBakersMath(e.target.checked)}
+            />
+            <Text fontSize="sm">
+              {t('calculator.settings.bakersMath.label')}
+            </Text>
+            <Badge ml="1" colorScheme="green">
+              {t('calculator.new.badge')}
+            </Badge>
+          </HStack>
         </Stack>
       </Box>
     </Container>
