@@ -4,7 +4,7 @@ module.exports = {
     src: '/_dist_',
   },
   plugins: [
-    '@snowpack/plugin-react-refresh',
+    '@prefresh/snowpack',
     '@snowpack/plugin-dotenv',
     '@snowpack/plugin-typescript',
     '@snowpack/plugin-optimize',
@@ -26,5 +26,7 @@ module.exports = {
   },
   alias: {
     '@app': './src',
+    react: 'preact/compat',
+    'react-dom': 'preact/compat',
   },
 };
