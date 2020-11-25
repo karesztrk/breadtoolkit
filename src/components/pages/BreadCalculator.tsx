@@ -19,8 +19,6 @@ import {
   StatLabel,
   StatNumber,
   StatHelpText,
-  IconButton,
-  Flex,
   FormControl,
   FormLabel,
   FormHelperText,
@@ -29,7 +27,8 @@ import {
   Kbd,
   Switch,
   HStack,
-  VStack,
+  IconButton,
+  Flex,
 } from '@chakra-ui/core';
 import { RepeatClockIcon } from '@chakra-ui/icons';
 import { useTranslation } from 'react-i18next';
@@ -38,7 +37,15 @@ import {
   saveCalculatorSettings,
   defaultSettings,
   Settings,
+  calcFlourPercent,
+  calcWaterPercent,
+  calcSaltPercent,
+  calcSourDoughPercent,
+  calcHydratation,
+  calcSourDoughLiquid,
+  deriveIngredientsFromGoal,
 } from '@app/util/calculatorUtil';
+import EditableText from '@app/components/common/EditableText';
 
 const BreadCalculator = () => {
   const [t] = useTranslation();
@@ -53,21 +60,16 @@ const BreadCalculator = () => {
   const dough = flour + water + salt + sourdough;
   const [liquids, setLiquids] = useState(water);
 
-  const flourPercent = bakersMath ? 100 : Math.floor((flour / dough) * 100);
-  const waterPercent = Math.floor((water / (bakersMath ? flour : dough)) * 100);
-  const saltPercent = Math.floor((salt / (bakersMath ? flour : dough)) * 100);
-  const sourDoughPercent = Math.floor(
-    (sourdough / (bakersMath ? flour : dough)) * 100,
+  const flourPercent = Math.floor(calcFlourPercent(bakersMath, flour, dough));
+  const waterPercent = Math.floor(
+    calcWaterPercent(bakersMath, flour, water, dough),
   );
-
-  let hydratation: string;
-  if (flour < 1) {
-    hydratation = '100';
-  } else if (liquids > flour) {
-    hydratation = '100+';
-  } else {
-    hydratation = ((liquids / flour) * 100).toPrecision(3);
-  }
+  const saltPercent = Math.floor(
+    calcSaltPercent(bakersMath, flour, salt, dough),
+  );
+  const sourDoughPercent = Math.floor(
+    calcSourDoughPercent(bakersMath, flour, sourdough, dough),
+  );
 
   useEffect(() => {
     const settings = loadCalculatorSettings();
@@ -86,18 +88,35 @@ const BreadCalculator = () => {
   }, [bakersMath, flour, water, salt, sourdough, sourdoughRatio]);
 
   useEffect(() => {
-    if (bakersMath) {
-      const sourDoughFlour = sourdough / (1 + sourdoughRatio / 100);
-      const sourDoughLiquid = sourdough - sourDoughFlour;
-      setLiquids(water + sourDoughLiquid);
-    } else {
-      const sourDoughLiquid = (sourdough * sourdoughRatio) / 100;
-      const sourDoughFlour = sourdough - sourDoughLiquid;
-      setLiquids(water + sourDoughLiquid);
-    }
+    const sourDoughLiquid = calcSourDoughLiquid(
+      bakersMath,
+      sourdough,
+      sourdoughRatio,
+    );
+    setLiquids(water + sourDoughLiquid);
   }, [water, sourdoughRatio, sourdough, bakersMath]);
 
   const onResetClick = () => loadSettings(defaultSettings);
+
+  const getSettings = (): Settings => {
+    return { bakersMath, flour, water, sourdough, salt, sourdoughRatio };
+  };
+
+  const onDoughGoalSubmit = (doughGoal: string) => {
+    const goal = parse(doughGoal);
+    if (!isNaN(goal)) {
+      const { flour, water, sourdough, salt } = deriveIngredientsFromGoal(
+        bakersMath,
+        goal,
+        dough,
+        getSettings(),
+      );
+      setFlour(flour);
+      setWater(water);
+      setSourdough(sourdough);
+      setSalt(salt);
+    }
+  };
 
   const loadSettings = ({
     bakersMath,
@@ -146,11 +165,18 @@ const BreadCalculator = () => {
           <Stat>
             <StatLabel>{t('calculator.doughWeight.text')}</StatLabel>
             <StatNumber>
-              {dough}&nbsp;{gramText}
+              <EditableText
+                value={`${dough} ${gramText}`}
+                onSubmit={onDoughGoalSubmit}
+                parser={parse}
+              >
+                {dough}&nbsp;{gramText}
+              </EditableText>
             </StatNumber>
+
             <StatHelpText>{`${t(
               'calculator.hydratation.text',
-            )} ${hydratation}%`}</StatHelpText>
+            )} ${calcHydratation(flour, liquids)}%`}</StatHelpText>
           </Stat>
           <IconButton
             onClick={onResetClick}
@@ -178,11 +204,11 @@ const BreadCalculator = () => {
                 <NumberDecrementStepper />
               </NumberInputStepper>
             </NumberInput>
-            <span>
+            <Text as="span" display={['none', 'none', 'none', 'inline']}>
               (<Kbd>{t('calculator.flour.hint')}</Kbd> + ) <Kbd>&uarr;</Kbd>
               &nbsp;{t('calculator.flour.hint.separator')}&nbsp;
               <Kbd>&darr;</Kbd>
-            </span>
+            </Text>
           </FormControl>
 
           <FormControl mb={2}>
