@@ -1,22 +1,31 @@
-import React, { FC, ReactNode, useState, useEffect, ChangeEvent } from 'react';
+import React, { FC, ReactNode, useState, useEffect } from 'react';
 import { CheckIcon, CloseIcon, EditIcon } from '@chakra-ui/icons';
-import { ButtonGroup, IconButton, Input, Stack } from '@chakra-ui/core';
+import {
+  ButtonGroup,
+  IconButton,
+  NumberInput,
+  NumberInputField,
+  Stack,
+} from '@chakra-ui/core';
 
-interface EditableTextProps {
-  value: string;
-  onSubmit: (value: string) => void;
+interface EditableNumericTextProps {
+  value: number;
+  onSubmit: (value: number) => void;
   onCancel?: () => void;
   children: ReactNode[] | ReactNode;
   numeric?: boolean;
-  parser?: (value: string) => number;
+  parser: (value: string) => number;
+  formatter: (value: number) => string;
+  pattern: string;
 }
 
-const EditableText: FC<EditableTextProps> = ({
+const EditableNumericText: FC<EditableNumericTextProps> = ({
   value,
   onSubmit,
   children,
-  numeric = true,
   parser,
+  formatter,
+  pattern,
 }) => {
   const [editing, setEditing] = useState(false);
   const [inputValue, setInputValue] = useState(value);
@@ -33,25 +42,23 @@ const EditableText: FC<EditableTextProps> = ({
 
   const toggleEditing = () => setEditing((prevState) => !prevState);
 
-  const onInputValueChange = (e: ChangeEvent<HTMLInputElement>) => {
-    if (numeric && parser) {
-      const parsed = parser(e.target.value);
-      if (!isNaN(parsed)) {
-        setInputValue(e.target.value);
-      }
-    } else {
-      setInputValue(e.target.value);
-    }
-  };
-
   const onSubmitClick = () => {
     onSubmit(inputValue);
     toggleEditing();
   };
   return editing ? (
     <>
-      <Stack direction={['column', 'row']} align="center">
-        <Input value={inputValue} onChange={onInputValueChange} />
+      <Stack direction={['column', 'row']} align={['start', 'center']}>
+        <NumberInput
+          value={formatter(inputValue)}
+          min={1}
+          step={1}
+          onChange={(value) => setInputValue(parser(value))}
+          allowMouseWheel
+          pattern={pattern}
+        >
+          <NumberInputField />
+        </NumberInput>
         <ButtonGroup>
           <IconButton
             aria-label="submit"
@@ -82,4 +89,4 @@ const EditableText: FC<EditableTextProps> = ({
   );
 };
 
-export default EditableText;
+export default EditableNumericText;

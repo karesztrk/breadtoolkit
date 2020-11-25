@@ -45,7 +45,7 @@ import {
   calcSourDoughLiquid,
   deriveIngredientsFromGoal,
 } from '@app/util/calculatorUtil';
-import EditableText from '@app/components/common/EditableText';
+import EditableNumericText from '@app/components/common/EditableNumericText';
 
 const BreadCalculator = () => {
   const [t] = useTranslation();
@@ -102,20 +102,17 @@ const BreadCalculator = () => {
     return { bakersMath, flour, water, sourdough, salt, sourdoughRatio };
   };
 
-  const onDoughGoalSubmit = (doughGoal: string) => {
-    const goal = parse(doughGoal);
-    if (!isNaN(goal)) {
-      const { flour, water, sourdough, salt } = deriveIngredientsFromGoal(
-        bakersMath,
-        goal,
-        dough,
-        getSettings(),
-      );
-      setFlour(flour);
-      setWater(water);
-      setSourdough(sourdough);
-      setSalt(salt);
-    }
+  const onDoughGoalSubmit = (goal: number) => {
+    const { flour, water, sourdough, salt } = deriveIngredientsFromGoal(
+      bakersMath,
+      goal,
+      dough,
+      getSettings(),
+    );
+    setFlour(flour);
+    setWater(water);
+    setSourdough(sourdough);
+    setSalt(salt);
   };
 
   const loadSettings = ({
@@ -162,28 +159,34 @@ const BreadCalculator = () => {
         margin="0 auto"
       >
         <Flex justify="space-between" mb={5}>
-          <Stat>
+          <Stat flex={2}>
             <StatLabel>{t('calculator.doughWeight.text')}</StatLabel>
             <StatNumber>
-              <EditableText
-                value={`${dough} ${gramText}`}
+              <EditableNumericText
+                value={dough}
                 onSubmit={onDoughGoalSubmit}
                 parser={parse}
+                formatter={format}
+                pattern={inputPattern}
               >
                 {dough}&nbsp;{gramText}
-              </EditableText>
+              </EditableNumericText>
             </StatNumber>
 
             <StatHelpText>{`${t(
               'calculator.hydratation.text',
             )} ${calcHydratation(flour, liquids)}%`}</StatHelpText>
           </Stat>
-          <IconButton
-            onClick={onResetClick}
-            variant="outline"
-            aria-label="Reset settings"
-            icon={<RepeatClockIcon />}
-          />
+          <Box flex={1} position="relative">
+            <IconButton
+              position="absolute"
+              right={0}
+              onClick={onResetClick}
+              variant="outline"
+              aria-label="Reset settings"
+              icon={<RepeatClockIcon />}
+            />
+          </Box>
         </Flex>
         <Stack>
           <FormControl mb={2}>
