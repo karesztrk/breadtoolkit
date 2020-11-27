@@ -3,7 +3,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import Menu from '@app/components/common/Menu';
-import Brand from '@app/components/common/Brand';
+import Brand from '@app/components/icons/BrandIcon';
 
 const Header = () => {
   const [t] = useTranslation();
@@ -20,7 +20,7 @@ const Header = () => {
       <Container maxW="xl">
         <Flex align="center" mr={5} justifyContent="space-between">
           <Link to="/">
-            <Brand />
+            <Brand w={9} h={9} />
           </Link>
           <Menu />
         </Flex>
