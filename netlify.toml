@@ -16,7 +16,7 @@
   status = 200
 
 [[headers]]
-  for = "/_dist_/index.js"
+  for = "/__snowpack__/env.js"
 
   [headers.values]
     Content-Type = "application/javascript"
