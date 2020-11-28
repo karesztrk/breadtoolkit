@@ -17,10 +17,15 @@ export const defaultSettings: Settings = {
 };
 
 export const saveCalculatorSettings = (settings: Settings) => {
-  localStorage.setItem('calculator', JSON.stringify(settings));
+  if (typeof window !== 'undefined') {
+    localStorage.setItem('calculator', JSON.stringify(settings));
+  }
 };
 
 export const loadCalculatorSettings = (): Settings => {
+  if (typeof window === 'undefined') {
+    return {} as Settings;
+  }
   const data = localStorage.getItem('calculator');
   if (!data) {
     return defaultSettings;

@@ -1,12 +1,10 @@
 import { Container, Flex } from '@chakra-ui/core';
 import React from 'react';
-import { Link } from 'react-router-dom';
-import { useTranslation } from 'react-i18next';
-import Menu from '@app/components/common/Menu';
-import Brand from '@app/components/icons/BrandIcon';
+import Link from 'next/link';
+import Menu from '@/components/common/Menu';
+import Brand from '@/components/icons/BrandIcon';
 
 const Header = () => {
-  const [t] = useTranslation();
   return (
     <Flex
       as="nav"
@@ -19,8 +17,8 @@ const Header = () => {
     >
       <Container maxW="xl">
         <Flex align="center" mr={5} justifyContent="space-between">
-          <Link to="/">
-            <Brand w={9} h={9} />
+          <Link href="/">
+            <Brand w={9} h={9} cursor="pointer" />
           </Link>
           <Menu />
         </Flex>

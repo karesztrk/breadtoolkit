@@ -1,22 +1,12 @@
 [build]
-  publish = "build"
-  command = "yarn build"
+  command   = "yarn build"
+  functions = "out_functions"
+  publish   = "out_publish"
 
 [dev]
-  framework = "#custom"
-  command = "yarn start"
-  targetPort = 3000
-  port = 8888
-  publish = "build"
-  autoLaunch = false
-
-[[redirects]]
-  from =  "/*"
-  to = "/index.html"
-  status = 200
-
-[[headers]]
-  for = "/_dist_/index.js"
-
-  [headers.values]
-    Content-Type = "application/javascript"
+  functions = "out_functions"
+  publish   = "out_publish"
+  # We manually set the framework to static, otherwise Netlify automatically
+  # detects Next.js and redirects do not work.
+  # Read more: https://github.com/netlify/cli/blob/master/docs/netlify-dev.md#project-detection
+  framework = "#static"
