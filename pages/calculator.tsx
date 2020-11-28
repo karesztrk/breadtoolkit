@@ -44,8 +44,8 @@ import {
   calcHydratation,
   calcSourDoughLiquid,
   deriveIngredientsFromGoal,
-} from '@app/util/calculatorUtil';
-import EditableNumericText from '@app/components/common/EditableNumericText';
+} from '@/util/calculatorUtil';
+import EditableNumericText from '@/components/common/EditableNumericText';
 
 const BreadCalculator = () => {
   const [t] = useTranslation();
@@ -137,11 +137,11 @@ const BreadCalculator = () => {
     Number(val.replace(` ${gramText}`, ''));
   const inputPattern = `[0-9]*(.[0-9]+)? ${gramText}`;
   return (
-    <Container maxW="xl">
+    <Container maxW='xl'>
       <Heading
-        fontFamily="hero"
+        fontFamily='hero'
         fontSize={['3rem', '4rem', '5rem']}
-        textTransform="uppercase"
+        textTransform='uppercase'
         color={colorMode === 'light' ? 'brand.300' : 'brand.100'}
         opacity={colorMode === 'light' ? 0.3 : 0.8}
         my={10}
@@ -150,15 +150,15 @@ const BreadCalculator = () => {
         {t('calculator.title')}
       </Heading>
       <Box
-        boxShadow="2xl"
-        p="6"
-        rounded="xl"
+        boxShadow='2xl'
+        p='6'
+        rounded='xl'
         bg={colorMode === 'light' ? 'white' : '#393432'}
         color={colorMode === 'light' ? 'brand.400' : 'brand.100'}
-        maxWidth="md"
-        margin="0 auto"
+        maxWidth='md'
+        margin='0 auto'
       >
-        <Flex justify="space-between" mb={5}>
+        <Flex justify='space-between' mb={5}>
           <Stat flex={2}>
             <StatLabel>{t('calculator.doughWeight.text')}</StatLabel>
             <StatNumber>
@@ -177,13 +177,13 @@ const BreadCalculator = () => {
               'calculator.hydratation.text',
             )} ${calcHydratation(flour, liquids)}%`}</StatHelpText>
           </Stat>
-          <Box flex={1} position="relative">
+          <Box flex={1} position='relative'>
             <IconButton
-              position="absolute"
+              position='absolute'
               right={0}
               onClick={onResetClick}
-              variant="outline"
-              aria-label="Reset settings"
+              variant='outline'
+              aria-label='Reset settings'
               icon={<RepeatClockIcon />}
             />
           </Box>
@@ -207,7 +207,7 @@ const BreadCalculator = () => {
                 <NumberDecrementStepper />
               </NumberInputStepper>
             </NumberInput>
-            <Text as="span" display={['none', 'none', 'none', 'inline']}>
+            <Text as='span' display={['none', 'none', 'none', 'inline']}>
               (<Kbd>{t('calculator.flour.hint')}</Kbd> + ) <Kbd>&uarr;</Kbd>
               &nbsp;{t('calculator.flour.hint.separator')}&nbsp;
               <Kbd>&darr;</Kbd>
@@ -277,15 +277,15 @@ const BreadCalculator = () => {
               </NumberInput>
               <Slider
                 flex={1}
-                colorScheme="orange"
+                colorScheme='orange'
                 value={sourdoughRatio}
                 onChange={setSourdoughRatio}
               >
                 <SliderTrack>
                   <SliderFilledTrack />
                 </SliderTrack>
-                <SliderThumb fontSize="sm" boxSize="32px">
-                  <Text color="brand.400">{sourdoughRatio}%</Text>
+                <SliderThumb fontSize='sm' boxSize='32px'>
+                  <Text color='brand.400'>{sourdoughRatio}%</Text>
                 </SliderThumb>
               </Slider>
             </Stack>
@@ -297,10 +297,10 @@ const BreadCalculator = () => {
               isChecked={bakersMath}
               onChange={(e) => setBakersMath(e.target.checked)}
             />
-            <Text fontSize="sm">
+            <Text fontSize='sm'>
               {t('calculator.settings.bakersMath.label')}
             </Text>
-            <Badge ml="1" colorScheme="green">
+            <Badge ml='1' colorScheme='green'>
               {t('calculator.new.badge')}
             </Badge>
           </HStack>

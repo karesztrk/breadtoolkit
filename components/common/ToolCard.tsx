@@ -1,6 +1,6 @@
 import { Box, useColorMode } from '@chakra-ui/core';
 import React, { FC, ReactNode } from 'react';
-import { Link } from 'react-router-dom';
+import Link from 'next/link';
 
 const GridItem: FC<{ to: string; children: ReactNode[] | ReactNode }> = ({
   to,
@@ -8,8 +8,9 @@ const GridItem: FC<{ to: string; children: ReactNode[] | ReactNode }> = ({
 }) => {
   const { colorMode } = useColorMode();
   return (
-    <Link to={to}>
+    <Link href={to}>
       <Box
+        cursor="pointer"
         bg={colorMode === 'light' ? 'white' : '#393432'}
         borderWidth="1px"
         rounded="xl"

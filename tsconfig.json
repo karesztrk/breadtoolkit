@@ -1,23 +1,31 @@
 {
-  "include": ["src", "types"],
   "compilerOptions": {
+    "allowJs": true,
+    "alwaysStrict": true,
+    "esModuleInterop": true,
+    "forceConsistentCasingInFileNames": true,
+    "isolatedModules": true,
+    "jsx": "preserve",
+    "lib": ["dom", "es2017"],
     "module": "esnext",
     "target": "esnext",
     "moduleResolution": "node",
-    "jsx": "preserve",
-    "baseUrl": "./",
-    /* paths - If you configure Snowpack import aliases, add them here. */
-    "paths": {
-      "@app/*": ["src/*"],
-    },
-    /* noEmit - Snowpack builds (emits) files, not tsc. */
     "noEmit": true,
-    /* Additional Options */
-    "strict": true,
-    "skipLibCheck": true,
-    "forceConsistentCasingInFileNames": true,
+    "noFallthroughCasesInSwitch": true,
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
     "resolveJsonModule": true,
+    "skipLibCheck": true,
+    "strict": true,
     "allowSyntheticDefaultImports": true,
-    "importsNotUsedAsValues": "error"
-  }
+    "baseUrl": ".",
+    "paths": {
+      "@/components/*": ["components/*"],
+      "@/assets/*": ["assets/*"],
+      "@/util/*": ["util/*"],
+      "@/theme/*": ["theme/*"],
+    }
+  },
+  "exclude": ["node_modules"],
+  "include": ["**/*.ts", "**/*.tsx"]
 }
