@@ -1,23 +1,28 @@
 import {
-    Box,
-    Button,
-    Container,
-    FormControl,
-    FormHelperText,
-    FormLabel,
-    Heading,
-    Input,
-    Text,
-    Textarea,
-    useColorMode,
-  } from '@chakra-ui/core';
-  import React from 'react';
-  import { useTranslation } from 'react-i18next';
-  
-  const Contact = () => {
-    const [t] = useTranslation();
-    const { colorMode } = useColorMode();
-    return (
+  Box,
+  Button,
+  Container,
+  FormControl,
+  FormHelperText,
+  FormLabel,
+  Heading,
+  Input,
+  Text,
+  Textarea,
+  useColorMode,
+} from '@chakra-ui/core';
+import Head from 'next/head';
+import React from 'react';
+import { useTranslation } from 'react-i18next';
+
+const Contact = () => {
+  const [t] = useTranslation();
+  const { colorMode } = useColorMode();
+  return (
+    <>
+      <Head>
+        <title>Bread Toolkit - Contact</title>
+      </Head>
       <Container maxW="xl">
         <Heading
           fontFamily="hero"
@@ -62,8 +67,8 @@ import {
           </form>
         </Box>
       </Container>
-    );
-  };
-  
-  export default Contact;
-  
+    </>
+  );
+};
+
+export default Contact;

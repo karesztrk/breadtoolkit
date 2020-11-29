@@ -2,7 +2,7 @@ import { Container, Flex } from '@chakra-ui/core';
 import React from 'react';
 import Link from 'next/link';
 import Menu from '@/components/common/Menu';
-import Brand from '@/components/icons/BrandIcon';
+import BrandIcon from '@/components/icons/BrandIcon';
 
 const Header = () => {
   return (
@@ -18,7 +18,9 @@ const Header = () => {
       <Container maxW="xl">
         <Flex align="center" mr={5} justifyContent="space-between">
           <Link href="/">
-            <Brand w={9} h={9} cursor="pointer" />
+            <a>
+              <BrandIcon w={9} h={9} cursor="pointer" />
+            </a>
           </Link>
           <Menu />
         </Flex>
