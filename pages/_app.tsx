@@ -21,7 +21,7 @@ const App: FC<{ Component: any; pageProps: AppProps }> = ({
         />
         <meta
           name="keywords"
-          content="bread,loaf,sourdough,toolbox,calculator,baking,hydratation,kenyér,sütés,kovász,focaccia,pita,baguette,ciabatta,artisan,starter,tartine,kovászos kenyér készítés,bread starters"
+          content="bread,toolkitloaf,sourdough,toolbox,calculator,baking,hydratation,kenyér,sütés,kovász,focaccia,pita,baguette,ciabatta,artisan,starter,tartine,kovászos kenyér készítés,bread starters,recipe,kalkulátor"
         />
       </Head>
       <Layout>

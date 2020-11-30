@@ -32,6 +32,7 @@ const Contact = () => {
           opacity={colorMode === 'light' ? 0.3 : 0.8}
           my={10}
           lineHeight={1}
+          whiteSpace="nowrap"
         >
           {t('contact.title')}
         </Heading>

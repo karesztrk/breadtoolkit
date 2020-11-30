@@ -26,9 +26,7 @@ const Menu = () => {
           <a>{t('header.calculator.link')}</a>
         </Link>
       </Text>
-      <Text display={['none', 'inline']} mx={0}>
-        {colorMode === 'light' ? '🌞' : '🌜'}
-      </Text>
+      <Text mx={0}>{colorMode === 'light' ? '🌞' : '🌜'}</Text>
       <Switch colorScheme="orange" onChange={toggleColorMode} lineHeight={1} />
       <Box>
         <Icon boxSize={5} color="brand.100">
