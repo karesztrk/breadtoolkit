@@ -11,7 +11,6 @@ const App: FC<{ Component: any; pageProps: AppProps }> = ({
   Component,
   pageProps,
 }) => {
-  const url = process.env.URL || '';
   return (
     <ChakraProvider theme={theme}>
       <Head>
