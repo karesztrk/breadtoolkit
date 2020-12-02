@@ -38,9 +38,7 @@ import {
   defaultSettings,
   Settings,
   calcFlourPercent,
-  calcWaterPercent,
-  calcSaltPercent,
-  calcSourDoughPercent,
+  calcIngredientPercent,
   calcHydratation,
   calcSourDoughLiquid,
   deriveIngredientsFromGoal,
@@ -48,35 +46,85 @@ import {
 import EditableNumericText from '@/components/common/EditableNumericText';
 import Head from 'next/head';
 
+const extraIngredients = [
+  {
+    key: 'egg',
+    name: 'calculator.eggs.label',
+    water: 75,
+    calories: 143,
+    macros: {
+      protein: 12.6,
+      fat: 9.5,
+      carb: 0.7,
+    },
+  },
+  {
+    key: 'butter',
+    name: 'calculator.butter.label',
+    water: 16,
+    calories: 742,
+    macros: {
+      protein: 0.4,
+      fat: 80,
+      carb: 0.5,
+    },
+  },
+  {
+    key: 'wholemilk',
+    name: 'calculator.milk.whole.label',
+    water: 88,
+    calories: 62,
+    macros: {
+      protein: 3,
+      fat: 3.5,
+      carb: 4.6,
+    },
+  },
+];
+
+interface ExtraIngredients {
+  [key: string]: ExtraIngredient;
+}
+
+interface ExtraIngredient {
+  disabled: boolean;
+  amount: number;
+  liquid: number;
+}
+
 const BreadCalculator = () => {
   const [t] = useTranslation();
   const { colorMode } = useColorMode();
 
   const [bakersMath, setBakersMath] = useState(true);
+  const [dough, setDough] = useState(0);
   const [flour, setFlour] = useState(0);
   const [water, setWater] = useState(0);
   const [salt, setSalt] = useState(0);
   const [sourdough, setSourdough] = useState(0);
   const [sourdoughRatio, setSourdoughRatio] = useState(0);
-  const dough = flour + water + salt + sourdough;
   const [liquids, setLiquids] = useState(water);
+  // Extra ingredients
+  const [extras, setExtras] = useState<ExtraIngredients>({});
 
   const flourPercent = Math.floor(calcFlourPercent(bakersMath, flour, dough));
   const waterPercent = Math.floor(
-    calcWaterPercent(bakersMath, flour, water, dough),
+    calcIngredientPercent(bakersMath, flour, water, dough),
   );
   const saltPercent = Math.floor(
-    calcSaltPercent(bakersMath, flour, salt, dough),
+    calcIngredientPercent(bakersMath, flour, salt, dough),
   );
   const sourDoughPercent = Math.floor(
-    calcSourDoughPercent(bakersMath, flour, sourdough, dough),
+    calcIngredientPercent(bakersMath, flour, sourdough, dough),
   );
 
+  // Loading
   useEffect(() => {
     const settings = loadCalculatorSettings();
     loadSettings(settings);
   }, []);
 
+  // Saving
   useEffect(() => {
     saveCalculatorSettings({
       bakersMath,
@@ -88,14 +136,32 @@ const BreadCalculator = () => {
     });
   }, [bakersMath, flour, water, salt, sourdough, sourdoughRatio]);
 
+  // Dough
+  useEffect(() => {
+    const extraAmount: number = Object.values(extras).reduce(
+      (accumulator, { disabled, amount }) => {
+        return accumulator + (disabled ? 0 : amount);
+      },
+      0,
+    );
+    setDough(flour + water + salt + sourdough + extraAmount);
+  }, [flour, water, salt, sourdough, extras]);
+
+  // Liquid
   useEffect(() => {
     const sourDoughLiquid = calcSourDoughLiquid(
       bakersMath,
       sourdough,
       sourdoughRatio,
     );
-    setLiquids(water + sourDoughLiquid);
-  }, [water, sourdoughRatio, sourdough, bakersMath]);
+    const extraLiquid: number = Object.values(extras).reduce(
+      (accumulator, { disabled, liquid }) => {
+        return accumulator + (disabled ? 0 : liquid);
+      },
+      0,
+    );
+    setLiquids(water + sourDoughLiquid + extraLiquid);
+  }, [water, sourdoughRatio, sourdough, bakersMath, extras]);
 
   const onResetClick = () => loadSettings(defaultSettings);
 
@@ -130,13 +196,48 @@ const BreadCalculator = () => {
     setSalt(salt);
     setSourdough(sourdough);
     setSourdoughRatio(sourdoughRatio);
+    setExtras({});
+  };
+
+  const toggleExtra = (key: string) => {
+    const newState = {
+      ...extras,
+    };
+    if (newState[key]) {
+      newState[key].disabled = !newState[key].disabled;
+    } else {
+      newState[key] = {
+        disabled: false,
+        amount: 0,
+        liquid: 0,
+        percent: 0,
+      } as ExtraIngredient;
+    }
+    setExtras(newState);
+  };
+
+  const onChangeExtras = (key: string, amount: number, water: number) => {
+    const newState = {
+      ...extras,
+    };
+    const liquid = (water / 100) * amount;
+    if (newState[key]) {
+      newState[key].amount = amount;
+      newState[key].liquid = liquid;
+    } else {
+      newState[key] = {
+        amount,
+        liquid,
+      } as ExtraIngredient;
+    }
+    setExtras(newState);
   };
 
   const gramText = t('calculator.gram.text');
   const format = (val: number): string => `${val} ${gramText}`;
   const parse = (val: string): number =>
     Number(val.replace(` ${gramText}`, ''));
-  const inputPattern = `[0-9]*(.[0-9]+)? ${gramText}`;
+  const inputPattern = '.*';
   return (
     <>
       <Head>
@@ -297,7 +398,48 @@ const BreadCalculator = () => {
               </Stack>
               <FormHelperText>{t('calculator.sourdough.hint')}</FormHelperText>
             </FormControl>
+
             <Divider mb={2} />
+            <Text mb={5}>{t('calculator.extras.text')}</Text>
+            {extraIngredients.map(({ key, name, water }) => {
+              const extra = extras[key];
+              const isDisabled = extra ? extra.disabled : true;
+              const amount = extra ? extra.amount : 0;
+              const percent = Math.floor(
+                calcIngredientPercent(bakersMath, flour, amount, dough),
+              );
+              return (
+                <FormControl key={key} mb={2} isDisabled={isDisabled}>
+                  <Switch
+                    isChecked={!isDisabled}
+                    onChange={() => toggleExtra(key)}
+                  />
+                  <FormLabel display="inline-block" ml={2}>
+                    {`${t(name)} (${percent}%)`}
+                  </FormLabel>
+                  <NumberInput
+                    isDisabled={isDisabled}
+                    value={format(amount)}
+                    min={0}
+                    step={1}
+                    onChange={(value) =>
+                      onChangeExtras(key, parse(value), water)
+                    }
+                    allowMouseWheel
+                    pattern={inputPattern}
+                  >
+                    <NumberInputField />
+                    <NumberInputStepper>
+                      <NumberIncrementStepper />
+                      <NumberDecrementStepper />
+                    </NumberInputStepper>
+                  </NumberInput>
+                </FormControl>
+              );
+            })}
+
+            <Divider mb={2} />
+
             <HStack>
               <Switch
                 isChecked={bakersMath}

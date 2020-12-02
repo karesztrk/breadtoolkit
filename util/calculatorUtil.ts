@@ -52,26 +52,12 @@ export const calcFlourPercent = (
   dough: number,
 ) => (bakersMath ? 100 : (flour / dough) * 100);
 
-export const calcWaterPercent = (
+export const calcIngredientPercent = (
   bakersMath: boolean,
   flour: number,
-  water: number,
+  amount: number,
   dough: number,
-) => (water / (bakersMath ? flour : dough)) * 100;
-
-export const calcSaltPercent = (
-  bakersMath: boolean,
-  flour: number,
-  salt: number,
-  dough: number,
-) => (salt / (bakersMath ? flour : dough)) * 100;
-
-export const calcSourDoughPercent = (
-  bakersMath: boolean,
-  flour: number,
-  sourdough: number,
-  dough: number,
-) => (sourdough / (bakersMath ? flour : dough)) * 100;
+) => (amount / (bakersMath ? flour : dough)) * 100;
 
 export const calcSourDoughLiquid = (
   bakersMath: boolean,
