@@ -243,7 +243,7 @@ const BreadCalculator = () => {
       <Head>
         <title>Bread Toolkit - Calculator</title>
       </Head>
-      <Container maxW="xl">
+      <Container maxW="xl" mb={16}>
         <Heading
           fontFamily="hero"
           fontSize={['3rem', '4rem', '5rem']}

@@ -20,15 +20,16 @@ const Layout: FC<{ children: ReactNode[] | ReactNode }> = ({ children }) => {
         ];
   return (
     <Flex
-      minHeight='100vh'
-      direction='column'
+      minHeight="100vh"
+      direction="column"
       backgroundImage={backgroundImage}
-      backgroundSize='cover'
-      backgroundPosition='center'
-      backgroundRepeat='no-repeat'
+      backgroundSize="cover"
+      backgroundPosition="center"
+      backgroundRepeat="no-repeat"
+      backgroundAttachment="fixed"
     >
       <Header />
-      <Box as='main' flexGrow={1}>
+      <Box as="main" flexGrow={1} position="relative">
         {children}
       </Box>
       <Divider color={colorMode === 'light' ? 'white' : '#3B3437'} />
