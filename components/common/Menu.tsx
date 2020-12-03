@@ -1,4 +1,3 @@
-import { changeLanguage } from '@/util/languageUtil';
 import {
   Box,
   Icon,
@@ -9,21 +8,26 @@ import {
   useColorMode,
 } from '@chakra-ui/core';
 import React, { ChangeEvent } from 'react';
-import { useTranslation } from 'react-i18next';
 import Link from 'next/link';
+import { useRouter } from 'next/dist/client/router';
+import { useI18n } from 'next-localization';
 
 const Menu = () => {
-  const [t, i18n] = useTranslation();
-  const {} = useColorMode();
-  const { language } = i18n;
-  const onChangeLanguage = (e: ChangeEvent<HTMLSelectElement>) =>
-    changeLanguage(e.target.value);
+  const router = useRouter();
+  const i18n = useI18n();
   const { colorMode, toggleColorMode } = useColorMode();
+  const { locale } = useRouter();
+  const { t } = i18n;
+
+  const onChangeLanguage = (e: ChangeEvent<HTMLSelectElement>) => {
+    const language = e.target.value;
+    router.push(router.route, router.route, { locale: language });
+  };
   return (
     <Stack alignItems="center" direction="row" justify="center">
       <Text mr={6} display={['none', 'inline']}>
         <Link href="/calculator">
-          <a>{t('header.calculator.link')}</a>
+          <a>{t('header.calculator-link')}</a>
         </Link>
       </Text>
       <Text mx={0}>{colorMode === 'light' ? '🌞' : '🌜'}</Text>
@@ -37,7 +41,7 @@ const Menu = () => {
           />
         </Icon>
       </Box>
-      <Select variant="unstyled" value={language} onChange={onChangeLanguage}>
+      <Select variant="unstyled" value={locale} onChange={onChangeLanguage}>
         <option value="en">{t('language.en')}</option>
         <option value="hu">{t('language.hu')}</option>
       </Select>

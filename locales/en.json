@@ -1,0 +1,47 @@
+{
+    "home": {
+        "title": "Bread",
+        "title-suffix": "Delight bake and taste",
+        "description": "Guides, tools and assets to help you to bake delicious and soft breads.",
+        "calculator-title":"Calculator",
+        "calculator-description": "Calculate your dough hydratation and the amount of ingredients."
+    },
+    "language": {
+        "en": "en",
+        "hu": "hu"
+    },
+    "header": {
+        "calculator-link": "Calculator"
+    },
+    "footer": {
+        "contact-link": "Contact"
+    },
+    "calculator": {
+        "title": "Calculator",
+        "doughWeight-text": "Dough weights",
+        "gram-text": "gram",
+        "hydratation-text": "Hydratation is",
+        "flour-label": "Flour",
+        "flour-hint": "Scroll",
+        "flour-hint-separator": "or",
+        "water-label": "Water",
+        "salt-label": "Salt",
+        "sourdough-label": "Sourdough",
+        "sourdough-hint": "Weight and hydratation of sourdough",
+        "extras-text": "Extra ingredients",
+        "eggs-label": "Eggs",
+        "butter-label": "Butter",
+        "milk-whole-label": "Whole milk",
+        "settings-bakersMath:label": "Use Baker's Math",
+        "new-badge": "New"
+    },
+    "contact": {
+        "title": "Contact",
+        "description": "Do you have any suggestion? Are you eager to have another kind of tool? Give us a comment.",
+        "email-label": "Email address",
+        "email-hint": "We'll never share your email:",
+        "comment-label": "Comment",
+        "comment-placeholder": "Tell your oppinion",
+        "submit-button": "Submit"
+    }
+}

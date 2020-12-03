@@ -79,8 +79,8 @@ export const deriveIngredientsFromGoal = (
 ): Settings => {
   const { flour, water, sourdough } = settings;
   const flourPercent = calcFlourPercent(bakersMath, flour, dough);
-  const waterPercent = calcWaterPercent(bakersMath, flour, water, dough);
-  const sourDoughPercent = calcSourDoughPercent(
+  const waterPercent = calcIngredientPercent(bakersMath, flour, water, dough);
+  const sourDoughPercent = calcIngredientPercent(
     bakersMath,
     flour,
     sourdough,

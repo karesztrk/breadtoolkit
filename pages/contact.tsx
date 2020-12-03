@@ -11,12 +11,12 @@ import {
   Textarea,
   useColorMode,
 } from '@chakra-ui/core';
+import { useI18n } from 'next-localization';
 import Head from 'next/head';
 import React from 'react';
-import { useTranslation } from 'react-i18next';
 
 const Contact = () => {
-  const [t] = useTranslation();
+  const { t } = useI18n();
   const { colorMode } = useColorMode();
   return (
     <>
@@ -51,19 +51,19 @@ const Contact = () => {
           <form name="contact" method="post">
             <input type="hidden" name="form-name" value="contact" />
             <FormControl id="email" isRequired mb={2}>
-              <FormLabel req>{t('contact.email.label')}</FormLabel>
+              <FormLabel req>{t('contact.email-label')}</FormLabel>
               <Input type="email" name="email" />
-              <FormHelperText>{t('contact.email.hint')}</FormHelperText>
+              <FormHelperText>{t('contact.email-hint')}</FormHelperText>
             </FormControl>
             <FormControl id="comment" isRequired mb={5}>
-              <FormLabel req>{t('contact.comment.label')}</FormLabel>
+              <FormLabel req>{t('contact.comment-label')}</FormLabel>
               <Textarea
-                placeholder={t('contact.comment.placeholder')}
+                placeholder={t('contact.comment-placeholder')}
                 name="comment"
               />
             </FormControl>
             <Button colorScheme="orange" type="submit">
-              {t('contact.submit.button')}
+              {t('contact.submit-button')}
             </Button>
           </form>
         </Box>

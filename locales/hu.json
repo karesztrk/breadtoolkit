@@ -1,0 +1,47 @@
+{
+    "home": {
+        "title": "Kenyér",
+        "title-suffix": "Élvezet sütni és kóstolni",
+        "description": "Útmutatók és eszközök ízletes és puha kenyerek sütéséhez.",
+        "calculator-title":"Kalkulátor",
+        "calculator-description": "Kalkuláld ki a tésztád hidratáltságát és a hozzávalókat."
+    },
+    "language": {
+        "en": "en",
+        "hu": "hu"
+    },
+    "header": {
+        "calculator-link": "Kalkulátor"
+    },
+    "footer": {
+        "contact-link": "Kapcsolat"
+    },
+    "calculator": {
+        "title": "Kalkulátor",
+        "doughWeight-text": "A tészta súlya",
+        "gram-text": "gramm",
+        "hydratation:text": "Víztartalom",
+        "flour-label": "Liszt",
+        "flour-hint": "Görget",
+        "flour-hint-separator": "vagy",
+        "water-label": "Víz",
+        "salt-label": "Só",
+        "sourdough-label": "Kovász",
+        "sourdough-hint": "Kovász mennyisége és hidratáltsága",
+        "extras-text": "Extra hozzávalók",
+        "eggs-label": "Tojás",
+        "butter-label": "Vaj",
+        "milk-whole-label": "Tej 3,5%-os",
+        "settings-bakersMath-label": "Mutasd pékszázalékban",
+        "new-badge": "Újdonság"
+    },
+    "contact": {
+        "title": "Kapcsolat",
+        "description": "Van egy jó ötleted? Valamilyen másik eszközt is szívesen igénybe vennél? Küdlj egy kommentet.",
+        "email-label": "Email cím",
+        "email-hint": "Email címed biztonságosan kezeljük",
+        "comment-label": "Komment",
+        "comment-placeholder": "Mond el a véleményed",
+        "submit-button": "Küldés"
+    }
+}

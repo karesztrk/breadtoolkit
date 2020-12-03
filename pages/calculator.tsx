@@ -31,7 +31,6 @@ import {
   Flex,
 } from '@chakra-ui/core';
 import { RepeatClockIcon } from '@chakra-ui/icons';
-import { useTranslation } from 'react-i18next';
 import {
   loadCalculatorSettings,
   saveCalculatorSettings,
@@ -45,11 +44,12 @@ import {
 } from '@/util/calculatorUtil';
 import EditableNumericText from '@/components/common/EditableNumericText';
 import Head from 'next/head';
+import { useI18n } from 'next-localization';
 
 const extraIngredients = [
   {
     key: 'egg',
-    name: 'calculator.eggs.label',
+    name: 'calculator.eggs-label',
     water: 75,
     calories: 143,
     macros: {
@@ -60,7 +60,7 @@ const extraIngredients = [
   },
   {
     key: 'butter',
-    name: 'calculator.butter.label',
+    name: 'calculator.butter-label',
     water: 16,
     calories: 742,
     macros: {
@@ -71,7 +71,7 @@ const extraIngredients = [
   },
   {
     key: 'wholemilk',
-    name: 'calculator.milk.whole.label',
+    name: 'calculator.milk-whole-label',
     water: 88,
     calories: 62,
     macros: {
@@ -93,7 +93,7 @@ interface ExtraIngredient {
 }
 
 const BreadCalculator = () => {
-  const [t] = useTranslation();
+  const { t } = useI18n();
   const { colorMode } = useColorMode();
 
   const [bakersMath, setBakersMath] = useState(true);
@@ -233,7 +233,7 @@ const BreadCalculator = () => {
     setExtras(newState);
   };
 
-  const gramText = t('calculator.gram.text');
+  const gramText = t('calculator.gram-text');
   const format = (val: number): string => `${val} ${gramText}`;
   const parse = (val: string): number =>
     Number(val.replace(` ${gramText}`, ''));
@@ -267,7 +267,7 @@ const BreadCalculator = () => {
         >
           <Flex justify="space-between" mb={5}>
             <Stat flex={2}>
-              <StatLabel>{t('calculator.doughWeight.text')}</StatLabel>
+              <StatLabel>{t('calculator.doughWeight-text')}</StatLabel>
               <StatNumber>
                 <EditableNumericText
                   value={dough}
@@ -298,7 +298,7 @@ const BreadCalculator = () => {
           <Stack>
             <FormControl mb={2}>
               <FormLabel>{`${t(
-                'calculator.flour.label',
+                'calculator.flour-label',
               )} (${flourPercent}%)`}</FormLabel>
               <NumberInput
                 value={format(flour)}
@@ -315,15 +315,15 @@ const BreadCalculator = () => {
                 </NumberInputStepper>
               </NumberInput>
               <Text as="span" display={['none', 'none', 'none', 'inline']}>
-                (<Kbd>{t('calculator.flour.hint')}</Kbd> + ) <Kbd>&uarr;</Kbd>
-                &nbsp;{t('calculator.flour.hint.separator')}&nbsp;
+                (<Kbd>{t('calculator.flour-hint')}</Kbd> + ) <Kbd>&uarr;</Kbd>
+                &nbsp;{t('calculator.flour-hint-separator')}&nbsp;
                 <Kbd>&darr;</Kbd>
               </Text>
             </FormControl>
 
             <FormControl mb={2}>
               <FormLabel>{`${t(
-                'calculator.water.label',
+                'calculator.water-label',
               )} (${waterPercent}%)`}</FormLabel>
               <NumberInput
                 value={format(water)}
@@ -343,7 +343,7 @@ const BreadCalculator = () => {
 
             <FormControl mb={2}>
               <FormLabel>{`${t(
-                'calculator.salt.label',
+                'calculator.salt-label',
               )} (${saltPercent}%)`}</FormLabel>
               <NumberInput
                 value={format(salt)}
@@ -363,7 +363,7 @@ const BreadCalculator = () => {
 
             <FormControl mb={5}>
               <FormLabel>{`${t(
-                'calculator.sourdough.label',
+                'calculator.sourdough-label',
               )} (${sourDoughPercent}%)`}</FormLabel>
 
               <Stack direction={['column', 'row']} spacing={5}>
@@ -396,11 +396,11 @@ const BreadCalculator = () => {
                   </SliderThumb>
                 </Slider>
               </Stack>
-              <FormHelperText>{t('calculator.sourdough.hint')}</FormHelperText>
+              <FormHelperText>{t('calculator.sourdough-hint')}</FormHelperText>
             </FormControl>
 
             <Divider mb={2} />
-            <Text mb={5}>{t('calculator.extras.text')}</Text>
+            <Text mb={5}>{t('calculator.extras-text')}</Text>
             {extraIngredients.map(({ key, name, water }) => {
               const extra = extras[key];
               const isDisabled = extra ? extra.disabled : true;
@@ -446,10 +446,10 @@ const BreadCalculator = () => {
                 onChange={(e) => setBakersMath(e.target.checked)}
               />
               <Text fontSize="sm">
-                {t('calculator.settings.bakersMath.label')}
+                {t('calculator.settings-bakersMath-label')}
               </Text>
               <Badge ml="1" colorScheme="green">
-                {t('calculator.new.badge')}
+                {t('calculator.new-badge')}
               </Badge>
             </HStack>
           </Stack>

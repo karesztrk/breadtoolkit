@@ -16,19 +16,18 @@
     "@chakra-ui/core": "^1.0.0-rc.8",
     "@chakra-ui/icons": "^1.0.0-rc.8",
     "framer-motion": "^2.9.4",
-    "i18next": "^19.8.4",
     "next": "10.0.3",
+    "next-localization": "^0.10.0",
     "react": "17.0.1",
     "react-dom": "17.0.1",
-    "react-helmet": "^6.1.0",
-    "react-i18next": "^11.7.3"
+    "react-helmet": "^6.1.0"
   },
   "devDependencies": {
     "@types/node": "^14.14.10",
     "@types/react": "^16.9.49",
     "@types/react-dom": "^16.9.8",
     "@types/react-helmet": "^6.1.0",
-    "next-on-netlify": "^2.6.3",
+    "next-on-netlify": "github:netlify/next-on-netlify#ll/i18n",
     "prettier": "^2.0.5",
     "typescript": "^4.0.0"
   },

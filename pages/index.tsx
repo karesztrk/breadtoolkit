@@ -1,12 +1,16 @@
 import React from 'react';
+import { GetStaticProps } from 'next';
 import { Heading, Text, Container, Grid, useColorMode } from '@chakra-ui/core';
-import { useTranslation } from 'react-i18next';
 import GridItem from '@/components/common/ToolCard';
 import CalculatorCard from '@/components/common/CalculatorCard';
+import { useI18n } from 'next-localization';
+import { PageProp } from '@/types/page';
 
 const Home = () => {
-  const [t] = useTranslation();
+  const i18n = useI18n();
+  const { t } = i18n;
   const { colorMode } = useColorMode();
+
   return (
     <Container maxW="xl" my="20">
       <Heading
@@ -33,7 +37,7 @@ const Home = () => {
           colorMode === 'light' ? '1px 1px 2px white' : '1px 1px 2px black'
         }
       >
-        {t('home.title.suffix')}
+        {t('home.title-suffix')}
       </Heading>
       <Text
         color={colorMode === 'light' ? 'brand.400' : 'brand.100'}
@@ -55,6 +59,13 @@ const Home = () => {
       </Grid>
     </Container>
   );
+};
+
+export const getStaticProps: GetStaticProps<PageProp> = async ({ locale }) => {
+  const { default: lngDict = {} } = await import(`../locales/${locale}.json`);
+  return {
+    props: { lngDict },
+  };
 };
 
 export default Home;

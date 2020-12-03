@@ -21,9 +21,10 @@
     "baseUrl": ".",
     "paths": {
       "@/components/*": ["components/*"],
-      "@/assets/*": ["assets/*"],
+      "@/locales/*": ["locales/*"],
       "@/util/*": ["util/*"],
       "@/theme/*": ["theme/*"],
+      "@/types/*": ["types/*"],
     }
   },
   "exclude": ["node_modules"],
