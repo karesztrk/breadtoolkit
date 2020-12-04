@@ -10,3 +10,23 @@
   # detects Next.js and redirects do not work.
   # Read more: https://github.com/netlify/cli/blob/master/docs/netlify-dev.md#project-detection
   framework = "#static"
+
+[[redirects]]
+  from = "/"
+  to = "/en"
+  status = 200
+
+[[redirects]]
+  from = "/404"
+  to = "/en/404"
+  status = 200
+
+[[redirects]]
+  from = "/calculator"
+  to = "/en/calculator"
+  status = 200
+
+[[redirects]]
+  from = "/contact"
+  to = "/en/contact"
+  status = 200
