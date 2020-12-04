@@ -7,7 +7,7 @@ import {
   Switch,
   useColorMode,
 } from '@chakra-ui/core';
-import React, { ChangeEvent } from 'react';
+import React, { ChangeEvent, useEffect } from 'react';
 import Link from 'next/link';
 import { useRouter } from 'next/dist/client/router';
 import { useI18n } from 'next-localization';
@@ -19,9 +19,18 @@ const Menu = () => {
   const { locale } = useRouter();
   const { t } = i18n;
 
-  const onChangeLanguage = (e: ChangeEvent<HTMLSelectElement>) => {
+  useEffect(() => {
+    async function changeLocale() {
+      const { locale = 'en' } = router;
+      i18n.set(locale, await import(`../../locales/${locale}.json`));
+      i18n.locale(locale);
+    }
+    changeLocale();
+  }, [router.locale]);
+
+  const onChangeLanguage = async (e: ChangeEvent<HTMLSelectElement>) => {
     const language = e.target.value;
-    router.push(router.route, router.route, { locale: language });
+    router.push(router.route, undefined, { locale: language, shallow: true });
   };
   return (
     <Stack alignItems="center" direction="row" justify="center">

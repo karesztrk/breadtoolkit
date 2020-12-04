@@ -1,16 +1,13 @@
 import React from 'react';
-import { Helmet } from 'react-helmet';
+import Head from 'next/head';
 
-const Meta = ({
-  title = 'Bread Toolkit',
-  description = 'Online tools to help your baking journey',
-}) => {
+const Meta = ({ title, description, keywords }) => {
   return (
-    <Helmet>
+    <Head>
       <title>{title}</title>
-      <meta charSet="utf-8" />
       <meta name="description" content={description} />
-    </Helmet>
+      <meta name="keywords" content={keywords} />
+    </Head>
   );
 };
 

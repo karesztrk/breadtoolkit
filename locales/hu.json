@@ -1,4 +1,8 @@
 {
+    "meta": {
+        "description": "Sütési kalandod online eszköztára",
+        "keywords": "kenyér,vekni,tészta,eszköztár,kalkulátor,sütés,hidratáció,víztartalom,kenyér,sütés,kovász,focaccia,pita,bagett,ciabatta,artisan,anyakovász,tartine,recept,kovászos kenyér készítés"
+    },
     "home": {
         "title": "Kenyér",
         "title-suffix": "Élvezet sütni és kóstolni",

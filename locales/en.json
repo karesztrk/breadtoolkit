@@ -1,4 +1,8 @@
 {
+    "meta": {
+        "description": "Online tools to help your baking journey",
+        "keywords": "bread,toolkit,loaf,sourdough,toolbox,calculator,baking,hydratation,focaccia,pita,baguette,ciabatta,artisan,starter,tartine,bread starters,recipe"
+    },
     "home": {
         "title": "Bread",
         "title-suffix": "Delight bake and taste",
