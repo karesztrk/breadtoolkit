@@ -41,57 +41,13 @@ import {
   calcHydratation,
   calcSourDoughLiquid,
   deriveIngredientsFromGoal,
-} from '@/util/calculatorUtil';
+  ExtraIngredient,
+  ExtraIngredients,
+  supportedIngredients,
+} from '@/util/calculator';
 import EditableNumericText from '@/components/common/EditableNumericText';
-import Head from 'next/head';
 import { useI18n } from 'next-localization';
 import Meta from '@/components/layout/Meta';
-
-const extraIngredients = [
-  {
-    key: 'egg',
-    name: 'calculator.eggs-label',
-    water: 75,
-    calories: 143,
-    macros: {
-      protein: 12.6,
-      fat: 9.5,
-      carb: 0.7,
-    },
-  },
-  {
-    key: 'butter',
-    name: 'calculator.butter-label',
-    water: 16,
-    calories: 742,
-    macros: {
-      protein: 0.4,
-      fat: 80,
-      carb: 0.5,
-    },
-  },
-  {
-    key: 'wholemilk',
-    name: 'calculator.milk-whole-label',
-    water: 88,
-    calories: 62,
-    macros: {
-      protein: 3,
-      fat: 3.5,
-      carb: 4.6,
-    },
-  },
-];
-
-interface ExtraIngredients {
-  [key: string]: ExtraIngredient;
-}
-
-interface ExtraIngredient {
-  disabled: boolean;
-  amount: number;
-  liquid: number;
-}
 
 const BreadCalculator = () => {
   const { t } = useI18n();
@@ -134,6 +90,7 @@ const BreadCalculator = () => {
       salt,
       sourdough,
       sourdoughRatio,
+      extras: {},
     });
   }, [bakersMath, flour, water, salt, sourdough, sourdoughRatio]);
 
@@ -167,20 +124,36 @@ const BreadCalculator = () => {
   const onResetClick = () => loadSettings(defaultSettings);
 
   const getSettings = (): Settings => {
-    return { bakersMath, flour, water, sourdough, salt, sourdoughRatio };
+    return {
+      bakersMath,
+      flour,
+      water,
+      sourdough,
+      salt,
+      sourdoughRatio,
+      extras,
+    };
   };
 
   const onDoughGoalSubmit = (goal: number) => {
-    const { flour, water, sourdough, salt } = deriveIngredientsFromGoal(
+    const {
+      flour,
+      water,
+      sourdough,
+      salt,
+      extras: newExtras,
+    } = deriveIngredientsFromGoal(
       bakersMath,
       goal,
       dough,
       getSettings(),
+      extras,
     );
     setFlour(flour);
     setWater(water);
     setSourdough(sourdough);
     setSalt(salt);
+    setExtras(newExtras);
   };
 
   const loadSettings = ({
@@ -280,7 +253,7 @@ const BreadCalculator = () => {
               </StatNumber>
 
               <StatHelpText>{`${t(
-                'calculator.hydratation.text',
+                'calculator.hydratation-text',
               )} ${calcHydratation(flour, liquids)}%`}</StatHelpText>
             </Stat>
             <Box flex={1} position="relative">
@@ -400,7 +373,7 @@ const BreadCalculator = () => {
 
             <Divider mb={2} />
             <Text mb={5}>{t('calculator.extras-text')}</Text>
-            {extraIngredients.map(({ key, name, water }) => {
+            {supportedIngredients.map(({ key, name, water }) => {
               const extra = extras[key];
               const isDisabled = extra ? extra.disabled : true;
               const amount = extra ? extra.amount : 0;

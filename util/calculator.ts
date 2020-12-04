@@ -5,6 +5,7 @@ export interface Settings {
   salt: number;
   sourdough: number;
   sourdoughRatio: number;
+  extras: ExtraIngredients;
 }
 
 export const defaultSettings: Settings = {
@@ -14,7 +15,54 @@ export const defaultSettings: Settings = {
   salt: 10,
   sourdough: 100,
   sourdoughRatio: 50,
+  extras: {},
 };
+
+export const supportedIngredients = [
+  {
+    key: 'egg',
+    name: 'calculator.eggs-label',
+    water: 75,
+    calories: 143,
+    macros: {
+      protein: 12.6,
+      fat: 9.5,
+      carb: 0.7,
+    },
+  },
+  {
+    key: 'butter',
+    name: 'calculator.butter-label',
+    water: 16,
+    calories: 742,
+    macros: {
+      protein: 0.4,
+      fat: 80,
+      carb: 0.5,
+    },
+  },
+  {
+    key: 'wholemilk',
+    name: 'calculator.milk-whole-label',
+    water: 88,
+    calories: 62,
+    macros: {
+      protein: 3,
+      fat: 3.5,
+      carb: 4.6,
+    },
+  },
+];
+
+export interface ExtraIngredients {
+  [key: string]: ExtraIngredient;
+}
+
+export interface ExtraIngredient {
+  disabled: boolean;
+  amount: number;
+  liquid: number;
+}
 
 export const saveCalculatorSettings = (settings: Settings) => {
   if (typeof window !== 'undefined') {
@@ -76,6 +124,7 @@ export const deriveIngredientsFromGoal = (
   goal: number,
   dough: number,
   settings: Settings,
+  extras: ExtraIngredients,
 ): Settings => {
   const { flour, water, sourdough } = settings;
   const flourPercent = calcFlourPercent(bakersMath, flour, dough);
@@ -95,6 +144,26 @@ export const deriveIngredientsFromGoal = (
   const sourdoughValue = bakersMath
     ? Math.round((flourValue * sourDoughPercent) / 100)
     : Math.round((goal * sourDoughPercent) / 100);
+
+  const newExtras = {
+    ...extras,
+  };
+  Object.keys(extras).forEach((extra) => {
+    const { amount, disabled } = extras[extra];
+    if (!disabled) {
+      const percent = calcIngredientPercent(bakersMath, flour, amount, dough);
+      const value = bakersMath
+        ? Math.round((flourValue * percent) / 100)
+        : Math.round((goal * percent) / 100);
+      newExtras[extra].amount = value;
+      const supportedIngredient = supportedIngredients.find(
+        (ingredient) => ingredient.key === extra,
+      );
+      if (supportedIngredient) {
+        newExtras[extra].liquid = (supportedIngredient.water / 100) * value;
+      }
+    }
+  });
   const saltValue = goal - flourValue - waterValue - sourdoughValue;
   return {
     bakersMath,
@@ -103,5 +172,6 @@ export const deriveIngredientsFromGoal = (
     sourdough: sourdoughValue,
     salt: saltValue,
     sourdoughRatio: -1,
+    extras: newExtras,
   };
 };

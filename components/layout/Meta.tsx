@@ -4,8 +4,8 @@ import Head from 'next/head';
 interface MetaProps {
   title?: string;
   subtitle?: string;
-  description: string;
-  keywords: string;
+  description?: string;
+  keywords?: string;
 }
 
 const Meta: FC<MetaProps> = ({
