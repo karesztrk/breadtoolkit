@@ -45,6 +45,7 @@ import {
 import EditableNumericText from '@/components/common/EditableNumericText';
 import Head from 'next/head';
 import { useI18n } from 'next-localization';
+import Meta from '@/components/layout/Meta';
 
 const extraIngredients = [
   {
@@ -240,9 +241,7 @@ const BreadCalculator = () => {
   const inputPattern = '.*';
   return (
     <>
-      <Head>
-        <title>Bread Toolkit - Calculator</title>
-      </Head>
+      <Meta subtitle={t('calculator.title')} />
       <Container maxW="xl" mb={16}>
         <Heading
           fontFamily="hero"

@@ -1,3 +1,4 @@
+import Meta from '@/components/layout/Meta';
 import {
   Box,
   Button,
@@ -12,7 +13,6 @@ import {
   useColorMode,
 } from '@chakra-ui/core';
 import { useI18n } from 'next-localization';
-import Head from 'next/head';
 import React from 'react';
 
 const Contact = () => {
@@ -20,9 +20,7 @@ const Contact = () => {
   const { colorMode } = useColorMode();
   return (
     <>
-      <Head>
-        <title>Bread Toolkit - Contact</title>
-      </Head>
+      <Meta subtitle={t('contact.title')} />
       <Container maxW="xl">
         <Heading
           fontFamily="hero"
