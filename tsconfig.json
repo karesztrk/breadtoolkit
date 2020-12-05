@@ -7,7 +7,7 @@
     "isolatedModules": true,
     "jsx": "preserve",
     "lib": ["dom", "es2017"],
-    "module": "esnext",
+    "module": "CommonJS",
     "target": "esnext",
     "moduleResolution": "node",
     "noEmit": true,
@@ -22,7 +22,7 @@
     "paths": {
       "@/components/*": ["components/*"],
       "@/locales/*": ["locales/*"],
-      "@/util/*": ["util/*"],
+      "@/service/*": ["service/*"],
       "@/theme/*": ["theme/*"],
       "@/types/*": ["types/*"],
     }

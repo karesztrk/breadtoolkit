@@ -82,7 +82,7 @@ export const loadCalculatorSettings = (): Settings => {
   return Object.keys(settings).length === 0 ? defaultSettings : settings;
 };
 
-export const calcHydratation = (flour: number, liquids: number) => {
+export const calcHydratation = (flour: number, liquids: number): string => {
   let hydratation: string;
   if (flour < 1) {
     hydratation = '100';

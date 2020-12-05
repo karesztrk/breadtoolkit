@@ -44,7 +44,7 @@ import {
   ExtraIngredient,
   ExtraIngredients,
   supportedIngredients,
-} from '@/util/calculator';
+} from '@/service/calculator';
 import EditableNumericText from '@/components/common/EditableNumericText';
 import { useI18n } from 'next-localization';
 import Meta from '@/components/layout/Meta';
