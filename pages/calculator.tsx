@@ -44,6 +44,7 @@ import {
   ExtraIngredient,
   ExtraIngredients,
   supportedIngredients,
+  calcDoughWeight,
 } from '@/service/calculator';
 import EditableNumericText from '@/components/common/EditableNumericText';
 import { useI18n } from 'next-localization';
@@ -90,19 +91,21 @@ const BreadCalculator = () => {
       salt,
       sourdough,
       sourdoughRatio,
-      extras: {},
     });
   }, [bakersMath, flour, water, salt, sourdough, sourdoughRatio]);
 
   // Dough
   useEffect(() => {
-    const extraAmount: number = Object.values(extras).reduce(
-      (accumulator, { disabled, amount }) => {
-        return accumulator + (disabled ? 0 : amount);
-      },
-      0,
+    const dough = calcDoughWeight(
+      {
+        flour,
+        water,
+        salt,
+        sourdough,
+      } as Settings,
+      extras,
     );
-    setDough(flour + water + salt + sourdough + extraAmount);
+    setDough(dough);
   }, [flour, water, salt, sourdough, extras]);
 
   // Liquid
@@ -131,7 +134,6 @@ const BreadCalculator = () => {
       sourdough,
       salt,
       sourdoughRatio,
-      extras,
     };
   };
 
@@ -142,13 +144,7 @@ const BreadCalculator = () => {
       sourdough,
       salt,
       extras: newExtras,
-    } = deriveIngredientsFromGoal(
-      bakersMath,
-      goal,
-      dough,
-      getSettings(),
-      extras,
-    );
+    } = deriveIngredientsFromGoal(goal, getSettings(), extras);
     setFlour(flour);
     setWater(water);
     setSourdough(sourdough);

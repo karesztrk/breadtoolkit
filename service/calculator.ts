@@ -5,6 +5,13 @@ export interface Settings {
   salt: number;
   sourdough: number;
   sourdoughRatio: number;
+}
+
+export interface DerivedIngredients {
+  flour: number;
+  water: number;
+  salt: number;
+  sourdough: number;
   extras: ExtraIngredients;
 }
 
@@ -15,7 +22,6 @@ export const defaultSettings: Settings = {
   salt: 10,
   sourdough: 100,
   sourdoughRatio: 50,
-  extras: {},
 };
 
 export const supportedIngredients = [
@@ -120,58 +126,65 @@ export const calcSourDoughLiquid = (
 };
 
 export const deriveIngredientsFromGoal = (
-  bakersMath: boolean,
   goal: number,
-  dough: number,
   settings: Settings,
   extras: ExtraIngredients,
-): Settings => {
+): DerivedIngredients => {
   const { flour, water, sourdough } = settings;
-  const flourPercent = calcFlourPercent(bakersMath, flour, dough);
-  const waterPercent = calcIngredientPercent(bakersMath, flour, water, dough);
+  const dough = calcDoughWeight(settings, extras);
+  const flourPercent = calcFlourPercent(false, flour, dough);
+  const waterPercent = calcIngredientPercent(false, flour, water, dough);
   const sourDoughPercent = calcIngredientPercent(
-    bakersMath,
+    false,
     flour,
     sourdough,
     dough,
   );
-  const flourValue = bakersMath
-    ? Math.round(goal * (flour / dough))
-    : Math.round((goal * flourPercent) / 100);
-  const waterValue = bakersMath
-    ? Math.round((flourValue * waterPercent) / 100)
-    : Math.round((goal * waterPercent) / 100);
-  const sourdoughValue = bakersMath
-    ? Math.round((flourValue * sourDoughPercent) / 100)
-    : Math.round((goal * sourDoughPercent) / 100);
+  const flourValue = Math.round((goal * flourPercent) / 100);
+  const waterValue = Math.round((goal * waterPercent) / 100);
+  const sourdoughValue = Math.round((goal * sourDoughPercent) / 100);
 
   const newExtras = {
     ...extras,
   };
+  let extraValue = 0;
   Object.keys(extras).forEach((extra) => {
     const { amount, disabled } = extras[extra];
     if (!disabled) {
-      const percent = calcIngredientPercent(bakersMath, flour, amount, dough);
-      const value = bakersMath
-        ? Math.round((flourValue * percent) / 100)
-        : Math.round((goal * percent) / 100);
-      newExtras[extra].amount = value;
       const supportedIngredient = supportedIngredients.find(
         (ingredient) => ingredient.key === extra,
       );
       if (supportedIngredient) {
+        const percent = calcIngredientPercent(false, flour, amount, dough);
+        const value = Math.round((goal * percent) / 100);
+        extraValue += value;
+        newExtras[extra].amount = value;
         newExtras[extra].liquid = (supportedIngredient.water / 100) * value;
       }
     }
   });
-  const saltValue = goal - flourValue - waterValue - sourdoughValue;
+  const saltValue =
+    goal - flourValue - waterValue - sourdoughValue - extraValue;
   return {
-    bakersMath,
     flour: flourValue,
     water: waterValue,
     sourdough: sourdoughValue,
     salt: saltValue,
-    sourdoughRatio: -1,
     extras: newExtras,
   };
+};
+
+export const calcDoughWeight = (
+  settings: Settings,
+  extras: ExtraIngredients,
+) => {
+  const { flour, water, sourdough, salt } = settings;
+  const extrasWeight = calcExtrasWeight(extras);
+  return flour + water + sourdough + salt + extrasWeight;
+};
+
+export const calcExtrasWeight = (extras: ExtraIngredients) => {
+  return Object.values(extras).reduce((accumulator, { disabled, amount }) => {
+    return accumulator + (disabled ? 0 : amount);
+  }, 0);
 };
