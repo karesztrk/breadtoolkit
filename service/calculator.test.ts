@@ -6,7 +6,7 @@ import {
   deriveIngredientsFromGoal,
   defaultSettings,
   calcDoughWeight,
-} from '../service/calculator';
+} from './calculator';
 import { expect } from 'chai';
 
 describe('hydration', () => {

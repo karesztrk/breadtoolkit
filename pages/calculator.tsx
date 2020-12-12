@@ -213,6 +213,7 @@ const BreadCalculator = () => {
       <Meta subtitle={t('calculator.title')} />
       <Container maxW="xl" mb={16}>
         <Heading
+          as="h1"
           fontFamily="hero"
           fontSize={['3rem', '4rem', '5rem']}
           textTransform="uppercase"

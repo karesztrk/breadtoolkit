@@ -23,6 +23,7 @@ const Contact = () => {
       <Meta subtitle={t('contact.title')} />
       <Container maxW="xl">
         <Heading
+          as="h1"
           fontFamily="hero"
           fontSize={['3rem', '4rem', '5rem']}
           textTransform="uppercase"
