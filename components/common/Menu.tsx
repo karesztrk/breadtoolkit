@@ -9,7 +9,7 @@ import {
 } from '@chakra-ui/core';
 import React, { ChangeEvent, useEffect } from 'react';
 import Link from 'next/link';
-import { useRouter } from 'next/dist/client/router';
+import { useRouter } from 'next/router';
 import { useI18n } from 'next-localization';
 
 const Menu = () => {
@@ -22,8 +22,10 @@ const Menu = () => {
   useEffect(() => {
     async function changeLocale() {
       const { locale = 'en' } = router;
-      i18n.set(locale, await import(`../../locales/${locale}.json`));
-      i18n.locale(locale);
+      if (typeof locale === 'string') {
+        i18n.set(locale, await import(`../../locales/${locale}.json`));
+        i18n.locale(locale);
+      }
     }
     changeLocale();
   }, [router.locale]);

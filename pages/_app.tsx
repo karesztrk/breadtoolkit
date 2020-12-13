@@ -6,7 +6,7 @@ import type { AppProps } from 'next/app';
 import Layout from '@/components/layout/Layout';
 import { I18nProvider } from 'next-localization';
 import { PageProp } from '@/types/page';
-import { useRouter } from 'next/dist/client/router';
+import { useRouter } from 'next/router';
 
 const App: FC<AppProps<PageProp>> = ({ Component, pageProps }) => {
   const router = useRouter();
