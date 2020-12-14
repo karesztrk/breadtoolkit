@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useMemo } from 'react';
 import {
   Divider,
   Badge,
@@ -54,13 +54,14 @@ const BreadCalculator = () => {
   const { t } = useI18n();
   const { colorMode } = useColorMode();
 
-  const [bakersMath, setBakersMath] = useState(true);
+  const settings = useMemo(() => loadCalculatorSettings(), []);
+  const [bakersMath, setBakersMath] = useState(settings.bakersMath);
   const [dough, setDough] = useState(0);
-  const [flour, setFlour] = useState(0);
-  const [water, setWater] = useState(0);
-  const [salt, setSalt] = useState(0);
-  const [sourdough, setSourdough] = useState(0);
-  const [sourdoughRatio, setSourdoughRatio] = useState(0);
+  const [flour, setFlour] = useState(settings.flour);
+  const [water, setWater] = useState(settings.water);
+  const [salt, setSalt] = useState(settings.salt);
+  const [sourdough, setSourdough] = useState(settings.sourdough);
+  const [sourdoughRatio, setSourdoughRatio] = useState(settings.sourdoughRatio);
   const [liquids, setLiquids] = useState(water);
   // Extra ingredients
   const [extras, setExtras] = useState<ExtraIngredients>({});
