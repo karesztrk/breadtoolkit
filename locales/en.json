@@ -23,7 +23,8 @@
     "calculator": {
         "title": "Calculator",
         "doughWeight-text": "Dough weights",
-        "gram-text": "gram",
+        "metric-text": "gram",
+        "imperial-text": "ounce",
         "hydratation-text": "Hydratation is",
         "flour-label": "Flour",
         "flour-hint": "Scroll",
@@ -37,6 +38,7 @@
         "butter-label": "Butter",
         "milk-whole-label": "Whole milk",
         "settings-bakersMath-label": "Use Baker's Math",
+        "settings-imperial-label": "Use Imperial units",
         "new-badge": "New"
     },
     "contact": {

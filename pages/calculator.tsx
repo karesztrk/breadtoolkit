@@ -45,6 +45,7 @@ import {
   ExtraIngredients,
   supportedIngredients,
   calcDoughWeight,
+  toggleImperialUnits,
 } from '@/service/calculator';
 import EditableNumericText from '@/components/common/EditableNumericText';
 import { useI18n } from 'next-localization';
@@ -56,6 +57,7 @@ const BreadCalculator = () => {
 
   const settings = useMemo(() => loadCalculatorSettings(), []);
   const [bakersMath, setBakersMath] = useState(settings.bakersMath);
+  const [imperialUnits, setImperialUnits] = useState(false);
   const [dough, setDough] = useState(0);
   const [flour, setFlour] = useState(settings.flour);
   const [water, setWater] = useState(settings.water);
@@ -77,6 +79,20 @@ const BreadCalculator = () => {
     calcIngredientPercent(bakersMath, flour, sourdough, dough),
   );
 
+  // Unit convertion
+  useEffect(() => {
+    const derivedIngredients = toggleImperialUnits(
+      getSettings(),
+      extras,
+      imperialUnits,
+    );
+    setFlour(derivedIngredients.flour);
+    setWater(derivedIngredients.water);
+    setSalt(derivedIngredients.salt);
+    setSourdough(derivedIngredients.sourdough);
+    setExtras(derivedIngredients.extras);
+  }, [imperialUnits]);
+
   // Loading
   useEffect(() => {
     const settings = loadCalculatorSettings();
@@ -92,8 +108,17 @@ const BreadCalculator = () => {
       salt,
       sourdough,
       sourdoughRatio,
+      imperialUnits,
     });
-  }, [bakersMath, flour, water, salt, sourdough, sourdoughRatio]);
+  }, [
+    bakersMath,
+    imperialUnits,
+    flour,
+    water,
+    salt,
+    sourdough,
+    sourdoughRatio,
+  ]);
 
   // Dough
   useEffect(() => {
@@ -125,7 +150,26 @@ const BreadCalculator = () => {
     setLiquids(water + sourDoughLiquid + extraLiquid);
   }, [water, sourdoughRatio, sourdough, bakersMath, extras]);
 
-  const onResetClick = () => loadSettings(defaultSettings);
+  const onResetClick = () => {
+    if (imperialUnits) {
+      const { flour, water, salt, sourdough } = toggleImperialUnits(
+        defaultSettings,
+        {},
+        imperialUnits,
+      );
+      loadSettings({
+        ...defaultSettings,
+        bakersMath,
+        imperialUnits,
+        flour,
+        water,
+        salt,
+        sourdough,
+      });
+    } else {
+      loadSettings(defaultSettings);
+    }
+  };
 
   const getSettings = (): Settings => {
     return {
@@ -135,6 +179,7 @@ const BreadCalculator = () => {
       sourdough,
       salt,
       sourdoughRatio,
+      imperialUnits,
     };
   };
 
@@ -160,8 +205,10 @@ const BreadCalculator = () => {
     salt,
     sourdough,
     sourdoughRatio,
+    imperialUnits,
   }: Settings) => {
     setBakersMath(bakersMath);
+    setImperialUnits(imperialUnits);
     setFlour(flour);
     setWater(water);
     setSalt(salt);
@@ -204,10 +251,12 @@ const BreadCalculator = () => {
     setExtras(newState);
   };
 
-  const gramText = t('calculator.gram-text');
-  const format = (val: number): string => `${val} ${gramText}`;
+  const unitText = t(
+    `calculator.${imperialUnits ? 'imperial' : 'metric'}-text`,
+  );
+  const format = (val: number): string => `${val} ${unitText}`;
   const parse = (val: string): number =>
-    Number(val.replace(` ${gramText}`, ''));
+    Number(val.replace(` ${unitText}`, ''));
   const inputPattern = '.*';
   return (
     <>
@@ -246,7 +295,7 @@ const BreadCalculator = () => {
                   formatter={format}
                   pattern={inputPattern}
                 >
-                  {dough}&nbsp;{gramText}
+                  {format(dough)}
                 </EditableNumericText>
               </StatNumber>
 
@@ -410,18 +459,32 @@ const BreadCalculator = () => {
 
             <Divider mb={2} />
 
-            <HStack>
-              <Switch
-                isChecked={bakersMath}
-                onChange={(e) => setBakersMath(e.target.checked)}
-              />
-              <Text fontSize="sm">
-                {t('calculator.settings-bakersMath-label')}
-              </Text>
-              <Badge ml="1" colorScheme="green">
-                {t('calculator.new-badge')}
-              </Badge>
-            </HStack>
+            <FormControl mb={2}>
+              <HStack>
+                <Switch
+                  isChecked={bakersMath}
+                  onChange={(e) => setBakersMath(e.target.checked)}
+                />
+                <Text fontSize="sm">
+                  {t('calculator.settings-bakersMath-label')}
+                </Text>
+              </HStack>
+            </FormControl>
+
+            <FormControl mb={2}>
+              <HStack>
+                <Switch
+                  isChecked={imperialUnits}
+                  onChange={(e) => setImperialUnits(e.target.checked)}
+                />
+                <Text fontSize="sm">
+                  {t('calculator.settings-imperial-label')}
+                </Text>
+                <Badge ml="1" colorScheme="green">
+                  {t('calculator.new-badge')}
+                </Badge>
+              </HStack>
+            </FormControl>
           </Stack>
         </Box>
       </Container>

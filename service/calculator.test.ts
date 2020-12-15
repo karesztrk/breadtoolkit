@@ -6,61 +6,62 @@ import {
   deriveIngredientsFromGoal,
   defaultSettings,
   calcDoughWeight,
+  convertToImperial,
+  toggleImperialUnits,
 } from './calculator';
-import { expect } from 'chai';
 
 describe('hydration', () => {
   it('does not exceed 100', () => {
-    expect(calcHydratation(2, 100)).to.equal('100+');
+    expect(calcHydratation(2, 100)).toEqual('100+');
   });
   it('accept zero flour', () => {
-    expect(calcHydratation(0, 100)).to.equal('100');
+    expect(calcHydratation(0, 100)).toEqual('100');
   });
   it('gives correct value', () => {
-    expect(calcHydratation(100, 50)).to.equal('50.0');
+    expect(calcHydratation(100, 50)).toEqual('50.0');
   });
   it('has correct precision', () => {
-    expect(calcHydratation(100, 33.33333)).to.equal('33.3');
+    expect(calcHydratation(100, 33.33333)).toEqual('33.3');
   });
 });
 
 describe('flour percent', () => {
   it('gives correct value', () => {
-    expect(calcFlourPercent(false, 80, 100)).to.equal(80);
+    expect(calcFlourPercent(false, 80, 100)).toEqual(80);
   });
   it('accept zero amount', () => {
-    expect(calcFlourPercent(false, 0, 100)).to.equal(0);
+    expect(calcFlourPercent(false, 0, 100)).toEqual(0);
   });
   it("is 100 in baker's math", () => {
-    expect(calcFlourPercent(true, 0, 100)).to.equal(100);
+    expect(calcFlourPercent(true, 0, 100)).toEqual(100);
   });
 });
 
 describe('ingredient percent', () => {
   it('uses to the dough weight in normal percentage mode', () => {
-    expect(calcIngredientPercent(false, 80, 10, 100)).to.equal(10);
+    expect(calcIngredientPercent(false, 80, 10, 100)).toEqual(10);
   });
   it("uses to the flour weight in normal baker's math mode", () => {
-    expect(calcIngredientPercent(true, 80, 10, 100)).to.equal(12.5);
+    expect(calcIngredientPercent(true, 80, 10, 100)).toEqual(12.5);
   });
   it('accept zero amount', () => {
-    expect(calcIngredientPercent(false, 80, 0, 100)).to.equal(0);
+    expect(calcIngredientPercent(false, 80, 0, 100)).toEqual(0);
   });
 });
 
 describe('sour dough liquid', () => {
   it('gives correct value', () => {
-    expect(calcSourDoughLiquid(false, 80, 50)).to.equal(40);
+    expect(calcSourDoughLiquid(false, 80, 50)).toEqual(40);
   });
   it("gives correct value for baker's math", () => {
-    expect(calcSourDoughLiquid(true, 90, 80)).to.equal(40);
+    expect(calcSourDoughLiquid(true, 90, 80)).toEqual(40);
   });
 });
 
 describe('deriving', () => {
   it('gives correct value', () => {
     const result = deriveIngredientsFromGoal(500, defaultSettings, {});
-    expect(result).to.deep.equal({
+    expect(result).toEqual({
       extras: {},
       flour: 267,
       salt: 6,
@@ -76,14 +77,14 @@ describe('deriving', () => {
       {},
     );
     const derivedWeight = flour + salt + sourdough + water;
-    expect(derivedWeight).to.equal(goal);
+    expect(derivedWeight).toEqual(goal);
   });
   it('gives correct value for extra ingredients', () => {
     const goal = 500;
     const { extras } = deriveIngredientsFromGoal(goal, defaultSettings, {
       egg: { disabled: false, amount: 50, liquid: 80 },
     });
-    expect(extras).to.deep.equal({
+    expect(extras).toEqual({
       egg: {
         amount: 25,
         disabled: false,
@@ -108,7 +109,7 @@ describe('deriving', () => {
     );
     const derivedWeight =
       flour + salt + sourdough + water + derivedExtrasWeight;
-    expect(derivedWeight).to.equal(goal);
+    expect(derivedWeight).toEqual(goal);
   });
   it('ignores disabled exta ingredients', () => {
     const goal = 500;
@@ -118,7 +119,7 @@ describe('deriving', () => {
       butter: { disabled: true, amount: 150, liquid: 80 },
     };
     const result = deriveIngredientsFromGoal(goal, defaultSettings, extras);
-    expect(result).to.deep.equal({
+    expect(result).toEqual({
       flour: 267,
       salt: 6,
       sourdough: 53,
@@ -136,6 +137,74 @@ describe('dough weight', () => {
       butter: { disabled: true, amount: 50, liquid: 80 },
     };
     const result = calcDoughWeight(defaultSettings, extras);
-    expect(result).to.equal(935 + 100);
+    expect(result).toEqual(935 + 100);
+  });
+});
+
+describe('imperial convertion', () => {
+  it('should give precise value', () => {
+    const imperialValue = convertToImperial(150);
+    expect(imperialValue).toEqual(5);
+  });
+  it('ignores negative values', () => {
+    const imperialValue = convertToImperial(-150);
+    expect(imperialValue).toEqual(1);
+  });
+  it('result must be larger then zero', () => {
+    const imperialValue = convertToImperial(0);
+    expect(imperialValue).toEqual(1);
+  });
+});
+
+describe('imperial convertion', () => {
+  it('should give precise value', () => {
+    const imperialValue = convertToImperial(150);
+    expect(imperialValue).toEqual(5);
+  });
+  it('ignores negative values', () => {
+    const imperialValue = convertToImperial(-150);
+    expect(imperialValue).toEqual(1);
+  });
+  it('result must be larger then zero', () => {
+    const imperialValue = convertToImperial(0);
+    expect(imperialValue).toEqual(1);
+  });
+  it('can convert the whole settings', () => {
+    const { flour, salt, water, sourdough, extras } = toggleImperialUnits(
+      defaultSettings,
+      { egg: { disabled: false, amount: 150, liquid: 80 } },
+      true,
+    );
+    expect(flour).toEqual(convertToImperial(defaultSettings.flour));
+    expect(salt).toEqual(convertToImperial(defaultSettings.salt));
+    expect(water).toEqual(convertToImperial(defaultSettings.water));
+    expect(sourdough).toEqual(convertToImperial(defaultSettings.sourdough));
+    expect(extras.egg.amount).toEqual(convertToImperial(150));
+    expect(extras.egg.liquid).toEqual(convertToImperial(80));
+  });
+  it('supports switching off imperial units for settings', () => {
+    const { flour, salt, water, sourdough, extras } = toggleImperialUnits(
+      defaultSettings,
+      { egg: { disabled: false, amount: 150, liquid: 80 } },
+      true,
+    );
+    const {
+      flour: metricFlour,
+      water: metricWater,
+      salt: metricSalt,
+      sourdough: metricSourdough,
+      extras: metricExtras,
+    } = toggleImperialUnits(
+      { ...defaultSettings, flour, salt, water, sourdough },
+      extras,
+      false,
+    );
+    // Rounding causes differencies
+    expect(metricFlour).toEqual(510);
+    expect(metricWater).toEqual(312);
+    expect(metricSalt).toEqual(28);
+    expect(metricSourdough).toEqual(113);
+    expect(metricExtras.egg.amount).toEqual(142);
+    expect(metricExtras.egg.liquid).toEqual(85);
   });
 });

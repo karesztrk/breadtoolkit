@@ -1,5 +1,6 @@
 export interface Settings {
   bakersMath: boolean;
+  imperialUnits: boolean;
   flour: number;
   water: number;
   salt: number;
@@ -17,6 +18,7 @@ export interface DerivedIngredients {
 
 export const defaultSettings: Settings = {
   bakersMath: true,
+  imperialUnits: false,
   flour: 500,
   water: 325,
   salt: 10,
@@ -187,4 +189,59 @@ export const calcExtrasWeight = (extras: ExtraIngredients) => {
   return Object.values(extras).reduce((accumulator, { disabled, amount }) => {
     return accumulator + (disabled ? 0 : amount);
   }, 0);
+};
+
+export const convertToImperial = (value: number): number => {
+  if (value < 0) {
+    return 1;
+  }
+  const roundedValue = Math.round(value * 0.0352739619);
+  return roundedValue || 1;
+};
+
+export const convertToMetric = (value: number): number => {
+  if (value < 0) {
+    return 1;
+  }
+  const roundedValue = Math.round(value / 0.0352739619);
+  return roundedValue || 1;
+};
+
+export const toggleImperialUnits = (
+  settings: Settings,
+  extras: ExtraIngredients,
+  imperialUnits: boolean,
+): DerivedIngredients => {
+  const { flour, salt, water, sourdough } = settings;
+  const convertedFlour = imperialUnits
+    ? convertToImperial(flour)
+    : convertToMetric(flour);
+  const convertedWater = imperialUnits
+    ? convertToImperial(water)
+    : convertToMetric(water);
+  const convertedSalt = imperialUnits
+    ? convertToImperial(salt)
+    : convertToMetric(salt);
+  const convertedSourdough = imperialUnits
+    ? convertToImperial(sourdough)
+    : convertToMetric(sourdough);
+  const convertedExtras = {
+    ...extras,
+  };
+  Object.keys(extras).forEach((extra) => {
+    const { amount, liquid } = extras[extra];
+    convertedExtras[extra].amount = imperialUnits
+      ? convertToImperial(amount)
+      : convertToMetric(amount);
+    convertedExtras[extra].liquid = imperialUnits
+      ? convertToImperial(liquid)
+      : convertToMetric(liquid);
+  });
+  return {
+    flour: convertedFlour,
+    water: convertedWater,
+    salt: convertedSalt,
+    sourdough: convertedSourdough,
+    extras: convertedExtras,
+  };
 };

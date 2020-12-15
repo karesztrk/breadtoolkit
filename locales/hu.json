@@ -23,7 +23,8 @@
     "calculator": {
         "title": "Kalkulátor",
         "doughWeight-text": "A tészta súlya",
-        "gram-text": "gramm",
+        "metric-text": "gramm",
+        "imperial-text": "unica",
         "hydratation-text": "Víztartalom",
         "flour-label": "Liszt",
         "flour-hint": "Görget",
@@ -37,6 +38,7 @@
         "butter-label": "Vaj",
         "milk-whole-label": "Tej 3,5%-os",
         "settings-bakersMath-label": "Mutasd pékszázalékban",
+        "settings-imperial-label": "Angolszász mértékegységek",
         "new-badge": "Újdonság"
     },
     "contact": {
