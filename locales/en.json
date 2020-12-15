@@ -11,8 +11,8 @@
         "calculator-description": "Calculate your dough hydratation and the amount of ingredients."
     },
     "language": {
-        "en": "en",
-        "hu": "hu"
+        "en": "english",
+        "hu": "hungarian"
     },
     "header": {
         "calculator-link": "Calculator"

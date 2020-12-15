@@ -11,8 +11,8 @@
         "calculator-description": "Kalkuláld ki a tésztád hidratáltságát és a hozzávalókat."
     },
     "language": {
-        "en": "en",
-        "hu": "hu"
+        "en": "angol",
+        "hu": "magyar"
     },
     "header": {
         "calculator-link": "Kalkulátor"

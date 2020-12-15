@@ -316,10 +316,11 @@ const BreadCalculator = () => {
           </Flex>
           <Stack>
             <FormControl mb={2}>
-              <FormLabel>{`${t(
+              <FormLabel htmlFor="flour">{`${t(
                 'calculator.flour-label',
               )} (${flourPercent}%)`}</FormLabel>
               <NumberInput
+                id="flour"
                 value={format(flour)}
                 min={1}
                 step={1}
@@ -341,10 +342,11 @@ const BreadCalculator = () => {
             </FormControl>
 
             <FormControl mb={2}>
-              <FormLabel>{`${t(
+              <FormLabel htmlFor="water">{`${t(
                 'calculator.water-label',
               )} (${waterPercent}%)`}</FormLabel>
               <NumberInput
+                id="water"
                 value={format(water)}
                 min={1}
                 step={1}
@@ -361,10 +363,11 @@ const BreadCalculator = () => {
             </FormControl>
 
             <FormControl mb={2}>
-              <FormLabel>{`${t(
+              <FormLabel htmlFor="salt">{`${t(
                 'calculator.salt-label',
               )} (${saltPercent}%)`}</FormLabel>
               <NumberInput
+                id="salt"
                 value={format(salt)}
                 min={1}
                 step={1}
@@ -381,12 +384,13 @@ const BreadCalculator = () => {
             </FormControl>
 
             <FormControl mb={5}>
-              <FormLabel>{`${t(
+              <FormLabel htmlFor="sourdough">{`${t(
                 'calculator.sourdough-label',
               )} (${sourDoughPercent}%)`}</FormLabel>
 
               <Stack direction={['column', 'row']} spacing={5}>
                 <NumberInput
+                  id="sourdough"
                   flex={1}
                   value={format(sourdough)}
                   min={1}
@@ -402,6 +406,7 @@ const BreadCalculator = () => {
                   </NumberInputStepper>
                 </NumberInput>
                 <Slider
+                  aria-label="Sourdough ratio"
                   flex={1}
                   colorScheme="orange"
                   value={sourdoughRatio}
@@ -433,10 +438,11 @@ const BreadCalculator = () => {
                     isChecked={!isDisabled}
                     onChange={() => toggleExtra(key)}
                   />
-                  <FormLabel display="inline-block" ml={2}>
+                  <FormLabel htmlFor={key} display="inline-block" ml={2}>
                     {`${t(name)} (${percent}%)`}
                   </FormLabel>
                   <NumberInput
+                    id={key}
                     isDisabled={isDisabled}
                     value={format(amount)}
                     min={0}
@@ -462,24 +468,36 @@ const BreadCalculator = () => {
             <FormControl mb={2}>
               <HStack>
                 <Switch
+                  id="bakersMath"
                   isChecked={bakersMath}
                   onChange={(e) => setBakersMath(e.target.checked)}
                 />
-                <Text fontSize="sm">
+                <FormLabel
+                  htmlFor="bakersMath"
+                  fontSize="sm"
+                  m={0}
+                  fontWeight={400}
+                >
                   {t('calculator.settings-bakersMath-label')}
-                </Text>
+                </FormLabel>
               </HStack>
             </FormControl>
 
             <FormControl mb={2}>
               <HStack>
                 <Switch
+                  id="imperialUnits"
                   isChecked={imperialUnits}
                   onChange={(e) => setImperialUnits(e.target.checked)}
                 />
-                <Text fontSize="sm">
+                <FormLabel
+                  htmlFor="bakersMath"
+                  fontSize="sm"
+                  m={0}
+                  fontWeight={400}
+                >
                   {t('calculator.settings-imperial-label')}
-                </Text>
+                </FormLabel>
                 <Badge ml="1" colorScheme="green">
                   {t('calculator.new-badge')}
                 </Badge>

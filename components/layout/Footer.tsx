@@ -50,32 +50,41 @@ const Footer = () => {
           </Text>
 
           <HStack wrap="wrap" p="1" justify="center" spacing={4} lineHeight={4}>
-            <a href="https://www.facebook.com/karoly.torok.9/">
+            <a
+              href="https://www.facebook.com/karoly.torok.9/"
+              aria-label="Facebook"
+            >
               <FacebookIcon
                 color={colorMode === 'light' ? 'brand.400' : 'brand.100'}
               />
             </a>
-            <a href="https://github.com/karesztrk">
+            <a href="https://github.com/karesztrk" aria-label="Github">
               <GitHubIcon
                 color={colorMode === 'light' ? 'brand.400' : 'brand.100'}
               />
             </a>
-            <a href="torok.karoly.krisztian@gmail.com">
+            <a href="torok.karoly.krisztian@gmail.com" aria-label="Email">
               <EmailIcon
                 color={colorMode === 'light' ? 'brand.400' : 'brand.100'}
               />
             </a>
-            <a href="https://www.instagram.com/karesztrk/">
+            <a
+              href="https://www.instagram.com/karesztrk/"
+              aria-label="Instagram"
+            >
               <InstagramIcon
                 color={colorMode === 'light' ? 'brand.400' : 'brand.100'}
               />
             </a>
-            <a href="https://www.linkedin.com/in/k%C3%A1roly-t%C3%B6r%C3%B6k-17541b80/">
+            <a
+              href="https://www.linkedin.com/in/k%C3%A1roly-t%C3%B6r%C3%B6k-17541b80/"
+              aria-label="LinkedIn"
+            >
               <LinkedInIcon
                 color={colorMode === 'light' ? 'brand.400' : 'brand.100'}
               />
             </a>
-            <a href="https://www.youtube.com/user/r0nan87">
+            <a href="https://www.youtube.com/user/r0nan87" aria-label="Youtube">
               <YouTubeIcon
                 color={colorMode === 'light' ? 'brand.400' : 'brand.100'}
               />
