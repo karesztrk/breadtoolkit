@@ -1,6 +1,6 @@
 {
     "meta": {
-        "description": "Sütési kalandod online eszköztára",
+        "description": "Kenyér sütési kalandod online eszköztára. A Bread toolkit ingyenes útmutatói, receptei és kalkulátorai segítségével egyszerű magas hidratációjú kenyerek készítése",
         "keywords": "kenyér,vekni,tészta,eszköztár,kalkulátor,sütés,hidratáció,víztartalom,kenyér,sütés,kovász,focaccia,pita,bagett,ciabatta,artisan,anyakovász,tartine,recept,kovászos kenyér készítés"
     },
     "home": {
@@ -25,7 +25,7 @@
         "doughWeight-text": "A tészta súlya",
         "metric-text": "gramm",
         "imperial-text": "unica",
-        "hydratation-text": "Víztartalom",
+        "hydration-text": "Víztartalom",
         "flour-label": "Liszt",
         "flour-hint": "Görget",
         "flour-hint-separator": "vagy",

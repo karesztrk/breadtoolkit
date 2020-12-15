@@ -90,16 +90,16 @@ export const loadCalculatorSettings = (): Settings => {
   return Object.keys(settings).length === 0 ? defaultSettings : settings;
 };
 
-export const calcHydratation = (flour: number, liquids: number): string => {
-  let hydratation: string;
+export const calcHydration = (flour: number, liquids: number): string => {
+  let hydration: string;
   if (flour < 1) {
-    hydratation = '100';
+    hydration = '100';
   } else if (liquids > flour) {
-    hydratation = '100+';
+    hydration = '100+';
   } else {
-    hydratation = ((liquids / flour) * 100).toPrecision(3);
+    hydration = ((liquids / flour) * 100).toPrecision(3);
   }
-  return hydratation;
+  return hydration;
 };
 
 export const calcFlourPercent = (

@@ -1,14 +1,14 @@
 {
     "meta": {
-        "description": "Online tools to help your baking journey",
-        "keywords": "bread,toolkit,loaf,sourdough,toolbox,calculator,baking,hydratation,focaccia,pita,baguette,ciabatta,artisan,starter,tartine,bread starters,recipe"
+        "description": "Online tools to help your bread baking journey. Bread toolkit gives your free recipes, guides and calculators to work with high hydration artisan breads.",
+        "keywords": "bread,toolkit,loaf,sourdough,toolbox,calculator,baking,hydration,focaccia,pita,baguette,ciabatta,artisan,starter,tartine,bread starters,recipe,formula"
     },
     "home": {
         "title": "Bread",
         "title-suffix": "Delight bake and taste",
         "description": "Guides, tools and assets to help you to bake delicious and soft breads.",
         "calculator-title":"Calculator",
-        "calculator-description": "Calculate your dough hydratation and the amount of ingredients."
+        "calculator-description": "Calculate your dough hydration and the amount of ingredients."
     },
     "language": {
         "en": "english",
@@ -25,14 +25,14 @@
         "doughWeight-text": "Dough weights",
         "metric-text": "gram",
         "imperial-text": "ounce",
-        "hydratation-text": "Hydratation is",
+        "hydration-text": "Hydration is",
         "flour-label": "Flour",
         "flour-hint": "Scroll",
         "flour-hint-separator": "or",
         "water-label": "Water",
         "salt-label": "Salt",
         "sourdough-label": "Sourdough",
-        "sourdough-hint": "Weight and hydratation of sourdough",
+        "sourdough-hint": "Weight and hydration of sourdough",
         "extras-text": "Extra ingredients",
         "eggs-label": "Eggs",
         "butter-label": "Butter",

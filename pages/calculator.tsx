@@ -38,7 +38,7 @@ import {
   Settings,
   calcFlourPercent,
   calcIngredientPercent,
-  calcHydratation,
+  calcHydration,
   calcSourDoughLiquid,
   deriveIngredientsFromGoal,
   ExtraIngredient,
@@ -299,9 +299,10 @@ const BreadCalculator = () => {
                 </EditableNumericText>
               </StatNumber>
 
-              <StatHelpText>{`${t(
-                'calculator.hydratation-text',
-              )} ${calcHydratation(flour, liquids)}%`}</StatHelpText>
+              <StatHelpText>{`${t('calculator.hydration-text')} ${calcHydration(
+                flour,
+                liquids,
+              )}%`}</StatHelpText>
             </Stat>
             <Box flex={1} position="relative">
               <IconButton

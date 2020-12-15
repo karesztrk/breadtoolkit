@@ -1,5 +1,5 @@
 import {
-  calcHydratation,
+  calcHydration,
   calcFlourPercent,
   calcIngredientPercent,
   calcSourDoughLiquid,
@@ -12,16 +12,16 @@ import {
 
 describe('hydration', () => {
   it('does not exceed 100', () => {
-    expect(calcHydratation(2, 100)).toEqual('100+');
+    expect(calcHydration(2, 100)).toEqual('100+');
   });
   it('accept zero flour', () => {
-    expect(calcHydratation(0, 100)).toEqual('100');
+    expect(calcHydration(0, 100)).toEqual('100');
   });
   it('gives correct value', () => {
-    expect(calcHydratation(100, 50)).toEqual('50.0');
+    expect(calcHydration(100, 50)).toEqual('50.0');
   });
   it('has correct precision', () => {
-    expect(calcHydratation(100, 33.33333)).toEqual('33.3');
+    expect(calcHydration(100, 33.33333)).toEqual('33.3');
   });
 });
 
