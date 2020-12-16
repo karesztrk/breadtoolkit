@@ -29,6 +29,7 @@ import {
   HStack,
   IconButton,
   Flex,
+  usePrevious,
 } from '@chakra-ui/core';
 import { RepeatClockIcon } from '@chakra-ui/icons';
 import {
@@ -45,7 +46,7 @@ import {
   ExtraIngredients,
   supportedIngredients,
   calcDoughWeight,
-  toggleImperialUnits,
+  convertToImperialUnits,
 } from '@/service/calculator';
 import EditableNumericText from '@/components/common/EditableNumericText';
 import { useI18n } from 'next-localization';
@@ -55,87 +56,82 @@ const BreadCalculator = () => {
   const { t } = useI18n();
   const { colorMode } = useColorMode();
 
-  const settings = useMemo(() => loadCalculatorSettings(), []);
-  const [bakersMath, setBakersMath] = useState(settings.bakersMath);
+  const [settings, setSettings] = useState<Settings>(loadCalculatorSettings());
+  // Switches need separate state to correctly load the initial value
   const [imperialUnits, setImperialUnits] = useState(false);
+  const [bakersMath, setBakersMath] = useState(false);
+  const previousUnit = usePrevious(imperialUnits);
   const [dough, setDough] = useState(0);
-  const [flour, setFlour] = useState(settings.flour);
-  const [water, setWater] = useState(settings.water);
-  const [salt, setSalt] = useState(settings.salt);
-  const [sourdough, setSourdough] = useState(settings.sourdough);
-  const [sourdoughRatio, setSourdoughRatio] = useState(settings.sourdoughRatio);
-  const [liquids, setLiquids] = useState(water);
-  // Extra ingredients
+  const [liquids, setLiquids] = useState(0);
   const [extras, setExtras] = useState<ExtraIngredients>({});
 
-  const flourPercent = Math.floor(calcFlourPercent(bakersMath, flour, dough));
+  const flourPercent = Math.floor(
+    calcFlourPercent(settings.bakersMath, settings.flour, dough),
+  );
   const waterPercent = Math.floor(
-    calcIngredientPercent(bakersMath, flour, water, dough),
+    calcIngredientPercent(
+      settings.bakersMath,
+      settings.flour,
+      settings.water,
+      dough,
+    ),
   );
   const saltPercent = Math.floor(
-    calcIngredientPercent(bakersMath, flour, salt, dough),
+    calcIngredientPercent(
+      settings.bakersMath,
+      settings.flour,
+      settings.salt,
+      dough,
+    ),
   );
   const sourDoughPercent = Math.floor(
-    calcIngredientPercent(bakersMath, flour, sourdough, dough),
+    calcIngredientPercent(
+      settings.bakersMath,
+      settings.flour,
+      settings.sourdough,
+      dough,
+    ),
   );
+
+  // Configs
+  useEffect(() => {
+    setImperialUnits(settings.imperialUnits);
+    setBakersMath(settings.bakersMath);
+  }, [settings.imperialUnits, settings.bakersMath]);
 
   // Unit convertion
   useEffect(() => {
-    const derivedIngredients = toggleImperialUnits(
-      getSettings(),
-      extras,
-      imperialUnits,
-    );
-    setFlour(derivedIngredients.flour);
-    setWater(derivedIngredients.water);
-    setSalt(derivedIngredients.salt);
-    setSourdough(derivedIngredients.sourdough);
-    setExtras(derivedIngredients.extras);
-  }, [imperialUnits]);
-
-  // Loading
-  useEffect(() => {
-    const settings = loadCalculatorSettings();
-    loadSettings(settings);
-  }, []);
+    if (previousUnit !== undefined && previousUnit !== settings.imperialUnits) {
+      const derivedIngredients = convertToImperialUnits(
+        settings,
+        extras,
+        settings.imperialUnits,
+      );
+      setSettings({
+        ...settings,
+        flour: derivedIngredients.flour,
+        water: derivedIngredients.water,
+        salt: derivedIngredients.salt,
+        sourdough: derivedIngredients.sourdough,
+      });
+      setExtras(derivedIngredients.extras);
+    }
+  }, [settings.imperialUnits]);
 
   // Saving
   useEffect(() => {
-    saveCalculatorSettings({
-      bakersMath,
-      flour,
-      water,
-      salt,
-      sourdough,
-      sourdoughRatio,
-      imperialUnits,
-    });
-  }, [
-    bakersMath,
-    imperialUnits,
-    flour,
-    water,
-    salt,
-    sourdough,
-    sourdoughRatio,
-  ]);
+    saveCalculatorSettings(settings);
+  }, [settings]);
 
   // Dough
   useEffect(() => {
-    const dough = calcDoughWeight(
-      {
-        flour,
-        water,
-        salt,
-        sourdough,
-      } as Settings,
-      extras,
-    );
+    const dough = calcDoughWeight(settings, extras);
     setDough(dough);
-  }, [flour, water, salt, sourdough, extras]);
+  }, [settings, extras]);
 
   // Liquid
   useEffect(() => {
+    const { bakersMath, sourdough, sourdoughRatio, water } = settings;
     const sourDoughLiquid = calcSourDoughLiquid(
       bakersMath,
       sourdough,
@@ -148,16 +144,17 @@ const BreadCalculator = () => {
       0,
     );
     setLiquids(water + sourDoughLiquid + extraLiquid);
-  }, [water, sourdoughRatio, sourdough, bakersMath, extras]);
+  }, [settings, extras]);
 
   const onResetClick = () => {
+    const { bakersMath, imperialUnits } = settings;
     if (imperialUnits) {
-      const { flour, water, salt, sourdough } = toggleImperialUnits(
+      const { flour, water, salt, sourdough } = convertToImperialUnits(
         defaultSettings,
         {},
         imperialUnits,
       );
-      loadSettings({
+      setSettings({
         ...defaultSettings,
         bakersMath,
         imperialUnits,
@@ -167,20 +164,8 @@ const BreadCalculator = () => {
         sourdough,
       });
     } else {
-      loadSettings(defaultSettings);
+      setSettings(defaultSettings);
     }
-  };
-
-  const getSettings = (): Settings => {
-    return {
-      bakersMath,
-      flour,
-      water,
-      sourdough,
-      salt,
-      sourdoughRatio,
-      imperialUnits,
-    };
   };
 
   const onDoughGoalSubmit = (goal: number) => {
@@ -190,31 +175,15 @@ const BreadCalculator = () => {
       sourdough,
       salt,
       extras: newExtras,
-    } = deriveIngredientsFromGoal(goal, getSettings(), extras);
-    setFlour(flour);
-    setWater(water);
-    setSourdough(sourdough);
-    setSalt(salt);
+    } = deriveIngredientsFromGoal(goal, settings, extras);
+    setSettings({
+      ...settings,
+      flour,
+      water,
+      sourdough,
+      salt,
+    });
     setExtras(newExtras);
-  };
-
-  const loadSettings = ({
-    bakersMath,
-    flour,
-    water,
-    salt,
-    sourdough,
-    sourdoughRatio,
-    imperialUnits,
-  }: Settings) => {
-    setBakersMath(bakersMath);
-    setImperialUnits(imperialUnits);
-    setFlour(flour);
-    setWater(water);
-    setSalt(salt);
-    setSourdough(sourdough);
-    setSourdoughRatio(sourdoughRatio);
-    setExtras({});
   };
 
   const toggleExtra = (key: string) => {
@@ -252,12 +221,36 @@ const BreadCalculator = () => {
   };
 
   const unitText = t(
-    `calculator.${imperialUnits ? 'imperial' : 'metric'}-text`,
+    `calculator.${settings.imperialUnits ? 'imperial' : 'metric'}-text`,
   );
   const format = (val: number): string => `${val} ${unitText}`;
   const parse = (val: string): number =>
     Number(val.replace(` ${unitText}`, ''));
   const inputPattern = '.*';
+
+  const setSetting = (key: string, value: any) => {
+    setSettings({
+      ...settings,
+      [key]: value,
+    });
+  };
+
+  const onSwitchBakersMath = (value: boolean) => {
+    setSettings({
+      ...settings,
+      bakersMath: value,
+    });
+    setBakersMath(value);
+  };
+
+  const onSwitchImperialUnits = (value: boolean) => {
+    setSettings({
+      ...settings,
+      imperialUnits: value,
+    });
+    setImperialUnits(value);
+  };
+
   return (
     <>
       <Meta subtitle={t('calculator.title')} />
@@ -300,7 +293,7 @@ const BreadCalculator = () => {
               </StatNumber>
 
               <StatHelpText>{`${t('calculator.hydration-text')} ${calcHydration(
-                flour,
+                settings.flour,
                 liquids,
               )}%`}</StatHelpText>
             </Stat>
@@ -322,10 +315,10 @@ const BreadCalculator = () => {
               )} (${flourPercent}%)`}</FormLabel>
               <NumberInput
                 id="flour"
-                value={format(flour)}
+                value={format(settings.flour)}
                 min={1}
                 step={1}
-                onChange={(value) => setFlour(parse(value))}
+                onChange={(value) => setSetting('flour', parse(value))}
                 allowMouseWheel
                 pattern={inputPattern}
               >
@@ -348,10 +341,10 @@ const BreadCalculator = () => {
               )} (${waterPercent}%)`}</FormLabel>
               <NumberInput
                 id="water"
-                value={format(water)}
+                value={format(settings.water)}
                 min={1}
                 step={1}
-                onChange={(value) => setWater(parse(value))}
+                onChange={(value) => setSetting('water', parse(value))}
                 allowMouseWheel
                 pattern={inputPattern}
               >
@@ -369,10 +362,10 @@ const BreadCalculator = () => {
               )} (${saltPercent}%)`}</FormLabel>
               <NumberInput
                 id="salt"
-                value={format(salt)}
+                value={format(settings.salt)}
                 min={1}
                 step={1}
-                onChange={(value) => setSalt(parse(value))}
+                onChange={(value) => setSetting('salt', parse(value))}
                 allowMouseWheel
                 pattern={inputPattern}
               >
@@ -393,10 +386,10 @@ const BreadCalculator = () => {
                 <NumberInput
                   id="sourdough"
                   flex={1}
-                  value={format(sourdough)}
+                  value={format(settings.sourdough)}
                   min={1}
                   step={1}
-                  onChange={(value) => setSourdough(parse(value))}
+                  onChange={(value) => setSetting('sourdough', parse(value))}
                   allowMouseWheel
                   pattern={inputPattern}
                 >
@@ -410,14 +403,14 @@ const BreadCalculator = () => {
                   aria-label="Sourdough ratio"
                   flex={1}
                   colorScheme="orange"
-                  value={sourdoughRatio}
-                  onChange={setSourdoughRatio}
+                  value={settings.sourdoughRatio}
+                  onChange={(value) => setSetting('sourdoughRatio', value)}
                 >
                   <SliderTrack>
                     <SliderFilledTrack />
                   </SliderTrack>
                   <SliderThumb fontSize="sm" boxSize="32px">
-                    <Text color="brand.400">{sourdoughRatio}%</Text>
+                    <Text color="brand.400">{settings.sourdoughRatio}%</Text>
                   </SliderThumb>
                 </Slider>
               </Stack>
@@ -431,7 +424,12 @@ const BreadCalculator = () => {
               const isDisabled = extra ? extra.disabled : true;
               const amount = extra ? extra.amount : 0;
               const percent = Math.floor(
-                calcIngredientPercent(bakersMath, flour, amount, dough),
+                calcIngredientPercent(
+                  settings.bakersMath,
+                  settings.flour,
+                  amount,
+                  dough,
+                ),
               );
               return (
                 <FormControl key={key} mb={2} isDisabled={isDisabled}>
@@ -471,7 +469,7 @@ const BreadCalculator = () => {
                 <Switch
                   id="bakersMath"
                   isChecked={bakersMath}
-                  onChange={(e) => setBakersMath(e.target.checked)}
+                  onChange={(e) => onSwitchBakersMath(e.target.checked)}
                 />
                 <FormLabel
                   htmlFor="bakersMath"
@@ -489,7 +487,7 @@ const BreadCalculator = () => {
                 <Switch
                   id="imperialUnits"
                   isChecked={imperialUnits}
-                  onChange={(e) => setImperialUnits(e.target.checked)}
+                  onChange={(e) => onSwitchImperialUnits(e.target.checked)}
                 />
                 <FormLabel
                   htmlFor="bakersMath"

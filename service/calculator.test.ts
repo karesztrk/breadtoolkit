@@ -7,7 +7,7 @@ import {
   defaultSettings,
   calcDoughWeight,
   convertToImperial,
-  toggleImperialUnits,
+  convertToImperialUnits,
 } from './calculator';
 
 describe('hydration', () => {
@@ -170,7 +170,7 @@ describe('imperial convertion', () => {
     expect(imperialValue).toEqual(1);
   });
   it('can convert the whole settings', () => {
-    const { flour, salt, water, sourdough, extras } = toggleImperialUnits(
+    const { flour, salt, water, sourdough, extras } = convertToImperialUnits(
       defaultSettings,
       { egg: { disabled: false, amount: 150, liquid: 80 } },
       true,
@@ -183,7 +183,7 @@ describe('imperial convertion', () => {
     expect(extras.egg.liquid).toEqual(convertToImperial(80));
   });
   it('supports switching off imperial units for settings', () => {
-    const { flour, salt, water, sourdough, extras } = toggleImperialUnits(
+    const { flour, salt, water, sourdough, extras } = convertToImperialUnits(
       defaultSettings,
       { egg: { disabled: false, amount: 150, liquid: 80 } },
       true,
@@ -194,7 +194,7 @@ describe('imperial convertion', () => {
       salt: metricSalt,
       sourdough: metricSourdough,
       extras: metricExtras,
-    } = toggleImperialUnits(
+    } = convertToImperialUnits(
       { ...defaultSettings, flour, salt, water, sourdough },
       extras,
       false,

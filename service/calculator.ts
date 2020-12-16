@@ -207,7 +207,7 @@ export const convertToMetric = (value: number): number => {
   return roundedValue || 1;
 };
 
-export const toggleImperialUnits = (
+export const convertToImperialUnits = (
   settings: Settings,
   extras: ExtraIngredients,
   imperialUnits: boolean,
