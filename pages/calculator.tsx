@@ -407,7 +407,6 @@ const BreadCalculator = () => {
                 min={1}
                 step={1}
                 onChange={(value) => setSetting('flour', parse(value))}
-                allowMouseWheel
                 pattern={inputPattern}
               >
                 <NumberInputField />
@@ -433,7 +432,6 @@ const BreadCalculator = () => {
                 min={1}
                 step={1}
                 onChange={(value) => setSetting('water', parse(value))}
-                allowMouseWheel
                 pattern={inputPattern}
               >
                 <NumberInputField />
@@ -454,7 +452,6 @@ const BreadCalculator = () => {
                 min={1}
                 step={1}
                 onChange={(value) => setSetting('salt', parse(value))}
-                allowMouseWheel
                 pattern={inputPattern}
               >
                 <NumberInputField />
@@ -478,7 +475,6 @@ const BreadCalculator = () => {
                   min={1}
                   step={1}
                   onChange={(value) => setSetting('sourdough', parse(value))}
-                  allowMouseWheel
                   pattern={inputPattern}
                 >
                   <NumberInputField />
@@ -522,6 +518,7 @@ const BreadCalculator = () => {
               return (
                 <FormControl key={key} mb={2} isDisabled={isDisabled}>
                   <Switch
+                    aria-label={`Enable ${key}`}
                     isChecked={!isDisabled}
                     onChange={() => toggleExtra(key)}
                   />
@@ -537,7 +534,6 @@ const BreadCalculator = () => {
                     onChange={(value) =>
                       onChangeExtras(key, parse(value), water)
                     }
-                    allowMouseWheel
                     pattern={inputPattern}
                   >
                     <NumberInputField />
@@ -578,7 +574,7 @@ const BreadCalculator = () => {
                   onChange={(e) => onSwitchImperialUnits(e.target.checked)}
                 />
                 <FormLabel
-                  htmlFor="bakersMath"
+                  htmlFor="imperialUnits"
                   fontSize="sm"
                   m={0}
                   fontWeight={400}

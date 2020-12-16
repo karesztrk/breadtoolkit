@@ -63,7 +63,10 @@ const Footer = () => {
                 color={colorMode === 'light' ? 'brand.400' : 'brand.100'}
               />
             </a>
-            <a href="torok.karoly.krisztian@gmail.com" aria-label="Email">
+            <a
+              href="mailto:torok.karoly.krisztian@gmail.com"
+              aria-label="Email"
+            >
               <EmailIcon
                 color={colorMode === 'light' ? 'brand.400' : 'brand.100'}
               />

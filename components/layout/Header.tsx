@@ -18,7 +18,7 @@ const Header = () => {
       <Container maxW="xl">
         <Flex align="center" mr={5} justifyContent="space-between">
           <Link href="/">
-            <a>
+            <a aria-label="Home">
               <BrandIcon w={9} h={9} cursor="pointer" />
             </a>
           </Link>

@@ -19,7 +19,7 @@ const GridItem: FC<{ to: string; children: ReactNode[] | ReactNode }> = ({
         role="group"
         position="relative"
         zIndex={1}
-        transition="transform 0.25s ease-in-out"
+        transition="all 0.25s ease-in-out"
         overflow="hidden"
       >
         {children}

@@ -19,7 +19,7 @@ const CalculatorCard: FC = () => {
         zIndex={1}
       />
       <Heading
-        as="h3"
+        as="p"
         size="2xl"
         color={colorMode === 'light' ? 'brand.300' : 'white'}
         opacity={colorMode === 'light' ? 0.3 : 0.8}
@@ -31,6 +31,7 @@ const CalculatorCard: FC = () => {
         textAlign="center"
         _groupHover={{
           transform: 'translateY(-150%)',
+          opacity: 1,
         }}
         zIndex={0}
       >

@@ -35,7 +35,6 @@ const Home = () => {
           as="h2"
           size="xl"
           fontFamily="hero"
-          textTransform="uppercase"
           color={colorMode === 'light' ? 'brand.300' : 'brand.100'}
           ml={['0', '4rem']}
           mb={2}

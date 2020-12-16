@@ -3,8 +3,8 @@ import { render } from '@testing-library/react';
 import Header from './Header';
 
 describe('Header', () => {
-  it('Logo & language selector displayed', () => {
+  it('Logo', () => {
     const { container } = render(<Header />);
-    expect(container.querySelectorAll('a')).toHaveLength(2);
+    expect(container.querySelectorAll('a')).toHaveLength(1);
   });
 });
