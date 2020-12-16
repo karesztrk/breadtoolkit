@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useMemo } from 'react';
+import React, { useEffect, useState } from 'react';
 import {
   Divider,
   Badge,
@@ -30,40 +30,77 @@ import {
   IconButton,
   Flex,
   usePrevious,
+  useToast,
 } from '@chakra-ui/core';
-import { RepeatClockIcon } from '@chakra-ui/icons';
+import { RepeatClockIcon, LinkIcon } from '@chakra-ui/icons';
 import {
   loadCalculatorSettings,
   saveCalculatorSettings,
   defaultSettings,
-  Settings,
   calcFlourPercent,
   calcIngredientPercent,
   calcHydration,
   calcSourDoughLiquid,
+  calcExtrasLiquid,
   deriveIngredientsFromGoal,
-  ExtraIngredient,
-  ExtraIngredients,
   supportedIngredients,
   calcDoughWeight,
   convertToImperialUnits,
 } from '@/service/calculator';
+import {
+  Settings,
+  ExtraIngredients,
+  ExtraIngredient,
+  SettingName,
+} from '@/types/calculator';
 import EditableNumericText from '@/components/common/EditableNumericText';
 import { useI18n } from 'next-localization';
 import Meta from '@/components/layout/Meta';
+import { useRouter } from 'next/router';
 
 const BreadCalculator = () => {
   const { t } = useI18n();
+  const { asPath } = useRouter();
   const { colorMode } = useColorMode();
+  const toast = useToast();
 
-  const [settings, setSettings] = useState<Settings>(loadCalculatorSettings());
+  const [settings, setSettings] = useState<Settings>(() => {
+    // Router query object is populated later
+    if (asPath && asPath.includes('?')) {
+      const queryParams = new URLSearchParams(asPath.split('?')[1]);
+      const settings = loadCalculatorSettings();
+      const flour = Number(queryParams.get('flour'));
+      const water = Number(queryParams.get('water'));
+      const salt = Number(queryParams.get('salt'));
+      const sourdough = Number(queryParams.get('sourdough'));
+      const sourdoughRatio = Number(queryParams.get('sourdoughRatio'));
+      return {
+        ...settings,
+        ...(flour && { flour }),
+        ...(water && { water }),
+        ...(salt && { salt }),
+        ...(sourdough && { sourdough }),
+        ...(sourdoughRatio && { sourdoughRatio }),
+      };
+    }
+    return loadCalculatorSettings();
+  });
   // Switches need separate state to correctly load the initial value
   const [imperialUnits, setImperialUnits] = useState(false);
   const [bakersMath, setBakersMath] = useState(false);
   const previousUnit = usePrevious(imperialUnits);
   const [dough, setDough] = useState(0);
   const [liquids, setLiquids] = useState(0);
-  const [extras, setExtras] = useState<ExtraIngredients>({});
+  const [extras, setExtras] = useState<ExtraIngredients>(() => {
+    // Router query object is populated later
+    if (asPath && asPath.includes('?')) {
+      const queryParams = new URLSearchParams(asPath.split('?')[1]);
+      supportedIngredients.forEach(({ key }) => {
+        console.log(queryParams.get(key), key);
+      });
+    }
+    return {};
+  });
 
   const flourPercent = Math.floor(
     calcFlourPercent(settings.bakersMath, settings.flour, dough),
@@ -137,12 +174,7 @@ const BreadCalculator = () => {
       sourdough,
       sourdoughRatio,
     );
-    const extraLiquid: number = Object.values(extras).reduce(
-      (accumulator, { disabled, liquid }) => {
-        return accumulator + (disabled ? 0 : liquid);
-      },
-      0,
-    );
+    const extraLiquid: number = calcExtrasLiquid(extras);
     setLiquids(water + sourDoughLiquid + extraLiquid);
   }, [settings, extras]);
 
@@ -166,6 +198,57 @@ const BreadCalculator = () => {
     } else {
       setSettings(defaultSettings);
     }
+
+    toast({
+      title: t('calculator.reset-success-toast-title'),
+      description: t('calculator.reset-success-toast-title'),
+      status: 'success',
+      duration: 9000,
+      isClosable: true,
+    });
+  };
+
+  const onShareClick = () => {
+    const url = new URL(window.location.href);
+    const extraSettings = Object.entries(extras).reduce((acc, [key, value]) => {
+      if (!value.disabled && value.amount > 0) {
+        acc[key] = value.amount;
+      }
+      return acc;
+    }, {} as Record<string, number>);
+    const mergedSettings: Record<string, any> = {
+      ...settings,
+      ...extraSettings,
+    };
+    delete mergedSettings.bakersMath;
+    delete mergedSettings.imperialUnits;
+    const searchParams = new URLSearchParams(mergedSettings);
+    url.search = searchParams.toString();
+
+    copyToClipboard(url.toString());
+  };
+
+  const copyToClipboard = async (text: string) => {
+    navigator.clipboard.writeText(text).then(
+      () => {
+        toast({
+          title: t('calculator.share-success-toast-title'),
+          description: t('calculator.share-success-toast-description'),
+          status: 'success',
+          duration: 9000,
+          isClosable: true,
+        });
+      },
+      () => {
+        toast({
+          title: t('calculator.share-failed-toast-title'),
+          description: t('calculator.share-failed-toast-description'),
+          status: 'error',
+          duration: 9000,
+          isClosable: true,
+        });
+      },
+    );
   };
 
   const onDoughGoalSubmit = (goal: number) => {
@@ -228,7 +311,7 @@ const BreadCalculator = () => {
     Number(val.replace(` ${unitText}`, ''));
   const inputPattern = '.*';
 
-  const setSetting = (key: string, value: any) => {
+  const setSetting = (key: SettingName, value: any) => {
     setSettings({
       ...settings,
       [key]: value,
@@ -297,12 +380,17 @@ const BreadCalculator = () => {
                 liquids,
               )}%`}</StatHelpText>
             </Stat>
-            <Box flex={1} position="relative">
+            <Box flex={1} textAlign="right">
               <IconButton
-                position="absolute"
-                right={0}
+                onClick={onShareClick}
+                variant="ghost"
+                aria-label="Share"
+                icon={<LinkIcon />}
+              />
+              <IconButton
+                ml={1}
                 onClick={onResetClick}
-                variant="outline"
+                variant="ghost"
                 aria-label="Reset settings"
                 icon={<RepeatClockIcon />}
               />

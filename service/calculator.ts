@@ -1,20 +1,8 @@
-export interface Settings {
-  bakersMath: boolean;
-  imperialUnits: boolean;
-  flour: number;
-  water: number;
-  salt: number;
-  sourdough: number;
-  sourdoughRatio: number;
-}
-
-export interface DerivedIngredients {
-  flour: number;
-  water: number;
-  salt: number;
-  sourdough: number;
-  extras: ExtraIngredients;
-}
+import {
+  Settings,
+  DerivedIngredients,
+  ExtraIngredients,
+} from '@/types/calculator';
 
 export const defaultSettings: Settings = {
   bakersMath: true,
@@ -61,16 +49,6 @@ export const supportedIngredients = [
     },
   },
 ];
-
-export interface ExtraIngredients {
-  [key: string]: ExtraIngredient;
-}
-
-export interface ExtraIngredient {
-  disabled: boolean;
-  amount: number;
-  liquid: number;
-}
 
 export const saveCalculatorSettings = (settings: Settings) => {
   if (typeof window !== 'undefined') {
@@ -188,6 +166,12 @@ export const calcDoughWeight = (
 export const calcExtrasWeight = (extras: ExtraIngredients) => {
   return Object.values(extras).reduce((accumulator, { disabled, amount }) => {
     return accumulator + (disabled ? 0 : amount);
+  }, 0);
+};
+
+export const calcExtrasLiquid = (extras: ExtraIngredients) => {
+  return Object.values(extras).reduce((accumulator, { disabled, liquid }) => {
+    return accumulator + (disabled ? 0 : liquid);
   }, 0);
 };
 

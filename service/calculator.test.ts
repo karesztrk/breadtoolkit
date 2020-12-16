@@ -8,6 +8,8 @@ import {
   calcDoughWeight,
   convertToImperial,
   convertToImperialUnits,
+  calcExtrasWeight,
+  calcExtrasLiquid,
 } from './calculator';
 
 describe('hydration', () => {
@@ -206,5 +208,29 @@ describe('imperial convertion', () => {
     expect(metricSourdough).toEqual(113);
     expect(metricExtras.egg.amount).toEqual(142);
     expect(metricExtras.egg.liquid).toEqual(85);
+  });
+});
+
+describe('extras', () => {
+  it('should be the enabled ingredients weight', () => {
+    const extras = {
+      egg: { disabled: false, amount: 50, liquid: 80 },
+      milk: { disabled: false, amount: 50, liquid: 80 },
+      butter: { disabled: true, amount: 50, liquid: 80 },
+    };
+    const result = calcExtrasWeight(extras);
+    expect(result).toEqual(100);
+  });
+});
+
+describe('extras liquid', () => {
+  it('should be the enabled ingredients liquid', () => {
+    const extras = {
+      egg: { disabled: false, amount: 50, liquid: 80 },
+      milk: { disabled: false, amount: 50, liquid: 80 },
+      butter: { disabled: true, amount: 50, liquid: 80 },
+    };
+    const result = calcExtrasLiquid(extras);
+    expect(result).toEqual(160);
   });
 });

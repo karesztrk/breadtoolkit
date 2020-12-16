@@ -39,7 +39,13 @@
         "milk-whole-label": "Whole milk",
         "settings-bakersMath-label": "Use Baker's Math",
         "settings-imperial-label": "Use Imperial units",
-        "new-badge": "New"
+        "new-badge": "New",
+        "reset-success-toast-title": "Reset successful",
+        "reset-success-toast-description": "Calculator settings had been reset for you",
+        "share-success-toast-title": "Link created",
+        "share-success-toast-description": "We've copied a share link to your clipboard",
+        "share-failed-toast-title": "Failed to create link",
+        "share-failed-toast-description": "Sorry. We couldn't set your share link"
     },
     "contact": {
         "title": "Contact",

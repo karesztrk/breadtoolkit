@@ -39,7 +39,13 @@
         "milk-whole-label": "Tej 3,5%-os",
         "settings-bakersMath-label": "Mutasd pékszázalékban",
         "settings-imperial-label": "Angolszász mértékegységek",
-        "new-badge": "Újdonság"
+        "new-badge": "Újdonság",
+        "reset-success-toast-title": "Sikeres alaphelyzetbe állítás",
+        "reset-success-toast-description": "A kalkulátort az alaphelyzetbe állítottuk",
+        "share-success-toast-title": "Hivatkozás létrehozva",
+        "share-success-toast-description": "A megosztható linket a vágólapodra másoltuk",
+        "share-failed-toast-title": "Sikertelen hivatkozás",
+        "share-failed-toast-description": "Bocsánat. Nem sikerült létrehozni az általad kért hivatkozást"
     },
     "contact": {
         "title": "Kapcsolat",
