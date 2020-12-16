@@ -1,5 +1,5 @@
 import React, { FC } from 'react';
-import { Box, ChakraProps } from '@chakra-ui/core';
+import { Box, ChakraProps } from '@chakra-ui/react';
 
 const Divider: FC<ChakraProps> = (props: ChakraProps) => {
   return (

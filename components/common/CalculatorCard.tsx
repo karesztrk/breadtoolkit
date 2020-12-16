@@ -1,4 +1,4 @@
-import { Heading, Text, useColorMode } from '@chakra-ui/core';
+import { Heading, Text, useColorMode } from '@chakra-ui/react';
 import React, { FC } from 'react';
 import CalculatorIcon from '@/components/icons/CalculatorIcon';
 import { useI18n } from 'next-localization';

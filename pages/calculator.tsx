@@ -31,7 +31,7 @@ import {
   Flex,
   usePrevious,
   useToast,
-} from '@chakra-ui/core';
+} from '@chakra-ui/react';
 import { RepeatClockIcon, LinkIcon } from '@chakra-ui/icons';
 import {
   loadCalculatorSettings,
@@ -337,7 +337,7 @@ const BreadCalculator = () => {
   return (
     <>
       <Meta subtitle={t('calculator.title')} />
-      <Container maxW="xl" mb={16}>
+      <Container maxW="7xl" mb={16}>
         <Heading
           as="h1"
           fontFamily="hero"
@@ -408,6 +408,7 @@ const BreadCalculator = () => {
                 step={1}
                 onChange={(value) => setSetting('flour', parse(value))}
                 pattern={inputPattern}
+                allowMouseWheel
               >
                 <NumberInputField />
                 <NumberInputStepper>
@@ -433,6 +434,7 @@ const BreadCalculator = () => {
                 step={1}
                 onChange={(value) => setSetting('water', parse(value))}
                 pattern={inputPattern}
+                allowMouseWheel
               >
                 <NumberInputField />
                 <NumberInputStepper>
@@ -453,6 +455,7 @@ const BreadCalculator = () => {
                 step={1}
                 onChange={(value) => setSetting('salt', parse(value))}
                 pattern={inputPattern}
+                allowMouseWheel
               >
                 <NumberInputField />
                 <NumberInputStepper>
@@ -476,6 +479,7 @@ const BreadCalculator = () => {
                   step={1}
                   onChange={(value) => setSetting('sourdough', parse(value))}
                   pattern={inputPattern}
+                  allowMouseWheel
                 >
                   <NumberInputField />
                   <NumberInputStepper>
@@ -535,6 +539,7 @@ const BreadCalculator = () => {
                       onChangeExtras(key, parse(value), water)
                     }
                     pattern={inputPattern}
+                    allowMouseWheel
                   >
                     <NumberInputField />
                     <NumberInputStepper>

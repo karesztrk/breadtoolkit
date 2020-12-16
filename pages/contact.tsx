@@ -11,7 +11,7 @@ import {
   Text,
   Textarea,
   useColorMode,
-} from '@chakra-ui/core';
+} from '@chakra-ui/react';
 import { useI18n } from 'next-localization';
 import React from 'react';
 
@@ -21,7 +21,7 @@ const Contact = () => {
   return (
     <>
       <Meta subtitle={t('contact.title')} />
-      <Container maxW="xl">
+      <Container maxW="7xl">
         <Heading
           as="h1"
           fontFamily="hero"

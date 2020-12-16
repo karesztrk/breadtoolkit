@@ -1,5 +1,5 @@
 import React, { FC } from 'react';
-import { Icon } from '@chakra-ui/core';
+import { Icon } from '@chakra-ui/react';
 
 const EmailIcon: FC<{ color: string }> = ({ color }) => {
   return (

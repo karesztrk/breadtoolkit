@@ -7,7 +7,7 @@ import {
   Container,
   HStack,
   useColorMode,
-} from '@chakra-ui/core';
+} from '@chakra-ui/react';
 import Link from 'next/link';
 import React from 'react';
 import FacebookIcon from '@/components/icons/FacebookIcon';
@@ -25,7 +25,7 @@ const Footer = () => {
   const direction = variant as FlexProps['direction'];
   return (
     <Box as="footer" bg={colorMode === 'light' ? 'white' : 'brand.400'}>
-      <Container maxW="xl">
+      <Container maxW="7xl">
         <Flex
           justify="space-between"
           alignItems="center"

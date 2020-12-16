@@ -6,7 +6,7 @@ import {
   Grid,
   useColorMode,
   Box,
-} from '@chakra-ui/core';
+} from '@chakra-ui/react';
 import GridItem from '@/components/common/ToolCard';
 import CalculatorCard from '@/components/common/CalculatorCard';
 import { useI18n } from 'next-localization';
@@ -17,7 +17,7 @@ const Home = () => {
   const { colorMode } = useColorMode();
 
   return (
-    <Container maxW="xl" my="20">
+    <Container maxW="7xl" my="20">
       <Box minHeight="9.5rem">
         <Heading
           as="h1"

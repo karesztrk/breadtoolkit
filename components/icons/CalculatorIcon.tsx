@@ -1,4 +1,4 @@
-import { ChakraProps, Icon, useColorMode } from '@chakra-ui/core';
+import { ChakraProps, Icon, useColorMode } from '@chakra-ui/react';
 import React from 'react';
 
 const CalculatorIcon = (props: ChakraProps) => {

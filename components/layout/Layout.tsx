@@ -1,4 +1,4 @@
-import { Box, Flex, useColorMode } from '@chakra-ui/core';
+import { Box, Flex, useColorMode } from '@chakra-ui/react';
 import Divider from '@/components/common/Divider';
 import Header from '@/components/layout/Header';
 import Footer from '@/components/layout/Footer';

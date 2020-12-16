@@ -1,5 +1,5 @@
 import React from 'react';
-import { ChakraProps, Icon } from '@chakra-ui/core';
+import { ChakraProps, Icon } from '@chakra-ui/react';
 
 const BrandIcon = (props: ChakraProps) => {
   return (

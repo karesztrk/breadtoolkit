@@ -6,7 +6,7 @@ import {
   Select,
   Switch,
   useColorMode,
-} from '@chakra-ui/core';
+} from '@chakra-ui/react';
 import React, { ChangeEvent, useEffect } from 'react';
 import Link from 'next/link';
 import { useRouter } from 'next/router';

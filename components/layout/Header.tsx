@@ -1,4 +1,4 @@
-import { Container, Flex } from '@chakra-ui/core';
+import { Container, Flex } from '@chakra-ui/react';
 import React from 'react';
 import Link from 'next/link';
 import Menu from '@/components/common/Menu';
@@ -15,7 +15,7 @@ const Header = () => {
       bg="brand.400"
       color="gray.200"
     >
-      <Container maxW="xl">
+      <Container maxW="7xl">
         <Flex align="center" mr={5} justifyContent="space-between">
           <Link href="/">
             <a aria-label="Home">
