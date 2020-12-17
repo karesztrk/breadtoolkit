@@ -1,8 +1,8 @@
 import Meta from '@/components/layout/Meta';
+import PageContainer from '@/components/layout/PageContainer';
 import {
   Box,
   Button,
-  Container,
   FormControl,
   FormHelperText,
   FormLabel,
@@ -21,7 +21,7 @@ const Contact = () => {
   return (
     <>
       <Meta subtitle={t('contact.title')} />
-      <Container maxW="7xl">
+      <PageContainer>
         <Heading
           as="h1"
           fontFamily="hero"
@@ -66,7 +66,7 @@ const Contact = () => {
             </Button>
           </form>
         </Box>
-      </Container>
+      </PageContainer>
     </>
   );
 };

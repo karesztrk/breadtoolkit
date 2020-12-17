@@ -2,7 +2,6 @@ import React, { useEffect, useState } from 'react';
 import {
   Divider,
   Badge,
-  Container,
   Heading,
   Box,
   NumberInput,
@@ -57,6 +56,7 @@ import EditableNumericText from '@/components/common/EditableNumericText';
 import { useI18n } from 'next-localization';
 import Meta from '@/components/layout/Meta';
 import { useRouter } from 'next/router';
+import PageContainer from '@/components/layout/PageContainer';
 
 const BreadCalculator = () => {
   const { t } = useI18n();
@@ -337,7 +337,7 @@ const BreadCalculator = () => {
   return (
     <>
       <Meta subtitle={t('calculator.title')} />
-      <Container maxW="7xl" mb={16}>
+      <PageContainer>
         <Heading
           as="h1"
           fontFamily="hero"
@@ -593,7 +593,7 @@ const BreadCalculator = () => {
             </FormControl>
           </Stack>
         </Box>
-      </Container>
+      </PageContainer>
     </>
   );
 };
