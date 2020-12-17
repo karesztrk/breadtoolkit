@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import {
   Divider,
-  Badge,
   Heading,
   Box,
   NumberInput,
@@ -24,8 +23,6 @@ import {
   Text,
   useColorMode,
   Kbd,
-  Switch,
-  HStack,
   IconButton,
   Flex,
   usePrevious,
@@ -54,10 +51,12 @@ import {
   SettingName,
 } from '@/types/calculator';
 import EditableNumericText from '@/components/common/EditableNumericText';
+import NumberInputSwitch from '@/components/common/NumberInputSwitch';
 import { useI18n } from 'next-localization';
 import Meta from '@/components/layout/Meta';
 import { useRouter } from 'next/router';
 import PageContainer from '@/components/layout/PageContainer';
+import ConfigSwitch from '@/components/common/ConfigSwitch';
 
 const BreadCalculator = () => {
   const { t } = useI18n();
@@ -86,15 +85,12 @@ const BreadCalculator = () => {
     }
     return loadCalculatorSettings();
   });
-  // Switches need separate state to correctly load the initial value
-  const [imperialUnits, setImperialUnits] = useState(false);
-  const [bakersMath, setBakersMath] = useState(false);
-  const previousUnit = usePrevious(imperialUnits);
+  const previousUnit = usePrevious(settings.imperialUnits);
   const [dough, setDough] = useState(0);
   const [liquids, setLiquids] = useState(0);
   const [extras, setExtras] = useState<ExtraIngredients>(() => {
     // Router query object is populated later
-    const extras = {} as ExtraIngredients;
+    const extras: ExtraIngredients = {};
     if (asPath && asPath.includes('?')) {
       const queryParams = new URLSearchParams(asPath.split('?')[1]);
       supportedIngredients.forEach(({ key, water }) => {
@@ -138,12 +134,6 @@ const BreadCalculator = () => {
       dough,
     ),
   );
-
-  // Configs
-  useEffect(() => {
-    setImperialUnits(settings.imperialUnits);
-    setBakersMath(settings.bakersMath);
-  }, [settings.imperialUnits, settings.bakersMath]);
 
   // Unit convertion
   useEffect(() => {
@@ -327,20 +317,18 @@ const BreadCalculator = () => {
     });
   };
 
-  const onSwitchBakersMath = (value: boolean) => {
+  const onSwitchBakersMath = () => {
     setSettings({
       ...settings,
-      bakersMath: value,
+      bakersMath: !settings.bakersMath,
     });
-    setBakersMath(value);
   };
 
-  const onSwitchImperialUnits = (value: boolean) => {
+  const onSwitchImperialUnits = () => {
     setSettings({
       ...settings,
-      imperialUnits: value,
+      imperialUnits: !settings.imperialUnits,
     });
-    setImperialUnits(value);
   };
 
   return (
@@ -528,8 +516,8 @@ const BreadCalculator = () => {
             <Text mb={5}>{t('calculator.extras-text')}</Text>
             {supportedIngredients.map(({ key, name, water }) => {
               const extra = extras[key];
-              const isDisabled = extra ? extra.disabled : true;
               const amount = extra ? extra.amount : 0;
+              const isDisabled = extra ? extra.disabled : true;
               const percent = Math.floor(
                 calcIngredientPercent(
                   settings.bakersMath,
@@ -539,77 +527,36 @@ const BreadCalculator = () => {
                 ),
               );
               return (
-                <FormControl key={key} mb={2} isDisabled={isDisabled}>
-                  <Switch
-                    aria-label={`Enable ${key}`}
-                    isChecked={!isDisabled}
-                    onChange={() => toggleExtra(key)}
-                  />
-                  <FormLabel htmlFor={key} display="inline-block" ml={2}>
-                    {`${t(name)} (${percent}%)`}
-                  </FormLabel>
-                  <NumberInput
+                <React.Fragment key={key}>
+                  <NumberInputSwitch
                     id={key}
-                    isDisabled={isDisabled}
+                    disabled={isDisabled}
+                    label={`${t(name)} (${percent}%)`}
                     value={format(amount)}
-                    min={0}
-                    step={1}
-                    onChange={(value) =>
+                    onChangeValue={(value) =>
                       onChangeExtras(key, parse(value), water)
                     }
-                    pattern={inputPattern}
-                    allowMouseWheel
-                  >
-                    <NumberInputField />
-                    <NumberInputStepper>
-                      <NumberIncrementStepper />
-                      <NumberDecrementStepper />
-                    </NumberInputStepper>
-                  </NumberInput>
-                </FormControl>
+                    onToggle={() => toggleExtra(key)}
+                  />
+                </React.Fragment>
               );
             })}
 
             <Divider mb={2} />
+            <ConfigSwitch
+              id="bakersMath"
+              label={t('calculator.settings-bakersMath-label')}
+              disabled={!settings.bakersMath}
+              onToggle={onSwitchBakersMath}
+            />
 
-            <FormControl mb={2}>
-              <HStack>
-                <Switch
-                  id="bakersMath"
-                  isChecked={bakersMath}
-                  onChange={(e) => onSwitchBakersMath(e.target.checked)}
-                />
-                <FormLabel
-                  htmlFor="bakersMath"
-                  fontSize="sm"
-                  m={0}
-                  fontWeight={400}
-                >
-                  {t('calculator.settings-bakersMath-label')}
-                </FormLabel>
-              </HStack>
-            </FormControl>
-
-            <FormControl mb={2}>
-              <HStack>
-                <Switch
-                  id="imperialUnits"
-                  isChecked={imperialUnits}
-                  onChange={(e) => onSwitchImperialUnits(e.target.checked)}
-                />
-                <FormLabel
-                  htmlFor="imperialUnits"
-                  fontSize="sm"
-                  m={0}
-                  fontWeight={400}
-                >
-                  {t('calculator.settings-imperial-label')}
-                </FormLabel>
-                <Badge ml="1" colorScheme="green">
-                  {t('calculator.new-badge')}
-                </Badge>
-              </HStack>
-            </FormControl>
+            <ConfigSwitch
+              id="imperialUnits"
+              label={t('calculator.settings-imperial-label')}
+              disabled={!settings.imperialUnits}
+              onToggle={onSwitchImperialUnits}
+              newConfig
+            />
           </Stack>
         </Box>
       </PageContainer>
