@@ -8,10 +8,10 @@ export const defaultSettings: Settings = {
   bakersMath: true,
   imperialUnits: false,
   flour: 500,
-  water: 325,
+  water: 345,
   salt: 10,
   sourdough: 100,
-  sourdoughRatio: 50,
+  sourdoughRatio: 80,
 };
 
 export const supportedIngredients = [
@@ -68,7 +68,15 @@ export const loadCalculatorSettings = (): Settings => {
   return Object.keys(settings).length === 0 ? defaultSettings : settings;
 };
 
-export const calcHydration = (flour: number, liquids: number): string => {
+export const calcHydration = (settings: Settings, liquids: number): string => {
+  const sourDoughFlour =
+    settings.sourdough -
+    calcSourDoughLiquid(
+      settings.bakersMath,
+      settings.sourdough,
+      settings.sourdoughRatio,
+    );
+  const flour = settings.flour + sourDoughFlour;
   let hydration: string;
   if (flour < 1) {
     hydration = '100';

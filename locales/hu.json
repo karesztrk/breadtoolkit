@@ -26,6 +26,7 @@
         "metric-text": "gramm",
         "imperial-text": "unica",
         "hydration-text": "Víztartalom",
+        "hydratation-tooltip": "A víztartalmat a teljes liszt és a teljes folyadék közötti aránya adja meg. A folyadéktartalmat befolyásolja a kovászban és az extra hozzávalókban lévő folyadék mennyisége.",
         "flour-label": "Liszt",
         "flour-hint": "Görget",
         "flour-hint-separator": "vagy",

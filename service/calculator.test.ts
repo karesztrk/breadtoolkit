@@ -14,16 +14,52 @@ import {
 
 describe('hydration', () => {
   it('does not exceed 100', () => {
-    expect(calcHydration(2, 100)).toEqual('100+');
+    expect(
+      calcHydration(
+        {
+          ...defaultSettings,
+          flour: 2,
+          sourdough: 40,
+        },
+        100,
+      ),
+    ).toEqual('100+');
   });
   it('accept zero flour', () => {
-    expect(calcHydration(0, 100)).toEqual('100');
+    expect(
+      calcHydration(
+        {
+          ...defaultSettings,
+          flour: 0,
+          sourdough: 40,
+        },
+        100,
+      ),
+    ).toEqual('100+');
   });
   it('gives correct value', () => {
-    expect(calcHydration(100, 50)).toEqual('50.0');
+    expect(
+      calcHydration(
+        {
+          ...defaultSettings,
+          flour: 100,
+          sourdough: 40,
+        },
+        50,
+      ),
+    ).toEqual('40.9');
   });
   it('has correct precision', () => {
-    expect(calcHydration(100, 33.33333)).toEqual('33.3');
+    expect(
+      calcHydration(
+        {
+          ...defaultSettings,
+          flour: 100,
+          sourdough: 40,
+        },
+        33.33333,
+      ),
+    ).toEqual('27.3');
   });
 });
 
@@ -65,10 +101,10 @@ describe('deriving', () => {
     const result = deriveIngredientsFromGoal(500, defaultSettings, {});
     expect(result).toEqual({
       extras: {},
-      flour: 267,
-      salt: 6,
-      sourdough: 53,
-      water: 174,
+      flour: 262,
+      salt: 5,
+      sourdough: 52,
+      water: 181,
     });
   });
   it('ingredients are having the goal weight in total', () => {
@@ -122,10 +158,10 @@ describe('deriving', () => {
     };
     const result = deriveIngredientsFromGoal(goal, defaultSettings, extras);
     expect(result).toEqual({
-      flour: 267,
-      salt: 6,
-      sourdough: 53,
-      water: 174,
+      flour: 262,
+      salt: 5,
+      sourdough: 52,
+      water: 181,
       extras,
     });
   });
@@ -139,7 +175,7 @@ describe('dough weight', () => {
       butter: { disabled: true, amount: 50, liquid: 80 },
     };
     const result = calcDoughWeight(defaultSettings, extras);
-    expect(result).toEqual(935 + 100);
+    expect(result).toEqual(955 + 100);
   });
 });
 
@@ -203,7 +239,7 @@ describe('imperial convertion', () => {
     );
     // Rounding causes differencies
     expect(metricFlour).toEqual(510);
-    expect(metricWater).toEqual(312);
+    expect(metricWater).toEqual(340);
     expect(metricSalt).toEqual(28);
     expect(metricSourdough).toEqual(113);
     expect(metricExtras.egg.amount).toEqual(142);

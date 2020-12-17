@@ -7,6 +7,9 @@ import Text from '@/theme/components/Text';
 import Select from '@/theme/components/Select';
 
 const overrides = {
+  config: {
+    useSystemColorMode: true,
+  },
   colors,
   fonts: {
     hero: 'Merriweather, sans-serif',

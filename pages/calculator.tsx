@@ -30,8 +30,9 @@ import {
   Flex,
   usePrevious,
   useToast,
+  Tooltip,
 } from '@chakra-ui/react';
-import { RepeatClockIcon, LinkIcon } from '@chakra-ui/icons';
+import { RepeatClockIcon, LinkIcon, InfoOutlineIcon } from '@chakra-ui/icons';
 import {
   loadCalculatorSettings,
   saveCalculatorSettings,
@@ -93,13 +94,21 @@ const BreadCalculator = () => {
   const [liquids, setLiquids] = useState(0);
   const [extras, setExtras] = useState<ExtraIngredients>(() => {
     // Router query object is populated later
+    const extras = {} as ExtraIngredients;
     if (asPath && asPath.includes('?')) {
       const queryParams = new URLSearchParams(asPath.split('?')[1]);
-      supportedIngredients.forEach(({ key }) => {
-        console.log(queryParams.get(key), key);
+      supportedIngredients.forEach(({ key, water }) => {
+        const param = Number(queryParams.get(key));
+        if (param) {
+          extras[key] = {
+            disabled: false,
+            amount: param,
+            liquid: (water / 100) * param,
+          };
+        }
       });
     }
-    return {};
+    return extras;
   });
 
   const flourPercent = Math.floor(
@@ -375,10 +384,20 @@ const BreadCalculator = () => {
                 </EditableNumericText>
               </StatNumber>
 
-              <StatHelpText>{`${t('calculator.hydration-text')} ${calcHydration(
-                settings.flour,
-                liquids,
-              )}%`}</StatHelpText>
+              <StatHelpText>
+                {`${t('calculator.hydration-text')} ${calcHydration(
+                  settings,
+                  liquids,
+                )}%`}
+                &nbsp;
+                <Tooltip
+                  label={t('calculator.hydratation-tooltip')}
+                  aria-label="Hydratation tooltip"
+                  placement="right"
+                >
+                  <InfoOutlineIcon verticalAlign="sub" />
+                </Tooltip>
+              </StatHelpText>
             </Stat>
             <Box flex={1} textAlign="right">
               <IconButton

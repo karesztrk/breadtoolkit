@@ -26,6 +26,7 @@
         "metric-text": "gram",
         "imperial-text": "ounce",
         "hydration-text": "Hydration is",
+        "hydratation-tooltip": "The hydratation is based on the ratio between the whole flour and whole the liquid. Both the sourdough and the extra ingredients affect the liquid content.",
         "flour-label": "Flour",
         "flour-hint": "Scroll",
         "flour-hint-separator": "or",
