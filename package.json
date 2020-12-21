@@ -22,9 +22,11 @@
     "framer-motion": "^2.9.5",
     "next": "10.0.3",
     "next-localization": "^0.10.0",
+    "next-pwa": "^5.0.0",
     "react": "17.0.1",
     "react-dom": "17.0.1",
-    "react-helmet": "^6.1.0"
+    "react-helmet": "^6.1.0",
+    "workbox-recipes": "^6.0.2"
   },
   "devDependencies": {
     "@babel/core": "^7.12.10",

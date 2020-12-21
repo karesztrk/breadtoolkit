@@ -1,6 +1,7 @@
 {
-  "short_name": "BreadToolkit",
-  "name": "Online tools to help your baking journey",
+  "short_name": "Bread Toolkit",
+  "name": "Bread Tookit app",
+  "description": "Online tools to help your bread baking journey. Bread toolkit gives your free recipes, guides and calculators to work with high hydration artisan breads.",
   "icons": [
     {
       "src": "favicon.ico",
@@ -16,20 +17,24 @@
       "src": "logo32.png",
       "type": "image/png",
       "sizes": "32x32"
-    }
+    },
     {
       "src": "logo192.png",
       "type": "image/png",
       "sizes": "192x192"
-    }
+    },
     {
       "src": "logo512.png",
       "type": "image/png",
       "sizes": "512x512"
     }
   ],
-  "start_url": ".",
+  "dir": "ltr",
+  "lang": "en",
+  "start_url": "/",
+  "orientation": "portrait",
   "display": "standalone",
-  "theme_color": "#000000",
-  "background_color": "#ffffff"
+  "theme_color": "#3B3437",
+  "background_color": "#3B3437"
 }
+
