@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import {
   Divider,
   Heading,
@@ -43,14 +43,18 @@ import {
   supportedIngredients,
   calcDoughWeight,
   convertToImperialUnits,
+  convertToYeast,
+  convertToSourdough,
 } from '@/service/calculator';
 import {
   Settings,
   ExtraIngredients,
   ExtraIngredient,
   SettingName,
+  StarterName,
 } from '@/types/calculator';
 import EditableNumericText from '@/components/common/EditableNumericText';
+import EditableSelectText from '@/components/common/EditableSelectText';
 import NumberInputSwitch from '@/components/common/NumberInputSwitch';
 import { useI18n } from 'next-localization';
 import Meta from '@/components/layout/Meta';
@@ -72,6 +76,7 @@ const BreadCalculator = () => {
       const flour = Number(queryParams.get('flour'));
       const water = Number(queryParams.get('water'));
       const salt = Number(queryParams.get('salt'));
+      const yeast = Number(queryParams.get('yeast'));
       const sourdough = Number(queryParams.get('sourdough'));
       const sourdoughRatio = Number(queryParams.get('sourdoughRatio'));
       return {
@@ -79,6 +84,7 @@ const BreadCalculator = () => {
         ...(flour && { flour }),
         ...(water && { water }),
         ...(salt && { salt }),
+        ...(yeast && { yeast }),
         ...(sourdough && { sourdough }),
         ...(sourdoughRatio && { sourdoughRatio }),
       };
@@ -123,14 +129,6 @@ const BreadCalculator = () => {
       settings.bakersMath,
       settings.flour,
       settings.salt,
-      dough,
-    ),
-  );
-  const sourDoughPercent = Math.floor(
-    calcIngredientPercent(
-      settings.bakersMath,
-      settings.flour,
-      settings.sourdough,
       dough,
     ),
   );
@@ -200,7 +198,7 @@ const BreadCalculator = () => {
 
     toast({
       title: t('calculator.reset-success-toast-title'),
-      description: t('calculator.reset-success-toast-title'),
+      description: t('calculator.reset-success-toast-description'),
       status: 'success',
       duration: 9000,
       isClosable: true,
@@ -255,6 +253,7 @@ const BreadCalculator = () => {
       flour,
       water,
       sourdough,
+      yeast,
       salt,
       extras: newExtras,
     } = deriveIngredientsFromGoal(goal, settings, extras);
@@ -264,6 +263,7 @@ const BreadCalculator = () => {
       water,
       sourdough,
       salt,
+      yeast,
     });
     setExtras(newExtras);
   };
@@ -309,7 +309,7 @@ const BreadCalculator = () => {
   const parse = (val: string): number =>
     Number(val.replace(` ${unitText}`, ''));
   const inputPattern = '.*';
-
+  const usingYeast = settings.yeast !== 0;
   const setSetting = (key: SettingName, value: any) => {
     setSettings({
       ...settings,
@@ -330,6 +330,42 @@ const BreadCalculator = () => {
       imperialUnits: !settings.imperialUnits,
     });
   };
+
+  const onStarterTypeChange = (starter: StarterName) => {
+    switch (starter) {
+      case 'yeast':
+        setSettings(convertToYeast(settings));
+        break;
+      case 'sourdough':
+        setSettings(convertToSourdough(settings));
+        break;
+      default:
+        break;
+    }
+  };
+
+  const starterValue = usingYeast ? 'yeast' : 'sourdough';
+  const starterLabel = t(
+    usingYeast ? 'calculator.yeast-label' : 'calculator.sourdough-label',
+  );
+  const starterPercent = Math.floor(
+    calcIngredientPercent(
+      settings.bakersMath,
+      settings.flour,
+      usingYeast ? settings.yeast : settings.sourdough,
+      dough,
+    ),
+  );
+  const starterValues: StarterName[] = ['sourdough', 'yeast'];
+  const starterLabels: string[] = [
+    t('calculator.sourdough-label'),
+    t('calculator.yeast-label'),
+  ];
+
+  const onStarterChange = useCallback(
+    (value) => setSetting(usingYeast ? 'yeast' : 'sourdough', parse(value)),
+    [usingYeast],
+  );
 
   return (
     <>
@@ -473,18 +509,27 @@ const BreadCalculator = () => {
             </FormControl>
 
             <FormControl mb={5}>
-              <FormLabel htmlFor="sourdough">{`${t(
-                'calculator.sourdough-label',
-              )} (${sourDoughPercent}%)`}</FormLabel>
+              <EditableSelectText
+                value={starterValue}
+                values={starterValues}
+                labels={starterLabels}
+                onSubmit={onStarterTypeChange}
+              >
+                <FormLabel htmlFor="starter" display="inline">
+                  {`${starterLabel} (${starterPercent}%)`}
+                </FormLabel>
+              </EditableSelectText>
 
               <Stack direction={['column', 'row']} spacing={5}>
                 <NumberInput
-                  id="sourdough"
+                  id="starter"
                   flex={1}
-                  value={format(settings.sourdough)}
+                  value={format(
+                    usingYeast ? settings.yeast : settings.sourdough,
+                  )}
                   min={1}
                   step={1}
-                  onChange={(value) => setSetting('sourdough', parse(value))}
+                  onChange={onStarterChange}
                   pattern={inputPattern}
                   allowMouseWheel
                 >
@@ -494,22 +539,28 @@ const BreadCalculator = () => {
                     <NumberDecrementStepper />
                   </NumberInputStepper>
                 </NumberInput>
-                <Slider
-                  aria-label="Sourdough ratio"
-                  flex={1}
-                  colorScheme="orange"
-                  value={settings.sourdoughRatio}
-                  onChange={(value) => setSetting('sourdoughRatio', value)}
-                >
-                  <SliderTrack>
-                    <SliderFilledTrack />
-                  </SliderTrack>
-                  <SliderThumb fontSize="sm" boxSize="32px">
-                    <Text color="brand.400">{settings.sourdoughRatio}%</Text>
-                  </SliderThumb>
-                </Slider>
+                {!usingYeast && (
+                  <Slider
+                    aria-label="Sourdough ratio"
+                    flex={1}
+                    colorScheme="orange"
+                    value={settings.sourdoughRatio}
+                    onChange={(value) => setSetting('sourdoughRatio', value)}
+                  >
+                    <SliderTrack>
+                      <SliderFilledTrack />
+                    </SliderTrack>
+                    <SliderThumb fontSize="sm" boxSize="32px">
+                      <Text color="brand.400">{settings.sourdoughRatio}%</Text>
+                    </SliderThumb>
+                  </Slider>
+                )}
               </Stack>
-              <FormHelperText>{t('calculator.sourdough-hint')}</FormHelperText>
+              {!usingYeast && (
+                <FormHelperText>
+                  {t('calculator.sourdough-hint')}
+                </FormHelperText>
+              )}
             </FormControl>
 
             <Divider mb={2} />

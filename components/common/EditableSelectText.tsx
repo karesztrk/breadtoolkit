@@ -1,31 +1,23 @@
-import React, { FC, ReactNode, useState, useEffect } from 'react';
+import React, { FC, ReactNode, useState, useEffect, ChangeEvent } from 'react';
 import { CheckIcon, CloseIcon, EditIcon } from '@chakra-ui/icons';
-import {
-  ButtonGroup,
-  IconButton,
-  NumberInput,
-  NumberInputField,
-  Stack,
-} from '@chakra-ui/react';
+import { ButtonGroup, IconButton, Stack, Select } from '@chakra-ui/react';
 
-interface EditableNumericTextProps {
-  value: number;
-  onSubmit: (value: number) => void;
+interface EditableSelectTextProps<T> {
+  value: T;
+  values: T[];
+  labels: string[];
+  onSubmit: (value: T) => void;
   onCancel?: () => void;
   children: ReactNode[] | ReactNode;
-  parser: (value: string) => number;
-  formatter: (value: number) => string;
-  pattern: string;
 }
 
-const EditableNumericText: FC<EditableNumericTextProps> = ({
+const EditableSelectText = <V extends string>({
   value,
+  values,
+  labels,
   onSubmit,
   children,
-  parser,
-  formatter,
-  pattern,
-}) => {
+}: EditableSelectTextProps<V>) => {
   const [editing, setEditing] = useState(false);
   const [inputValue, setInputValue] = useState(value);
 
@@ -39,6 +31,9 @@ const EditableNumericText: FC<EditableNumericTextProps> = ({
     }
   }, [editing]);
 
+  const onSelectChange = (e: ChangeEvent<HTMLSelectElement>) =>
+    setInputValue(e.target.value as V);
+
   const toggleEditing = () => setEditing((prevState) => !prevState);
 
   const onSubmitClick = () => {
@@ -47,17 +42,19 @@ const EditableNumericText: FC<EditableNumericTextProps> = ({
   };
   return editing ? (
     <>
-      <Stack direction={['column', 'row']} align={['start', 'center']}>
-        <NumberInput
-          value={formatter(inputValue)}
-          min={1}
-          step={1}
-          onChange={(value) => setInputValue(parser(value))}
-          allowMouseWheel
-          pattern={pattern}
+      <Stack direction={['column', 'row']} align={['start', 'center']} mb={1}>
+        <Select
+          value={inputValue}
+          aria-label="Starter"
+          onChange={onSelectChange}
+          width="auto"
         >
-          <NumberInputField />
-        </NumberInput>
+          {values.map((value, index) => (
+            <option key={value} value={value}>
+              {labels[index]}
+            </option>
+          ))}
+        </Select>
         <ButtonGroup>
           <IconButton
             aria-label="submit"
@@ -88,4 +85,4 @@ const EditableNumericText: FC<EditableNumericTextProps> = ({
   );
 };
 
-export default EditableNumericText;
+export default EditableSelectText;

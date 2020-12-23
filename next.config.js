@@ -8,6 +8,10 @@ module.exports = withPWA({
     defaultLocale: 'en',
   },
   pwa: {
+    disable: process.env.NODE_ENV === 'development',
+    register: true,
+    scope: '/',
     dest: 'public',
+    sw: 'service-worker.js',
   },
 });

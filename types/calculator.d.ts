@@ -8,6 +8,7 @@ export interface Settings {
   salt: number;
   sourdough: number;
   sourdoughRatio: number;
+  yeast: number;
 }
 
 export type SettingName =
@@ -15,15 +16,19 @@ export type SettingName =
   | 'water'
   | 'salt'
   | 'sourdough'
-  | 'sourdoughRatio';
+  | 'sourdoughRatio'
+  | 'yeast';
 
 export interface DerivedIngredients {
   flour: number;
   water: number;
   salt: number;
   sourdough: number;
+  yeast: number;
   extras: ExtraIngredients;
 }
+
+export type StarterName = 'yeast' | 'sourdough';
 
 export interface ExtraIngredients {
   [key: string]: ExtraIngredient;

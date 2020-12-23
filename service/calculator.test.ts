@@ -10,6 +10,8 @@ import {
   convertToImperialUnits,
   calcExtrasWeight,
   calcExtrasLiquid,
+  convertToYeast,
+  convertToSourdough,
 } from './calculator';
 
 describe('hydration', () => {
@@ -105,6 +107,7 @@ describe('deriving', () => {
       salt: 5,
       sourdough: 52,
       water: 181,
+      yeast: 0,
     });
   });
   it('ingredients are having the goal weight in total', () => {
@@ -162,6 +165,7 @@ describe('deriving', () => {
       salt: 5,
       sourdough: 52,
       water: 181,
+      yeast: 0,
       extras,
     });
   });
@@ -268,5 +272,60 @@ describe('extras liquid', () => {
     };
     const result = calcExtrasLiquid(extras);
     expect(result).toEqual(160);
+  });
+});
+
+describe('starter convertion', () => {
+  it('should be able to convert to yeast starter', () => {
+    const result = convertToYeast(defaultSettings);
+    expect(result).toEqual({
+      bakersMath: true,
+      flour: 556,
+      imperialUnits: false,
+      salt: 10,
+      sourdough: 0,
+      sourdoughRatio: 0,
+      water: 389,
+      yeast: 15,
+    });
+  });
+  it('should be able to convert to sourdough starter', () => {
+    const result = convertToSourdough({
+      ...defaultSettings,
+      flour: 556,
+      water: 389,
+      yeast: 15,
+      sourdoughRatio: 0,
+      sourdough: 0,
+    });
+    expect(result).toEqual(defaultSettings);
+  });
+  it('should not touch base ingredients in case of zero', () => {
+    let result = convertToSourdough({
+      ...defaultSettings,
+      sourdoughRatio: 0,
+      sourdough: 0,
+    });
+    expect(result).toEqual({
+      bakersMath: true,
+      flour: 500,
+      imperialUnits: false,
+      salt: 10,
+      sourdough: 0,
+      sourdoughRatio: 80,
+      water: 345,
+      yeast: 0,
+    });
+    result = convertToYeast(result);
+    expect(result).toEqual({
+      bakersMath: true,
+      flour: 500,
+      imperialUnits: false,
+      salt: 10,
+      sourdough: 0,
+      sourdoughRatio: 0,
+      water: 345,
+      yeast: 0,
+    });
   });
 });
