@@ -215,6 +215,7 @@ const BaseIngredientsPanel: FC<BaseIngredientsProps> = ({
               aria-label="Sourdough ratio"
               flex={1}
               colorScheme="orange"
+              defaultValue={settings.sourdoughRatio}
               onChangeEnd={onSourdoughRatioChangeEnd}
             >
               <SliderTrack>
