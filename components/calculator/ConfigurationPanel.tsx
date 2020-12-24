@@ -4,7 +4,7 @@ import { useI18n } from 'next-localization';
 import React, { FC } from 'react';
 import ConfigSwitch from '../common/ConfigSwitch';
 
-interface ConfigurationProps {
+interface ConfigurationPanelProps {
   settings: Settings;
   onSwitchBakersMath: () => void;
   onSwitchImperialUnits: () => void;

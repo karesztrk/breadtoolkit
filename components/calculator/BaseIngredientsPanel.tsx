@@ -23,7 +23,7 @@ import {
   Text,
 } from '@chakra-ui/react';
 import { useI18n } from 'next-localization';
-import React, { FC, useCallback, useState } from 'react';
+import React, { FC, useCallback } from 'react';
 import EditableSelectText from '../common/EditableSelectText';
 
 interface BaseIngredientsProps {
@@ -40,7 +40,6 @@ const BaseIngredientsPanel: FC<BaseIngredientsProps> = ({
   onSettingsChange,
 }) => {
   const { t } = useI18n();
-  const [sourdoughRatio, setSourdoughRatio] = useState(0);
   const inputPattern = '.*';
   const usingYeast = settings.yeast !== 0;
   const unitText = t(
@@ -105,6 +104,13 @@ const BaseIngredientsPanel: FC<BaseIngredientsProps> = ({
         break;
     }
   };
+
+  const onSourdoughRatioChangeEnd = (value: number) => {
+    if (value !== settings.sourdoughRatio) {
+      onSettingChange('sourdoughRatio', value);
+    }
+  };
+
   return (
     <>
       <FormControl mb={2}>
@@ -209,8 +215,7 @@ const BaseIngredientsPanel: FC<BaseIngredientsProps> = ({
               aria-label="Sourdough ratio"
               flex={1}
               colorScheme="orange"
-              value={settings.sourdoughRatio}
-              onChange={(value) => onSettingChange('sourdoughRatio', value)}
+              onChangeEnd={onSourdoughRatioChangeEnd}
             >
               <SliderTrack>
                 <SliderFilledTrack />
