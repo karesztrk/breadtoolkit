@@ -129,11 +129,13 @@ export const deriveIngredientsFromGoal = (
     sourdough,
     dough,
   );
-  const yeastPercent = calcIngredientPercent(false, flour, yeast, dough);
+  const yeastPercent = yeast
+    ? calcIngredientPercent(false, flour, yeast, dough)
+    : 0;
   const flourValue = Math.round((goal * flourPercent) / 100);
   const waterValue = Math.round((goal * waterPercent) / 100);
   const sourdoughValue = Math.round((goal * sourDoughPercent) / 100);
-  const yeastValue = Math.round((goal * yeastPercent) / 100);
+  const yeastValue = yeast ? Math.round((goal * yeastPercent) / 100) : 0;
 
   const newExtras = {
     ...extras,
@@ -172,7 +174,7 @@ export const calcDoughWeight = (
 ) => {
   const { flour, water, sourdough, yeast, salt } = settings;
   const extrasWeight = calcExtrasWeight(extras);
-  return flour + water + sourdough + yeast + salt + extrasWeight;
+  return flour + water + sourdough + salt + extrasWeight + (yeast || 0);
 };
 
 export const calcExtrasWeight = (extras: ExtraIngredients) => {
@@ -241,7 +243,7 @@ export const convertToImperialUnits = (
     water: convertedWater,
     salt: convertedSalt,
     sourdough: convertedSourdough,
-    yeast: convertedYeast,
+    yeast: convertedYeast || 0,
     extras: convertedExtras,
   };
 };

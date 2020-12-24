@@ -41,7 +41,7 @@ const BaseIngredientsPanel: FC<BaseIngredientsProps> = ({
 }) => {
   const { t } = useI18n();
   const inputPattern = '.*';
-  const usingYeast = settings.yeast !== 0;
+  const usingYeast = settings.yeast && settings.yeast !== 0;
   const unitText = t(
     `calculator.${settings.imperialUnits ? 'imperial' : 'metric'}-text`,
   );
