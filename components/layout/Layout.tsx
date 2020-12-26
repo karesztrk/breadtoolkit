@@ -31,7 +31,7 @@ const Layout: FC<{ children: ReactNode[] | ReactNode }> = ({ children }) => {
         backgroundSize="cover"
         backgroundPosition="center"
         backgroundRepeat="no-repeat"
-        backgroundAttachment="fixed"
+        backgroundAttachment="scroll"
       >
         <Header />
         <Box as="main" flexGrow={1} position="relative">
