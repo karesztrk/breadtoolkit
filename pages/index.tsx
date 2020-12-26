@@ -28,6 +28,9 @@ const Home = () => {
           opacity={0.2}
           lineHeight="5rem"
           whiteSpace="nowrap"
+          textShadow={
+            colorMode === 'light' ? '1px 1px 2px white' : '1px 1px 2px black'
+          }
         >
           {t('home.title')}
         </Heading>
