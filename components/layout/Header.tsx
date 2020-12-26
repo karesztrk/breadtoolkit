@@ -16,7 +16,7 @@ const Header = () => {
       color="gray.200"
     >
       <Container maxW="7xl">
-        <Flex align="center" mr={5} justifyContent="space-between">
+        <Flex align="center" justifyContent="space-between">
           <Link href="/">
             <a aria-label="Home">
               <BrandIcon w={9} h={9} cursor="pointer" />
