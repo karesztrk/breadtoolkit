@@ -7,7 +7,6 @@ import {
   useColorMode,
   Box,
 } from '@chakra-ui/react';
-import GridItem from '@/components/common/GridItem';
 import CalculatorCard from '@/components/common/CalculatorCard';
 import { useI18n } from 'next-localization';
 
