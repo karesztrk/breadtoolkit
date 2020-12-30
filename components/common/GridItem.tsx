@@ -1,6 +1,9 @@
-import { Box, useColorMode } from '@chakra-ui/react';
+import { Box, chakra, useColorMode } from '@chakra-ui/react';
 import React, { FC, ReactNode } from 'react';
 import Link from 'next/link';
+import { motion } from 'framer-motion';
+
+const MotionBox = chakra(motion.div);
 
 const GridItem: FC<{ to: string; children: ReactNode[] | ReactNode }> = ({
   to,
@@ -9,21 +12,19 @@ const GridItem: FC<{ to: string; children: ReactNode[] | ReactNode }> = ({
   const { colorMode } = useColorMode();
   return (
     <Link href={to}>
-      <Box
+      <MotionBox
         cursor="pointer"
         bg={colorMode === 'light' ? 'white' : '#393432'}
         borderWidth="1px"
         rounded="xl"
         p={[5, 8, 10]}
         boxShadow="md"
-        role="group"
         position="relative"
         zIndex={1}
-        transition="all 0.25s ease-in-out"
         overflow="hidden"
       >
         {children}
-      </Box>
+      </MotionBox>
     </Link>
   );
 };

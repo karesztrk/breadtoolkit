@@ -7,7 +7,7 @@ import {
   useColorMode,
   Box,
 } from '@chakra-ui/react';
-import GridItem from '@/components/common/ToolCard';
+import GridItem from '@/components/common/GridItem';
 import CalculatorCard from '@/components/common/CalculatorCard';
 import { useI18n } from 'next-localization';
 
@@ -61,9 +61,7 @@ const Home = () => {
         templateColumns={['1fr', 'repeat(2, 1fr)', 'repeat(3, 1fr)']}
         gap={6}
       >
-        <GridItem to="/calculator">
-          <CalculatorCard />
-        </GridItem>
+        <CalculatorCard />
       </Grid>
     </Container>
   );
