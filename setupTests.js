@@ -1,10 +1,6 @@
 import '@testing-library/jest-dom/extend-expect';
 
-jest.mock('next-localization', () => ({
-  useI18n: jest.fn().mockReturnValue({
-    t: (key) => key,
-  }),
-}));
+jest.mock('@/locales/en');
 
 jest.mock('next/router', () => ({
   useRouter: jest.fn().mockReturnValue({

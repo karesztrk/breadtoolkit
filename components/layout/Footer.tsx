@@ -16,10 +16,13 @@ import EmailIcon from '@/components/icons/EmailIcon';
 import InstagramIcon from '@/components/icons/InstagramIcon';
 import YouTubeIcon from '@/components/icons/YouTubeIcon';
 import LinkedInIcon from '@/components/icons/LinkedInIcon';
-import { useI18n } from 'next-localization';
+import { useRouter } from 'next/router';
+import en from '@/locales/en';
+import hu from '@/locales/hu';
 
 const Footer = () => {
-  const { t } = useI18n();
+  const { locale } = useRouter();
+  const t = locale === 'en' ? en : hu;
   const { colorMode } = useColorMode();
   const variant = useBreakpointValue({ base: 'column', md: 'row' });
   const direction = variant as FlexProps['direction'];
@@ -38,7 +41,7 @@ const Footer = () => {
               color={colorMode === 'light' ? 'brand.400' : 'brand.100'}
               fontSize="sm"
             >
-              <Link href="/contact">{t('footer.contact-link')}</Link>
+              <Link href="/contact">{t.footer.contactLink}</Link>
             </Text>
           </HStack>
 

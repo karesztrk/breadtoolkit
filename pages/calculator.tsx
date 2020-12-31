@@ -22,7 +22,6 @@ import {
   ExtraIngredient,
   SettingName,
 } from '@/types/calculator';
-import { useI18n } from 'next-localization';
 import Meta from '@/components/layout/Meta';
 import { useRouter } from 'next/router';
 import PageContainer from '@/components/layout/PageContainer';
@@ -30,9 +29,12 @@ import ConfigurationPanel from '@/components/calculator/ConfigurationPanel';
 import ExtraIngredientsPanel from '@/components/calculator/ExtraIngredientsPanel';
 import BaseIngredientsPanel from '@/components/calculator/BaseIngredientsPanel';
 import Summary from '@/components/calculator/Summary';
+import en from '@/locales/en';
+import hu from '@/locales/hu';
 
 const BreadCalculator = () => {
-  const { t } = useI18n();
+  const { locale } = useRouter();
+  const t = locale === 'en' ? en : hu;
   const { asPath } = useRouter();
   const { colorMode } = useColorMode();
 
@@ -200,7 +202,7 @@ const BreadCalculator = () => {
 
   return (
     <>
-      <Meta subtitle={t('calculator.title')} />
+      <Meta subtitle={t.calculator.title} />
       <PageContainer>
         <Heading
           as="h1"
@@ -213,7 +215,7 @@ const BreadCalculator = () => {
           lineHeight={1}
           whiteSpace="nowrap"
         >
-          {t('calculator.title')}
+          {t.calculator.title}
         </Heading>
         <Box
           boxShadow="2xl"

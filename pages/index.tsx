@@ -8,11 +8,13 @@ import {
   Box,
 } from '@chakra-ui/react';
 import CalculatorCard from '@/components/common/CalculatorCard';
-import { useI18n } from 'next-localization';
+import { useRouter } from 'next/router';
+import en from '@/locales/en';
+import hu from '@/locales/hu';
 
 const Home = () => {
-  const i18n = useI18n();
-  const { t } = i18n;
+  const { locale } = useRouter();
+  const t = locale === 'en' ? en : hu;
   const { colorMode } = useColorMode();
 
   return (
@@ -31,7 +33,7 @@ const Home = () => {
             colorMode === 'light' ? '1px 1px 2px white' : '1px 1px 2px black'
           }
         >
-          {t('home.title')}
+          {t.home.title}
         </Heading>
         <Heading
           as="h2"
@@ -44,7 +46,7 @@ const Home = () => {
             colorMode === 'light' ? '1px 1px 2px white' : '1px 1px 2px black'
           }
         >
-          {t('home.title-suffix')}
+          {t.home.titleSuffix}
         </Heading>
         <Text
           color={colorMode === 'light' ? 'brand.400' : 'brand.100'}
@@ -52,7 +54,7 @@ const Home = () => {
             colorMode === 'light' ? '1px 1px 3px white' : '1px 0px 3px black'
           }
         >
-          {t('home.description')}
+          {t.home.description}
         </Text>
       </Box>
       <Grid

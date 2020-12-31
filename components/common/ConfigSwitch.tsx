@@ -5,8 +5,10 @@ import {
   HStack,
   Switch,
 } from '@chakra-ui/react';
-import { useI18n } from 'next-localization';
 import React, { FC, useEffect, useState } from 'react';
+import en from '@/locales/en';
+import hu from '@/locales/hu';
+import { useRouter } from 'next/router';
 
 interface ConfigSwitchProps {
   id: string;
@@ -23,7 +25,8 @@ const ConfigSwitch: FC<ConfigSwitchProps> = ({
   onToggle,
   newConfig,
 }) => {
-  const { t } = useI18n();
+  const { locale } = useRouter();
+  const t = locale === 'en' ? en : hu;
   const [checked, setChecked] = useState(false);
 
   useEffect(() => {
@@ -38,7 +41,7 @@ const ConfigSwitch: FC<ConfigSwitchProps> = ({
         </FormLabel>
         {newConfig && (
           <Badge ml="1" colorScheme="green">
-            {t('calculator.new-badge')}
+            {t.calculator.newBadge}
           </Badge>
         )}
       </HStack>

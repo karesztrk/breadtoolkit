@@ -7,38 +7,27 @@ import {
   Switch,
   useColorMode,
 } from '@chakra-ui/react';
-import React, { ChangeEvent, useEffect } from 'react';
+import React, { ChangeEvent } from 'react';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
-import { useI18n } from 'next-localization';
+import en from '@/locales/en';
+import hu from '@/locales/hu';
 
 const Menu = () => {
   const router = useRouter();
-  const i18n = useI18n();
+  const { locale } = router;
+  const t = locale === 'en' ? en : hu;
   const { colorMode, toggleColorMode } = useColorMode();
-  const { locale } = useRouter();
-  const { t } = i18n;
-
-  useEffect(() => {
-    async function changeLocale() {
-      const { locale = 'en' } = router;
-      if (typeof locale === 'string') {
-        i18n.set(locale, await import(`../../locales/${locale}.json`));
-        i18n.locale(locale);
-      }
-    }
-    changeLocale();
-  }, [router.locale]);
 
   const onChangeLanguage = async (e: ChangeEvent<HTMLSelectElement>) => {
-    const language = e.target.value;
-    router.push(router.route, undefined, { locale: language, shallow: true });
+    const locale = e.target.value;
+    router.push(router.route, undefined, { locale, shallow: true });
   };
   return (
     <Stack alignItems="center" direction="row" justify="center">
       <Text mr={6} display={['none', 'inline']}>
         <Link href="/calculator">
-          <a>{t('header.calculator-link')}</a>
+          <a>{t.header.calculatorLink}</a>
         </Link>
       </Text>
       <Text mx={0}>{colorMode === 'light' ? '🌞' : '🌜'}</Text>
@@ -63,8 +52,8 @@ const Menu = () => {
         value={locale}
         onChange={onChangeLanguage}
       >
-        <option value="en">{t('language.en')}</option>
-        <option value="hu">{t('language.hu')}</option>
+        <option value="en">{t.language.en}</option>
+        <option value="hu">{t.language.hu}</option>
       </Select>
     </Stack>
   );

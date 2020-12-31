@@ -4,10 +4,13 @@ import Header from '@/components/layout/Header';
 import Footer from '@/components/layout/Footer';
 import { FC, ReactNode } from 'react';
 import Meta from './Meta';
-import { useI18n } from 'next-localization';
+import en from '@/locales/en';
+import hu from '@/locales/hu';
+import { useRouter } from 'next/router';
 
 const Layout: FC<{ children: ReactNode[] | ReactNode }> = ({ children }) => {
-  const { t } = useI18n();
+  const { locale } = useRouter();
+  const t = locale === 'en' ? en : hu;
   const { colorMode } = useColorMode();
   const backgroundImage =
     colorMode === 'light'
@@ -23,7 +26,7 @@ const Layout: FC<{ children: ReactNode[] | ReactNode }> = ({ children }) => {
         ];
   return (
     <>
-      <Meta description={t('meta.description')} keywords={t('meta.keywords')} />
+      <Meta description={t.meta.description} keywords={t.meta.keywords} />
       <Flex
         minHeight="100vh"
         direction="column"

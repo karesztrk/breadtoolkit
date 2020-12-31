@@ -12,15 +12,18 @@ import {
   Textarea,
   useColorMode,
 } from '@chakra-ui/react';
-import { useI18n } from 'next-localization';
+import { useRouter } from 'next/router';
 import React from 'react';
+import en from '@/locales/en';
+import hu from '@/locales/hu';
 
 const Contact = () => {
-  const { t } = useI18n();
+  const { locale } = useRouter();
+  const t = locale === 'en' ? en : hu;
   const { colorMode } = useColorMode();
   return (
     <>
-      <Meta subtitle={t('contact.title')} />
+      <Meta subtitle={t.contact.title} />
       <PageContainer>
         <Heading
           as="h1"
@@ -33,7 +36,7 @@ const Contact = () => {
           lineHeight={1}
           whiteSpace="nowrap"
         >
-          {t('contact.title')}
+          {t.contact.title}
         </Heading>
         <Box
           boxShadow="md"
@@ -45,24 +48,24 @@ const Contact = () => {
           margin="0 auto"
         >
           <Text fontSize="sm" textAlign="justify" mb={2}>
-            {t('contact.description')}
+            {t.contact.description}
           </Text>
           <form name="contact" method="post">
             <input type="hidden" name="form-name" value="contact" />
             <FormControl id="email" isRequired mb={2}>
-              <FormLabel req>{t('contact.email-label')}</FormLabel>
+              <FormLabel req>{t.contact.emailLabel}</FormLabel>
               <Input type="email" name="email" />
-              <FormHelperText>{t('contact.email-hint')}</FormHelperText>
+              <FormHelperText>{t.contact.emailHint}</FormHelperText>
             </FormControl>
             <FormControl id="comment" isRequired mb={5}>
-              <FormLabel req>{t('contact.comment-label')}</FormLabel>
+              <FormLabel req>{t.contact.commentLabel}</FormLabel>
               <Textarea
-                placeholder={t('contact.comment-placeholder')}
+                placeholder={t.contact.commentPlaceholder}
                 name="comment"
               />
             </FormControl>
             <Button colorScheme="orange" type="submit">
-              {t('contact.submit-button')}
+              {t.contact.submitButton}
             </Button>
           </form>
         </Box>

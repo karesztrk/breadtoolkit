@@ -22,9 +22,11 @@ import {
   Stack,
   Text,
 } from '@chakra-ui/react';
-import { useI18n } from 'next-localization';
+import { useRouter } from 'next/router';
 import React, { FC, useCallback } from 'react';
-import EditableSelectText from '../common/EditableSelectText';
+import EditableSelectText from '@/components/common/EditableSelectText';
+import en from '@/locales/en';
+import hu from '@/locales/hu';
 
 interface BaseIngredientsProps {
   settings: Settings;
@@ -39,12 +41,14 @@ const BaseIngredientsPanel: FC<BaseIngredientsProps> = ({
   onSettingChange,
   onSettingsChange,
 }) => {
-  const { t } = useI18n();
+  const { locale } = useRouter();
+  const t = locale === 'en' ? en : hu;
   const inputPattern = '.*';
   const usingYeast = settings.yeast && settings.yeast !== 0;
-  const unitText = t(
-    `calculator.${settings.imperialUnits ? 'imperial' : 'metric'}-text`,
-  );
+  const unitText = settings.imperialUnits
+    ? t.calculator.imperialText
+    : t.calculator.metricText;
+
   const format = (val: number): string => `${val} ${unitText}`;
   const parse = (val: string): number =>
     Number(val.replace(` ${unitText}`, ''));
@@ -69,9 +73,10 @@ const BaseIngredientsPanel: FC<BaseIngredientsProps> = ({
   );
 
   const starterValue = usingYeast ? 'yeast' : 'sourdough';
-  const starterLabel = t(
-    usingYeast ? 'calculator.yeast-label' : 'calculator.sourdough-label',
-  );
+  const starterLabel = usingYeast
+    ? t.calculator.yeastLabel
+    : t.calculator.sourdoughLabel;
+
   const starterPercent = Math.floor(
     calcIngredientPercent(
       settings.bakersMath,
@@ -82,8 +87,8 @@ const BaseIngredientsPanel: FC<BaseIngredientsProps> = ({
   );
   const starterValues: StarterName[] = ['sourdough', 'yeast'];
   const starterLabels: string[] = [
-    t('calculator.sourdough-label'),
-    t('calculator.yeast-label'),
+    t.calculator.sourdoughLabel,
+    t.calculator.yeastLabel,
   ];
 
   const onStarterChange = useCallback(
@@ -114,9 +119,7 @@ const BaseIngredientsPanel: FC<BaseIngredientsProps> = ({
   return (
     <>
       <FormControl mb={2}>
-        <FormLabel htmlFor="flour">{`${t(
-          'calculator.flour-label',
-        )} (${flourPercent}%)`}</FormLabel>
+        <FormLabel htmlFor="flour">{`${t.calculator.flourLabel} (${flourPercent}%)`}</FormLabel>
         <NumberInput
           id="flour"
           value={format(settings.flour)}
@@ -133,16 +136,14 @@ const BaseIngredientsPanel: FC<BaseIngredientsProps> = ({
           </NumberInputStepper>
         </NumberInput>
         <Text as="span" display={['none', 'none', 'none', 'inline']}>
-          (<Kbd>{t('calculator.flour-hint')}</Kbd> + ) <Kbd>&uarr;</Kbd>
-          &nbsp;{t('calculator.flour-hint-separator')}&nbsp;
+          (<Kbd>{t.calculator.flourHint}</Kbd> + ) <Kbd>&uarr;</Kbd>
+          &nbsp;{t.calculator.flourHintSeparator}&nbsp;
           <Kbd>&darr;</Kbd>
         </Text>
       </FormControl>
 
       <FormControl mb={2}>
-        <FormLabel htmlFor="water">{`${t(
-          'calculator.water-label',
-        )} (${waterPercent}%)`}</FormLabel>
+        <FormLabel htmlFor="water">{`${t.calculator.waterLabel} (${waterPercent}%)`}</FormLabel>
         <NumberInput
           id="water"
           value={format(settings.water)}
@@ -161,9 +162,7 @@ const BaseIngredientsPanel: FC<BaseIngredientsProps> = ({
       </FormControl>
 
       <FormControl mb={2}>
-        <FormLabel htmlFor="salt">{`${t(
-          'calculator.salt-label',
-        )} (${saltPercent}%)`}</FormLabel>
+        <FormLabel htmlFor="salt">{`${t.calculator.saltLabel} (${saltPercent}%)`}</FormLabel>
         <NumberInput
           id="salt"
           value={format(settings.salt)}
@@ -228,7 +227,7 @@ const BaseIngredientsPanel: FC<BaseIngredientsProps> = ({
           )}
         </Stack>
         {!usingYeast && (
-          <FormHelperText>{t('calculator.sourdough-hint')}</FormHelperText>
+          <FormHelperText>{t.calculator.sourdoughHint}</FormHelperText>
         )}
       </FormControl>
     </>

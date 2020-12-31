@@ -1,9 +1,11 @@
 import { chakra, useColorMode } from '@chakra-ui/react';
 import React, { FC, useState } from 'react';
 import CalculatorIcon from '@/components/icons/CalculatorIcon';
-import { useI18n } from 'next-localization';
 import { motion } from 'framer-motion';
 import Link from 'next/link';
+import { useRouter } from 'next/router';
+import en from '@/locales/en';
+import hu from '@/locales/hu';
 
 const MotionText = chakra(motion.p);
 const MotionBox = chakra(motion.div);
@@ -38,7 +40,8 @@ const textMotion = {
 };
 
 const CalculatorCard: FC = () => {
-  const { t } = useI18n();
+  const { locale } = useRouter();
+  const t = locale === 'en' ? en : hu;
   // whileHover helper did not executed after page transition
   const [hovered, setHovered] = useState(false);
   const { colorMode } = useColorMode();
@@ -80,7 +83,7 @@ const CalculatorCard: FC = () => {
           animate={hovered ? 'hover' : 'rest'}
           variants={headingMotion}
         >
-          {t('home.calculator-title')}
+          {t.home.calculatorTitle}
         </MotionText>
         <MotionText
           textAlign="center"
@@ -91,7 +94,7 @@ const CalculatorCard: FC = () => {
           animate={hovered ? 'hover' : 'rest'}
           variants={textMotion}
         >
-          {t('home.calculator-description')}
+          {t.home.calculatorDescription}
         </MotionText>
       </MotionBox>
     </Link>

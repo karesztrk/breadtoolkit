@@ -1,6 +1,8 @@
 import React, { FC } from 'react';
 import Head from 'next/head';
-import { useI18n } from 'next-localization';
+import en from '@/locales/en';
+import hu from '@/locales/hu';
+import { useRouter } from 'next/router';
 
 interface MetaProps {
   title?: string;
@@ -15,9 +17,10 @@ const Meta: FC<MetaProps> = ({
   description,
   keywords,
 }) => {
-  const { t } = useI18n();
-  const desc = description || t('meta.description');
-  const kywrds = keywords || t('meta.keywords');
+  const { locale } = useRouter();
+  const t = locale === 'en' ? en : hu;
+  const desc = description || t.meta.description;
+  const kywrds = keywords || t.meta.keywords;
   const headTitle = subtitle ? `${title} - ${subtitle}` : title;
   return (
     <Head>

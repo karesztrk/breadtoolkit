@@ -16,9 +16,11 @@ import {
   Tooltip,
   useToast,
 } from '@chakra-ui/react';
-import { useI18n } from 'next-localization';
 import React, { FC } from 'react';
 import EditableNumericText from '../common/EditableNumericText';
+import en from '@/locales/en';
+import hu from '@/locales/hu';
+import { useRouter } from 'next/router';
 
 interface SummaryProps {
   settings: Settings;
@@ -37,11 +39,12 @@ const Summary: FC<SummaryProps> = ({
   onDoughGoalSubmit,
   onResetSettings,
 }) => {
-  const { t } = useI18n();
+  const { locale } = useRouter();
+  const t = locale === 'en' ? en : hu;
   const toast = useToast();
-  const unitText = t(
-    `calculator.${settings.imperialUnits ? 'imperial' : 'metric'}-text`,
-  );
+  const unitText = settings.imperialUnits
+    ? t.calculator.imperialText
+    : t.calculator.metricText;
   const format = (val: number): string => `${val} ${unitText}`;
   const parse = (val: string): number =>
     Number(val.replace(` ${unitText}`, ''));
@@ -71,8 +74,8 @@ const Summary: FC<SummaryProps> = ({
     navigator.clipboard.writeText(text).then(
       () => {
         toast({
-          title: t('calculator.share-success-toast-title'),
-          description: t('calculator.share-success-toast-description'),
+          title: t.calculator.shareSuccessToastTitle,
+          description: t.calculator.shareSuccessToastDescription,
           status: 'success',
           duration: 9000,
           isClosable: true,
@@ -80,8 +83,8 @@ const Summary: FC<SummaryProps> = ({
       },
       () => {
         toast({
-          title: t('calculator.share-failed-toast-title'),
-          description: t('calculator.share-failed-toast-description'),
+          title: t.calculator.shareFailedToastTitle,
+          description: t.calculator.shareFailedToastDescription,
           status: 'error',
           duration: 9000,
           isClosable: true,
@@ -112,8 +115,8 @@ const Summary: FC<SummaryProps> = ({
     }
 
     toast({
-      title: t('calculator.reset-success-toast-title'),
-      description: t('calculator.reset-success-toast-description'),
+      title: t.calculator.resetSuccessToastTitle,
+      description: t.calculator.resetSuccessToastDescription,
       status: 'success',
       duration: 9000,
       isClosable: true,
@@ -123,7 +126,7 @@ const Summary: FC<SummaryProps> = ({
   return (
     <Flex justify="space-between" mb={5}>
       <Stat flex={2}>
-        <StatLabel>{t('calculator.doughWeight-text')}</StatLabel>
+        <StatLabel>{t.calculator.doughWeightText}</StatLabel>
         <StatNumber>
           <EditableNumericText
             value={dough}
@@ -137,13 +140,10 @@ const Summary: FC<SummaryProps> = ({
         </StatNumber>
 
         <StatHelpText>
-          {`${t('calculator.hydration-text')} ${calcHydration(
-            settings,
-            liquids,
-          )}%`}
+          {`${t.calculator.hydrationText} ${calcHydration(settings, liquids)}%`}
           &nbsp;
           <Tooltip
-            label={t('calculator.hydratation-tooltip')}
+            label={t.calculator.hydratationTooltip}
             aria-label="Hydratation tooltip"
             placement="right"
           >

@@ -4,9 +4,11 @@ import {
 } from '@/service/calculator';
 import { ExtraIngredients, Settings } from '@/types/calculator';
 import { Divider, Text } from '@chakra-ui/react';
-import { useI18n } from 'next-localization';
+import { useRouter } from 'next/router';
 import React, { FC } from 'react';
 import NumberInputSwitch from '../common/NumberInputSwitch';
+import en from '@/locales/en';
+import hu from '@/locales/hu';
 
 interface ExtraIngredientsPanelProps {
   settings: Settings;
@@ -23,17 +25,18 @@ const ExtraIngredientsPanel: FC<ExtraIngredientsPanelProps> = ({
   onChangeExtras,
   toggleExtra,
 }) => {
-  const { t } = useI18n();
-  const unitText = t(
-    `calculator.${settings.imperialUnits ? 'imperial' : 'metric'}-text`,
-  );
+  const { locale } = useRouter();
+  const t = locale === 'en' ? en : hu;
+  const unitText = settings.imperialUnits
+    ? t.calculator.imperialText
+    : t.calculator.metricText;
   const format = (val: number): string => `${val} ${unitText}`;
   const parse = (val: string): number =>
     Number(val.replace(` ${unitText}`, ''));
   return (
     <>
       <Divider mb={2} />
-      <Text mb={5}>{t('calculator.extras-text')}</Text>
+      <Text mb={5}>{t.calculator.extrasText}</Text>
       {supportedIngredients.map(({ key, name, water }) => {
         const extra = extras[key];
         const amount = extra ? extra.amount : 0;
@@ -46,12 +49,13 @@ const ExtraIngredientsPanel: FC<ExtraIngredientsPanelProps> = ({
             dough,
           ),
         );
+        const label = (t.calculator as any)[name];
         return (
           <React.Fragment key={key}>
             <NumberInputSwitch
               id={key}
               disabled={isDisabled}
-              label={`${t(name)} (${percent}%)`}
+              label={`${label} (${percent}%)`}
               value={format(amount)}
               onChangeValue={(value) =>
                 onChangeExtras(key, parse(value), water)

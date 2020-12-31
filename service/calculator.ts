@@ -18,7 +18,7 @@ export const defaultSettings: Settings = {
 export const supportedIngredients = [
   {
     key: 'egg',
-    name: 'calculator.eggs-label',
+    name: 'eggsLabel',
     water: 75,
     calories: 143,
     macros: {
@@ -29,7 +29,7 @@ export const supportedIngredients = [
   },
   {
     key: 'butter',
-    name: 'calculator.butter-label',
+    name: 'butterLabel',
     water: 16,
     calories: 742,
     macros: {
@@ -40,7 +40,7 @@ export const supportedIngredients = [
   },
   {
     key: 'wholemilk',
-    name: 'calculator.milk-whole-label',
+    name: 'milkWholeLabel',
     water: 88,
     calories: 62,
     macros: {
