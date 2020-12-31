@@ -19,7 +19,7 @@ const Menu = () => {
   const t = locale === 'en' ? en : hu;
   const { colorMode, toggleColorMode } = useColorMode();
 
-  const onChangeLanguage = async (e: ChangeEvent<HTMLSelectElement>) => {
+  const onChangeLanguage = (e: ChangeEvent<HTMLSelectElement>) => {
     const locale = e.target.value;
     router.push(router.route, undefined, { locale, shallow: true });
   };
