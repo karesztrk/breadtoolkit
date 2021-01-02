@@ -3,7 +3,7 @@ export default {
     description:
       'Kenyér sütési kalandod online eszköztára. A Bread toolkit ingyenes útmutatói, receptei és kalkulátorai segítségével egyszerű magas hidratációjú kenyerek készítése',
     keywords:
-      'kenyér,vekni,tészta,eszköztár,kalkulátor,sütés,hidratáció,víztartalom,kenyér,sütés,kovász,focaccia,pita,bagett,ciabatta,artisan,anyakovász,tartine,recept,kovászos kenyér készítés',
+      'kenyér,vekni,tészta,eszköztár,kalkulátor,sütés,hidratáció,víztartalom,kenyér,sütés,kovász,focaccia,pita,bagett,ciabatta,anyakovász,tartine,recept,kovászos kenyér készítés',
   },
   home: {
     title: 'Kenyér',
@@ -12,6 +12,9 @@ export default {
     calculatorTitle: 'Kalkulátor',
     calculatorDescription:
       'Kalkuláld ki a tésztád hidratáltságát és a hozzávalókat.',
+    recipesTitle: 'Receptek',
+    recipesDescription:
+      'Készítsd az ízlésedhez legközelebb álló receptek egyikét.',
   },
   language: {
     en: 'angol',

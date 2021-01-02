@@ -7,10 +7,12 @@ import {
   useColorMode,
   Box,
 } from '@chakra-ui/react';
-import CalculatorCard from '@/components/common/CalculatorCard';
+import Card from '@/components/common/Card';
 import { useRouter } from 'next/router';
 import en from '@/locales/en';
 import hu from '@/locales/hu';
+import CalculatorIcon from '@/components/icons/CalculatorIcon';
+import RecipeIcon from '@/components/icons/RecipeIcon';
 
 const Home = () => {
   const { locale } = useRouter();
@@ -62,7 +64,18 @@ const Home = () => {
         templateColumns={['1fr', 'repeat(2, 1fr)', 'repeat(3, 1fr)']}
         gap={6}
       >
-        <CalculatorCard />
+        <Card
+          path="/calculator"
+          title={t.home.calculatorTitle}
+          description={t.home.calculatorDescription}
+          icon={<CalculatorIcon height="5rem" width="100%" />}
+        />
+        <Card
+          path="/recipes"
+          title={t.home.recipesTitle}
+          description={t.home.recipesDescription}
+          icon={<RecipeIcon height="5rem" width="100%" />}
+        />
       </Grid>
     </Container>
   );
