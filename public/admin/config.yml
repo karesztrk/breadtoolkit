@@ -1,0 +1,19 @@
+backend:
+  name: github
+  repo: karesztrk/breadtoolkit
+  branch: recipes
+slug:
+  encoding: 'ascii'
+  clean_accents: true
+  sanitize_replacement: '_'
+media_folder: public/images/blog
+collections:
+  - name: 'recipes'
+    label: 'Recipes'
+    folder: 'pages/recipes'
+    create: true
+    fields:
+      - { label: 'Title', name: 'title', widget: 'string' }
+      - { label: 'Publish Date', name: 'date', widget: 'date' }
+      - { label: 'Body', name: 'body', widget: 'markdown' }
+extension: mdx

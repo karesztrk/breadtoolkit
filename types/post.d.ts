@@ -1,17 +1,8 @@
-type Author = {
-  name: string;
-  picture: string;
-};
-
-export type Post = {
-  slug: string;
+export type PostMeta = {
   title: string;
-  date: string;
+  slug: string;
   coverImage: string;
-  author: Author;
-  excerpt: string;
-  ogImage: {
-    url: string;
-  };
-  content: string;
+  date: string;
+  language: string;
+  __resourcePath: string;
 };

@@ -1,22 +1,14 @@
-import { getAllPosts } from '@/lib/api';
 import React, { FC } from 'react';
-import { Post } from '@/types/post';
-import { GetStaticProps } from 'next';
 import Meta from '@/components/layout/Meta';
 import PageContainer from '@/components/layout/PageContainer';
-import { Box, Grid, Heading, useColorMode } from '@chakra-ui/react';
-import { useRouter } from 'next/router';
-import en from '@/locales/en';
-import hu from '@/locales/hu';
+import { Grid, Heading, useColorMode } from '@chakra-ui/react';
 import Card from '@/components/common/Card';
+import { frontMatter as pages } from './recipes/*.mdx';
 
-interface RecipesProps {
-  posts: Post[];
-}
-
-const Recipes: FC<RecipesProps> = ({ posts }) => {
-  const { locale } = useRouter();
-  const t = locale === 'en' ? en : hu;
+const Recipes: FC = () => {
+  const sortedPages = pages.sort((left, right) =>
+    left.date > right.date ? -1 : 1,
+  );
   const { colorMode } = useColorMode();
   return (
     <>
@@ -40,15 +32,15 @@ const Recipes: FC<RecipesProps> = ({ posts }) => {
           templateColumns={['1fr', 'repeat(2, 1fr)', 'repeat(3, 1fr)']}
           gap={6}
         >
-          {posts &&
-            posts.map((post) => (
-              <Card
-                key={post.slug}
-                path={`/recipes/${post.slug}`}
-                title={post.title}
-                description={post.excerpt}
-              />
-            ))}
+          {sortedPages.map((page) => (
+            <Card
+              key={page.slug}
+              path={page.slug}
+              title={page.title}
+              image={page.coverImage}
+              height={200}
+            />
+          ))}
         </Grid>
       </PageContainer>
     </>
@@ -56,23 +48,3 @@ const Recipes: FC<RecipesProps> = ({ posts }) => {
 };
 
 export default Recipes;
-
-export const getStaticProps: GetStaticProps<RecipesProps, {}> = async (
-  context,
-) => {
-  const posts = getAllPosts([
-    'title',
-    'date',
-    'slug',
-    'author',
-    'coverImage',
-    'excerpt',
-  ]) as any;
-
-  return {
-    props: {
-      locale: context.locale || 'en',
-      posts,
-    },
-  };
-};

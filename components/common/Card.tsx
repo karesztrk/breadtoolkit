@@ -40,11 +40,20 @@ const textMotion = {
 interface CardProps {
   path: string;
   title: string;
-  description: string;
+  description?: string;
   icon?: ReactNode;
+  image?: string;
+  height?: number;
 }
 
-const Card: FC<CardProps> = ({ path, title, description, icon }) => {
+const Card: FC<CardProps> = ({
+  path,
+  title,
+  description,
+  icon,
+  image,
+  height,
+}) => {
   // whileHover helper did not executed after page transition
   const [hovered, setHovered] = useState(false);
   const { colorMode } = useColorMode();
@@ -52,8 +61,12 @@ const Card: FC<CardProps> = ({ path, title, description, icon }) => {
     <Link href={path}>
       <MotionBox
         cursor="pointer"
-        bg={colorMode === 'light' ? 'white' : '#393432'}
-        borderWidth="1px"
+        minHeight={height}
+        bg={image ? `url(${image})` : undefined}
+        bgColor={colorMode === 'light' ? 'white' : '#393432'}
+        backgroundRepeat="no-repeat"
+        backgroundPosition="center"
+        backgroundSize="cover"
         rounded="xl"
         p={[5, 8, 10]}
         boxShadow="md"
@@ -76,7 +89,7 @@ const Card: FC<CardProps> = ({ path, title, description, icon }) => {
           fontFamily="heading"
           fontSize="5xl"
           fontWeight="700"
-          color={colorMode === 'light' ? 'brand.300' : 'white'}
+          color={colorMode === 'light' && !image ? 'brand.300' : 'white'}
           position="absolute"
           bottom="1rem"
           left={0}
