@@ -21,7 +21,7 @@ module.exports = withPWA(
   withMdx({
     layoutPath: 'layouts',
     defaultLayout: false,
-    fileExtensions: ['mdx'],
+    fileExtensions: ['mdx', 'md'],
     remarkPlugins: [],
     rehypePlugins: [],
     usesSrc: false,
@@ -30,7 +30,7 @@ module.exports = withPWA(
       process: async (_, frontmatter) => {
         const { __resourcePath } = frontmatter;
 
-        const slug = __resourcePath.replace('.mdx', '');
+        const slug = __resourcePath.replace(/\.md.?/i, '');
 
         return {
           slug,

@@ -3,7 +3,7 @@ import Meta from '@/components/layout/Meta';
 import PageContainer from '@/components/layout/PageContainer';
 import { Grid, Heading, useColorMode } from '@chakra-ui/react';
 import Card from '@/components/common/Card';
-import { frontMatter as pages } from './recipes/*.mdx';
+import { frontMatter as pages } from './recipes/*.md?(x)';
 
 const Recipes: FC = () => {
   const sortedPages = pages.sort((left, right) =>

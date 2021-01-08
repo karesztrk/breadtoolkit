@@ -1,5 +1,4 @@
-// types/mdx.d.ts
-declare module '*.mdx' {
+declare module '*.md?(x)' {
   type PostMeta = {
     title: string;
     slug: string;
