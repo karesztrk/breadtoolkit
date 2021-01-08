@@ -16,8 +16,18 @@ collections:
     create: true
     fields:
       - { label: 'Title', name: 'title', widget: 'string' }
-      - { label: 'Slug', name: 'slug', widget: 'string' }
       - { label: 'Publish Date', name: 'date', widget: 'date' }
+      - {
+          label: 'Language',
+          name: 'language',
+          widget: 'select',
+          default: 'hu',
+          options:
+            [
+              { label: 'Magyar', value: 'hu' },
+              { label: 'English', value: 'en' },
+            ],
+        }
       - {
           label: 'Cover Image',
           name: 'coverImage',
@@ -26,5 +36,10 @@ collections:
         }
       - { label: 'Body', name: 'body', widget: 'markdown' }
       - { label: 'Tags', name: 'tags', widget: 'list' }
-      - { label: 'Layout', name: 'layout', widget: 'hidden', default: 'mdx' }
-      - { label: 'Language', name: 'language', default: 'hu' }
+      - {
+          label: 'Layout',
+          name: 'layout',
+          widget: 'hidden',
+          default: 'mdx',
+          options: [{ label: 'Default', value: 'mdx' }],
+        }
