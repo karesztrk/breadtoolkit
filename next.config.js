@@ -1,6 +1,7 @@
+const withMdx = require('next-mdx-enhanced');
 const withPWA = require('next-pwa');
 
-module.exports = withPWA({
+const defaultConfig = {
   // Target must be serverless
   target: 'serverless',
   i18n: {
@@ -14,4 +15,36 @@ module.exports = withPWA({
     dest: 'public',
     sw: 'service-worker.js',
   },
-});
+  async redirects() {
+    return [
+      {
+        source: '/admin',
+        destination: '/admin/index.html',
+        permanent: true,
+      },
+    ];
+  },
+};
+
+module.exports = withPWA(
+  withMdx({
+    layoutPath: 'layouts',
+    defaultLayout: false,
+    fileExtensions: ['mdx', 'md'],
+    remarkPlugins: [],
+    rehypePlugins: [],
+    usesSrc: false,
+    reExportDataFetching: false,
+    extendFrontMatter: {
+      process: async (_, frontmatter) => {
+        const { __resourcePath } = frontmatter;
+
+        const slug = __resourcePath.replace(/\.md.?/i, '');
+
+        return {
+          slug,
+        };
+      },
+    },
+  })(defaultConfig),
+);

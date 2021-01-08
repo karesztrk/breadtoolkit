@@ -20,11 +20,14 @@
     "@emotion/react": "^11.1.4",
     "@emotion/styled": "^11.0.0",
     "framer-motion": "^3.1.1",
+    "netlify-cms-app": "^2.14.10",
     "next": "10.0.4",
     "next-pwa": "^5.0.1",
     "react": "17.0.1",
     "react-dom": "17.0.1",
     "react-helmet": "^6.1.0",
+    "remark": "^13.0.0",
+    "remark-html": "^13.0.1",
     "workbox-recipes": "^6.0.2"
   },
   "devDependencies": {
@@ -40,9 +43,12 @@
     "@types/react-dom": "^17.0.0",
     "@types/react-helmet": "^6.1.0",
     "babel-jest": "^26.6.3",
+    "babel-plugin-import-glob-array": "^0.2.0",
+    "gray-matter": "^4.0.2",
     "jest": "^26.6.3",
     "jsdom": "^16.4.0",
     "jsdom-global": "^3.0.2",
+    "next-mdx-enhanced": "^5.0.0",
     "next-on-netlify": "^2.6.3",
     "prettier": "^2.0.5",
     "typescript": "^4.1.3"

@@ -1,11 +1,7 @@
 import { chakra, useColorMode } from '@chakra-ui/react';
-import React, { FC, useState } from 'react';
-import CalculatorIcon from '@/components/icons/CalculatorIcon';
+import React, { FC, ReactNode, useState } from 'react';
 import { motion } from 'framer-motion';
 import Link from 'next/link';
-import { useRouter } from 'next/router';
-import en from '@/locales/en';
-import hu from '@/locales/hu';
 
 const MotionText = chakra(motion.p);
 const MotionBox = chakra(motion.div);
@@ -32,25 +28,45 @@ const iconMotion = {
 
 const textMotion = {
   rest: {
+    opacity: 0,
     y: '100%',
   },
   hover: {
+    opacity: 1,
     y: '-65%',
   },
 };
 
-const CalculatorCard: FC = () => {
-  const { locale } = useRouter();
-  const t = locale === 'en' ? en : hu;
+interface CardProps {
+  path: string;
+  title: string;
+  description?: string;
+  icon?: ReactNode;
+  image?: string;
+  height?: number;
+}
+
+const Card: FC<CardProps> = ({
+  path,
+  title,
+  description,
+  icon,
+  image,
+  height,
+}) => {
   // whileHover helper did not executed after page transition
   const [hovered, setHovered] = useState(false);
   const { colorMode } = useColorMode();
   return (
-    <Link href="/calculator">
+    <Link href={path}>
       <MotionBox
         cursor="pointer"
-        bg={colorMode === 'light' ? 'white' : '#393432'}
-        borderWidth="1px"
+        minHeight={height}
+        bg={image ? `url(${image})` : undefined}
+        bgColor={colorMode === 'light' ? 'white' : '#393432'}
+        backgroundRepeat="no-repeat"
+        backgroundPosition="center"
+        backgroundSize="cover"
         rounded="xl"
         p={[5, 8, 10]}
         boxShadow="md"
@@ -60,19 +76,20 @@ const CalculatorCard: FC = () => {
         onHoverStart={() => setHovered(true)}
         onHoverEnd={() => setHovered(false)}
       >
-        <CalculatorIcon
-          height="5rem"
-          width="100%"
+        <MotionBox
           position="relative"
           zIndex={1}
           animate={hovered ? 'hover' : 'rest'}
           variants={iconMotion}
-        />
+        >
+          {icon}
+        </MotionBox>
+
         <MotionText
           fontFamily="heading"
           fontSize="5xl"
           fontWeight="700"
-          color={colorMode === 'light' ? 'brand.300' : 'white'}
+          color={colorMode === 'light' && !image ? 'brand.300' : 'white'}
           position="absolute"
           bottom="1rem"
           left={0}
@@ -83,7 +100,7 @@ const CalculatorCard: FC = () => {
           animate={hovered ? 'hover' : 'rest'}
           variants={headingMotion}
         >
-          {t.home.calculatorTitle}
+          {title}
         </MotionText>
         <MotionText
           textAlign="center"
@@ -94,11 +111,11 @@ const CalculatorCard: FC = () => {
           animate={hovered ? 'hover' : 'rest'}
           variants={textMotion}
         >
-          {t.home.calculatorDescription}
+          {description}
         </MotionText>
       </MotionBox>
     </Link>
   );
 };
 
-export default CalculatorCard;
+export default Card;

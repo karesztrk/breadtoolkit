@@ -13,6 +13,8 @@ export default {
     calculatorTitle: 'Calculator',
     calculatorDescription:
       'Calculate your dough hydration and the amount of ingredients.',
+    recipesTitle: 'Recipes',
+    recipesDescription: 'Find and bake a recipe of your taste',
   },
   language: {
     en: 'english',

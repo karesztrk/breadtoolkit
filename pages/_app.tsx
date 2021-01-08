@@ -4,9 +4,8 @@ import theme from '@/theme/extendedTheme';
 import { FC } from 'react';
 import type { AppProps } from 'next/app';
 import Layout from '@/components/layout/Layout';
-import { PageProp } from '@/types/page';
 
-const App: FC<AppProps<PageProp>> = ({ Component, pageProps }) => {
+const App: FC<AppProps> = ({ Component, pageProps }) => {
   return (
     <ChakraProvider theme={theme}>
       <Layout>
