@@ -1,7 +1,7 @@
 backend:
   name: github
   repo: karesztrk/breadtoolkit
-  branch: recipes
+  branch: master
 slug:
   encoding: 'ascii'
   clean_accents: true
