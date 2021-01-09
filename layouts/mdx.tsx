@@ -21,7 +21,7 @@ import {
 import { MDXProvider } from '@mdx-js/react';
 import * as React from 'react';
 
-const mdComponents = {
+export const mdComponents = {
   h1: (props: any) => <Heading as="h1" {...props} />,
   h2: (props: any) => <Heading as="h2" {...props} />,
   h3: (props: any) => <Heading as="h3" {...props} />,

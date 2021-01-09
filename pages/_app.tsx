@@ -6,7 +6,10 @@ import type { AppProps } from 'next/app';
 import Layout from '@/components/layout/Layout';
 
 const App: FC<AppProps> = ({ Component, pageProps }) => {
-  return (
+  const admin = Component.adminLayout;
+  return admin ? (
+    <Component {...pageProps} />
+  ) : (
     <ChakraProvider theme={theme}>
       <Layout>
         <Component {...pageProps} />
