@@ -1,6 +1,5 @@
 backend:
-  name: github
-  repo: karesztrk/breadtoolkit
+  name: git-gateway
   branch: master
 slug:
   encoding: 'ascii'
