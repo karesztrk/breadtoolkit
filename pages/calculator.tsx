@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react';
 import {
-  Heading,
   Box,
   Stack,
   useColorMode,
@@ -22,15 +21,14 @@ import {
   ExtraIngredient,
   SettingName,
 } from '@/types/calculator';
-import Meta from '@/components/layout/Meta';
 import { useRouter } from 'next/router';
-import PageContainer from '@/components/layout/PageContainer';
 import ConfigurationPanel from '@/components/calculator/ConfigurationPanel';
 import ExtraIngredientsPanel from '@/components/calculator/ExtraIngredientsPanel';
 import BaseIngredientsPanel from '@/components/calculator/BaseIngredientsPanel';
 import Summary from '@/components/calculator/Summary';
 import en from '@/locales/en';
 import hu from '@/locales/hu';
+import PageContainer from '@/components/layout/PageContainer';
 
 const BreadCalculator = () => {
   const { locale } = useRouter();
@@ -201,62 +199,48 @@ const BreadCalculator = () => {
   };
 
   return (
-    <>
-      <Meta subtitle={t.calculator.title} />
-      <PageContainer>
-        <Heading
-          as="h1"
-          fontFamily="hero"
-          fontSize={['3rem', '4rem', '5rem']}
-          textTransform="uppercase"
-          color={colorMode === 'light' ? 'brand.300' : 'brand.100'}
-          opacity={colorMode === 'light' ? 0.3 : 0.8}
-          my={10}
-          lineHeight={1}
-          whiteSpace="nowrap"
-        >
-          {t.calculator.title}
-        </Heading>
-        <Box
-          boxShadow="2xl"
-          p="6"
-          rounded="xl"
-          bg={colorMode === 'light' ? 'white' : '#393432'}
-          color={colorMode === 'light' ? 'brand.400' : 'brand.100'}
-          maxWidth="md"
-          margin="0 auto"
-        >
-          <Summary
+    <PageContainer title={t.calculator.title}>
+      <Box
+        p="6"
+        rounded="xl"
+        bg={colorMode === 'light' ? 'white' : '#393432'}
+        color={colorMode === 'light' ? 'brand.400' : 'brand.100'}
+        maxWidth="md"
+        margin="0 auto"
+        border={colorMode === 'dark' ? '1px' : ''}
+        borderColor={colorMode === 'dark' ? 'rgba(255, 255, 255, 0.15)' : ''}
+        boxShadow={colorMode === 'dark' ? '' : '0 0 10px rgba(59, 52, 55, 0.4)'}
+      >
+        <Summary
+          settings={settings}
+          extras={extras}
+          dough={dough}
+          liquids={liquids}
+          onDoughGoalSubmit={onDoughGoalSubmit}
+          onResetSettings={setSettings}
+        />
+        <Stack>
+          <BaseIngredientsPanel
+            settings={settings}
+            dough={dough}
+            onSettingChange={setSetting}
+            onSettingsChange={setSettings}
+          />
+          <ExtraIngredientsPanel
             settings={settings}
             extras={extras}
             dough={dough}
-            liquids={liquids}
-            onDoughGoalSubmit={onDoughGoalSubmit}
-            onResetSettings={setSettings}
+            onChangeExtras={onChangeExtras}
+            toggleExtra={toggleExtra}
           />
-          <Stack>
-            <BaseIngredientsPanel
-              settings={settings}
-              dough={dough}
-              onSettingChange={setSetting}
-              onSettingsChange={setSettings}
-            />
-            <ExtraIngredientsPanel
-              settings={settings}
-              extras={extras}
-              dough={dough}
-              onChangeExtras={onChangeExtras}
-              toggleExtra={toggleExtra}
-            />
-            <ConfigurationPanel
-              settings={settings}
-              onSwitchBakersMath={onSwitchBakersMath}
-              onSwitchImperialUnits={onSwitchImperialUnits}
-            />
-          </Stack>
-        </Box>
-      </PageContainer>
-    </>
+          <ConfigurationPanel
+            settings={settings}
+            onSwitchBakersMath={onSwitchBakersMath}
+            onSwitchImperialUnits={onSwitchImperialUnits}
+          />
+        </Stack>
+      </Box>
+    </PageContainer>
   );
 };
 

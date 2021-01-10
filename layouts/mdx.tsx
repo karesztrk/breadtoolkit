@@ -1,4 +1,3 @@
-import Meta from '@/components/layout/Meta';
 import PageContainer from '@/components/layout/PageContainer';
 import { PostMeta } from '@/types/post';
 import {
@@ -80,35 +79,24 @@ const MDXLayout: React.FC<MDXLayoutProps> = ({ frontMatter, children }) => {
   const { colorMode } = useColorMode();
   return (
     <MDXProvider components={mdComponents}>
-      <PageContainer>
-        <Meta title={frontMatter.title} />
-        <article>
-          <Heading
-            as="h1"
-            fontFamily="hero"
-            fontSize={['3rem', '4rem', '5rem']}
-            textTransform="uppercase"
-            color={colorMode === 'light' ? 'brand.300' : 'brand.100'}
-            opacity={colorMode === 'light' ? 0.3 : 0.8}
-            my={10}
-            lineHeight={1}
-            whiteSpace="nowrap"
-          >
-            {frontMatter.title}
-          </Heading>
-          <Box
-            boxShadow="md"
-            rounded="xl"
-            bg={colorMode === 'light' ? 'white' : '#393432'}
-            color={colorMode === 'light' ? 'brand.400' : 'brand.100'}
-            maxWidth="2xl"
-            margin="0 auto"
-            overflow="hidden"
-          >
-            <Image src={frontMatter.coverImage} alt={frontMatter.title} />
-            <Box p="6">{children}</Box>
-          </Box>
-        </article>
+      <PageContainer title={frontMatter.title}>
+        <Box
+          as={'article'}
+          rounded="xl"
+          bg={colorMode === 'light' ? 'white' : '#393432'}
+          color={colorMode === 'light' ? 'brand.400' : 'brand.100'}
+          maxWidth="2xl"
+          margin="0 auto"
+          overflow="hidden"
+          border={colorMode === 'dark' ? '1px' : ''}
+          borderColor={colorMode === 'dark' ? 'rgba(255, 255, 255, 0.15)' : ''}
+          boxShadow={
+            colorMode === 'dark' ? '' : '0 0 10px rgba(59, 52, 55, 0.4)'
+          }
+        >
+          <Image src={frontMatter.coverImage} alt={frontMatter.title} />
+          <Box p="6">{children}</Box>
+        </Box>
       </PageContainer>
     </MDXProvider>
   );

@@ -1,11 +1,11 @@
 import React, { FC } from 'react';
 import { Box, ChakraProps } from '@chakra-ui/react';
 
-const Divider: FC<ChakraProps> = (props: ChakraProps) => {
+const BottomWaves: FC<ChakraProps> = (props: ChakraProps) => {
   return (
     <Box
       overflow="hidden"
-      height={['30px', '30px', '45px']}
+      height={['20px', '30px', '45px']}
       transform="rotate(180deg)"
       mb="-1px"
       {...props}
@@ -36,4 +36,4 @@ const Divider: FC<ChakraProps> = (props: ChakraProps) => {
   );
 };
 
-export default Divider;
+export default BottomWaves;

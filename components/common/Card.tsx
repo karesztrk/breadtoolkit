@@ -8,7 +8,7 @@ const MotionBox = chakra(motion.div);
 
 const headingMotion = {
   rest: {
-    opacity: 0.5,
+    opacity: 0.2,
     y: 0,
   },
   hover: {
@@ -63,18 +63,20 @@ const Card: FC<CardProps> = ({
         cursor="pointer"
         minHeight={height}
         bg={image ? `url(${image})` : undefined}
-        bgColor={colorMode === 'light' ? 'white' : '#393432'}
+        bgColor={colorMode === 'light' ? 'white' : 'brand.400'}
         backgroundRepeat="no-repeat"
         backgroundPosition="center"
         backgroundSize="cover"
         rounded="xl"
         p={[5, 8, 10]}
-        boxShadow="md"
         position="relative"
         zIndex={1}
         overflow="hidden"
         onHoverStart={() => setHovered(true)}
         onHoverEnd={() => setHovered(false)}
+        border={colorMode === 'dark' ? '1px' : ''}
+        borderColor={colorMode === 'dark' ? 'rgba(255, 255, 255, 0.15)' : ''}
+        boxShadow={colorMode === 'dark' ? '' : '0 0 10px rgba(59, 52, 55, 0.4)'}
       >
         <MotionBox
           position="relative"
