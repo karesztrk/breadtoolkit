@@ -1,15 +1,19 @@
 import { FC } from 'react';
 import {
   Box,
+  chakra,
   Container,
-  Fade,
   Heading,
   Image,
   Text,
+  theme,
   useColorMode,
 } from '@chakra-ui/react';
 import TopWaves from '../common/TopWaves';
 import Meta from './Meta';
+import { AnimatePresence, motion } from 'framer-motion';
+
+const MotionContainer = chakra(motion.div, theme.components.Container);
 
 interface PageContainerProps {
   title: string;
@@ -27,38 +31,33 @@ const PageContainer: FC<PageContainerProps> = ({
   return (
     <>
       <Meta subtitle={title} />
-      <Box
-        position="absolute"
-        maxHeight="50vh"
-        overflow="hidden"
-        zIndex={-1}
-        top="0"
-        left="0"
-        right="0"
-        bottom="0"
-      >
-        <Image
-          height="50vh"
-          width="100%"
-          srcSet={`/images/bg/${colorMode}/hd.webp 300w,
-                /images/bg/${colorMode}/fhd.webp 600w,
-                /images/bg/${colorMode}/4k.webp 1200w`}
-          fit="cover"
-        />
-        <Container
-          maxW="7xl"
-          my={[8, 20]}
-          minHeight="9.5rem"
+      <Box position="relative">
+        <Box
           position="absolute"
+          height="50vh"
+          overflow="hidden"
+          zIndex={-1}
           top="0"
           left="0"
           right="0"
           bottom="0"
         >
+          <Image
+            height="50vh"
+            width="100%"
+            srcSet={`/images/bg/${colorMode}/hd.webp 300w,
+                /images/bg/${colorMode}/fhd.webp 600w,
+                /images/bg/${colorMode}/4k.webp 1200w`}
+            fit="cover"
+          />
+
+          <TopWaves color={colorMode === 'light' ? 'white' : '#1a202c'} />
+        </Box>
+        <Container maxW="7xl" pt={20} pb={[12]} minHeight="9.5rem">
           <Heading
             as="h1"
             fontFamily="hero"
-            fontSize={['4rem', '5rem', '6rem', '7rem']}
+            fontSize={['3rem', '5rem', '6rem', '7rem']}
             textTransform="uppercase"
             color={colorMode === 'light' ? 'brand.300' : 'brand.100'}
             opacity={0.9}
@@ -72,7 +71,7 @@ const PageContainer: FC<PageContainerProps> = ({
           {subtitle && (
             <Heading
               as="h2"
-              fontSize={['2rem', '2rem', '3rem']}
+              fontSize={['1.5rem', '2rem', '3rem']}
               fontFamily="hero"
               color={colorMode === 'light' ? 'brand.300' : 'brand.100'}
               mb={2}
@@ -100,13 +99,24 @@ const PageContainer: FC<PageContainerProps> = ({
             </Text>
           )}
         </Container>
-        <TopWaves color={colorMode === 'light' ? 'white' : '#1a202c'} />
       </Box>
-      <Fade in>
-        <Container maxW="7xl" mt={[64, 72, 80, 96]} mb={20}>
+      <AnimatePresence exitBeforeEnter>
+        <MotionContainer
+          exit={{
+            opacity: 0,
+          }}
+          initial={{
+            opacity: 0,
+          }}
+          animate={{
+            opacity: 1,
+          }}
+          maxW="7xl"
+          mb={20}
+        >
           {children}
-        </Container>
-      </Fade>
+        </MotionContainer>
+      </AnimatePresence>
     </>
   );
 };

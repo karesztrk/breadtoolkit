@@ -1,10 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import {
-  Box,
-  Stack,
-  useColorMode,
-  usePrevious,
-} from '@chakra-ui/react';
+import { Box, Stack, useColorMode, usePrevious } from '@chakra-ui/react';
 import {
   loadCalculatorSettings,
   saveCalculatorSettings,

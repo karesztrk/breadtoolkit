@@ -11,7 +11,6 @@ import PageContainer from '@/components/layout/PageContainer';
 const Home = () => {
   const { locale } = useRouter();
   const t = locale === 'en' ? en : hu;
-
   return (
     <>
       <PageContainer
