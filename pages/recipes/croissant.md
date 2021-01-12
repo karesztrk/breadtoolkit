@@ -20,23 +20,25 @@ layout: mdx
 ---
 Párom kérésére készítettem először ezt a friss, ropogós péksüteményt.
 
-Az eredeti receptet Betti Hobby konyháról szereztem. Javasolom, hogy Ti is próbáljátok ki mihamarabb. Recept: <https://bettyhobbikonyha.cafeblog.hu/2017/01/10/kovaszos-croissant-hosszu-erlelessel/>
+Az eredeti receptet Betti Hobby konyháról szereztem. Javasolom, hogy Ti is próbáljátok ki mihamarabb. 
 
-#### Édes kovász első etetés
+> <https://bettyhobbikonyha.cafeblog.hu/2017/01/10/kovaszos-croissant-hosszu-erlelessel/>
+
+**Édes kovász első etetés**
 
 * 20g víz
 * 12g barna cukor
 * 50g liszt
 * 25g aktív kovász
 
-#### Második etetés
+**Második etetés**
 
 * Előző kovász
 * 45g víz
 * 25g barna cukor
 * 100g liszt
 
-#### Tészta
+**Tészta**
 
 * 200g az etetett kovászból
 * 500g liszt
@@ -45,7 +47,7 @@ Az eredeti receptet Betti Hobby konyháról szereztem. Javasolom, hogy Ti is pr�
 * 10g só
 * 250g vaj
 
-#### Kenéshez
+**Kenéshez**
 
 * 1 tojás
 * pici tejszín
