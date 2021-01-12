@@ -15,6 +15,11 @@ const headingMotion: Variants = {
     opacity: 1,
     y: '-65%',
   },
+  hoverWithShadow: {
+    opacity: 1,
+    y: '-65%',
+    textShadow: '0px 0px 5px black',
+  },
 };
 
 const iconMotion: Variants = {
@@ -100,10 +105,12 @@ const Card: FC<CardProps> = ({
           textAlign="center"
           zIndex={0}
           initial="rest"
-          animate={hovered ? 'hover' : 'rest'}
+          animate={hovered ? (image ? 'hoverWithShadow' : 'hover') : 'rest'}
           variants={headingMotion}
           isTruncated
           px={1}
+          mx={4}
+          borderRadius={10}
         >
           {title}
         </MotionText>
