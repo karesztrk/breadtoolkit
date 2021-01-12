@@ -27,7 +27,7 @@ A receptet Betty Hobbi konyhájáról vettem kölcsön ezúttal.
 * 100g víz
 * 100g kenyérliszt
 
-**Pogácsatészta***:*
+**Pogácsatészta:**
 
 * egész előtészta
 * 150g főtt, összetört burgonya
@@ -38,12 +38,10 @@ A receptet Betty Hobbi konyhájáról vettem kölcsön ezúttal.
 * 100g vaj
 * kb. 100-150g reszelt sajt
 
-**Tetejére***:*
+**Tetejére:**
 
 * 1db tojás
 * reszelt sajt
-
-<!--StartFragment-->
 
 A hűtőben (vagy konyhapulton) pihenő kovászból kimérünk 50g-ot, kikeverjük a vízzel, majd a lisztet is belekeverjük. Folpackkal letakarva konyhapulton hagyjuk 10-12 órát.
 
