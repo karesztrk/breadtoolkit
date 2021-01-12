@@ -28,7 +28,7 @@ const mdComponents = {
   h5: (props: any) => <Heading as="h5" {...props} />,
   h6: (props: any) => <Heading as="h6" {...props} />,
   hr: (props: any) => <Divider {...props} />,
-  p: (props: any) => <Text as="p" {...props} />,
+  p: (props: any) => <Text as="p" mb={1} {...props} />,
   a: (props: any) => <Link as="a" {...props} />,
   ul: (props: any) => <UnorderedList my={2}>{props.children}</UnorderedList>,
   ol: (props: any) => <OrderedList my={2}>{props.children}</OrderedList>,

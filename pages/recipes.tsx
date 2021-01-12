@@ -3,13 +3,18 @@ import { Grid } from '@chakra-ui/react';
 import Card from '@/components/common/Card';
 import { frontMatter as pages } from './recipes/*.md?(x)';
 import PageContainer from '@/components/layout/PageContainer';
+import { useRouter } from 'next/router';
+import en from '@/locales/en';
+import hu from '@/locales/hu';
 
 const Recipes: FC = () => {
+  const { locale } = useRouter();
+  const t = locale === 'en' ? en : hu;
   const sortedPages = pages.sort((left, right) =>
     left.date > right.date ? -1 : 1,
   );
   return (
-    <PageContainer title="Receptek">
+    <PageContainer title={t.recipes.title}>
       <Grid
         my={20}
         templateColumns={['1fr', 'repeat(2, 1fr)', 'repeat(3, 1fr)']}

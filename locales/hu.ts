@@ -67,4 +67,7 @@ export default {
     commentPlaceholder: 'Mond el a véleményed',
     submitButton: 'Küldés',
   },
+  recipes: {
+    title: 'Receptek',
+  },
 };

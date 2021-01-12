@@ -66,4 +66,7 @@ export default {
     commentPlaceholder: 'Tell your oppinion',
     submitButton: 'Submit',
   },
+  recipes: {
+    title: 'Recipes',
+  },
 };
