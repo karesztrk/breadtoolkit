@@ -102,6 +102,8 @@ const Card: FC<CardProps> = ({
           initial="rest"
           animate={hovered ? 'hover' : 'rest'}
           variants={headingMotion}
+          isTruncated
+          px={1}
         >
           {title}
         </MotionText>
