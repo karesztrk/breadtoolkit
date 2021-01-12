@@ -11,9 +11,24 @@ import {
 } from '@chakra-ui/react';
 import TopWaves from '../common/TopWaves';
 import Meta from './Meta';
-import { AnimatePresence, motion } from 'framer-motion';
+import { animate, AnimatePresence, motion } from 'framer-motion';
 
 const MotionContainer = chakra(motion.div, theme.components.Container);
+
+const pageMotions = {
+  exit: {
+    opacity: 0,
+    transition: {
+      when: 'beforeChildren',
+    },
+  },
+  rest: {
+    opacity: 0,
+  },
+  animate: {
+    opacity: 1,
+  },
+};
 
 interface PageContainerProps {
   title: string;
@@ -100,23 +115,17 @@ const PageContainer: FC<PageContainerProps> = ({
           )}
         </Container>
       </Box>
-      <AnimatePresence exitBeforeEnter>
-        <MotionContainer
-          exit={{
-            opacity: 0,
-          }}
-          initial={{
-            opacity: 0,
-          }}
-          animate={{
-            opacity: 1,
-          }}
-          maxW="7xl"
-          mb={20}
-        >
-          {children}
-        </MotionContainer>
-      </AnimatePresence>
+
+      <MotionContainer
+        exit="exit"
+        initial="rest"
+        animate="animate"
+        variants={pageMotions}
+        maxW="7xl"
+        mb={20}
+      >
+        {children}
+      </MotionContainer>
     </>
   );
 };

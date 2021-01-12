@@ -1,12 +1,12 @@
 import { chakra, useColorMode } from '@chakra-ui/react';
 import React, { FC, ReactNode, useState } from 'react';
-import { motion } from 'framer-motion';
+import { motion, Variants } from 'framer-motion';
 import Link from 'next/link';
 
 const MotionText = chakra(motion.p);
 const MotionBox = chakra(motion.div);
 
-const headingMotion = {
+const headingMotion: Variants = {
   rest: {
     opacity: 0.2,
     y: 0,
@@ -17,7 +17,7 @@ const headingMotion = {
   },
 };
 
-const iconMotion = {
+const iconMotion: Variants = {
   rest: {
     y: 0,
   },
@@ -26,7 +26,7 @@ const iconMotion = {
   },
 };
 
-const textMotion = {
+const textMotion: Variants = {
   rest: {
     opacity: 0,
     y: '100%',
@@ -82,8 +82,8 @@ const Card: FC<CardProps> = ({
         <MotionBox
           position="relative"
           zIndex={1}
-          animate={hovered ? 'hover' : 'rest'}
           variants={iconMotion}
+          animate={hovered ? 'hover' : 'rest'}
         >
           {icon}
         </MotionBox>
