@@ -11,7 +11,7 @@ import {
 } from '@chakra-ui/react';
 import TopWaves from '../common/TopWaves';
 import Meta from './Meta';
-import { animate, AnimatePresence, motion } from 'framer-motion';
+import { motion } from 'framer-motion';
 
 const MotionContainer = chakra(motion.div, theme.components.Container);
 

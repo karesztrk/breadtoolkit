@@ -1,10 +1,10 @@
-import { chakra, ChakraProps, useColorMode } from '@chakra-ui/react';
+import { chakra, useColorMode } from '@chakra-ui/react';
 import { HTMLMotionProps, motion } from 'framer-motion';
 import React from 'react';
 
 const MotionIcon = chakra(motion.svg);
 
-const CalculatorIcon = (props: ChakraProps | HTMLMotionProps<any>) => {
+const CalculatorIcon = (props: any | HTMLMotionProps<any>) => {
   const { colorMode } = useColorMode();
   return (
     <MotionIcon viewBox="0 0 64 64" {...props}>
