@@ -31,7 +31,7 @@ const Recipes: FC = () => {
             key={page.slug}
             path={page.slug}
             title={page.title}
-            image={page.coverImage}
+            image={`${page.coverImage}?nf_resize=fit&w=480`}
             height={200}
           />
         ))}

@@ -75,9 +75,10 @@ interface MDXLayoutProps {
 }
 
 const MDXLayout: React.FC<MDXLayoutProps> = ({ frontMatter, children }) => {
+  const { title, coverImage } = frontMatter;
   return (
     <MDXProvider components={mdComponents}>
-      <PageContainer title={frontMatter.title}>
+      <PageContainer title={title}>
         <Box
           as={'article'}
           rounded="xl"
@@ -90,7 +91,7 @@ const MDXLayout: React.FC<MDXLayoutProps> = ({ frontMatter, children }) => {
           borderColor={useColorModeValue('', 'rgba(255, 255, 255, 0.15)')}
           boxShadow={useColorModeValue('0 0 10px rgba(59, 52, 55, 0.4)', '')}
         >
-          <Image src={frontMatter.coverImage} alt={frontMatter.title} />
+          <Image src={`${coverImage}?nf_resize=fit&w=670`} alt={title} />
           <Box p="6">{children}</Box>
         </Box>
       </PageContainer>
