@@ -21,8 +21,14 @@ const Home = () => {
         <Container maxW="7xl">
           <Grid
             mb={20}
-            templateColumns={['1fr', 'repeat(2, 1fr)', 'repeat(3, 1fr)']}
+            templateColumns={[
+              '1fr',
+              'repeat(2, 40%)',
+              'repeat(2, 35%)',
+              'repeat(2, 30%)',
+            ]}
             gap={6}
+            justifyContent="center"
           >
             <Card
               path="/calculator"

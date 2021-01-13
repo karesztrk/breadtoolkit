@@ -17,8 +17,14 @@ const Recipes: FC = () => {
     <PageContainer title={t.recipes.title}>
       <Grid
         my={20}
-        templateColumns={['1fr', 'repeat(2, 1fr)', 'repeat(3, 1fr)']}
+        templateColumns={[
+          '1fr',
+          'repeat(2, 1fr)',
+          'repeat(2, 30%)',
+          'repeat(3, 25%)',
+        ]}
         gap={6}
+        justifyContent="center"
       >
         {sortedPages.map((page) => (
           <Card

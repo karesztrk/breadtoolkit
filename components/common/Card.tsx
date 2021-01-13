@@ -82,7 +82,9 @@ const Card: FC<CardProps> = ({
         whileTap={{ scale: 0.95 }}
         border={colorMode === 'dark' ? '1px' : ''}
         borderColor={colorMode === 'dark' ? 'rgba(255, 255, 255, 0.15)' : ''}
-        boxShadow={colorMode === 'dark' ? '' : '0 0 10px rgba(59, 52, 55, 0.4)'}
+        boxShadow={
+          colorMode === 'dark' ? '' : '0 5px 10px rgba(59, 52, 55, 0.4)'
+        }
       >
         <MotionBox
           position="relative"
