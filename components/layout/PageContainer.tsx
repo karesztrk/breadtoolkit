@@ -77,11 +77,12 @@ const PageContainer: FC<PageContainerProps> = ({
             textTransform="uppercase"
             color={useColorModeValue('brand.300', 'brand.100')}
             opacity={0.9}
-            isTruncated
+            noOfLines={2}
             textShadow={useColorModeValue(
               '1px 1px 2px white',
               '1px 1px 2px black',
             )}
+            title={title}
           >
             {title}
           </Heading>
@@ -98,6 +99,7 @@ const PageContainer: FC<PageContainerProps> = ({
                 '1px 1px 2px white',
                 '1px 1px 2px black',
               )}
+              title={subtitle}
             >
               {subtitle}
             </Heading>

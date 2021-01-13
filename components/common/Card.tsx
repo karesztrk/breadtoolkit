@@ -111,6 +111,7 @@ const Card: FC<CardProps> = ({
           px={1}
           mx={4}
           borderRadius={10}
+          title={title}
         >
           {title}
         </MotionText>
