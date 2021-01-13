@@ -8,7 +8,7 @@ import {
   Input,
   Text,
   Textarea,
-  useColorMode,
+  useColorModeValue,
 } from '@chakra-ui/react';
 import { useRouter } from 'next/router';
 import React from 'react';
@@ -18,19 +18,18 @@ import hu from '@/locales/hu';
 const Contact = () => {
   const { locale } = useRouter();
   const t = locale === 'en' ? en : hu;
-  const { colorMode } = useColorMode();
   return (
     <PageContainer title={t.contact.title}>
       <Box
         p="6"
         rounded="xl"
-        bg={colorMode === 'light' ? 'white' : '#393432'}
-        color={colorMode === 'light' ? 'brand.400' : 'brand.100'}
+        bg={useColorModeValue('white', '#393432')}
+        color={useColorModeValue('brand.400', 'brand.100')}
         maxWidth="md"
         margin="0 auto"
-        border={colorMode === 'dark' ? '1px' : ''}
-        borderColor={colorMode === 'dark' ? 'rgba(255, 255, 255, 0.15)' : ''}
-        boxShadow={colorMode === 'dark' ? '' : '0 0 10px rgba(59, 52, 55, 0.4)'}
+        border={useColorModeValue('', '1px')}
+        borderColor={useColorModeValue('', 'rgba(255, 255, 255, 0.15)')}
+        boxShadow={useColorModeValue('0 0 10px rgba(59, 52, 55, 0.4)', '')}
       >
         <Text fontSize="sm" textAlign="justify" mb={2}>
           {t.contact.description}

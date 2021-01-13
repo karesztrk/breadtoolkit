@@ -10,7 +10,6 @@ import {
   OrderedList,
   Text,
   UnorderedList,
-  useColorMode,
   useColorModeValue,
   Td,
   Table,
@@ -76,23 +75,20 @@ interface MDXLayoutProps {
 }
 
 const MDXLayout: React.FC<MDXLayoutProps> = ({ frontMatter, children }) => {
-  const { colorMode } = useColorMode();
   return (
     <MDXProvider components={mdComponents}>
       <PageContainer title={frontMatter.title}>
         <Box
           as={'article'}
           rounded="xl"
-          bg={colorMode === 'light' ? 'white' : '#393432'}
-          color={colorMode === 'light' ? 'brand.400' : 'brand.100'}
+          bg={useColorModeValue('white', '#393432')}
+          color={useColorModeValue('brand.400', 'brand.100')}
           maxWidth="2xl"
           margin="0 auto"
           overflow="hidden"
-          border={colorMode === 'dark' ? '1px' : ''}
-          borderColor={colorMode === 'dark' ? 'rgba(255, 255, 255, 0.15)' : ''}
-          boxShadow={
-            colorMode === 'dark' ? '' : '0 0 10px rgba(59, 52, 55, 0.4)'
-          }
+          border={useColorModeValue('', '1px')}
+          borderColor={useColorModeValue('', 'rgba(255, 255, 255, 0.15)')}
+          boxShadow={useColorModeValue('0 0 10px rgba(59, 52, 55, 0.4)', '')}
         >
           <Image src={frontMatter.coverImage} alt={frontMatter.title} />
           <Box p="6">{children}</Box>

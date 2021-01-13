@@ -1,27 +1,27 @@
-import { chakra, useColorMode } from '@chakra-ui/react';
+import { chakra, useColorModeValue } from '@chakra-ui/react';
 import { HTMLMotionProps, motion } from 'framer-motion';
 import React from 'react';
 
 const MotionIcon = chakra(motion.svg);
 
 const CalculatorIcon = (props: any | HTMLMotionProps<any>) => {
-  const { colorMode } = useColorMode();
+  const color = useColorModeValue('#ffa88a', '#fbd38d');
   return (
     <MotionIcon viewBox="0 0 64 64" {...props}>
       <path
-        fill={colorMode === 'light' ? '#ffa88a' : '#fbd38d'}
+        fill={color}
         d="M57,5V59a2,2,0,0,1-4,0V5a2,2,0,0,1,2-2,2,2,0,0,1,2,2Z"
       />
       <path
-        fill={colorMode === 'light' ? '#ffa88a' : '#fbd38d'}
+        fill={color}
         d="M57,5V41.9a27.37,27.37,0,0,1-4,2.93V5a2,2,0,0,1,2-2,2,2,0,0,1,2,2Z"
       />
       <path
-        fill={colorMode === 'light' ? '#ffa88a' : '#fbd38d'}
+        fill={color}
         d="M11,5V59a2,2,0,0,1-4,0V5A2,2,0,0,1,9,3a2,2,0,0,1,2,2Z"
       />
       <path
-        fill={colorMode === 'light' ? '#ffa88a' : '#fbd38d'}
+        fill={color}
         d="M11,5V41.9a27.37,27.37,0,0,1-4,2.93V5A2,2,0,0,1,9,3a2,2,0,0,1,2,2Z"
       />
       <circle cx="18" cy="14" r="3" fill="#61c3b6" />

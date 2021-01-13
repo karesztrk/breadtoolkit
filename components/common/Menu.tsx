@@ -6,6 +6,7 @@ import {
   Select,
   Switch,
   useColorMode,
+  useColorModeValue,
 } from '@chakra-ui/react';
 import React, { ChangeEvent } from 'react';
 import Link from 'next/link';
@@ -17,7 +18,7 @@ const Menu = () => {
   const router = useRouter();
   const { locale } = router;
   const t = locale === 'en' ? en : hu;
-  const { colorMode, toggleColorMode } = useColorMode();
+  const { toggleColorMode } = useColorMode();
 
   const onChangeLanguage = async (e: ChangeEvent<HTMLSelectElement>) => {
     const locale = e.target.value;
@@ -30,7 +31,7 @@ const Menu = () => {
           <a>{t.header.calculatorLink}</a>
         </Link>
       </Text>
-      <Text mx={0}>{colorMode === 'light' ? '🌞' : '🌜'}</Text>
+      <Text mx={0}>{useColorModeValue('🌞', '🌜')}</Text>
       <Switch
         aria-label="Dark mode toggle"
         colorScheme="orange"

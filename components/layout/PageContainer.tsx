@@ -8,6 +8,7 @@ import {
   Text,
   theme,
   useColorMode,
+  useColorModeValue,
 } from '@chakra-ui/react';
 import TopWaves from '../common/TopWaves';
 import Meta from './Meta';
@@ -66,7 +67,7 @@ const PageContainer: FC<PageContainerProps> = ({
             fit="cover"
           />
 
-          <TopWaves color={colorMode === 'light' ? 'white' : '#1a202c'} />
+          <TopWaves color={useColorModeValue('white', '#1a202c')} />
         </Box>
         <Container maxW="7xl" pt={20} pb={[12]} minHeight="9.5rem">
           <Heading
@@ -74,12 +75,13 @@ const PageContainer: FC<PageContainerProps> = ({
             fontFamily="hero"
             fontSize={['3rem', '5rem', '6rem', '7rem']}
             textTransform="uppercase"
-            color={colorMode === 'light' ? 'brand.300' : 'brand.100'}
+            color={useColorModeValue('brand.300', 'brand.100')}
             opacity={0.9}
             isTruncated
-            textShadow={
-              colorMode === 'light' ? '1px 1px 2px white' : '1px 1px 2px black'
-            }
+            textShadow={useColorModeValue(
+              '1px 1px 2px white',
+              '1px 1px 2px black',
+            )}
           >
             {title}
           </Heading>
@@ -88,27 +90,25 @@ const PageContainer: FC<PageContainerProps> = ({
               as="h2"
               fontSize={['1.5rem', '2rem', '3rem']}
               fontFamily="hero"
-              color={colorMode === 'light' ? 'brand.300' : 'brand.100'}
+              color={useColorModeValue('brand.300', 'brand.100')}
               mb={2}
               opacity={0.8}
               isTruncated
-              textShadow={
-                colorMode === 'light'
-                  ? '1px 1px 2px white'
-                  : '1px 1px 2px black'
-              }
+              textShadow={useColorModeValue(
+                '1px 1px 2px white',
+                '1px 1px 2px black',
+              )}
             >
               {subtitle}
             </Heading>
           )}
           {description && (
             <Text
-              color={colorMode === 'light' ? 'brand.400' : 'brand.100'}
-              textShadow={
-                colorMode === 'light'
-                  ? '1px 1px 3px white'
-                  : '1px 0px 3px black'
-              }
+              color={useColorModeValue('brand.400', 'brand.100')}
+              textShadow={useColorModeValue(
+                '1px 1px 3px white',
+                '1px 0px 3px black',
+              )}
             >
               {description}
             </Text>

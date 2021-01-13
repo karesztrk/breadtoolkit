@@ -1,4 +1,4 @@
-import { chakra, useColorMode } from '@chakra-ui/react';
+import { chakra, useColorMode, useColorModeValue } from '@chakra-ui/react';
 import React, { FC, ReactNode, useState } from 'react';
 import { motion, Variants } from 'framer-motion';
 import Link from 'next/link';
@@ -68,7 +68,7 @@ const Card: FC<CardProps> = ({
         cursor="pointer"
         minHeight={height}
         bg={image ? `url(${image})` : undefined}
-        bgColor={colorMode === 'light' ? 'white' : 'brand.400'}
+        bgColor={useColorModeValue('white', 'brand.400')}
         backgroundRepeat="no-repeat"
         backgroundPosition="center"
         backgroundSize="cover"
@@ -80,11 +80,9 @@ const Card: FC<CardProps> = ({
         onHoverStart={() => setHovered(true)}
         onHoverEnd={() => setHovered(false)}
         whileTap={{ scale: 0.95 }}
-        border={colorMode === 'dark' ? '1px' : ''}
-        borderColor={colorMode === 'dark' ? 'rgba(255, 255, 255, 0.15)' : ''}
-        boxShadow={
-          colorMode === 'dark' ? '' : '0 5px 10px rgba(59, 52, 55, 0.4)'
-        }
+        border={useColorModeValue('', '1px')}
+        borderColor={useColorModeValue('', 'rgba(255, 255, 255, 0.15)')}
+        boxShadow={useColorModeValue('0 5px 10px rgba(59, 52, 55, 0.4)', '')}
       >
         <MotionBox
           position="relative"

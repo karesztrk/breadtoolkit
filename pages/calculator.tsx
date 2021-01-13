@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Box, Stack, useColorMode, usePrevious } from '@chakra-ui/react';
+import { Box, Stack, useColorModeValue, usePrevious } from '@chakra-ui/react';
 import {
   loadCalculatorSettings,
   saveCalculatorSettings,
@@ -29,7 +29,6 @@ const BreadCalculator = () => {
   const { locale } = useRouter();
   const t = locale === 'en' ? en : hu;
   const { asPath } = useRouter();
-  const { colorMode } = useColorMode();
 
   const [settings, setSettings] = useState<Settings>(() => {
     // Router query object is populated later
@@ -198,13 +197,13 @@ const BreadCalculator = () => {
       <Box
         p="6"
         rounded="xl"
-        bg={colorMode === 'light' ? 'white' : '#393432'}
-        color={colorMode === 'light' ? 'brand.400' : 'brand.100'}
+        bg={useColorModeValue('white', '#393432')}
+        color={useColorModeValue('brand.400', 'brand.100')}
         maxWidth="md"
         margin="0 auto"
-        border={colorMode === 'dark' ? '1px' : ''}
-        borderColor={colorMode === 'dark' ? 'rgba(255, 255, 255, 0.15)' : ''}
-        boxShadow={colorMode === 'dark' ? '' : '0 0 10px rgba(59, 52, 55, 0.4)'}
+        border={useColorModeValue('', '1px')}
+        borderColor={useColorModeValue('', 'rgba(255, 255, 255, 0.15)')}
+        boxShadow={useColorModeValue('0 0 10px rgba(59, 52, 55, 0.4)', '')}
       >
         <Summary
           settings={settings}
