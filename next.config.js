@@ -15,6 +15,12 @@ const defaultConfig = {
     dest: 'public',
     sw: 'service-worker.js',
   },
+  webpack: (config, { isServer }) => {
+    if (isServer) {
+      require('./scripts/generate-sitemap');
+    }
+    return config;
+  },
   async redirects() {
     return [
       {
