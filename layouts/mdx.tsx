@@ -86,7 +86,7 @@ const MDXLayout: FC<MDXLayoutProps> = ({ frontMatter, children }) => {
         <Page as="article" maxWidth="3xl" overflow="hidden" p={0}>
           <Skeleton isLoaded={imageLoaded}>
             <Image
-              src={`${coverImage}?nf_resize=fit&h=448`}
+              src={`${coverImage}?nf_resize=fit&w=766`}
               alt={title}
               fit="cover"
               width="100%"
