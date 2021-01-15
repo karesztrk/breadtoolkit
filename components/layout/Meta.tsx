@@ -25,6 +25,13 @@ const Meta: FC<MetaProps> = ({
   return (
     <Head>
       <title>{headTitle}</title>
+      <link
+        rel="preload"
+        href="/fonts/inter-var-latin.woff2"
+        as="font"
+        type="font/woff2"
+        crossOrigin="anonymous"
+      />
       <meta name="description" content={desc} />
       <meta name="keywords" content={kywrds} />
       <link rel="manifest" href="/manifest.json" />
