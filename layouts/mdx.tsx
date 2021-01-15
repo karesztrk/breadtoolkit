@@ -1,3 +1,4 @@
+import { FC, useState } from 'react';
 import PageContainer from '@/components/layout/PageContainer';
 import { PostMeta } from '@/types/post';
 import {
@@ -15,9 +16,10 @@ import {
   Table,
   Th,
   Divider,
+  Skeleton,
 } from '@chakra-ui/react';
 import { MDXProvider } from '@mdx-js/react';
-import * as React from 'react';
+import Page from '@/components/layout/PageCard';
 
 const mdComponents = {
   h1: (props: any) => <Heading as="h1" {...props} />,
@@ -74,26 +76,28 @@ interface MDXLayoutProps {
   frontMatter: PostMeta;
 }
 
-const MDXLayout: React.FC<MDXLayoutProps> = ({ frontMatter, children }) => {
+const MDXLayout: FC<MDXLayoutProps> = ({ frontMatter, children }) => {
   const { title, coverImage } = frontMatter;
+  const [imageLoaded, setImageLoaded] = useState(false);
+  const onImageLoaded = () => setImageLoaded(true);
   return (
     <MDXProvider components={mdComponents}>
       <PageContainer title={title}>
-        <Box
-          as={'article'}
-          rounded="xl"
-          bg={useColorModeValue('white', '#393432')}
-          color={useColorModeValue('brand.400', 'brand.100')}
-          maxWidth="2xl"
-          margin="0 auto"
-          overflow="hidden"
-          border={useColorModeValue('', '1px')}
-          borderColor={useColorModeValue('', 'rgba(255, 255, 255, 0.15)')}
-          boxShadow={useColorModeValue('0 0 10px rgba(59, 52, 55, 0.4)', '')}
-        >
-          <Image src={`${coverImage}?nf_resize=fit&w=670`} alt={title} />
+        <Page as="article" maxWidth="3xl" overflow="hidden" p={0}>
+          <Skeleton isLoaded={imageLoaded}>
+            <Image
+              src={`${coverImage}?nf_resize=fit&h=448`}
+              alt={title}
+              fit="cover"
+              width="100%"
+              maxHeight="md"
+              height="md"
+              onLoad={onImageLoaded}
+            />
+          </Skeleton>
           <Box p="6">{children}</Box>
-        </Box>
+          {/* </Box> */}
+        </Page>
       </PageContainer>
     </MDXProvider>
   );

@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Box, Stack, useColorModeValue, usePrevious } from '@chakra-ui/react';
+import { Stack, usePrevious } from '@chakra-ui/react';
 import {
   loadCalculatorSettings,
   saveCalculatorSettings,
@@ -24,6 +24,7 @@ import Summary from '@/components/calculator/Summary';
 import en from '@/locales/en';
 import hu from '@/locales/hu';
 import PageContainer from '@/components/layout/PageContainer';
+import PageCard from '@/components/layout/PageCard';
 
 const BreadCalculator = () => {
   const { locale } = useRouter();
@@ -194,17 +195,7 @@ const BreadCalculator = () => {
 
   return (
     <PageContainer title={t.calculator.title}>
-      <Box
-        p="6"
-        rounded="xl"
-        bg={useColorModeValue('white', '#393432')}
-        color={useColorModeValue('brand.400', 'brand.100')}
-        maxWidth="md"
-        margin="0 auto"
-        border={useColorModeValue('', '1px')}
-        borderColor={useColorModeValue('', 'rgba(255, 255, 255, 0.15)')}
-        boxShadow={useColorModeValue('0 0 10px rgba(59, 52, 55, 0.4)', '')}
-      >
+      <PageCard>
         <Summary
           settings={settings}
           extras={extras}
@@ -233,7 +224,7 @@ const BreadCalculator = () => {
             onSwitchImperialUnits={onSwitchImperialUnits}
           />
         </Stack>
-      </Box>
+      </PageCard>
     </PageContainer>
   );
 };

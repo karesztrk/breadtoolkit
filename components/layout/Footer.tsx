@@ -38,24 +38,24 @@ const Footer = () => {
             py="2"
             direction={direction}
           >
-            <HStack wrap="wrap" p="1" justify="center">
-              <Text
-                color="brand.500"
-                _hover={{ color: hoverColor }}
-                fontSize="sm"
-              >
-                <Link href="/contact">{t.footer.contactLink}</Link>
-              </Text>
-            </HStack>
+            <Text
+              flex={1}
+              color="brand.500"
+              _hover={{ color: hoverColor }}
+              fontSize="sm"
+            >
+              <Link href="/contact">{t.footer.contactLink}</Link>
+            </Text>
 
-            <Text color="brand.500" fontSize="sm">
+            <Text color="brand.500" fontSize="sm" flex={2} textAlign="center">
               &copy; 2020
             </Text>
 
             <HStack
+              flex={1}
               wrap="wrap"
               p="1"
-              justify="center"
+              justify="flex-end"
               spacing={4}
               lineHeight={4}
             >

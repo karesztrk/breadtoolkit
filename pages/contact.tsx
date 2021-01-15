@@ -1,6 +1,5 @@
 import PageContainer from '@/components/layout/PageContainer';
 import {
-  Box,
   Button,
   FormControl,
   FormHelperText,
@@ -8,29 +7,19 @@ import {
   Input,
   Text,
   Textarea,
-  useColorModeValue,
 } from '@chakra-ui/react';
 import { useRouter } from 'next/router';
 import React from 'react';
 import en from '@/locales/en';
 import hu from '@/locales/hu';
+import PageCard from '@/components/layout/PageCard';
 
 const Contact = () => {
   const { locale } = useRouter();
   const t = locale === 'en' ? en : hu;
   return (
     <PageContainer title={t.contact.title}>
-      <Box
-        p="6"
-        rounded="xl"
-        bg={useColorModeValue('white', '#393432')}
-        color={useColorModeValue('brand.400', 'brand.100')}
-        maxWidth="md"
-        margin="0 auto"
-        border={useColorModeValue('', '1px')}
-        borderColor={useColorModeValue('', 'rgba(255, 255, 255, 0.15)')}
-        boxShadow={useColorModeValue('0 0 10px rgba(59, 52, 55, 0.4)', '')}
-      >
+      <PageCard>
         <Text fontSize="sm" textAlign="justify" mb={2}>
           {t.contact.description}
         </Text>
@@ -52,7 +41,7 @@ const Contact = () => {
             {t.contact.submitButton}
           </Button>
         </form>
-      </Box>
+      </PageCard>
     </PageContainer>
   );
 };

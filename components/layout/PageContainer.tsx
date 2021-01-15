@@ -44,6 +44,10 @@ const PageContainer: FC<PageContainerProps> = ({
   children,
 }) => {
   const { colorMode } = useColorMode();
+  const textShadow = useColorModeValue(
+    '0px 1px 2px white',
+    '0px 1px 2px black',
+  );
   return (
     <>
       <Meta subtitle={title} />
@@ -78,10 +82,7 @@ const PageContainer: FC<PageContainerProps> = ({
             color={useColorModeValue('brand.300', 'brand.100')}
             opacity={0.9}
             noOfLines={2}
-            textShadow={useColorModeValue(
-              '1px 1px 2px white',
-              '1px 1px 2px black',
-            )}
+            textShadow={textShadow}
             title={title}
           >
             {title}
@@ -95,10 +96,7 @@ const PageContainer: FC<PageContainerProps> = ({
               mb={2}
               opacity={0.8}
               isTruncated
-              textShadow={useColorModeValue(
-                '1px 1px 2px white',
-                '1px 1px 2px black',
-              )}
+              textShadow={textShadow}
               title={subtitle}
             >
               {subtitle}
@@ -107,10 +105,7 @@ const PageContainer: FC<PageContainerProps> = ({
           {description && (
             <Text
               color={useColorModeValue('brand.400', 'brand.100')}
-              textShadow={useColorModeValue(
-                '1px 1px 3px white',
-                '1px 0px 3px black',
-              )}
+              textShadow={textShadow}
             >
               {description}
             </Text>
