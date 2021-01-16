@@ -24,14 +24,11 @@ const Meta: FC<MetaProps> = ({
   const headTitle = subtitle ? `${title} - ${subtitle}` : title;
   return (
     <Head>
-      <title>{headTitle}</title>
       <link
-        rel="preload"
-        href="/fonts/inter-var-latin.woff2"
-        as="font"
-        type="font/woff2"
-        crossOrigin="anonymous"
+        href="https://fonts.googleapis.com/css2?family=Exo+2:wght@400;700&display=swap"
+        rel="stylesheet"
       />
+      <title>{headTitle}</title>
       <meta name="description" content={desc} />
       <meta name="keywords" content={kywrds} />
       <link rel="manifest" href="/manifest.json" />

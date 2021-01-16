@@ -15,7 +15,7 @@ const Home = () => {
     <>
       <PageContainer
         title={t.home.title}
-        subtitle={t.home.titleSuffix}
+        prefix={t.home.titlePrefix}
         description={t.home.description}
       >
         <Container maxW="7xl">

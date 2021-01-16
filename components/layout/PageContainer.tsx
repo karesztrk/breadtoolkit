@@ -33,13 +33,13 @@ const pageMotions = {
 
 interface PageContainerProps {
   title: string;
-  subtitle?: string;
+  prefix?: string;
   description?: string;
 }
 
 const PageContainer: FC<PageContainerProps> = ({
   title,
-  subtitle,
+  prefix,
   description,
   children,
 }) => {
@@ -48,6 +48,7 @@ const PageContainer: FC<PageContainerProps> = ({
     '0px 1px 2px white',
     '0px 1px 2px black',
   );
+  const imageOpacity = useColorModeValue(1, 0.8);
   return (
     <>
       <Meta subtitle={title} />
@@ -69,17 +70,35 @@ const PageContainer: FC<PageContainerProps> = ({
                 /images/bg/${colorMode}/fhd.webp 600w,
                 /images/bg/${colorMode}/4k.webp 1200w`}
             fit="cover"
+            opacity={imageOpacity}
           />
 
           <TopWaves color={useColorModeValue('white', '#1a202c')} />
         </Box>
-        <Container maxW="7xl" pt={20} pb={[12]} minHeight="9.5rem">
+        <Container maxW="7xl" pt={20} pb={8} minHeight="9.5rem">
+          {prefix && (
+            <Heading
+              as="h2"
+              fontSize={['1.5rem', '2rem', '3rem']}
+              fontFamily="hero"
+              color={useColorModeValue('brand.300', 'brand.100')}
+              isTruncated
+              textShadow={textShadow}
+              title={prefix}
+              maxWidth="10em"
+              whiteSpace="break-spaces"
+              lineHeight={0.95}
+              height="2.1em"
+            >
+              {prefix}
+            </Heading>
+          )}
           <Heading
             as="h1"
             fontFamily="hero"
-            fontSize={['3rem', '5rem', '6rem', '7rem']}
+            fontSize={['3.5rem', '5rem', '6rem', '7rem']}
             textTransform="uppercase"
-            color={useColorModeValue('brand.300', 'brand.100')}
+            color={useColorModeValue('brand.200', 'white')}
             opacity={0.9}
             noOfLines={2}
             textShadow={textShadow}
@@ -87,25 +106,15 @@ const PageContainer: FC<PageContainerProps> = ({
           >
             {title}
           </Heading>
-          {subtitle && (
-            <Heading
-              as="h2"
-              fontSize={['1.5rem', '2rem', '3rem']}
-              fontFamily="hero"
-              color={useColorModeValue('brand.300', 'brand.100')}
-              mb={2}
-              opacity={0.8}
-              isTruncated
-              textShadow={textShadow}
-              title={subtitle}
-            >
-              {subtitle}
-            </Heading>
-          )}
+
           {description && (
             <Text
               color={useColorModeValue('brand.400', 'brand.100')}
+              fontSize={['sm', 'md', 'lg']}
               textShadow={textShadow}
+              maxWidth={['100%', '60%']}
+              lineHeight={1.8}
+              textAlign="justify"
             >
               {description}
             </Text>
@@ -123,6 +132,16 @@ const PageContainer: FC<PageContainerProps> = ({
       >
         {children}
       </MotionContainer>
+
+      <Box
+        position="absolute"
+        top="60vh"
+        bottom={0}
+        left={0}
+        right={0}
+        zIndex={-1}
+        // bgGradient="linear(to-b, #FFFFFF, brand.200)"
+      ></Box>
     </>
   );
 };

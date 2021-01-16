@@ -7,9 +7,9 @@ export default {
   },
   home: {
     title: 'Bread',
-    titleSuffix: 'Delight bake and taste',
+    titlePrefix: 'Irresistibly delicate and fragrant',
     description:
-      'Guides, tools and assets to help you to bake delicious and soft breads.',
+      'Do you know the secret of baking mouthwatering and soft breads? Are you interesteded in using sourdough? With the aid of recipes, guides and assets of this page You can learn it.',
     calculatorTitle: 'Calculator',
     calculatorDescription:
       'Calculate your dough hydration and the amount of ingredients.',
