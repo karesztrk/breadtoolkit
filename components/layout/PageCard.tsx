@@ -5,22 +5,29 @@ interface PageProps extends ChakraProps {
   as?: any;
 }
 
-const Page: FC<PageProps> = ({ as = 'div', children, p = 6, ...rest }) => (
-  <Box
-    as={as}
-    p={p}
-    rounded="xl"
-    bg={useColorModeValue('white', '#393432')}
-    color={useColorModeValue('brand.400', 'brand.100')}
-    maxWidth="md"
-    margin="0 auto"
-    border={useColorModeValue('', '1px')}
-    borderColor={useColorModeValue('', 'rgba(255, 255, 255, 0.15)')}
-    boxShadow={useColorModeValue('0 0 10px rgba(59, 52, 55, 0.4)', '')}
-    {...rest}
-  >
-    {children}
-  </Box>
-);
+const Page: FC<PageProps> = ({ as = 'div', children, p = 6, ...rest }) => {
+  const bg = useColorModeValue('white', '#393432');
+  const color = useColorModeValue('brand.400', 'brand.100');
+  const border = useColorModeValue('', '1px');
+  const borderColor = useColorModeValue('', 'rgba(255, 255, 255, 0.15)');
+  const boxShadow = useColorModeValue('0 50px 100px rgba(59, 52, 55, 0.4)', '');
+  return (
+    <Box
+      as={as}
+      p={p}
+      rounded="xl"
+      bg={bg}
+      color={color}
+      maxWidth="md"
+      margin="0 auto"
+      border={border}
+      borderColor={borderColor}
+      boxShadow={boxShadow}
+      {...rest}
+    >
+      {children}
+    </Box>
+  );
+};
 
 export default Page;

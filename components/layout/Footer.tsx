@@ -8,6 +8,9 @@ import {
   HStack,
   Divider,
   useColorModeValue,
+  theme,
+  useTheme,
+  useColorMode,
 } from '@chakra-ui/react';
 import Link from 'next/link';
 import React from 'react';
@@ -27,10 +30,11 @@ const Footer = () => {
   const variant = useBreakpointValue({ base: 'column', md: 'row' });
   const direction = variant as FlexProps['direction'];
   const hoverColor = useColorModeValue('brand.600', 'white');
+  const background = useColorModeValue('white', 'gray.800');
   return (
     <>
       <Divider />
-      <Box as="footer">
+      <Box as="footer" position="relative" background={background}>
         <Container maxW="7xl">
           <Flex
             justify="space-between"
