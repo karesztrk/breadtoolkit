@@ -5,6 +5,6 @@ import Footer from './Footer';
 describe('Footer', () => {
   it('uses Bootstrap component class', () => {
     const { container } = render(<Footer />);
-    expect(container.querySelectorAll('a')).toHaveLength(7);
+    expect(container.querySelectorAll('a')).toHaveLength(8);
   });
 });
