@@ -13,6 +13,7 @@ import {
 import TopWaves from '../common/TopWaves';
 import Meta from './Meta';
 import { motion } from 'framer-motion';
+import BackgroundBreadIcon from '../icons/BackgroundBreadIcon';
 
 const MotionContainer = chakra(motion.div, theme.components.Container);
 
@@ -132,17 +133,17 @@ const PageContainer: FC<PageContainerProps> = ({
         mb={20}
       >
         {children}
-      </MotionContainer>
 
-      <Box
-        position="absolute"
-        top="60vh"
-        bottom={0}
-        left={0}
-        right={0}
-        zIndex={-1}
-        // bgGradient="linear(to-b, #FFFFFF, brand.200)"
-      ></Box>
+        <BackgroundBreadIcon
+          position="absolute"
+          bottom={0}
+          right="-10%"
+          zIndex={-1}
+          width="auto"
+          height="35%"
+          opacity={0.9}
+        />
+      </MotionContainer>
     </>
   );
 };

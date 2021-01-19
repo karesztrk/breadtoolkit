@@ -12,7 +12,7 @@ const App: FC<AppProps> = ({ Component, pageProps, router }) => {
     <ChakraProvider theme={theme}>
       <Flex minHeight="100vh" direction="column">
         <Header />
-        <Box as="main" flexGrow={1} position="relative">
+        <Box as="main" flexGrow={1} position="relative" overflow="hidden">
           <AnimatePresence exitBeforeEnter>
             <Component key={router.route} {...pageProps} />
           </AnimatePresence>
