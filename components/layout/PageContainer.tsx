@@ -48,7 +48,7 @@ const PageContainer: FC<PageContainerProps> = ({
     '0px 1px 2px white',
     '0px 1px 2px black',
   );
-  const imageOpacity = useColorModeValue(1, 0.8);
+  const imageOpacity = colorMode === 'light' ? [0.8, 1] : [0.6, 0.8];
   return (
     <>
       <Meta subtitle={title} />
@@ -79,7 +79,7 @@ const PageContainer: FC<PageContainerProps> = ({
           {prefix && (
             <Heading
               as="h2"
-              fontSize={['1.5rem', '2rem', '3rem']}
+              fontSize="clamp(1.5rem, 5vw, 3rem)"
               fontFamily="hero"
               color={useColorModeValue('brand.300', 'brand.100')}
               isTruncated
@@ -96,13 +96,14 @@ const PageContainer: FC<PageContainerProps> = ({
           <Heading
             as="h1"
             fontFamily="hero"
-            fontSize={['3.5rem', '5rem', '6rem', '7rem']}
+            fontSize="clamp(4.5rem, 10vw, 8rem)"
             textTransform="uppercase"
             color={useColorModeValue('brand.200', 'white')}
             opacity={0.9}
             noOfLines={2}
             textShadow={textShadow}
             title={title}
+            mb="1.5rem"
           >
             {title}
           </Heading>
