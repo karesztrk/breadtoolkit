@@ -8,9 +8,6 @@ import {
   HStack,
   Divider,
   useColorModeValue,
-  theme,
-  useTheme,
-  useColorMode,
 } from '@chakra-ui/react';
 import Link from 'next/link';
 import React from 'react';
@@ -23,6 +20,7 @@ import LinkedInIcon from '@/components/icons/LinkedInIcon';
 import { useRouter } from 'next/router';
 import en from '@/locales/en';
 import hu from '@/locales/hu';
+import KofiIcon from '../icons/KofiIcon';
 
 const Footer = () => {
   const { locale } = useRouter();
@@ -63,6 +61,9 @@ const Footer = () => {
               spacing={4}
               lineHeight={4}
             >
+              <a href="https://ko-fi.com/K3K53CVET" target="_blank">
+                <KofiIcon color="#434B57" hoverColor="#29ABE0" />
+              </a>
               <a
                 href="https://www.facebook.com/karoly.torok.9/"
                 aria-label="Facebook"
