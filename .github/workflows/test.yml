@@ -1,6 +1,9 @@
-name: Test
+name: Test & Deploy
 
-on: push
+on:
+  push:
+    branches:
+      - master
 
 jobs:
   build:
@@ -11,7 +14,7 @@ jobs:
         run: yarn
       - name: Run tests
         run: yarn test
-      - name: Publish
+      - name: Trigger Netlify build
         uses: netlify/actions/build@master
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
