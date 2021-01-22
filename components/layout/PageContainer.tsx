@@ -36,6 +36,7 @@ interface PageContainerProps {
   title: string;
   prefix?: string;
   description?: string;
+  subPages?: string[];
 }
 
 const PageContainer: FC<PageContainerProps> = ({
@@ -43,6 +44,7 @@ const PageContainer: FC<PageContainerProps> = ({
   prefix,
   description,
   children,
+  subPages,
 }) => {
   const { colorMode } = useColorMode();
   const textShadow = useColorModeValue(
@@ -52,7 +54,7 @@ const PageContainer: FC<PageContainerProps> = ({
   const imageOpacity = colorMode === 'light' ? [0.8, 1] : [0.6, 0.8];
   return (
     <>
-      <Meta subtitle={title} />
+      <Meta subtitle={title} subPages={subPages} />
       <Box position="relative">
         <Box
           position="absolute"

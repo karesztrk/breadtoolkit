@@ -2,6 +2,9 @@ const withMdx = require('next-mdx-enhanced');
 const withPWA = require('next-pwa');
 
 const defaultConfig = {
+  env: {
+    siteUrl: process.env.URL,
+  },
   // Target must be serverless
   target: 'serverless',
   i18n: {

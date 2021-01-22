@@ -9,6 +9,7 @@ interface MetaProps {
   subtitle?: string;
   description?: string;
   keywords?: string;
+  subPages?: string[];
 }
 
 const Meta: FC<MetaProps> = ({
@@ -16,12 +17,20 @@ const Meta: FC<MetaProps> = ({
   subtitle,
   description,
   keywords,
+  subPages = [],
 }) => {
   const { locale } = useRouter();
   const t = locale === 'en' ? en : hu;
   const desc = description || t.meta.description;
   const kywrds = keywords || t.meta.keywords;
   const headTitle = subtitle ? `${title} - ${subtitle}` : title;
+  const listItems = subPages.map((subPage, index) => {
+    return `{
+        "@type": "ListItem",
+        "position": ${index + 1},
+        "url": "${process.env.siteUrl}/${subPage}"
+      }`;
+  });
   return (
     <Head>
       <link
@@ -64,6 +73,18 @@ const Meta: FC<MetaProps> = ({
       <meta property="og:title" content={title} />
       <meta property="og:description" content={description} />
       <meta property="og:site_name" content={title} />
+
+      {listItems.length > 0 && (
+        <script type="application/ld+json">
+          {`{
+          "@context": "https://schema.org",
+          "@type": "ItemList",
+          "itemListElement": [
+            ${listItems.join(',')}
+          ]
+          }`}
+        </script>
+      )}
     </Head>
   );
 };

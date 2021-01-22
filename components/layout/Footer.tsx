@@ -41,13 +41,13 @@ const Footer = () => {
             alignItems="center"
             py="2"
             direction={direction}
-            transition="color 150ms ease"
           >
             <Text
               flex={1}
               color="brand.500"
               _hover={{ color: hoverColor }}
               fontSize="sm"
+              transition="color 150ms ease"
             >
               <Link href="/contact">{t.footer.contactLink}</Link>
             </Text>
