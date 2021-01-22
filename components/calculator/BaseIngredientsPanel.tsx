@@ -110,12 +110,6 @@ const BaseIngredientsPanel: FC<BaseIngredientsProps> = ({
     }
   };
 
-  const onSourdoughRatioChangeEnd = (value: number) => {
-    if (value !== settings.sourdoughRatio) {
-      onSettingChange('sourdoughRatio', value);
-    }
-  };
-
   return (
     <>
       <FormControl mb={2}>
@@ -215,7 +209,8 @@ const BaseIngredientsPanel: FC<BaseIngredientsProps> = ({
               flex={1}
               colorScheme="orange"
               defaultValue={settings.sourdoughRatio}
-              onChangeEnd={onSourdoughRatioChangeEnd}
+              value={settings.sourdoughRatio}
+              onChange={(value) => onSettingChange('sourdoughRatio', value)}
             >
               <SliderTrack>
                 <SliderFilledTrack />
