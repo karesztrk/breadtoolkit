@@ -14,10 +14,12 @@ jobs:
         run: yarn
       - name: Run tests
         run: yarn test
+      - name: Run build
+        run: yarn build
       - name: Netlify deploy
         uses: netlify/actions/cli@master
         with:
-          args: deploy --prod --message "Site deployment finished" --dir=out_publish --functions=out_functions --build
+          args: deploy --prod --dir=out_publish --functions=out_functions
         env:
           NETLIFY_SITE_ID: ${{ secrets.NETLIFY_SITE_ID }}
           NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
