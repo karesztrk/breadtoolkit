@@ -14,8 +14,10 @@ jobs:
         run: yarn
       - name: Run tests
         run: yarn test
-      - name: Trigger Netlify build
-        uses: netlify/actions/build@master
+      - name: Netlify deploy
+        uses: netlify/actions/cli@master
+        with:
+          args: deploy --prod --message "Site deployment finished" --dir=out_publish --functions=out_functions --build
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           NETLIFY_SITE_ID: ${{ secrets.NETLIFY_SITE_ID }}
+          NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
