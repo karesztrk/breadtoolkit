@@ -5,7 +5,7 @@ import React from 'react';
 const MotionIcon = chakra(motion.svg);
 
 const CalculatorIcon = (props: any | HTMLMotionProps<any>) => {
-  const color = useColorModeValue('#ffa88a', '#fbd38d'); //
+  const color = '#C1A782';
   const edgeColor = useColorModeValue('#3B3437', '#604e47');
   return (
     <MotionIcon viewBox="0 0 64 64" {...props}>
