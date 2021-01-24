@@ -85,7 +85,7 @@ const PageContainer: FC<PageContainerProps> = ({
             opacity={imageOpacity}
           />
 
-          <TopWaves color={useColorModeValue('white', '#1a202c')} />
+          <TopWaves color={useColorModeValue('bg.light', 'bg.dark')} />
         </Box>
         <Container maxW="7xl" pt={20} pb={8} minHeight="9.5rem">
           {prefix && (
@@ -112,7 +112,6 @@ const PageContainer: FC<PageContainerProps> = ({
             textTransform="uppercase"
             color={useColorModeValue('brand.200', 'white')}
             opacity={0.9}
-            noOfLines={2}
             textShadow={textShadow}
             title={title}
             mb="1.5rem"

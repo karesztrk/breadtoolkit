@@ -62,13 +62,17 @@ const Card: FC<CardProps> = ({
   // whileHover helper did not executed after page transition
   const [hovered, setHovered] = useState(false);
   const { colorMode } = useColorMode();
+  const bgColor = useColorModeValue('bg.light', 'bg.dark');
+  const border = useColorModeValue('', '1px');
+  const borderColor = useColorModeValue('', 'rgba(255, 255, 255, 0.15)');
+  const boxShadow = useColorModeValue('0 5px 10px rgba(59, 52, 55, 0.4)', '');
   return (
     <Link href={path}>
       <MotionBox
         cursor="pointer"
         minHeight={height}
         bg={image ? `url(${image})` : undefined}
-        bgColor={useColorModeValue('white', 'brand.400')}
+        bgColor={bgColor}
         backgroundRepeat="no-repeat"
         backgroundPosition="center"
         backgroundSize="cover"
@@ -80,9 +84,9 @@ const Card: FC<CardProps> = ({
         onHoverStart={() => setHovered(true)}
         onHoverEnd={() => setHovered(false)}
         whileTap={{ scale: 0.95 }}
-        border={useColorModeValue('', '1px')}
-        borderColor={useColorModeValue('', 'rgba(255, 255, 255, 0.15)')}
-        boxShadow={useColorModeValue('0 5px 10px rgba(59, 52, 55, 0.4)', '')}
+        border={border}
+        borderColor={borderColor}
+        boxShadow={boxShadow}
       >
         <MotionBox
           position="relative"
