@@ -26,7 +26,6 @@ export interface MetaDetails {
 
 export interface Recipe extends MetaDetails {
   recipeCategory?: string;
-  recipeInstructions?: string;
 }
 
 const Meta: FC<MetaProps> = ({

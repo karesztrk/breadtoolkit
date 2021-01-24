@@ -78,7 +78,7 @@ interface MDXLayoutProps {
 }
 
 const MDXLayout: FC<MDXLayoutProps> = ({ frontMatter, children }) => {
-  const { title, coverImage, date, tags, content } = frontMatter;
+  const { title, coverImage, date, tags } = frontMatter;
   const [imageLoaded, setImageLoaded] = useState(false);
   const onImageLoaded = () => setImageLoaded(true);
   const imageSource = `${coverImage}?nf_resize=fit&w=766`;
@@ -89,7 +89,6 @@ const MDXLayout: FC<MDXLayoutProps> = ({ frontMatter, children }) => {
     keywords,
     name: title,
     recipeCategory: 'bread',
-    recipeInstructions: content,
   };
   return (
     <MDXProvider components={mdComponents}>
