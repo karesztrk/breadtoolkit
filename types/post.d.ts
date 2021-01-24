@@ -4,5 +4,7 @@ export type PostMeta = {
   coverImage: string;
   date: string;
   language: string;
+  tags: string[];
+  content: string;
   __resourcePath: string;
 };

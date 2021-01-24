@@ -20,6 +20,7 @@ import {
 } from '@chakra-ui/react';
 import { MDXProvider } from '@mdx-js/react';
 import Page from '@/components/layout/PageCard';
+import { Recipe } from '@/components/layout/Meta';
 
 const mdComponents = {
   h1: (props: any) => <Heading as="h1" {...props} />,
@@ -77,16 +78,26 @@ interface MDXLayoutProps {
 }
 
 const MDXLayout: FC<MDXLayoutProps> = ({ frontMatter, children }) => {
-  const { title, coverImage } = frontMatter;
+  const { title, coverImage, date, tags, content } = frontMatter;
   const [imageLoaded, setImageLoaded] = useState(false);
   const onImageLoaded = () => setImageLoaded(true);
+  const imageSource = `${coverImage}?nf_resize=fit&w=766`;
+  const keywords = tags ? tags.join(',') : undefined;
+  const metaDetails: Recipe = {
+    datePublished: date,
+    image: [imageSource],
+    keywords,
+    name: title,
+    recipeCategory: 'bread',
+    recipeInstructions: content,
+  };
   return (
     <MDXProvider components={mdComponents}>
-      <PageContainer title={title}>
+      <PageContainer title={title} meta={{ details: metaDetails }}>
         <Page as="article" maxWidth="3xl" overflow="hidden" p={0}>
           <Skeleton isLoaded={imageLoaded}>
             <Image
-              src={`${coverImage}?nf_resize=fit&w=766`}
+              src={imageSource}
               alt={title}
               fit="cover"
               width="100%"

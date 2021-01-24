@@ -11,7 +11,7 @@ import {
   useColorModeValue,
 } from '@chakra-ui/react';
 import TopWaves from '../common/TopWaves';
-import Meta from './Meta';
+import Meta, { MetaDetails } from './Meta';
 import { motion } from 'framer-motion';
 import BackgroundBreadIcon from '../icons/BackgroundBreadIcon';
 
@@ -32,11 +32,16 @@ const pageMotions = {
   },
 };
 
+interface Meta {
+  itemList?: string[];
+  details?: MetaDetails;
+}
+
 interface PageContainerProps {
   title: string;
   prefix?: string;
   description?: string;
-  subPages?: string[];
+  meta?: Meta;
 }
 
 const PageContainer: FC<PageContainerProps> = ({
@@ -44,7 +49,7 @@ const PageContainer: FC<PageContainerProps> = ({
   prefix,
   description,
   children,
-  subPages,
+  meta,
 }) => {
   const { colorMode } = useColorMode();
   const textShadow = useColorModeValue(
@@ -54,7 +59,11 @@ const PageContainer: FC<PageContainerProps> = ({
   const imageOpacity = colorMode === 'light' ? [0.8, 1] : [0.6, 0.8];
   return (
     <>
-      <Meta subtitle={title} subPages={subPages} />
+      <Meta
+        subtitle={title}
+        itemList={meta?.itemList}
+        details={meta?.details}
+      />
       <Box position="relative">
         <Box
           position="absolute"

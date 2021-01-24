@@ -4,12 +4,29 @@ import en from '@/locales/en';
 import hu from '@/locales/hu';
 import { useRouter } from 'next/router';
 
+type PageType = 'Recipe';
+
 interface MetaProps {
   title?: string;
   subtitle?: string;
   description?: string;
   keywords?: string;
-  subPages?: string[];
+  itemList?: string[];
+  details?: MetaDetails;
+}
+
+export interface MetaDetails {
+  '@context'?: string;
+  '@type'?: PageType;
+  name: string;
+  image: string[];
+  datePublished: string;
+  keywords: string | undefined;
+}
+
+export interface Recipe extends MetaDetails {
+  recipeCategory?: string;
+  recipeInstructions?: string;
 }
 
 const Meta: FC<MetaProps> = ({
@@ -17,26 +34,35 @@ const Meta: FC<MetaProps> = ({
   subtitle,
   description,
   keywords,
-  subPages = [],
+  itemList,
+  details,
 }) => {
   const { locale } = useRouter();
   const t = locale === 'en' ? en : hu;
   const desc = description || t.meta.description;
   const kywrds = keywords || t.meta.keywords;
   const headTitle = subtitle ? `${title} - ${subtitle}` : title;
-  const listItems = subPages.map((subPage, index) => {
-    return `{
-        "@type": "ListItem",
-        "position": ${index + 1},
-        "url": "${process.env.siteUrl}/${subPage}"
-      }`;
-  });
+  const metaList = itemList && {
+    '@context': 'https://schema.org',
+    '@type': 'ItemList',
+    itemListElement: itemList.map((subPage, index) => ({
+      '@type': 'ListItem',
+      position: index + 1,
+      url: `${process.env.siteUrl}/${subPage.replace('\\', '/')}`,
+    })),
+  };
+  const metaDetails = details && {
+    ...details,
+    '@context': 'https://schema.org/',
+    '@type': 'Recipe',
+    ...(details && {
+      image: [...details.image].map(
+        (image) => `${process.env.siteUrl}${image}`,
+      ),
+    }),
+  };
   return (
     <Head>
-      <link
-        href="https://fonts.googleapis.com/css2?family=Exo+2:wght@400;700&display=swap"
-        rel="stylesheet"
-      />
       <title>{headTitle}</title>
       <meta name="description" content={desc} />
       <meta name="keywords" content={kywrds} />
@@ -74,15 +100,12 @@ const Meta: FC<MetaProps> = ({
       <meta property="og:description" content={description} />
       <meta property="og:site_name" content={title} />
 
-      {listItems.length > 0 && (
+      {metaList && (
+        <script type="application/ld+json">{JSON.stringify(metaList)}</script>
+      )}
+      {metaDetails && (
         <script type="application/ld+json">
-          {`{
-          "@context": "https://schema.org",
-          "@type": "ItemList",
-          "itemListElement": [
-            ${listItems.join(',')}
-          ]
-          }`}
+          {JSON.stringify(metaDetails)}
         </script>
       )}
     </Head>

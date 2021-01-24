@@ -13,9 +13,9 @@ const Recipes: FC = () => {
   const sortedPages = pages.sort((left, right) =>
     left.date > right.date ? -1 : 1,
   );
-  const subPages = sortedPages.map((page) => page.slug);
+  const itemList = sortedPages.map((page) => page.slug);
   return (
-    <PageContainer title={t.recipes.title} subPages={subPages}>
+    <PageContainer title={t.recipes.title} meta={{ itemList }}>
       <Grid
         my={20}
         templateColumns={[

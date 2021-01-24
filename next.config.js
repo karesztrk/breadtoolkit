@@ -45,13 +45,12 @@ module.exports = withPWA(
     usesSrc: false,
     reExportDataFetching: false,
     extendFrontMatter: {
-      process: async (_, frontmatter) => {
+      process: async (mdxContent, frontmatter) => {
         const { __resourcePath } = frontmatter;
-
         const slug = __resourcePath.replace(/\.md.?/i, '');
-
         return {
           slug,
+          content: mdxContent,
         };
       },
     },
