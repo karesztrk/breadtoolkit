@@ -18,9 +18,7 @@ const globby = require('globby');
                 return `
           <url>
               <loc>${`${process.env.URL}${route}`}</loc>
-              <lastmod>${lastmod.getFullYear()}-${
-                  lastmod.getMonth() + 1
-                }-${lastmod.getDate()}</lastmod>
+              <lastmod>${lastmod.toISOString().split('T')[0]}</lastmod>
               <priority>0.5</priority>
               <xhtml:link 
                 rel="alternate"
