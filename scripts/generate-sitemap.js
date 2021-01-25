@@ -4,8 +4,7 @@ const globby = require('globby');
 (async () => {
   const pages = await globby(['pages/**/*{.tsx,.mdx,.md}', '!pages/_*.tsx']);
   const lastmod = new Date();
-  const sitemap = `
-        <?xml version="1.0" encoding="UTF-8"?>
+  const sitemap = `<?xml version="1.0" encoding="UTF-8"?>
         <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">
             ${pages
               .map((page) => {
