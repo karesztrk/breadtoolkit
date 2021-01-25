@@ -86,7 +86,6 @@ const Meta: FC<MetaProps> = ({
       <link rel="icon" type="image/png" sizes="32x32" href="/logo32.png" />
       <link rel="icon" type="image/png" sizes="192x192" href="/logo192.png" />
       <link rel="icon" type="image/png" sizes="512x512" href="/logo512.png" />
-      <link rel="manifest" href="/static/manifest.json" />
 
       <link rel="shortcut icon" href="/favicon.ico" />
 
@@ -98,6 +97,13 @@ const Meta: FC<MetaProps> = ({
       <meta property="og:title" content={title} />
       <meta property="og:description" content={description} />
       <meta property="og:site_name" content={title} />
+      <meta
+        property="og:image"
+        content={`${process.env.siteUrl}/logo512.png`}
+      />
+      <meta property="og:image:width" content="512" />
+      <meta property="og:image:height" content="512" />
+      <meta property="og:image:type" content="image/png" />
 
       {metaList && (
         <script type="application/ld+json">{JSON.stringify(metaList)}</script>
