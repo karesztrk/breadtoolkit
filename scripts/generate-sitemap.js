@@ -2,6 +2,7 @@ const fs = require('fs');
 const globby = require('globby');
 
 (async () => {
+  console.log(`Generating site map for '${process.env.URL}'`);
   const pages = await globby(['pages/**/*{.tsx,.mdx,.md}', '!pages/_*.tsx']);
   const lastmod = new Date();
   const sitemap = `<?xml version="1.0" encoding="UTF-8"?>
@@ -16,7 +17,7 @@ const globby = require('globby');
                 const route = path === '/index' ? '' : path;
                 return `
           <url>
-              <loc>${`https://breadtoolkit.netlify.app${route}`}</loc>
+              <loc>${`${process.env.URL}${route}`}</loc>
               <lastmod>${lastmod.getFullYear()}-${
                   lastmod.getMonth() + 1
                 }-${lastmod.getDate()}</lastmod>
@@ -24,7 +25,7 @@ const globby = require('globby');
               <xhtml:link 
                 rel="alternate"
                 hreflang="hu"
-                href="https://breadtoolkit.netlify.app/hu${route}"/>
+                href="${process.env.URL}/hu${route}"/>
           </url>`;
               })
               .join('')}
