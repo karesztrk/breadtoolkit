@@ -1,11 +1,16 @@
 import { Box, useColorModeValue, ChakraProps } from '@chakra-ui/react';
 import React, { FC } from 'react';
 
-interface PageProps extends ChakraProps {
+interface PageCardProps extends ChakraProps {
   as?: any;
 }
 
-const Page: FC<PageProps> = ({ as = 'div', children, p = 6, ...rest }) => {
+const PageCard: FC<PageCardProps> = ({
+  as = 'div',
+  children,
+  p = 6,
+  ...rest
+}) => {
   const bgColor = useColorModeValue('bg.light', 'bg.dark');
   const color = useColorModeValue('brand.400', 'brand.100');
   const border = useColorModeValue('', '1px');
@@ -30,4 +35,4 @@ const Page: FC<PageProps> = ({ as = 'div', children, p = 6, ...rest }) => {
   );
 };
 
-export default Page;
+export default PageCard;
