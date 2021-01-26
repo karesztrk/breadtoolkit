@@ -18,12 +18,4 @@ describe('Card', () => {
     rerender(<Card path={path} title={title} description={description} />);
     expect(screen.queryByText(description)).toBeInTheDocument();
   });
-  it('display a custom background image', () => {
-    const title = 'title';
-    const path = 'path';
-    const image = 'imageSrc';
-    render(<Card path={path} title={title} image={image} />);
-    console.log(screen.debug());
-    expect(screen.findByText(image)).toBeInTheDocument();
-  });
 });
