@@ -87,11 +87,11 @@ const PageContainer: FC<PageContainerProps> = ({
 
           <TopWaves color={useColorModeValue('bg.light', 'bg.dark')} />
         </Box>
-        <Container maxW="7xl" pt={20} pb={8} minHeight="9.5rem">
+        <Container maxW="7xl" pt={[4, 20]} pb={8} minHeight="9.5rem">
           {prefix && (
             <Heading
               as="h2"
-              fontSize="clamp(1.5rem, 5vw, 3rem)"
+              fontSize="min(max(1.5rem, 5vw), 3rem)" // clamp() is not supported on all browsers yet
               fontFamily="hero"
               color={useColorModeValue('brand.300', 'brand.100')}
               isTruncated
@@ -101,6 +101,7 @@ const PageContainer: FC<PageContainerProps> = ({
               whiteSpace="break-spaces"
               lineHeight={0.95}
               height="2.1em"
+              mt={4}
             >
               {prefix}
             </Heading>
@@ -108,13 +109,15 @@ const PageContainer: FC<PageContainerProps> = ({
           <Heading
             as="h1"
             fontFamily="hero"
-            fontSize="clamp(4.5rem, 10vw, 8rem)"
+            fontSize="min(max(4.5rem, 10vw), 8rem)"
             textTransform="uppercase"
             color={useColorModeValue('brand.200', 'white')}
             opacity={0.9}
             textShadow={textShadow}
             title={title}
             mb="1.5rem"
+            noOfLines={2}
+            lineHeight={1.3}
           >
             {title}
           </Heading>
