@@ -36,7 +36,9 @@ const ExtraIngredientsPanel: FC<ExtraIngredientsPanelProps> = ({
   return (
     <>
       <Divider mb={2} />
-      <Text mb={5}>{t.calculator.extrasText}</Text>
+      <Text mb={5} data-testid="extra-ingredients">
+        {t.calculator.extrasText}
+      </Text>
       {supportedIngredients.map(({ key, name, water }) => {
         const extra = extras[key];
         const amount = extra ? extra.amount : 0;
