@@ -124,7 +124,7 @@ const Summary: FC<SummaryProps> = ({
   };
 
   return (
-    <Flex justify="space-between" mb={5}>
+    <Flex justify="space-between" mb={5} data-testid="summary">
       <Stat flex={2}>
         <StatLabel>{t.calculator.doughWeightText}</StatLabel>
         <StatNumber>
@@ -157,6 +157,7 @@ const Summary: FC<SummaryProps> = ({
           variant="ghost"
           aria-label="Share"
           icon={<LinkIcon />}
+          data-testid="share"
         />
         <IconButton
           ml={1}
@@ -164,6 +165,7 @@ const Summary: FC<SummaryProps> = ({
           variant="ghost"
           aria-label="Reset settings"
           icon={<RepeatClockIcon />}
+          data-testid="reset"
         />
       </Box>
     </Flex>

@@ -112,7 +112,7 @@ const BaseIngredientsPanel: FC<BaseIngredientsProps> = ({
 
   return (
     <>
-      <FormControl mb={2}>
+      <FormControl mb={2} data-testid="base-ingredients">
         <FormLabel htmlFor="flour">{`${t.calculator.flourLabel} (${flourPercent}%)`}</FormLabel>
         <NumberInput
           id="flour"
