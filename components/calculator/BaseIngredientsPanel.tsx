@@ -23,7 +23,7 @@ import {
   Text,
 } from '@chakra-ui/react';
 import { useRouter } from 'next/router';
-import React, { FC, useCallback } from 'react';
+import React, { FC } from 'react';
 import EditableSelectText from '@/components/common/EditableSelectText';
 import en from '@/locales/en';
 import hu from '@/locales/hu';
@@ -91,11 +91,8 @@ const BaseIngredientsPanel: FC<BaseIngredientsProps> = ({
     t.calculator.yeastLabel,
   ];
 
-  const onStarterChange = useCallback(
-    (value) =>
-      onSettingChange(usingYeast ? 'yeast' : 'sourdough', parse(value)),
-    [usingYeast],
-  );
+  const onStarterChange = (value: string) =>
+    onSettingChange(usingYeast ? 'yeast' : 'sourdough', parse(value));
 
   const onStarterTypeChange = (starter: StarterName) => {
     switch (starter) {
