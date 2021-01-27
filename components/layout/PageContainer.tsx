@@ -1,4 +1,4 @@
-import { FC } from 'react';
+import { FC, useEffect, useState } from 'react';
 import {
   Box,
   chakra,
@@ -14,6 +14,7 @@ import TopWaves from '../common/TopWaves';
 import Meta, { MetaDetails } from './Meta';
 import { motion } from 'framer-motion';
 import BackgroundBreadIcon from '../icons/BackgroundBreadIcon';
+import Bowser from 'bowser';
 
 const MotionContainer = chakra(motion.div, theme.components.Container);
 
@@ -56,7 +57,29 @@ const PageContainer: FC<PageContainerProps> = ({
     '0px 1px 2px white',
     '0px 1px 2px black',
   );
+  const [modernBrowser, setModernBrowser] = useState(false);
   const imageOpacity = colorMode === 'light' ? [0.8, 1] : [0.6, 0.8];
+  const subheaderFontSize = modernBrowser
+    ? 'clamp(1.5rem, 5vw, 3rem)'
+    : ['1.5rem', '2rem', '3rem'];
+  const mainheaderFontSize = modernBrowser
+    ? 'clamp(4.5rem, 10vw, 8rem)'
+    : ['4.5rem', '5rem', '6rem', '8rem'];
+  useEffect(() => {
+    if (window !== undefined) {
+      const browser = Bowser.getParser(window.navigator.userAgent);
+      setModernBrowser(
+        !!browser.satisfies({
+          chrome: '>=79',
+          firefox: '>=75',
+          opera: '>=66',
+          macos: {
+            safari: '>=13',
+          },
+        }),
+      );
+    }
+  }, []);
   return (
     <>
       <Meta
@@ -91,7 +114,7 @@ const PageContainer: FC<PageContainerProps> = ({
           {prefix && (
             <Heading
               as="h2"
-              fontSize="min(max(1.5rem, 5vw), 3rem)" // clamp() is not supported on all browsers yet
+              fontSize={subheaderFontSize}
               fontFamily="hero"
               color={useColorModeValue('brand.300', 'brand.100')}
               isTruncated
@@ -109,7 +132,7 @@ const PageContainer: FC<PageContainerProps> = ({
           <Heading
             as="h1"
             fontFamily="hero"
-            fontSize="min(max(4.5rem, 10vw), 8rem)"
+            fontSize={mainheaderFontSize}
             textTransform="uppercase"
             color={useColorModeValue('brand.200', 'white')}
             opacity={0.9}
