@@ -11,9 +11,15 @@ const overrides: ThemeOverride = {
   },
   colors,
   fonts: {
-    hero: 'Merriweather, sans-serif',
-    heading: 'Lato, sans-serif',
-    body: 'Montserrat, sans-serif',
+    hero:
+      /* Times New Roman-based stack */
+      "Merriweather, Cambria, 'Hoefler Text', Utopia, 'Liberation Serif', 'Nimbus Roman No9 L Regular', Times, 'Times New Roman', serif",
+    heading:
+      /* Helvetica/Arial-based sans serif stack */
+      "Lato, Frutiger, 'Frutiger Linotype', Univers, Calibri, 'Gill Sans', 'Gill Sans MT', 'Myriad Pro', Myriad, 'DejaVu Sans Condensed', 'Liberation Sans', 'Nimbus Sans L', Tahoma, Geneva, 'Helvetica Neue', Helvetica, Arial, sans-serif;",
+    body:
+      /* Trebuchet-based sans serif stack */
+      "Montserrat, 'Segoe UI', Candara, 'Bitstream Vera Sans', 'DejaVu Sans', 'Bitstream Vera Sans', 'Trebuchet MS', Verdana, 'Verdana Ref', sans-serif",
   },
   components: {
     Heading,

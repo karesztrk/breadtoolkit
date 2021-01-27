@@ -9,7 +9,7 @@ export default {
     title: 'Kenyér',
     titlePrefix: 'Ellenállhatatlanul finom és illatos',
     description:
-      'Ismered a kívül puha, belül pedig rogós kenyerek titkát? Érdekel, hogy hogyan is használhatsz kovászt? Az oldalon receptek, útmutatók és különféle eszközök segítségével mindezt Te is megtanulhatod.',
+      'Ismered a kívül rogós, belül ellenállhatatlanul puha kenyerek titkát? Érdekel, hogy hogyan is használhatsz kovászt? Az oldalon receptek, útmutatók és különféle eszközök segítségével mindezt Te is megtanulhatod.',
     calculatorTitle: 'Kalkulátor',
     calculatorDescription:
       'Kalkuláld ki a tésztád hidratáltságát és a hozzávalókat.',
