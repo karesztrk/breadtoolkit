@@ -3,6 +3,7 @@
 > ✨ Bootstrapped with Create Next App (CNA).
 
 [![Netlify Status](https://api.netlify.com/api/v1/badges/f9253d81-8715-4146-915b-17ffdc51839d/deploy-status)](https://app.netlify.com/sites/breadtoolkit/deploys)
+[![tested with jest](https://img.shields.io/badge/tested_with-jest-99424f.svg)](https://github.com/facebook/jest)
 
 [![ko-fi](https://ko-fi.com/img/githubbutton_sm.svg)](https://ko-fi.com/K3K53CVET)
 
@@ -30,4 +31,5 @@ The application is also a [Progressive Web App](https://developer.mozilla.org/en
 
 ## Testing
 
-Tester running is powered by [Jest](https://jestjs.io/). While [React Testing Library](https://testing-library.com/) is responsible for Component based Unit testing.
+Test running is powered by [Jest](https://jestjs.io/). While [React Testing Library](https://testing-library.com/) is responsible for Component based Unit testing.
+E2E testing is easy using [Cypress](https://www.cypress.io/). Running, executing and recording end-user experience is handled by this library.
