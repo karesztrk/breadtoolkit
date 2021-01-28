@@ -3,6 +3,7 @@
 > ✨ Bootstrapped with Create Next App (CNA).
 
 [![Netlify Status](https://api.netlify.com/api/v1/badges/f9253d81-8715-4146-915b-17ffdc51839d/deploy-status)](https://app.netlify.com/sites/breadtoolkit/deploys)
+[![Cypress.io](https://img.shields.io/badge/tested%20with-Cypress-04C38E.svg)](https://www.cypress.io/)
 [![tested with jest](https://img.shields.io/badge/tested_with-jest-99424f.svg)](https://github.com/facebook/jest)
 
 [![ko-fi](https://ko-fi.com/img/githubbutton_sm.svg)](https://ko-fi.com/K3K53CVET)
