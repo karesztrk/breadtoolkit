@@ -17,6 +17,7 @@ const Recipes: FC = () => {
   return (
     <PageContainer title={t.recipes.title} meta={{ itemList }}>
       <Grid
+        id="recipes"
         my={20}
         templateColumns={[
           '1fr',
@@ -32,7 +33,7 @@ const Recipes: FC = () => {
             key={page.slug}
             path={page.slug}
             title={page.title}
-            image={`${page.coverImage}?nf_resize=fit&w=480`}
+            image={page.coverImage}
             height={200}
           />
         ))}

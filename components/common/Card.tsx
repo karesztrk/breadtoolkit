@@ -2,6 +2,7 @@ import { chakra, useColorMode, useColorModeValue } from '@chakra-ui/react';
 import React, { FC, ReactNode, useState } from 'react';
 import { motion, Variants } from 'framer-motion';
 import Link from 'next/link';
+import Image from 'next/image';
 
 const MotionText = chakra(motion.p);
 const MotionBox = chakra(motion.div);
@@ -71,11 +72,7 @@ const Card: FC<CardProps> = ({
       <MotionBox
         cursor="pointer"
         minHeight={height}
-        bg={image ? `url(${image})` : undefined}
         bgColor={bgColor}
-        backgroundRepeat="no-repeat"
-        backgroundPosition="center"
-        backgroundSize="cover"
         rounded="xl"
         p={[5, 8, 10]}
         position="relative"
@@ -88,6 +85,15 @@ const Card: FC<CardProps> = ({
         borderColor={borderColor}
         boxShadow={boxShadow}
       >
+        {image && (
+          <Image
+            layout="fill"
+            objectFit="cover"
+            objectPosition="center"
+            src={image}
+            loader={({ src }) => `${src}?nf_resize=fit&w=480`}
+          />
+        )}
         <MotionBox
           position="relative"
           zIndex={1}
