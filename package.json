@@ -53,6 +53,7 @@
     "jest": "^26.6.3",
     "jsdom": "^16.4.0",
     "jsdom-global": "^3.0.2",
+    "netlify-plugin-cache-nextjs": "^1.5.2",
     "next-mdx-enhanced": "^5.0.0",
     "next-on-netlify": "^2.8.4",
     "prettier": "^2.0.5",
