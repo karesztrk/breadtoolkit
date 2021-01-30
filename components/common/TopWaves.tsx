@@ -4,7 +4,6 @@ import { usePrefersReducedMotion } from '@chakra-ui/react';
 
 const TopWaves: FC<ChakraProps> = (props: ChakraProps) => {
   const prefersReducedMotion = usePrefersReducedMotion();
-  console.log(prefersReducedMotion);
   return (
     <Box
       overflow="hidden"
