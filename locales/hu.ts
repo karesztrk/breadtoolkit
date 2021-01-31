@@ -70,5 +70,6 @@ export default {
   },
   recipes: {
     title: 'Receptek',
+    searchPlaceHolder: 'Találj egy izgalmas receptet',
   },
 };

@@ -68,5 +68,6 @@ export default {
   },
   recipes: {
     title: 'Recipes',
+    searchPlaceHolder: 'Find an exciting recipe',
   },
 };
