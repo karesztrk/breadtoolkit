@@ -1,4 +1,7 @@
 export default {
+  site: {
+    title: 'Bread Toolkit',
+  },
   meta: {
     description:
       'Kenyér sütési kalandod online eszköztára. A Bread toolkit ingyenes útmutatói, receptei és kalkulátorai segítségével egyszerű magas hidratációjú kenyerek készítése',

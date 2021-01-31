@@ -92,7 +92,14 @@ const MDXLayout: FC<MDXLayoutProps> = ({ frontMatter, children }) => {
   };
   return (
     <MDXProvider components={mdComponents}>
-      <PageContainer title={title} meta={{ details: metaDetails }}>
+      <PageContainer
+        title={title}
+        sd={{ details: metaDetails }}
+        meta={{
+          title,
+          keywords,
+        }}
+      >
         <Page as="article" maxWidth="3xl" overflow="hidden" p={0}>
           <Skeleton isLoaded={imageLoaded}>
             <Image

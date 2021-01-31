@@ -20,7 +20,7 @@ const Recipes: FC = () => {
     (page) => !searchterm || page.title.toLowerCase().includes(searchterm),
   );
   return (
-    <PageContainer title={t.recipes.title} meta={{ itemList: metaList }}>
+    <PageContainer title={t.recipes.title} sd={{ itemList: metaList }}>
       <Center>
         <SearchInput
           placeholder={t.recipes.searchPlaceHolder}

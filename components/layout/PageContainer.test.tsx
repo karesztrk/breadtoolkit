@@ -21,7 +21,7 @@ describe('PageContainer', () => {
   it('can display subtitle', () => {
     const title = 'Hello';
     const subTitle = 'world';
-    render(<PageContainer title={title} prefix={subTitle} />);
+    render(<PageContainer title={title} subtitle={subTitle} />);
     expect(screen.getByText(title)).toHaveAttribute('title', title);
     expect(screen.getByText(subTitle)).toHaveAttribute('title', subTitle);
   });
@@ -34,7 +34,7 @@ describe('PageContainer', () => {
     render(
       <PageContainer
         title=""
-        meta={{
+        sd={{
           details: {
             name,
             datePublished,

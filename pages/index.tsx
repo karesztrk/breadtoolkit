@@ -15,8 +15,13 @@ const Home = () => {
     <>
       <PageContainer
         title={t.home.title}
-        prefix={t.home.titlePrefix}
+        subtitle={t.home.titlePrefix}
         description={t.home.description}
+        meta={{
+          title: t.site.title,
+          description: t.meta.description,
+          keywords: t.meta.keywords,
+        }}
       >
         <Container maxW="7xl">
           <Grid

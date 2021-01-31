@@ -8,7 +8,6 @@ type PageType = 'Recipe';
 
 interface MetaProps {
   title?: string;
-  subtitle?: string;
   description?: string;
   keywords?: string;
   itemList?: string[];
@@ -30,7 +29,6 @@ export interface Recipe extends MetaDetails {
 
 const Meta: FC<MetaProps> = ({
   title = 'Bread Toolkit',
-  subtitle,
   description,
   keywords,
   itemList,
@@ -40,7 +38,6 @@ const Meta: FC<MetaProps> = ({
   const t = locale === 'en' ? en : hu;
   const desc = description || t.meta.description;
   const kywrds = keywords || t.meta.keywords;
-  const headTitle = subtitle ? `${title} - ${subtitle}` : title;
   const metaList = itemList && {
     '@context': 'https://schema.org',
     '@type': 'ItemList',
@@ -62,7 +59,7 @@ const Meta: FC<MetaProps> = ({
   };
   return (
     <Head>
-      <title>{headTitle}</title>
+      <title>{title}</title>
       <meta name="description" content={desc} />
       <meta name="keywords" content={kywrds} />
       <link rel="manifest" href="/manifest.json" />

@@ -33,24 +33,32 @@ const pageMotions = {
   },
 };
 
-interface Meta {
+interface StructuredData {
   itemList?: string[];
   details?: MetaDetails;
 }
 
+interface Meta {
+  title?: string;
+  description?: string;
+  keywords?: string;
+}
+
 interface PageContainerProps {
   title: string;
-  prefix?: string;
+  subtitle?: string;
   description?: string;
   meta?: Meta;
+  sd?: StructuredData;
 }
 
 const PageContainer: FC<PageContainerProps> = ({
   title,
-  prefix,
+  subtitle,
   description,
-  children,
   meta,
+  sd,
+  children,
 }) => {
   const { colorMode } = useColorMode();
   const textShadow = useColorModeValue(
@@ -83,9 +91,11 @@ const PageContainer: FC<PageContainerProps> = ({
   return (
     <>
       <Meta
-        subtitle={title}
-        itemList={meta?.itemList}
-        details={meta?.details}
+        title={meta?.title || title}
+        keywords={meta?.keywords}
+        description={meta?.description}
+        itemList={sd?.itemList}
+        details={sd?.details}
       />
       <Box position="relative">
         <Box
@@ -111,7 +121,7 @@ const PageContainer: FC<PageContainerProps> = ({
           <TopWaves color={useColorModeValue('bg.light', 'bg.dark')} />
         </Box>
         <Container maxW="7xl" pt={[4, 20]} pb={8} minHeight="9.5rem">
-          {prefix && (
+          {subtitle && (
             <Heading
               as="h2"
               fontSize={subheaderFontSize}
@@ -119,14 +129,14 @@ const PageContainer: FC<PageContainerProps> = ({
               color={useColorModeValue('brand.300', 'brand.100')}
               isTruncated
               textShadow={textShadow}
-              title={prefix}
+              title={subtitle}
               maxWidth="10em"
               whiteSpace="break-spaces"
               lineHeight={0.95}
               height="2.1em"
               mt={4}
             >
-              {prefix}
+              {subtitle}
             </Heading>
           )}
           <Heading
