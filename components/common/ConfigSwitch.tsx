@@ -36,7 +36,7 @@ const ConfigSwitch: FC<ConfigSwitchProps> = ({
     <FormControl mb={2}>
       <HStack>
         <Switch id={id} isChecked={checked} onChange={onToggle} />
-        <FormLabel htmlFor={id} fontSize="sm" m={0} fontWeight={400}>
+        <FormLabel htmlFor={id} fontSize="sm" m={0}>
           {label}
         </FormLabel>
         {newConfig && (

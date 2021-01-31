@@ -1,4 +1,7 @@
 export default {
+  site: {
+    title: 'Bread Toolkit',
+  },
   meta: {
     description:
       'Online tools to help your bread baking journey. Bread toolkit gives your free recipes, guides and calculators to work with high hydration artisan breads.',
