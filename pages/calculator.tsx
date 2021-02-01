@@ -152,7 +152,7 @@ const BreadCalculator = () => {
     setExtras(newState);
   };
 
-  const setSetting = (key: SettingName, value: any) => {
+  const setSetting = (key: SettingName, value: number) => {
     setSettings({
       ...settings,
       [key]: value,

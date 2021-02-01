@@ -50,8 +50,10 @@ const BaseIngredientsPanel: FC<BaseIngredientsProps> = ({
     : t.calculator.metricText;
 
   const format = (val: number): string => `${val} ${unitText}`;
-  const parse = (val: string): number =>
-    Number(val.replace(` ${unitText}`, ''));
+  const parse = (val: string): number => {
+    const numVal = Number(val.replace(` ${unitText}`, ''));
+    return Number.isNaN(numVal) || numVal < 1 ? 1 : numVal;
+  };
   const flourPercent = Math.floor(
     calcFlourPercent(settings.bakersMath, settings.flour, dough),
   );
@@ -116,6 +118,7 @@ const BaseIngredientsPanel: FC<BaseIngredientsProps> = ({
           value={format(settings.flour)}
           min={1}
           step={1}
+          clampValueOnBlur={false}
           onChange={(value) => onSettingChange('flour', parse(value))}
           pattern={inputPattern}
           allowMouseWheel
@@ -143,6 +146,7 @@ const BaseIngredientsPanel: FC<BaseIngredientsProps> = ({
           onChange={(value) => onSettingChange('water', parse(value))}
           pattern={inputPattern}
           allowMouseWheel
+          clampValueOnBlur={false}
         >
           <NumberInputField />
           <NumberInputStepper>
@@ -162,6 +166,7 @@ const BaseIngredientsPanel: FC<BaseIngredientsProps> = ({
           onChange={(value) => onSettingChange('salt', parse(value))}
           pattern={inputPattern}
           allowMouseWheel
+          clampValueOnBlur={false}
         >
           <NumberInputField />
           <NumberInputStepper>
@@ -193,6 +198,7 @@ const BaseIngredientsPanel: FC<BaseIngredientsProps> = ({
             onChange={onStarterChange}
             pattern={inputPattern}
             allowMouseWheel
+            clampValueOnBlur={false}
           >
             <NumberInputField />
             <NumberInputStepper>

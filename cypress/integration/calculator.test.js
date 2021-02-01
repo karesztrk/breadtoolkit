@@ -1,13 +1,13 @@
 describe('Calculator', () => {
   it('supports basic ingredients change', () => {
     cy.visit('/calculator');
-    cy.get('#flour').clear().type(1000);
+    cy.get('#flour').clear().type('{selectall}1000');
 
-    cy.get('#water').clear().type(690);
+    cy.get('#water').clear().type('{selectall}690');
 
-    cy.get('#salt').clear().type(20);
+    cy.get('#salt').clear().type('{selectall}20');
 
-    cy.get('#starter').clear().type(200);
+    cy.get('#starter').clear().type('{selectall}200');
 
     cy.get('dl dd').should('contain', '1910 gram');
     cy.get('dl p').should('contain', '70.1%');
