@@ -55,6 +55,7 @@ const EditableNumericText: FC<EditableNumericTextProps> = ({
           onChange={(value) => setInputValue(parser(value))}
           allowMouseWheel
           pattern={pattern}
+          clampValueOnBlur={false}
         >
           <NumberInputField />
         </NumberInput>

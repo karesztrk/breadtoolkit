@@ -53,6 +53,7 @@ const NumberInputSwitch: FC<NumberInputSwitchProps> = ({
         onChange={onChangeValue}
         pattern=".*"
         allowMouseWheel
+        clampValueOnBlur={false}
       >
         <NumberInputField />
         <NumberInputStepper>

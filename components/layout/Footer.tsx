@@ -122,7 +122,7 @@ const Footer = () => {
                 }}
                 transition={{
                   times: [0, 0.4, 0.5, 0.7, 0.8, 1],
-                  loop: Infinity,
+                  repeat: Infinity,
                   repeatDelay: 10,
                 }}
               >
