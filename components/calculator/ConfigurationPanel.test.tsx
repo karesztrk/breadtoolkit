@@ -6,7 +6,6 @@ import userEvent from '@testing-library/user-event';
 
 describe('ConfigurationPanel', () => {
   it('rendered with empty data', () => {
-    const settings = {} as Settings;
     const onSwitchBakersMath = jest.fn();
     const onSwitchImperialUnits = jest.fn();
     render(
