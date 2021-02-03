@@ -1,8 +1,4 @@
-import {
-  calcHydration,
-  convertToImperialUnits,
-  defaultSettings,
-} from '@/service/calculator';
+import { calcHydration } from '@/service/calculator';
 import { ExtraIngredients, Settings } from '@/types/calculator';
 import { InfoOutlineIcon, LinkIcon, RepeatClockIcon } from '@chakra-ui/icons';
 import {
@@ -28,7 +24,7 @@ interface SummaryProps {
   dough: number;
   liquids: number;
   onDoughGoalSubmit: (goal: number) => void;
-  onResetSettings: (settings: Settings) => void;
+  onResetSettings: () => void;
 }
 
 const Summary: FC<SummaryProps> = ({
@@ -94,25 +90,7 @@ const Summary: FC<SummaryProps> = ({
   };
 
   const onResetClick = () => {
-    const { bakersMath, imperialUnits } = settings;
-    if (imperialUnits) {
-      const { flour, water, salt, sourdough } = convertToImperialUnits(
-        defaultSettings,
-        {},
-        imperialUnits,
-      );
-      onResetSettings({
-        ...defaultSettings,
-        bakersMath,
-        imperialUnits,
-        flour,
-        water,
-        salt,
-        sourdough,
-      });
-    } else {
-      onResetSettings(defaultSettings);
-    }
+    onResetSettings();
 
     toast({
       title: t.calculator.resetSuccessToastTitle,

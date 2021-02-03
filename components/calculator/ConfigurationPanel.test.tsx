@@ -11,7 +11,8 @@ describe('ConfigurationPanel', () => {
     const onSwitchImperialUnits = jest.fn();
     render(
       <ConfigurationPanel
-        settings={settings}
+        imperialUnits
+        bakersMath
         onSwitchBakersMath={onSwitchBakersMath}
         onSwitchImperialUnits={onSwitchImperialUnits}
       />,
@@ -19,14 +20,12 @@ describe('ConfigurationPanel', () => {
     expect(screen.getAllByRole('checkbox').length).toEqual(2);
   });
   it('invokes bakers math callback', () => {
-    const settings = {
-      bakersMath: true,
-    } as Settings;
     const onSwitchBakersMath = jest.fn();
     const onSwitchImperialUnits = jest.fn();
     const { rerender } = render(
       <ConfigurationPanel
-        settings={settings}
+        imperialUnits={false}
+        bakersMath
         onSwitchBakersMath={onSwitchBakersMath}
         onSwitchImperialUnits={onSwitchImperialUnits}
       />,
@@ -36,10 +35,8 @@ describe('ConfigurationPanel', () => {
     expect(onSwitchBakersMath).toHaveBeenCalled();
     rerender(
       <ConfigurationPanel
-        settings={{
-          ...settings,
-          bakersMath: false,
-        }}
+        imperialUnits={false}
+        bakersMath={false}
         onSwitchBakersMath={onSwitchBakersMath}
         onSwitchImperialUnits={onSwitchImperialUnits}
       />,
@@ -54,7 +51,8 @@ describe('ConfigurationPanel', () => {
     const onSwitchImperialUnits = jest.fn();
     const { rerender } = render(
       <ConfigurationPanel
-        settings={settings}
+        imperialUnits
+        bakersMath={false}
         onSwitchBakersMath={onSwitchBakersMath}
         onSwitchImperialUnits={onSwitchImperialUnits}
       />,
@@ -64,10 +62,8 @@ describe('ConfigurationPanel', () => {
     expect(onSwitchImperialUnits).toHaveBeenCalled();
     rerender(
       <ConfigurationPanel
-        settings={{
-          ...settings,
-          imperialUnits: false,
-        }}
+        imperialUnits={false}
+        bakersMath={false}
         onSwitchBakersMath={onSwitchBakersMath}
         onSwitchImperialUnits={onSwitchImperialUnits}
       />,

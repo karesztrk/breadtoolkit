@@ -2,7 +2,7 @@ import {
   calcIngredientPercent,
   supportedIngredients,
 } from '@/service/calculator';
-import { ExtraIngredients, Settings } from '@/types/calculator';
+import { ExtraIngredients } from '@/types/calculator';
 import { Divider, Text } from '@chakra-ui/react';
 import { useRouter } from 'next/router';
 import React, { FC } from 'react';
@@ -11,7 +11,9 @@ import en from '@/locales/en';
 import hu from '@/locales/hu';
 
 interface ExtraIngredientsPanelProps {
-  settings: Settings;
+  bakersMath: boolean;
+  imperialUnits: boolean;
+  flour: number;
   extras: ExtraIngredients;
   dough: number;
   onChangeExtras: (key: string, amount: number, water: number) => void;
@@ -19,7 +21,9 @@ interface ExtraIngredientsPanelProps {
 }
 
 const ExtraIngredientsPanel: FC<ExtraIngredientsPanelProps> = ({
-  settings,
+  bakersMath,
+  imperialUnits,
+  flour,
   extras,
   dough,
   onChangeExtras,
@@ -27,7 +31,7 @@ const ExtraIngredientsPanel: FC<ExtraIngredientsPanelProps> = ({
 }) => {
   const { locale } = useRouter();
   const t = locale === 'en' ? en : hu;
-  const unitText = settings.imperialUnits
+  const unitText = imperialUnits
     ? t.calculator.imperialText
     : t.calculator.metricText;
   const format = (val: number): string => `${val} ${unitText}`;
@@ -44,12 +48,7 @@ const ExtraIngredientsPanel: FC<ExtraIngredientsPanelProps> = ({
         const amount = extra ? extra.amount : 0;
         const isDisabled = extra ? extra.disabled : true;
         const percent = Math.floor(
-          calcIngredientPercent(
-            settings.bakersMath,
-            settings.flour,
-            amount,
-            dough,
-          ),
+          calcIngredientPercent(bakersMath, flour, amount, dough),
         );
         const label = (t.calculator as any)[name];
         return (
