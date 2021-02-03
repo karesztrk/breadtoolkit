@@ -1,4 +1,3 @@
-import { Settings } from '@/types/calculator';
 import { Divider } from '@chakra-ui/react';
 import { useRouter } from 'next/router';
 import React, { FC } from 'react';
@@ -7,13 +6,15 @@ import en from '@/locales/en';
 import hu from '@/locales/hu';
 
 interface ConfigurationPanelProps {
-  settings: Settings;
+  bakersMath: boolean;
+  imperialUnits: boolean;
   onSwitchBakersMath: () => void;
   onSwitchImperialUnits: () => void;
 }
 
 const ConfigurationPanel: FC<ConfigurationPanelProps> = ({
-  settings,
+  bakersMath,
+  imperialUnits,
   onSwitchBakersMath,
   onSwitchImperialUnits,
 }) => {
@@ -25,14 +26,14 @@ const ConfigurationPanel: FC<ConfigurationPanelProps> = ({
       <ConfigSwitch
         id="bakersMath"
         label={t.calculator.settingsBakersMathLabel}
-        disabled={!settings.bakersMath}
+        disabled={!bakersMath}
         onToggle={onSwitchBakersMath}
       />
 
       <ConfigSwitch
         id="imperialUnits"
         label={t.calculator.settingsImperialLabel}
-        disabled={!settings.imperialUnits}
+        disabled={!imperialUnits}
         onToggle={onSwitchImperialUnits}
         newConfig
       />

@@ -26,6 +26,7 @@
       "@/theme/*": ["theme/*"],
       "@/types/*": ["types/*"],
       "@/lib/*": ["lib/*"],
+      "@/context/*": ["context/*"],
     }
   },
   "exclude": ["node_modules"],
