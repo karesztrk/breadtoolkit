@@ -68,6 +68,7 @@ const Footer = () => {
                 href="https://karolytorok.netlify.app/"
                 aria-label="Website"
                 target="_blank"
+                rel="noreferrer noopener"
               >
                 <WebIcon color="brand.500" hoverColor={hoverColor} />
               </a>
@@ -75,6 +76,7 @@ const Footer = () => {
                 href="https://www.facebook.com/karoly.torok.9/"
                 aria-label="Facebook"
                 target="_blank"
+                rel="noreferrer noopener"
               >
                 <FacebookIcon color="brand.500" hoverColor={hoverColor} />
               </a>
@@ -82,12 +84,14 @@ const Footer = () => {
                 href="https://github.com/karesztrk"
                 aria-label="Github"
                 target="_blank"
+                rel="noreferrer noopener"
               >
                 <GitHubIcon color="brand.500" hoverColor={hoverColor} />
               </a>
               <a
                 href="mailto:torok.karoly.krisztian@gmail.com"
                 aria-label="Email"
+                rel="noreferrer noopener"
               >
                 <EmailIcon color="brand.500" hoverColor={hoverColor} />
               </a>
@@ -95,6 +99,7 @@ const Footer = () => {
                 href="https://www.instagram.com/karesztrk/"
                 aria-label="Instagram"
                 target="_blank"
+                rel="noreferrer noopener"
               >
                 <InstagramIcon color="brand.500" hoverColor={hoverColor} />
               </a>
@@ -102,6 +107,7 @@ const Footer = () => {
                 href="https://www.linkedin.com/in/k%C3%A1roly-t%C3%B6r%C3%B6k-17541b80/"
                 aria-label="LinkedIn"
                 target="_blank"
+                rel="noreferrer noopener"
               >
                 <LinkedInIcon color="brand.500" hoverColor={hoverColor} />
               </a>
@@ -109,12 +115,14 @@ const Footer = () => {
                 href="https://www.youtube.com/user/r0nan87"
                 aria-label="Youtube"
                 target="_blank"
+                rel="noreferrer noopener"
               >
                 <YouTubeIcon color="brand.500" hoverColor={hoverColor} />
               </a>
               <motion.a
                 href="https://ko-fi.com/K3K53CVET"
                 target="_blank"
+                rel="noreferrer noopener"
                 initial={{ y: 0, rotate: 0 }}
                 animate={{
                   y: [0, -2, -2, -2, -2, 0],
