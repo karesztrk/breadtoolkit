@@ -118,7 +118,7 @@ const PageContainer: FC<PageContainerProps> = ({
             objectFit="cover"
             objectPosition="center"
             priority
-            src={`/images/bg/${colorMode}/fhd.webp`}
+            src={`/images/bg/${colorMode}/fhd.jpg`}
             loader={({ src, width }) => `${src}?nf_resize=fit&w=${width}`}
           />
 
