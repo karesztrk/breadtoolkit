@@ -42,7 +42,7 @@ const Recipes: FC = () => {
         {itemList.map((page) => (
           <Card
             key={page.slug}
-            path={page.slug}
+            to={page.slug}
             title={page.title}
             image={page.coverImage}
             height={200}

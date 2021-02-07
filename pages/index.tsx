@@ -36,13 +36,13 @@ const Home = () => {
             justifyContent="center"
           >
             <Card
-              path="/calculator"
+              to={{ path: '/calculator', lazy: true }}
               title={t.home.calculatorTitle}
               description={t.home.calculatorDescription}
               icon={<CalculatorIcon height="5rem" width="100%" />}
             />
             <Card
-              path="/recipes"
+              to={{ path: '/recipes', lazy: true }}
               title={t.home.recipesTitle}
               description={t.home.recipesDescription}
               icon={<RecipeIcon height="5rem" width="100%" />}
