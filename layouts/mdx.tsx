@@ -1,4 +1,4 @@
-import { FC, useState, useEffect } from 'react';
+import { FC, useEffect, useState } from 'react';
 import PageContainer from '@/components/layout/PageContainer';
 import { PostMeta } from '@/types/post';
 import {
@@ -21,11 +21,11 @@ import {
 import { MDXProvider } from '@mdx-js/react';
 import Page from '@/components/layout/PageCard';
 import { Recipe } from '@/components/layout/Meta';
-import { motion } from 'framer-motion';
+import { motion, useAnimation } from 'framer-motion';
 
 const imageMotion = {
-  initial: { filter: 'blur(20px)' },
-  animate: {
+  blurred: { filter: 'blur(20px)' },
+  reveal: {
     filter: 'blur(0px)',
     transition: {
       duration: 0.5,
@@ -92,12 +92,17 @@ interface MDXLayoutProps {
 
 const MDXLayout: FC<MDXLayoutProps> = ({ frontMatter, children }) => {
   const { title, coverImage, date, tags } = frontMatter;
+  const animation = useAnimation();
+  const imageSource = `${coverImage}?nf_resize=fit&w=40`;
   const [imageSourceSet, setImageSourceSet] = useState<string>();
   const sizes = '(min-width: 50em) 766px, 90vw';
   const srcSet = `${coverImage}?nf_resize=fit&w=320 320w,
     ${coverImage}?nf_resize=fit&w=576 576w,
     ${coverImage}?nf_resize=fit&w=768 768w`;
-  const onImageSourceLoad = () => setImageSourceSet(srcSet);
+  const onImageSourceLoad = () => {
+    setImageSourceSet(srcSet);
+    animation.start('reveal');
+  };
 
   useEffect(() => {
     const image = new Image();
@@ -128,8 +133,8 @@ const MDXLayout: FC<MDXLayoutProps> = ({ frontMatter, children }) => {
       >
         <Page as="article" maxWidth="3xl" overflow="hidden" p={0}>
           <MotionBox
-            initial="initial"
-            animate="animate"
+            initial="blurred"
+            animate={animation}
             variants={imageMotion}
             maxHeight="md"
             height="md"
@@ -137,7 +142,7 @@ const MDXLayout: FC<MDXLayoutProps> = ({ frontMatter, children }) => {
             <ChakraImage
               alt={title}
               sizes={sizes}
-              src={`${coverImage}?nf_resize=fit&w=40`}
+              src={imageSource}
               srcSet={imageSourceSet}
               fit="cover"
               width="100%"
