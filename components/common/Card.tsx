@@ -44,16 +44,17 @@ const textMotion: Variants = {
 };
 
 interface CardProps {
-  path: string;
+  to: string | { path: string; lazy: boolean };
   title: string;
   description?: string;
   icon?: ReactNode;
   image?: string;
   height?: number;
+  lazy?: boolean;
 }
 
 const Card: FC<CardProps> = ({
-  path,
+  to,
   title,
   description,
   icon,
@@ -67,8 +68,10 @@ const Card: FC<CardProps> = ({
   const border = useColorModeValue('', '1px');
   const borderColor = useColorModeValue('', 'rgba(255, 255, 255, 0.15)');
   const boxShadow = useColorModeValue('0 5px 10px rgba(59, 52, 55, 0.4)', '');
+  const href = typeof to === 'string' ? to : to.path;
+  const prefetch = typeof to === 'string' ? undefined : !to.lazy;
   return (
-    <Link href={path}>
+    <Link href={href} prefetch={prefetch}>
       <MotionBox
         cursor="pointer"
         minHeight={height}

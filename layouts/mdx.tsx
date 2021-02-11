@@ -1,11 +1,10 @@
-import { FC, useState } from 'react';
+import { FC, useState, useEffect } from 'react';
 import PageContainer from '@/components/layout/PageContainer';
 import { PostMeta } from '@/types/post';
 import {
   Alert,
   Box,
   Heading,
-  Image,
   Link,
   ListItem,
   OrderedList,
@@ -16,11 +15,25 @@ import {
   Table,
   Th,
   Divider,
-  Skeleton,
+  Image as ChakraImage,
+  chakra,
 } from '@chakra-ui/react';
 import { MDXProvider } from '@mdx-js/react';
 import Page from '@/components/layout/PageCard';
 import { Recipe } from '@/components/layout/Meta';
+import { motion } from 'framer-motion';
+
+const imageMotion = {
+  initial: { filter: 'blur(20px)' },
+  animate: {
+    filter: 'blur(0px)',
+    transition: {
+      duration: 0.5,
+    },
+  },
+};
+
+const MotionBox = chakra(motion.div);
 
 const mdComponents = {
   h1: (props: any) => <Heading as="h1" {...props} />,
@@ -70,7 +83,7 @@ const mdComponents = {
       {...props}
     />
   ),
-  img: (props: any) => <Image {...props} />,
+  img: (props: any) => <ChakraImage {...props} />,
 };
 
 interface MDXLayoutProps {
@@ -79,13 +92,26 @@ interface MDXLayoutProps {
 
 const MDXLayout: FC<MDXLayoutProps> = ({ frontMatter, children }) => {
   const { title, coverImage, date, tags } = frontMatter;
-  const [imageLoaded, setImageLoaded] = useState(false);
-  const onImageLoaded = () => setImageLoaded(true);
-  const imageSource = `${coverImage}?nf_resize=fit&w=766`;
+  const [imageSourceSet, setImageSourceSet] = useState<string>();
+  const sizes = '(min-width: 50em) 766px, 90vw';
+  const srcSet = `${coverImage}?nf_resize=fit&w=320 320w,
+    ${coverImage}?nf_resize=fit&w=576 576w,
+    ${coverImage}?nf_resize=fit&w=768 768w`;
+  const onImageSourceLoad = () => setImageSourceSet(srcSet);
+
+  useEffect(() => {
+    const image = new Image();
+    image.sizes = sizes;
+    image.srcset = srcSet;
+    image.addEventListener('load', onImageSourceLoad, false);
+    return () => {
+      image.removeEventListener('load', onImageSourceLoad);
+    };
+  }, []);
   const keywords = tags ? tags.join(',') : undefined;
   const metaDetails: Recipe = {
     datePublished: date,
-    image: [imageSource],
+    image: [`${coverImage}?nf_resize=fit&w=768`],
     keywords,
     name: title,
     recipeCategory: 'bread',
@@ -101,19 +127,25 @@ const MDXLayout: FC<MDXLayoutProps> = ({ frontMatter, children }) => {
         }}
       >
         <Page as="article" maxWidth="3xl" overflow="hidden" p={0}>
-          <Skeleton isLoaded={imageLoaded}>
-            <Image
-              src={imageSource}
+          <MotionBox
+            initial="initial"
+            animate="animate"
+            variants={imageMotion}
+            maxHeight="md"
+            height="md"
+          >
+            <ChakraImage
               alt={title}
+              sizes={sizes}
+              src={`${coverImage}?nf_resize=fit&w=40`}
+              srcSet={imageSourceSet}
               fit="cover"
               width="100%"
               maxHeight="md"
               height="md"
-              onLoad={onImageLoaded}
             />
-          </Skeleton>
+          </MotionBox>
           <Box p="6">{children}</Box>
-          {/* </Box> */}
         </Page>
       </PageContainer>
     </MDXProvider>

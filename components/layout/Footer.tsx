@@ -49,7 +49,9 @@ const Footer = () => {
               fontSize="sm"
               transition="color 150ms ease"
             >
-              <Link href="/contact">{t.footer.contactLink}</Link>
+              <Link href="/contact" prefetch={false}>
+                {t.footer.contactLink}
+              </Link>
             </Text>
 
             <Text color="brand.500" fontSize="sm" flex={2} textAlign="center">
