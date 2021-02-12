@@ -1,11 +1,24 @@
 import { chakra, useColorMode, useColorModeValue } from '@chakra-ui/react';
-import React, { FC, ReactNode, useState } from 'react';
-import { motion, Variants } from 'framer-motion';
+import React, { FC, ReactNode, useEffect, useState, useCallback } from 'react';
+import { motion, useAnimation, Variants } from 'framer-motion';
 import Link from 'next/link';
-import Image from 'next/image';
+import { useInView } from 'react-intersection-observer';
 
 const MotionText = chakra(motion.p);
 const MotionBox = chakra(motion.div);
+
+const imageMotion: Variants = {
+  initial: {},
+  blurred: {
+    filter: 'blur(20px)',
+  },
+  reveal: {
+    filter: 'blur(0px)',
+    transition: {
+      duration: 0.5,
+    },
+  },
+};
 
 const headingMotion: Variants = {
   rest: {
@@ -48,7 +61,7 @@ interface CardProps {
   title: string;
   description?: string;
   icon?: ReactNode;
-  image?: string;
+  image?: string | { path: string; lazy: boolean };
   height?: number;
   lazy?: boolean;
 }
@@ -62,7 +75,12 @@ const Card: FC<CardProps> = ({
   height,
 }) => {
   // whileHover helper did not executed after page transition
+  const animation = useAnimation();
+  const { ref, inView } = useInView({
+    triggerOnce: true,
+  });
   const [hovered, setHovered] = useState(false);
+  const [imageSource, setImageSource] = useState<string>();
   const { colorMode } = useColorMode();
   const bgColor = useColorModeValue('bg.light', 'bg.dark');
   const border = useColorModeValue('', '1px');
@@ -70,12 +88,38 @@ const Card: FC<CardProps> = ({
   const boxShadow = useColorModeValue('0 5px 10px rgba(59, 52, 55, 0.4)', '');
   const href = typeof to === 'string' ? to : to.path;
   const prefetch = typeof to === 'string' ? undefined : !to.lazy;
+  const imagePath = typeof image === 'string' ? image : image?.path;
+
+  const onImageSourceLoad = useCallback((e: Event) => {
+    const target = e.target as HTMLImageElement;
+    setImageSource(target.src);
+    animation.start('reveal');
+  }, []);
+
+  useEffect(() => {
+    if (inView && imagePath) {
+      setImageSource(`${imagePath}?nf_resize=fit&w=40`);
+      const img = new Image();
+      img.src = `${imagePath}?nf_resize=fit&w=576`;
+      img.addEventListener('load', onImageSourceLoad, false);
+      return () => {
+        img.removeEventListener('load', onImageSourceLoad);
+      };
+    }
+  }, [inView]);
+
   return (
     <Link href={href} prefetch={prefetch}>
       <MotionBox
+        data-testid="card"
+        ref={ref}
         cursor="pointer"
         minHeight={height}
+        bg={imageSource ? `url(${imageSource})` : undefined}
         bgColor={bgColor}
+        backgroundRepeat="no-repeat"
+        backgroundPosition="center"
+        backgroundSize="cover"
         rounded="xl"
         p={[5, 8, 10]}
         position="relative"
@@ -87,16 +131,10 @@ const Card: FC<CardProps> = ({
         border={border}
         borderColor={borderColor}
         boxShadow={boxShadow}
+        initial={image ? 'blurred' : 'initial'}
+        animate={animation}
+        variants={imageMotion}
       >
-        {image && (
-          <Image
-            layout="fill"
-            objectFit="cover"
-            objectPosition="center"
-            src={image}
-            loader={({ src }) => `${src}?nf_resize=fit&w=480`}
-          />
-        )}
         <MotionBox
           position="relative"
           zIndex={1}
