@@ -21,9 +21,9 @@ import {
 import { MDXProvider } from '@mdx-js/react';
 import Page from '@/components/layout/PageCard';
 import { Recipe } from '@/components/layout/Meta';
-import { motion, useAnimation } from 'framer-motion';
+import { motion, useAnimation, Variants } from 'framer-motion';
 
-const imageMotion = {
+const imageMotion: Variants = {
   blurred: { filter: 'blur(20px)' },
   reveal: {
     filter: 'blur(0px)',
