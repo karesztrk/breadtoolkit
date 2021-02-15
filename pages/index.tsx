@@ -1,4 +1,3 @@
-import React from 'react';
 import { Container, Grid } from '@chakra-ui/react';
 import Card from '@/components/common/Card';
 import { useRouter } from 'next/router';

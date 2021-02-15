@@ -10,7 +10,6 @@ import {
   useColorModeValue,
 } from '@chakra-ui/react';
 import Link from 'next/link';
-import React from 'react';
 import FacebookIcon from '@/components/icons/FacebookIcon';
 import GitHubIcon from '@/components/icons/GitHubIcon';
 import EmailIcon from '@/components/icons/EmailIcon';

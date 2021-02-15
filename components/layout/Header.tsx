@@ -1,5 +1,4 @@
 import { Container, Flex } from '@chakra-ui/react';
-import React from 'react';
 import Link from 'next/link';
 import Menu from '@/components/common/Menu';
 import BrandIcon from '@/components/icons/BrandIcon';

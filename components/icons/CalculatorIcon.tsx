@@ -1,6 +1,5 @@
 import { chakra, useColorModeValue } from '@chakra-ui/react';
 import { HTMLMotionProps, motion } from 'framer-motion';
-import React from 'react';
 
 const MotionIcon = chakra(motion.svg);
 
