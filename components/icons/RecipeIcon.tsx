@@ -1,5 +1,4 @@
 import { ChakraProps, Icon } from '@chakra-ui/react';
-import React from 'react';
 
 const RecipeIcon = (props: ChakraProps) => {
   return (

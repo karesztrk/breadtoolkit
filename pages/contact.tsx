@@ -9,7 +9,6 @@ import {
   Textarea,
 } from '@chakra-ui/react';
 import { useRouter } from 'next/router';
-import React from 'react';
 import en from '@/locales/en';
 import hu from '@/locales/hu';
 import PageCard from '@/components/layout/PageCard';
