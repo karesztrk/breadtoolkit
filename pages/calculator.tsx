@@ -1,26 +1,25 @@
 import React, { useEffect, useReducer } from 'react';
-import { Stack } from '@chakra-ui/react';
-import {
-  loadCalculatorSettings,
-  saveCalculatorSettings,
-  supportedIngredients,
-} from '@/service/calculator';
-import { Settings, ExtraIngredients, SettingName } from '@/types/calculator';
 import { useRouter } from 'next/router';
-import ConfigurationPanel from '@/components/calculator/ConfigurationPanel';
-import ExtraIngredientsPanel from '@/components/calculator/ExtraIngredientsPanel';
-import BaseIngredientsPanel from '@/components/calculator/BaseIngredientsPanel';
-import Summary from '@/components/calculator/Summary';
 import en from '@/locales/en';
 import hu from '@/locales/hu';
 import PageContainer from '@/components/layout/PageContainer';
 import PageCard from '@/components/layout/PageCard';
 import reducer, { initialState } from '@/context/calculator/reducer';
+import {
+  loadCalculatorSettings,
+  saveCalculatorSettings,
+  supportedIngredients,
+} from '@/service/calculator';
+import { ExtraIngredients, SettingName, Settings } from '@/types/calculator';
+import { Stack } from '@chakra-ui/react';
+import BaseIngredientsPanel from '@/components/calculator/BaseIngredientsPanel';
+import ExtraIngredientsPanel from '@/components/calculator/ExtraIngredientsPanel';
+import ConfigurationPanel from '@/components/calculator/ConfigurationPanel';
+import Summary from '@/components/calculator/Summary';
 
 const BreadCalculator = () => {
-  const { locale } = useRouter();
+  const { locale, asPath } = useRouter();
   const t = locale === 'en' ? en : hu;
-  const { asPath } = useRouter();
   const [{ settings, extras, dough, liquids }, dispatch] = useReducer(
     reducer,
     initialState,

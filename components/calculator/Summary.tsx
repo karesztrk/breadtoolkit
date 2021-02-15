@@ -1,6 +1,8 @@
-import { calcHydration } from '@/service/calculator';
 import { ExtraIngredients, Settings } from '@/types/calculator';
-import { InfoOutlineIcon, LinkIcon, RepeatClockIcon } from '@chakra-ui/icons';
+import { FC } from 'react';
+import en from '@/locales/en';
+import hu from '@/locales/hu';
+import { useRouter } from 'next/router';
 import {
   Box,
   Flex,
@@ -9,14 +11,11 @@ import {
   StatHelpText,
   StatLabel,
   StatNumber,
-  Tooltip,
   useToast,
 } from '@chakra-ui/react';
-import React, { FC } from 'react';
 import EditableNumericText from '../common/EditableNumericText';
-import en from '@/locales/en';
-import hu from '@/locales/hu';
-import { useRouter } from 'next/router';
+import { InfoOutlineIcon, LinkIcon, RepeatClockIcon } from '@chakra-ui/icons';
+import { calcHydration } from '@/service/calculator';
 
 interface SummaryProps {
   settings: Settings;
@@ -100,7 +99,6 @@ const Summary: FC<SummaryProps> = ({
       isClosable: true,
     });
   };
-
   return (
     <Flex justify="space-between" mb={5} data-testid="summary">
       <Stat flex={2}>
@@ -116,17 +114,16 @@ const Summary: FC<SummaryProps> = ({
             {format(dough)}
           </EditableNumericText>
         </StatNumber>
-
         <StatHelpText>
           {`${t.calculator.hydrationText} ${calcHydration(settings, liquids)}%`}
           &nbsp;
-          <Tooltip
-            label={t.calculator.hydratationTooltip}
+          <span
+            style={{ verticalAlign: 'text-bottom' }}
+            title={t.calculator.hydratationTooltip}
             aria-label="Hydratation tooltip"
-            placement="right"
           >
-            <InfoOutlineIcon verticalAlign="sub" />
-          </Tooltip>
+            <InfoOutlineIcon />
+          </span>
         </StatHelpText>
       </Stat>
       <Box flex={1} textAlign="right">
