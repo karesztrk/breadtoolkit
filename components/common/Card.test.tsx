@@ -25,9 +25,9 @@ describe('Card', () => {
     const image = 'imagePath';
     mockAllIsIntersecting(true);
     render(<Card to={to} title={title} image={image} />);
-    expect(screen.getByTestId('card')).toHaveAttribute(
+    expect(screen.getByTestId('card-wrapper')).toHaveAttribute(
       'style',
-      'filter: blur(20px);',
+      'filter: blur(10px);',
     );
   });
 });

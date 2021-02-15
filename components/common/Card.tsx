@@ -1,4 +1,4 @@
-import { chakra, useColorMode, useColorModeValue } from '@chakra-ui/react';
+import { Box, chakra, useColorMode, useColorModeValue } from '@chakra-ui/react';
 import React, { FC, ReactNode, useEffect, useState, useCallback } from 'react';
 import { motion, useAnimation, Variants } from 'framer-motion';
 import Link from 'next/link';
@@ -10,7 +10,7 @@ const MotionBox = chakra(motion.div);
 const imageMotion: Variants = {
   initial: {},
   blurred: {
-    filter: 'blur(20px)',
+    filter: 'blur(10px)',
   },
   reveal: {
     filter: 'blur(0px)',
@@ -110,74 +110,78 @@ const Card: FC<CardProps> = ({
 
   return (
     <Link href={href} prefetch={prefetch}>
-      <MotionBox
+      <Box
         data-testid="card"
-        ref={ref}
         cursor="pointer"
-        minHeight={height}
-        bg={imageSource ? `url(${imageSource})` : undefined}
-        bgColor={bgColor}
-        backgroundRepeat="no-repeat"
-        backgroundPosition="center"
-        backgroundSize="cover"
         rounded="xl"
-        p={[5, 8, 10]}
-        position="relative"
         zIndex={1}
         overflow="hidden"
-        onHoverStart={() => setHovered(true)}
-        onHoverEnd={() => setHovered(false)}
-        whileTap={{ scale: 0.95 }}
         border={border}
         borderColor={borderColor}
         boxShadow={boxShadow}
-        initial={image ? 'blurred' : 'initial'}
-        animate={animation}
-        variants={imageMotion}
       >
         <MotionBox
+          data-testid="card-wrapper"
+          ref={ref}
+          minHeight={height}
           position="relative"
-          zIndex={1}
-          variants={iconMotion}
-          animate={hovered ? 'hover' : 'rest'}
+          p={[5, 8, 10]}
+          initial={image ? 'blurred' : 'initial'}
+          bg={imageSource ? `url(${imageSource})` : undefined}
+          bgColor={bgColor}
+          backgroundRepeat="no-repeat"
+          backgroundPosition="center"
+          backgroundSize="cover"
+          animate={animation}
+          variants={imageMotion}
+          onHoverStart={() => setHovered(true)}
+          onHoverEnd={() => setHovered(false)}
+          whileTap={{ scale: 0.95 }}
         >
-          {icon}
-        </MotionBox>
+          <MotionBox
+            position="relative"
+            zIndex={1}
+            variants={iconMotion}
+            animate={hovered ? 'hover' : 'rest'}
+          >
+            {icon}
+          </MotionBox>
 
-        <MotionText
-          fontFamily="heading"
-          fontSize="5xl"
-          fontWeight="700"
-          color={colorMode === 'light' && !image ? 'brand.300' : 'white'}
-          position="absolute"
-          bottom="1rem"
-          left={0}
-          right={0}
-          textAlign="center"
-          zIndex={0}
-          initial="rest"
-          animate={hovered ? (image ? 'hoverWithShadow' : 'hover') : 'rest'}
-          variants={headingMotion}
-          isTruncated
-          px={1}
-          mx={4}
-          borderRadius={10}
-          title={title}
-        >
-          {title}
-        </MotionText>
-        <MotionText
-          textAlign="center"
-          position="absolute"
-          left={0}
-          right={0}
-          initial="rest"
-          animate={hovered ? 'hover' : 'rest'}
-          variants={textMotion}
-        >
-          {description}
-        </MotionText>
-      </MotionBox>
+          <MotionText
+            fontFamily="heading"
+            fontSize="5xl"
+            fontWeight="700"
+            color={colorMode === 'light' && !image ? 'brand.300' : 'white'}
+            position="absolute"
+            bottom="1rem"
+            left={0}
+            right={0}
+            textAlign="center"
+            zIndex={0}
+            initial="rest"
+            animate={hovered ? (image ? 'hoverWithShadow' : 'hover') : 'rest'}
+            variants={headingMotion}
+            isTruncated
+            px={1}
+            mx={4}
+            borderRadius={10}
+            title={title}
+          >
+            {title}
+          </MotionText>
+          <MotionText
+            textAlign="center"
+            position="absolute"
+            left={0}
+            right={0}
+            initial="rest"
+            animate={hovered ? 'hover' : 'rest'}
+            variants={textMotion}
+          >
+            {description}
+          </MotionText>
+        </MotionBox>
+      </Box>
     </Link>
   );
 };
