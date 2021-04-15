@@ -69,3 +69,7 @@ Másnap reggel tempuráltam a tésztát és kinyújtottam téglalap alakra. Hár
 Megkentem a tejszínes tojással és hagytam kelni egy kicsit. Sok időt vett igénybe 6-8 óra, amíg pufi nem lett.
 
 Sütőt előmelegítettem és újra megkentem tojással. 5 percig sütöttem 225 fokon, majd 190 fokon még ~15 percet.
+
+### Frissítve 2021
+
+Mindenképpen hagyjuk időt az utolsó kelésnek. Máskülönben tömör marad a késztermék.
