@@ -36,12 +36,12 @@ const imageMotion: Variants = {
 const MotionBox = chakra(motion.div);
 
 const mdComponents = {
-  h1: (props: any) => <Heading as="h1" {...props} />,
-  h2: (props: any) => <Heading as="h2" {...props} />,
-  h3: (props: any) => <Heading as="h3" {...props} />,
-  h4: (props: any) => <Heading as="h4" {...props} />,
-  h5: (props: any) => <Heading as="h5" {...props} />,
-  h6: (props: any) => <Heading as="h6" {...props} />,
+  h1: (props: any) => <Heading as="h1" size="xl" {...props} />,
+  h2: (props: any) => <Heading as="h2" size="lg" {...props} />,
+  h3: (props: any) => <Heading as="h3" size="md" {...props} />,
+  h4: (props: any) => <Heading as="h4" size="md" {...props} />,
+  h5: (props: any) => <Heading as="h5" size="md" {...props} />,
+  h6: (props: any) => <Heading as="h6" size="md" {...props} />,
   hr: (props: any) => <Divider {...props} />,
   p: (props: any) => <Text as="p" mb={4} {...props} />,
   a: (props: any) => <Link as="a" {...props} />,
