@@ -13,7 +13,8 @@
     "astro": "astro"
   },
   "dependencies": {
-    "astro": "^5.16.0"
+    "astro": "^5.16.0",
+    "kelpui": "^1.11.4"
   },
   "license": "MIT"
 }
