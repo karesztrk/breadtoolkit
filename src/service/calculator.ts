@@ -1,8 +1,4 @@
-import {
-  Settings,
-  DerivedIngredients,
-  ExtraIngredients,
-} from '@/types/calculator';
+import type { DerivedIngredients, ExtraIngredients, Settings } from "./types";
 
 export const defaultSettings: Settings = {
   bakersMath: true,
@@ -17,8 +13,8 @@ export const defaultSettings: Settings = {
 
 export const supportedIngredients = [
   {
-    key: 'egg',
-    name: 'eggsLabel',
+    key: "egg",
+    name: "eggsLabel",
     water: 75,
     calories: 143,
     macros: {
@@ -28,8 +24,8 @@ export const supportedIngredients = [
     },
   },
   {
-    key: 'butter',
-    name: 'butterLabel',
+    key: "butter",
+    name: "butterLabel",
     water: 16,
     calories: 742,
     macros: {
@@ -39,8 +35,8 @@ export const supportedIngredients = [
     },
   },
   {
-    key: 'wholemilk',
-    name: 'milkWholeLabel',
+    key: "wholemilk",
+    name: "milkWholeLabel",
     water: 88,
     calories: 62,
     macros: {
@@ -52,16 +48,16 @@ export const supportedIngredients = [
 ];
 
 export const saveCalculatorSettings = (settings: Settings) => {
-  if (typeof window !== 'undefined') {
-    localStorage.setItem('calculator', JSON.stringify(settings));
+  if (typeof window !== "undefined") {
+    localStorage.setItem("calculator", JSON.stringify(settings));
   }
 };
 
 export const loadCalculatorSettings = (): Settings => {
-  if (typeof window === 'undefined') {
+  if (typeof window === "undefined") {
     return {} as Settings;
   }
-  const data = localStorage.getItem('calculator');
+  const data = localStorage.getItem("calculator");
   if (!data) {
     return defaultSettings;
   }
@@ -72,28 +68,21 @@ export const loadCalculatorSettings = (): Settings => {
 export const calcHydration = (settings: Settings, liquids: number): string => {
   const sourDoughFlour =
     settings.sourdough -
-    calcSourDoughLiquid(
-      settings.bakersMath,
-      settings.sourdough,
-      settings.sourdoughRatio,
-    );
+    calcSourDoughLiquid(settings.bakersMath, settings.sourdough, settings.sourdoughRatio);
   const flour = settings.flour + sourDoughFlour;
   let hydration: string;
   if (flour < 1) {
-    hydration = '100';
+    hydration = "100";
   } else if (liquids > flour) {
-    hydration = '100+';
+    hydration = "100+";
   } else {
     hydration = ((liquids / flour) * 100).toPrecision(3);
   }
   return hydration;
 };
 
-export const calcFlourPercent = (
-  bakersMath: boolean,
-  flour: number,
-  dough: number,
-) => (bakersMath ? 100 : (flour / dough) * 100);
+export const calcFlourPercent = (bakersMath: boolean, flour: number, dough: number) =>
+  bakersMath ? 100 : (flour / dough) * 100;
 
 export const calcIngredientPercent = (
   bakersMath: boolean,
@@ -123,15 +112,8 @@ export const deriveIngredientsFromGoal = (
   const dough = calcDoughWeight(settings, extras);
   const flourPercent = calcFlourPercent(false, flour, dough);
   const waterPercent = calcIngredientPercent(false, flour, water, dough);
-  const sourDoughPercent = calcIngredientPercent(
-    false,
-    flour,
-    sourdough,
-    dough,
-  );
-  const yeastPercent = yeast
-    ? calcIngredientPercent(false, flour, yeast, dough)
-    : 0;
+  const sourDoughPercent = calcIngredientPercent(false, flour, sourdough, dough);
+  const yeastPercent = yeast ? calcIngredientPercent(false, flour, yeast, dough) : 0;
   const flourValue = Math.round((goal * flourPercent) / 100);
   const waterValue = Math.round((goal * waterPercent) / 100);
   const sourdoughValue = Math.round((goal * sourDoughPercent) / 100);
@@ -156,8 +138,7 @@ export const deriveIngredientsFromGoal = (
       }
     }
   });
-  const saltValue =
-    goal - flourValue - waterValue - sourdoughValue - yeastValue - extraValue;
+  const saltValue = goal - flourValue - waterValue - sourdoughValue - yeastValue - extraValue;
   return {
     flour: flourValue,
     water: waterValue,
@@ -168,10 +149,7 @@ export const deriveIngredientsFromGoal = (
   };
 };
 
-export const calcDoughWeight = (
-  settings: Settings,
-  extras: ExtraIngredients,
-) => {
+export const calcDoughWeight = (settings: Settings, extras: ExtraIngredients) => {
   const { flour, water, sourdough, yeast, salt } = settings;
   const extrasWeight = calcExtrasWeight(extras);
   return flour + water + sourdough + salt + extrasWeight + (yeast || 0);
@@ -211,21 +189,13 @@ export const convertToImperialUnits = (
   imperialUnits: boolean,
 ): DerivedIngredients => {
   const { flour, salt, yeast, water, sourdough } = settings;
-  const convertedFlour = imperialUnits
-    ? convertToImperial(flour)
-    : convertToMetric(flour);
-  const convertedWater = imperialUnits
-    ? convertToImperial(water)
-    : convertToMetric(water);
-  const convertedSalt = imperialUnits
-    ? convertToImperial(salt)
-    : convertToMetric(salt);
+  const convertedFlour = imperialUnits ? convertToImperial(flour) : convertToMetric(flour);
+  const convertedWater = imperialUnits ? convertToImperial(water) : convertToMetric(water);
+  const convertedSalt = imperialUnits ? convertToImperial(salt) : convertToMetric(salt);
   const convertedSourdough = imperialUnits
     ? convertToImperial(sourdough)
     : convertToMetric(sourdough);
-  const convertedYeast = imperialUnits
-    ? convertToImperial(yeast)
-    : convertToMetric(yeast);
+  const convertedYeast = imperialUnits ? convertToImperial(yeast) : convertToMetric(yeast);
   const convertedExtras = {
     ...extras,
   };
@@ -250,9 +220,7 @@ export const convertToImperialUnits = (
 
 export const convertToYeast = (settings: Settings) => {
   const { flour, water, bakersMath, sourdough, sourdoughRatio } = settings;
-  const sourdoughLiquid = Math.round(
-    calcSourDoughLiquid(bakersMath, sourdough, sourdoughRatio),
-  );
+  const sourdoughLiquid = Math.round(calcSourDoughLiquid(bakersMath, sourdough, sourdoughRatio));
   const sourdoughFlour = sourdough - sourdoughLiquid;
   const yeast = sourdough * 0.15;
   return {
@@ -269,9 +237,7 @@ export const convertToSourdough = (settings: Settings) => {
   const { bakersMath, flour, water, yeast } = settings;
   const sourdough = yeast / 0.15;
   const sourdoughRatio = 80;
-  const sourdoughLiquid = Math.round(
-    calcSourDoughLiquid(bakersMath, sourdough, sourdoughRatio),
-  );
+  const sourdoughLiquid = Math.round(calcSourDoughLiquid(bakersMath, sourdough, sourdoughRatio));
   const sourdoughFlour = sourdough - sourdoughLiquid;
   return {
     ...settings,

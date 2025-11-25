@@ -5,14 +5,9 @@ import {
   convertToImperialUnits,
   defaultSettings,
   deriveIngredientsFromGoal,
-} from '@/service/calculator';
-import {
-  ExtraIngredient,
-  ExtraIngredients,
-  Settings,
-} from '@/types/calculator';
-import { Reducer } from 'react';
-import { Action } from './actions';
+} from "@service/calculator";
+import type { ExtraIngredient, ExtraIngredients, Settings } from "@service/types";
+import type { Action } from "./actions";
 
 export interface CalculatorState {
   settings: Settings;
@@ -28,11 +23,11 @@ export const initialState = {
   liquids: 0,
 } as CalculatorState;
 
-const reducer: Reducer<CalculatorState, Action> = (state, action) => {
+const reducer = (state: CalculatorState, action: Action): CalculatorState => {
   let newState = {} as CalculatorState;
 
   switch (action.type) {
-    case 'setSetting': {
+    case "setSetting": {
       newState = {
         ...state,
         settings: {
@@ -43,7 +38,7 @@ const reducer: Reducer<CalculatorState, Action> = (state, action) => {
       break;
     }
 
-    case 'setSettings': {
+    case "setSettings": {
       newState = {
         ...state,
         settings: {
@@ -54,7 +49,7 @@ const reducer: Reducer<CalculatorState, Action> = (state, action) => {
       break;
     }
 
-    case 'initialize': {
+    case "initialize": {
       newState = {
         ...state,
         settings: {
@@ -69,7 +64,7 @@ const reducer: Reducer<CalculatorState, Action> = (state, action) => {
       break;
     }
 
-    case 'switchBakersMath': {
+    case "switchBakersMath": {
       newState = {
         ...state,
         settings: {
@@ -80,7 +75,7 @@ const reducer: Reducer<CalculatorState, Action> = (state, action) => {
       break;
     }
 
-    case 'switchImperialUnits': {
+    case "switchImperialUnits": {
       const newStateImperialUnits = !state.settings.imperialUnits;
       const derivedIngredients = convertToImperialUnits(
         state.settings,
@@ -102,7 +97,7 @@ const reducer: Reducer<CalculatorState, Action> = (state, action) => {
       break;
     }
 
-    case 'toggleExtra': {
+    case "toggleExtra": {
       const extras = {
         ...state.extras,
       };
@@ -123,7 +118,7 @@ const reducer: Reducer<CalculatorState, Action> = (state, action) => {
       break;
     }
 
-    case 'changeExtra': {
+    case "changeExtra": {
       const extras = {
         ...state.extras,
       };
@@ -144,7 +139,7 @@ const reducer: Reducer<CalculatorState, Action> = (state, action) => {
       break;
     }
 
-    case 'submitDoughGoal': {
+    case "submitDoughGoal": {
       const {
         flour,
         water,
@@ -168,7 +163,7 @@ const reducer: Reducer<CalculatorState, Action> = (state, action) => {
       break;
     }
 
-    case 'resetSettings': {
+    case "resetSettings": {
       const { bakersMath, imperialUnits } = state.settings;
       if (imperialUnits) {
         const { flour, water, salt, sourdough } = convertToImperialUnits(
@@ -203,12 +198,8 @@ const reducer: Reducer<CalculatorState, Action> = (state, action) => {
 
   const dough = calcDoughWeight(newState.settings, newState.extras);
   const { bakersMath, sourdough, sourdoughRatio, water } = newState.settings;
-  const sourDoughLiquid = calcSourDoughLiquid(
-    bakersMath,
-    sourdough,
-    sourdoughRatio,
-  );
-  const extraLiquid: number = calcExtrasLiquid(newState.extras);
+  const sourDoughLiquid = calcSourDoughLiquid(bakersMath, sourdough, sourdoughRatio);
+  const extraLiquid = calcExtrasLiquid(newState.extras);
   const liquids = water + sourDoughLiquid + extraLiquid;
   newState = {
     ...newState,
