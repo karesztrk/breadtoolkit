@@ -8,6 +8,9 @@ importers:
 
   .:
     dependencies:
+      '@karesztrk/webcomponent-base':
+        specifier: ^1.0.10
+        version: 1.0.10
       astro:
         specifier: ^5.16.0
         version: 5.16.0(@types/node@24.10.1)(rollup@4.53.3)(typescript@5.9.3)
@@ -413,6 +416,9 @@ packages:
 
   '@jridgewell/sourcemap-codec@1.5.5':
     resolution: {integrity: sha512-cYQ9310grqxueWbl+WuIUIaiUaDcj7WOq5fVhEljNVgRfOUhY9fy2zTvfoqWsnebh8Sl70VScFbICvJnLKB0Og==}
+
+  '@karesztrk/webcomponent-base@1.0.10':
+    resolution: {integrity: sha512-cJpHmS/C0CobZkHeN0FNOxyvya82M54F5xD9zkUlwPoWUpJi3xO6nuTXpBHrzRamaKinjwWkdg6A7uKukbcNDQ==}
 
   '@oslojs/encoding@1.1.0':
     resolution: {integrity: sha512-70wQhgYmndg4GCPxPPxPGevRKqTIJ2Nh4OkiMWmDAVYsTQ+Ta7Sq+rPevXyXGdzr30/qZBnyOalCszoMxlyldQ==}
@@ -2035,6 +2041,8 @@ snapshots:
     optional: true
 
   '@jridgewell/sourcemap-codec@1.5.5': {}
+
+  '@karesztrk/webcomponent-base@1.0.10': {}
 
   '@oslojs/encoding@1.1.0': {}
 
