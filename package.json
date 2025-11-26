@@ -16,7 +16,7 @@
   },
   "dependencies": {
     "astro": "^5.16.0",
-    "kelpui": "^1.11.4",
+    "kelpui": "^1.14.0",
     "typescript": "^5.9.3"
   },
   "license": "MIT",

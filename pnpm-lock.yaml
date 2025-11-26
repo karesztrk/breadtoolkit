@@ -12,8 +12,8 @@ importers:
         specifier: ^5.16.0
         version: 5.16.0(@types/node@24.10.1)(rollup@4.53.3)(typescript@5.9.3)
       kelpui:
-        specifier: ^1.11.4
-        version: 1.11.4
+        specifier: ^1.14.0
+        version: 1.14.0
       typescript:
         specifier: ^5.9.3
         version: 5.9.3
@@ -1055,8 +1055,8 @@ packages:
     resolution: {integrity: sha512-qQKT4zQxXl8lLwBtHMWwaTcGfFOZviOJet3Oy/xmGk2gZH677CJM9EvtfdSkgWcATZhj/55JZ0rmy3myCT5lsA==}
     hasBin: true
 
-  kelpui@1.11.4:
-    resolution: {integrity: sha512-Inby23mqIkXQWRbHYKWb7UqaTGyNb8cnRvmb5twdRISlA7OUKwLooa67Qbj2xzKNlF9I9BuoZMVmr5A2utYZlQ==}
+  kelpui@1.14.0:
+    resolution: {integrity: sha512-acnYMCjcC3xba9VkDiKfiq++0i8RjXIevgl8rb0Dp9hdjHKU1N+zygDwBB9WgPqXPnwCvinzop1lmuBmpPw2qg==}
 
   kleur@3.0.3:
     resolution: {integrity: sha512-eTIzlVOSUR+JxdDFepEYcBMtZ9Qqdef+rnzWdRZuMbOywu5tO2w2N7rqjoANZ5k9vywhL6Br1VRjUIgTQx4E8w==}
@@ -2776,7 +2776,7 @@ snapshots:
     dependencies:
       argparse: 2.0.1
 
-  kelpui@1.11.4:
+  kelpui@1.14.0:
     dependencies:
       http-server: 14.1.1
     transitivePeerDependencies:
