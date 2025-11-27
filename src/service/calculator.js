@@ -1,6 +1,11 @@
-import type { DerivedIngredients, ExtraIngredients, Settings } from "./types";
+/**
+ * @typedef {import('@service/types').Settings} Settings
+ * @typedef {import('@service/types').ExtraIngredients} ExtraIngredients
+ * @typedef {import('@service/types').DerivedIngredients} DerivedIngredients
+ */
 
-export const defaultSettings: Settings = {
+/** @type {Settings} */
+export const defaultSettings = {
   bakersMath: true,
   imperialUnits: false,
   flour: 500,
@@ -47,15 +52,21 @@ export const supportedIngredients = [
   },
 ];
 
-export const saveCalculatorSettings = (settings: Settings) => {
+/**
+ * @param {Settings} settings
+ */
+export const saveCalculatorSettings = (settings) => {
   if (typeof window !== "undefined") {
     localStorage.setItem("calculator", JSON.stringify(settings));
   }
 };
 
-export const loadCalculatorSettings = (): Settings => {
+/**
+ * @returns {Settings}
+ */
+export const loadCalculatorSettings = () => {
   if (typeof window === "undefined") {
-    return {} as Settings;
+    return /** @type Settings */ ({});
   }
   const data = localStorage.getItem("calculator");
   if (!data) {
@@ -65,12 +76,17 @@ export const loadCalculatorSettings = (): Settings => {
   return Object.keys(settings).length === 0 ? defaultSettings : settings;
 };
 
-export const calcHydration = (settings: Settings, liquids: number): string => {
+/**
+ * @param {Settings} settings
+ * @param {number} liquids
+ * @returns {string}
+ */
+export const calcHydration = (settings, liquids) => {
   const sourDoughFlour =
     settings.sourdough -
     calcSourDoughLiquid(settings.bakersMath, settings.sourdough, settings.sourdoughRatio);
   const flour = settings.flour + sourDoughFlour;
-  let hydration: string;
+  let hydration;
   if (flour < 1) {
     hydration = "100";
   } else if (liquids > flour) {
@@ -81,21 +97,32 @@ export const calcHydration = (settings: Settings, liquids: number): string => {
   return hydration;
 };
 
-export const calcFlourPercent = (bakersMath: boolean, flour: number, dough: number) =>
+/**
+ * @param {boolean} bakersMath
+ * @param {number} flour
+ * @param {number} dough
+ * @returns {number}
+ */
+export const calcFlourPercent = (bakersMath, flour, dough) =>
   bakersMath ? 100 : (flour / dough) * 100;
 
-export const calcIngredientPercent = (
-  bakersMath: boolean,
-  flour: number,
-  amount: number,
-  dough: number,
-) => (amount / (bakersMath ? flour : dough)) * 100;
+/**
+ * @param {boolean} bakersMath
+ * @param {number} flour
+ * @param {number} amount
+ * @param {number} dough
+ * @returns {number}
+ */
+export const calcIngredientPercent = (bakersMath, flour, amount, dough) =>
+  (amount / (bakersMath ? flour : dough)) * 100;
 
-export const calcSourDoughLiquid = (
-  bakersMath: boolean,
-  sourdough: number,
-  sourdoughRatio: number,
-) => {
+/**
+ * @param {boolean} bakersMath
+ * @param {number} sourdough
+ * @param {number} sourdoughRatio
+ * @returns {number}
+ */
+export const calcSourDoughLiquid = (bakersMath, sourdough, sourdoughRatio) => {
   if (bakersMath) {
     const sourDoughFlour = sourdough / (1 + sourdoughRatio / 100);
     return sourdough - sourDoughFlour;
@@ -103,11 +130,13 @@ export const calcSourDoughLiquid = (
   return (sourdough * sourdoughRatio) / 100;
 };
 
-export const deriveIngredientsFromGoal = (
-  goal: number,
-  settings: Settings,
-  extras: ExtraIngredients,
-): DerivedIngredients => {
+/**
+ * @param {number} goal
+ * @param {Settings} settings
+ * @param {ExtraIngredients} extras
+ * @returns {DerivedIngredients}
+ */
+export const deriveIngredientsFromGoal = (goal, settings, extras) => {
   const { flour, water, sourdough, yeast } = settings;
   const dough = calcDoughWeight(settings, extras);
   const flourPercent = calcFlourPercent(false, flour, dough);
@@ -149,25 +178,39 @@ export const deriveIngredientsFromGoal = (
   };
 };
 
-export const calcDoughWeight = (settings: Settings, extras: ExtraIngredients) => {
+/**
+ * @param {Settings} settings
+ * @param {ExtraIngredients} extras
+ */
+export const calcDoughWeight = (settings, extras) => {
   const { flour, water, sourdough, yeast, salt } = settings;
   const extrasWeight = calcExtrasWeight(extras);
   return flour + water + sourdough + salt + extrasWeight + (yeast || 0);
 };
 
-export const calcExtrasWeight = (extras: ExtraIngredients) => {
+/**
+ * @param {ExtraIngredients} extras
+ */
+export const calcExtrasWeight = (extras) => {
   return Object.values(extras).reduce((accumulator, { disabled, amount }) => {
     return accumulator + (disabled ? 0 : amount);
   }, 0);
 };
 
-export const calcExtrasLiquid = (extras: ExtraIngredients) => {
+/**
+ * @param {ExtraIngredients} extras
+ */
+export const calcExtrasLiquid = (extras) => {
   return Object.values(extras).reduce((accumulator, { disabled, liquid }) => {
     return accumulator + (disabled ? 0 : liquid);
   }, 0);
 };
 
-export const convertToImperial = (value: number): number => {
+/**
+ * @param {number} value
+ * @returns {number}
+ */
+export const convertToImperial = (value) => {
   if (value < 0) {
     return 1;
   }
@@ -175,7 +218,11 @@ export const convertToImperial = (value: number): number => {
   return roundedValue || 1;
 };
 
-export const convertToMetric = (value: number): number => {
+/**
+ * @param {number} value
+ * @returns {number}
+ */
+export const convertToMetric = (value) => {
   if (value < 0) {
     return 1;
   }
@@ -183,11 +230,13 @@ export const convertToMetric = (value: number): number => {
   return roundedValue || 1;
 };
 
-export const convertToImperialUnits = (
-  settings: Settings,
-  extras: ExtraIngredients,
-  imperialUnits: boolean,
-): DerivedIngredients => {
+/**
+ * @param {Settings} settings
+ * @param {ExtraIngredients} extras
+ * @param {boolean} imperialUnits
+ * @returns {DerivedIngredients}
+ */
+export const convertToImperialUnits = (settings, extras, imperialUnits) => {
   const { flour, salt, yeast, water, sourdough } = settings;
   const convertedFlour = imperialUnits ? convertToImperial(flour) : convertToMetric(flour);
   const convertedWater = imperialUnits ? convertToImperial(water) : convertToMetric(water);
@@ -218,7 +267,10 @@ export const convertToImperialUnits = (
   };
 };
 
-export const convertToYeast = (settings: Settings) => {
+/**
+ * @param {Settings} settings
+ */
+export const convertToYeast = (settings) => {
   const { flour, water, bakersMath, sourdough, sourdoughRatio } = settings;
   const sourdoughLiquid = Math.round(calcSourDoughLiquid(bakersMath, sourdough, sourdoughRatio));
   const sourdoughFlour = sourdough - sourdoughLiquid;
@@ -233,7 +285,10 @@ export const convertToYeast = (settings: Settings) => {
   };
 };
 
-export const convertToSourdough = (settings: Settings) => {
+/**
+ * @param {Settings} settings
+ */
+export const convertToSourdough = (settings) => {
   const { bakersMath, flour, water, yeast } = settings;
   const sourdough = yeast / 0.15;
   const sourdoughRatio = 80;

@@ -6,25 +6,96 @@ import {
   defaultSettings,
   deriveIngredientsFromGoal,
 } from "@service/calculator";
-import type { ExtraIngredient, ExtraIngredients, Settings } from "@service/types";
-import type { Action } from "./actions";
 
-export interface CalculatorState {
-  settings: Settings;
-  extras: ExtraIngredients;
-  dough: number;
-  liquids: number;
-}
+/**
+ * @typedef {import('@service/types').Settings} Settings
+ * @typedef {import('@service/types').SettingName} SettingName
+ * @typedef {import('@service/types').ExtraIngredients} ExtraIngredients
+ * @typedef {import('@service/types').ExtraIngredient} ExtraIngredient
+ * @typedef {import('@service/types').DerivedIngredients} DerivedIngredients
+ */
 
-export const initialState = {
+/**
+ * @typedef {Object} SetSettingAction
+ * @property {"setSetting"} type
+ * @property {SettingName} key
+ * @property {number} value
+ */
+
+/**
+ * @typedef {Object} SetSettingsAction
+ * @property {"setSettings"} type
+ * @property {Settings} settings
+ */
+
+/**
+ * @typedef {Object} InitializeAction
+ * @property {"initialize"} type
+ * @property {Settings} settings
+ * @property {ExtraIngredients} extras
+ */
+
+/**
+ * @typedef {Object} SwitchBakersMathAction
+ * @property {"switchBakersMath"} type
+ */
+
+/**
+ * @typedef {Object} SwitchImperialUnitsAction
+ * @property {"switchImperialUnits"} type
+ */
+
+/**
+ * @typedef {Object} ToggleExtraAction
+ * @property {"toggleExtra"} type
+ * @property {string} key
+ */
+
+/**
+ * @typedef {Object} ChangeExtraAction
+ * @property {"changeExtra"} type
+ * @property {string} key
+ * @property {number} amount
+ * @property {number} water
+ */
+
+/**
+ * @typedef {Object} SubmitDoughGoalAction
+ * @property {"submitDoughGoal"} type
+ * @property {number} goal
+ */
+
+/**
+ * @typedef {Object} ResetSettingsAction
+ * @property {"resetSettings"} type
+ */
+
+/**
+ * @typedef {SetSettingAction | SetSettingsAction | InitializeAction | SwitchBakersMathAction | SwitchImperialUnitsAction | ToggleExtraAction | ChangeExtraAction | SubmitDoughGoalAction | ResetSettingsAction} Action
+ */
+
+/**
+ * @typedef {Object} CalculatorState
+ * @property {Settings} settings
+ * @property {ExtraIngredients} extras
+ * @property {number} dough
+ * @property {number} liquids
+ */
+
+export const initialState = /** @type {CalculatorState} */ ({
   settings: {},
   extras: {},
   dough: 0,
   liquids: 0,
-} as CalculatorState;
+});
 
-const reducer = (state: CalculatorState, action: Action): CalculatorState => {
-  let newState = {} as CalculatorState;
+/**
+ * @param {CalculatorState} state
+ * @param {Action} action
+ * @returns {CalculatorState}
+ */
+const reducer = (state, action) => {
+  let newState = /** @type {CalculatorState} */ ({});
 
   switch (action.type) {
     case "setSetting": {
@@ -104,12 +175,12 @@ const reducer = (state: CalculatorState, action: Action): CalculatorState => {
       if (extras[action.key]) {
         extras[action.key].disabled = !extras[action.key].disabled;
       } else {
-        extras[action.key] = {
+        extras[action.key] = /** @type {ExtraIngredient} */ ({
           disabled: false,
           amount: 0,
           liquid: 0,
           percent: 0,
-        } as ExtraIngredient;
+        });
       }
       newState = {
         ...state,
@@ -127,10 +198,10 @@ const reducer = (state: CalculatorState, action: Action): CalculatorState => {
         extras[action.key].amount = action.amount;
         extras[action.key].liquid = liquid;
       } else {
-        extras[action.key] = {
+        extras[action.key] = /** @type {ExtraIngredient} */ ({
           amount: action.amount,
           liquid,
-        } as ExtraIngredient;
+        });
       }
       newState = {
         ...state,

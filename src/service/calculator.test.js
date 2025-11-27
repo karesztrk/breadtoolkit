@@ -1,21 +1,21 @@
 import {
-  calcHydration,
+  calcDoughWeight,
+  calcExtrasLiquid,
+  calcExtrasWeight,
   calcFlourPercent,
+  calcHydration,
   calcIngredientPercent,
   calcSourDoughLiquid,
-  deriveIngredientsFromGoal,
-  defaultSettings,
-  calcDoughWeight,
   convertToImperial,
   convertToImperialUnits,
-  calcExtrasWeight,
-  calcExtrasLiquid,
-  convertToYeast,
   convertToSourdough,
-} from './calculator';
+  convertToYeast,
+  defaultSettings,
+  deriveIngredientsFromGoal,
+} from "./calculator";
 
-describe('hydration', () => {
-  it('does not exceed 100', () => {
+describe("hydration", () => {
+  it("does not exceed 100", () => {
     expect(
       calcHydration(
         {
@@ -25,9 +25,9 @@ describe('hydration', () => {
         },
         100,
       ),
-    ).toEqual('100+');
+    ).toEqual("100+");
   });
-  it('accept zero flour', () => {
+  it("accept zero flour", () => {
     expect(
       calcHydration(
         {
@@ -37,9 +37,9 @@ describe('hydration', () => {
         },
         100,
       ),
-    ).toEqual('100+');
+    ).toEqual("100+");
   });
-  it('gives correct value', () => {
+  it("gives correct value", () => {
     expect(
       calcHydration(
         {
@@ -49,9 +49,9 @@ describe('hydration', () => {
         },
         50,
       ),
-    ).toEqual('40.9');
+    ).toEqual("40.9");
   });
-  it('has correct precision', () => {
+  it("has correct precision", () => {
     expect(
       calcHydration(
         {
@@ -61,15 +61,15 @@ describe('hydration', () => {
         },
         33.33333,
       ),
-    ).toEqual('27.3');
+    ).toEqual("27.3");
   });
 });
 
-describe('flour percent', () => {
-  it('gives correct value', () => {
+describe("flour percent", () => {
+  it("gives correct value", () => {
     expect(calcFlourPercent(false, 80, 100)).toEqual(80);
   });
-  it('accept zero amount', () => {
+  it("accept zero amount", () => {
     expect(calcFlourPercent(false, 0, 100)).toEqual(0);
   });
   it("is 100 in baker's math", () => {
@@ -77,20 +77,20 @@ describe('flour percent', () => {
   });
 });
 
-describe('ingredient percent', () => {
-  it('uses to the dough weight in normal percentage mode', () => {
+describe("ingredient percent", () => {
+  it("uses to the dough weight in normal percentage mode", () => {
     expect(calcIngredientPercent(false, 80, 10, 100)).toEqual(10);
   });
   it("uses to the flour weight in normal baker's math mode", () => {
     expect(calcIngredientPercent(true, 80, 10, 100)).toEqual(12.5);
   });
-  it('accept zero amount', () => {
+  it("accept zero amount", () => {
     expect(calcIngredientPercent(false, 80, 0, 100)).toEqual(0);
   });
 });
 
-describe('sour dough liquid', () => {
-  it('gives correct value', () => {
+describe("sour dough liquid", () => {
+  it("gives correct value", () => {
     expect(calcSourDoughLiquid(false, 80, 50)).toEqual(40);
   });
   it("gives correct value for baker's math", () => {
@@ -98,8 +98,8 @@ describe('sour dough liquid', () => {
   });
 });
 
-describe('deriving', () => {
-  it('gives correct value', () => {
+describe("deriving", () => {
+  it("gives correct value", () => {
     const result = deriveIngredientsFromGoal(500, defaultSettings, {});
     expect(result).toEqual({
       extras: {},
@@ -110,17 +110,13 @@ describe('deriving', () => {
       yeast: 0,
     });
   });
-  it('ingredients are having the goal weight in total', () => {
+  it("ingredients are having the goal weight in total", () => {
     const goal = 1234;
-    const { flour, salt, sourdough, water } = deriveIngredientsFromGoal(
-      goal,
-      defaultSettings,
-      {},
-    );
+    const { flour, salt, sourdough, water } = deriveIngredientsFromGoal(goal, defaultSettings, {});
     const derivedWeight = flour + salt + sourdough + water;
     expect(derivedWeight).toEqual(goal);
   });
-  it('gives correct value for extra ingredients', () => {
+  it("gives correct value for extra ingredients", () => {
     const goal = 500;
     const { extras } = deriveIngredientsFromGoal(goal, defaultSettings, {
       egg: { disabled: false, amount: 50, liquid: 80 },
@@ -133,7 +129,7 @@ describe('deriving', () => {
       },
     });
   });
-  it('ingredients are having the goal weight in total including extras', () => {
+  it("ingredients are having the goal weight in total including extras", () => {
     const goal = 1234;
     const { flour, salt, sourdough, water, extras } = deriveIngredientsFromGoal(
       goal,
@@ -148,11 +144,10 @@ describe('deriving', () => {
       },
       0,
     );
-    const derivedWeight =
-      flour + salt + sourdough + water + derivedExtrasWeight;
+    const derivedWeight = flour + salt + sourdough + water + derivedExtrasWeight;
     expect(derivedWeight).toEqual(goal);
   });
-  it('ignores disabled exta ingredients', () => {
+  it("ignores disabled exta ingredients", () => {
     const goal = 500;
     const extras = {
       egg: { disabled: true, amount: 50, liquid: 80 },
@@ -171,8 +166,8 @@ describe('deriving', () => {
   });
 });
 
-describe('dough weight', () => {
-  it('should consist of all ingredients own weight', () => {
+describe("dough weight", () => {
+  it("should consist of all ingredients own weight", () => {
     const extras = {
       egg: { disabled: false, amount: 50, liquid: 80 },
       milk: { disabled: false, amount: 50, liquid: 80 },
@@ -183,35 +178,35 @@ describe('dough weight', () => {
   });
 });
 
-describe('imperial convertion', () => {
-  it('should give precise value', () => {
+describe("imperial convertion", () => {
+  it("should give precise value", () => {
     const imperialValue = convertToImperial(150);
     expect(imperialValue).toEqual(5);
   });
-  it('ignores negative values', () => {
+  it("ignores negative values", () => {
     const imperialValue = convertToImperial(-150);
     expect(imperialValue).toEqual(1);
   });
-  it('result must be larger then zero', () => {
+  it("result must be larger then zero", () => {
     const imperialValue = convertToImperial(0);
     expect(imperialValue).toEqual(1);
   });
 });
 
-describe('imperial convertion', () => {
-  it('should give precise value', () => {
+describe("imperial convertion", () => {
+  it("should give precise value", () => {
     const imperialValue = convertToImperial(150);
     expect(imperialValue).toEqual(5);
   });
-  it('ignores negative values', () => {
+  it("ignores negative values", () => {
     const imperialValue = convertToImperial(-150);
     expect(imperialValue).toEqual(1);
   });
-  it('result must be larger then zero', () => {
+  it("result must be larger then zero", () => {
     const imperialValue = convertToImperial(0);
     expect(imperialValue).toEqual(1);
   });
-  it('can convert the whole settings', () => {
+  it("can convert the whole settings", () => {
     const { flour, salt, water, sourdough, extras } = convertToImperialUnits(
       defaultSettings,
       { egg: { disabled: false, amount: 150, liquid: 80 } },
@@ -224,7 +219,7 @@ describe('imperial convertion', () => {
     expect(extras.egg.amount).toEqual(convertToImperial(150));
     expect(extras.egg.liquid).toEqual(convertToImperial(80));
   });
-  it('supports switching off imperial units for settings', () => {
+  it("supports switching off imperial units for settings", () => {
     const { flour, salt, water, sourdough, extras } = convertToImperialUnits(
       defaultSettings,
       { egg: { disabled: false, amount: 150, liquid: 80 } },
@@ -251,8 +246,8 @@ describe('imperial convertion', () => {
   });
 });
 
-describe('extras', () => {
-  it('should be the enabled ingredients weight', () => {
+describe("extras", () => {
+  it("should be the enabled ingredients weight", () => {
     const extras = {
       egg: { disabled: false, amount: 50, liquid: 80 },
       milk: { disabled: false, amount: 50, liquid: 80 },
@@ -263,8 +258,8 @@ describe('extras', () => {
   });
 });
 
-describe('extras liquid', () => {
-  it('should be the enabled ingredients liquid', () => {
+describe("extras liquid", () => {
+  it("should be the enabled ingredients liquid", () => {
     const extras = {
       egg: { disabled: false, amount: 50, liquid: 80 },
       milk: { disabled: false, amount: 50, liquid: 80 },
@@ -275,8 +270,8 @@ describe('extras liquid', () => {
   });
 });
 
-describe('starter convertion', () => {
-  it('should be able to convert to yeast starter', () => {
+describe("starter convertion", () => {
+  it("should be able to convert to yeast starter", () => {
     const result = convertToYeast(defaultSettings);
     expect(result).toEqual({
       bakersMath: true,
@@ -289,7 +284,7 @@ describe('starter convertion', () => {
       yeast: 15,
     });
   });
-  it('should be able to convert to sourdough starter', () => {
+  it("should be able to convert to sourdough starter", () => {
     const result = convertToSourdough({
       ...defaultSettings,
       flour: 556,
@@ -300,7 +295,7 @@ describe('starter convertion', () => {
     });
     expect(result).toEqual(defaultSettings);
   });
-  it('should not touch base ingredients in case of zero', () => {
+  it("should not touch base ingredients in case of zero", () => {
     let result = convertToSourdough({
       ...defaultSettings,
       sourdoughRatio: 0,
