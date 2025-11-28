@@ -6,10 +6,18 @@ import Layout from "../layouts/Layout.astro";
   <h1 id="form-heading">Calculator</h1>
 
   <calculator-form $change="onChange">
+    <dl>
+      <dt>Dough weights</dt>
+      <dl id="weight" data-unit="gram">967</dl>
+
+      <dt>Hydration</dt>
+      <dl id="hydration" data-unit="%">79.9</dl>
+    </dl>
+
     <form aria-labelledby="form-heading">
 
       <label for="flour">Flour</label>
-      <input type="number" id="flour" name="flour" value="0">
+      <input type="number" id="flour" name="flour" value="0" >
 
       <label for="water">Water</label>
       <input type="number" id="water" name="water" value="0">
@@ -28,3 +36,12 @@ import Layout from "../layouts/Layout.astro";
 <script>
   import "@components/calculator/CalculatorForm";
 </script>
+
+<style>
+
+dl {
+  &:after{
+    content: ' ' attr(data-unit);
+  }
+}
+</style>
