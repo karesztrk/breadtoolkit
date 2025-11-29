@@ -1,5 +1,5 @@
 ---
-import "kelpui/css/kelp.css";
+import "@picocss/pico/css/pico.classless.min.css";
 import Menu from "@components/Menu.astro";
 ---
 
@@ -13,14 +13,12 @@ import Menu from "@components/Menu.astro";
     <title>Astro Basics</title>
   </head>
   <body>
-    <header class="container-l">
+    <header class="container">
       <Menu />
     </header>
-    <main class="container-l">
+    <main class="container">
       <slot />
     </main>
   </body>
   <footer></footer>
-  <script src="kelpui/js/kelp.js"></script>
-  <script src="kelpui/js/dark-mode-auto.js"></script>
 </html>

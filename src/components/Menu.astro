@@ -4,8 +4,12 @@ const currentPath = Astro.url.pathname;
 export const pages = ["calculator", "recipes"];
 ---
 
-<nav class="navbar">
-  <a class="logo" href="/">Breadtoolkit</a>
+<nav>
+  <ul>
+    <li>
+      <a href="/"><strong>Breadtoolkit</strong></a>
+    </li>
+  </ul>
   <ul>
     {pages.map((name) => {
       const currentPage = currentPath === `/${name}` ? "page" : undefined;
