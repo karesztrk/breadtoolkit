@@ -5,7 +5,7 @@ import { calcHydration, loadCalculatorSettings } from "@/service/calculator";
 /**
  * @typedef {import('@service/types').Settings} Settings
  */
-
+// TODO: Input validation
 class CalculatorForm extends LightElement {
   static {
     this.register("calculator-form", CalculatorForm);
