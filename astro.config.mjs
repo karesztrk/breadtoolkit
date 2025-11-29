@@ -1,5 +1,17 @@
-// @ts-check
-import { defineConfig } from 'astro/config';
+import { defineConfig } from "astro/config";
+import browserslist from "browserslist";
+import { browserslistToTargets } from "lightningcss";
 
-// https://astro.build/config
-export default defineConfig({});
+export default defineConfig({
+  vite: {
+    css: {
+      transformer: "lightningcss",
+      lightningcss: {
+        targets: browserslistToTargets(browserslist(">0.3%, last 2 versions, not dead")),
+      },
+    },
+    build: {
+      cssMinify: "lightningcss",
+    },
+  },
+});
