@@ -5,7 +5,7 @@ import Layout from "../layouts/Layout.astro";
 <Layout>
   <h1 id="form-heading">Calculator</h1>
 
-  <calculator-form $change="onChange">
+  <calculator-form $input="onChange">
     <dl>
       <dt>Dough weights</dt>
       <dl id="weight" data-unit="gram">967</dl>
@@ -16,17 +16,25 @@ import Layout from "../layouts/Layout.astro";
 
     <form aria-labelledby="form-heading">
 
-      <label for="flour">Flour</label>
-      <input type="number" id="flour" name="flour" value="0" inputmode="decimal" step="any" min="0">
+      <fieldset>
+        <label for="flour">Flour</label>
+        <input type="number" id="flour" name="flour" value="0" inputmode="decimal" step="any" min="0">
 
-      <label for="water">Water</label>
-      <input type="number" id="water" name="water" value="0" inputmode="decimal" step="any" min="0">
+        <label for="water">Water</label>
+        <input type="number" id="water" name="water" value="0" inputmode="decimal" step="any" min="0">
 
-      <label for="salt">Salt</label>
-      <input type="number" id="salt" name="salt" value="0" inputmode="decimal" step="any" min="0">
+        <label for="salt">Salt</label>
+        <input type="number" id="salt" name="salt" value="0" inputmode="decimal" step="any" min="0">
 
-      <label for="sourdough">Sourdough</label>
-      <input type="number" id="sourdough" name="sourdough" value="0" inputmode="decimal" step="any" min="0">
+      </fieldset>
+
+      <fieldset>
+        <label for="sourdough">Sourdough</label>
+        <input type="number" id="sourdough" name="sourdough" value="0" inputmode="decimal" step="any" min="0">
+
+        <label>Ratio</label>
+        <input type="range" value="0" min="0" max="100" id="sourdough_ratio" name="sourdough_ratio" />
+      </fieldset>
 
     </form>
   </calculator-form>
@@ -54,8 +62,8 @@ input[type='number'] {
   -moz-appearance: textfield;
 }
 
-input:user-invalid {
+input:invalid {
   /* TODO: invalid input */
-  /* color: red; */
+  color: red;
 }
 </style>

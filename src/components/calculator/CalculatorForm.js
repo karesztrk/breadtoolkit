@@ -12,40 +12,44 @@ class CalculatorForm extends LightElement {
   }
 
   /** @type HTMLInputElement | null */
-  flourInput;
+  #flourInput;
 
   /** @type HTMLInputElement | null */
-  waterInput;
+  #waterInput;
 
   /** @type HTMLInputElement | null */
-  saltInput;
+  #saltInput;
 
   /** @type HTMLInputElement | null */
-  sourdoughInput;
+  #sourdoughInput;
+
+  /** @type HTMLInputElement | null */
+  #sourdoughRatioInput;
 
   /** @type HTMLElement | null */
-  weight;
+  #weight;
 
   /** @type HTMLElement | null */
-  hydration;
+  #hydration;
 
   /** @type {import("@/context/calculator/reducer").CalculatorState} */
-  state = initialState;
+  #state = initialState;
 
   connectedCallback() {
-    this.flourInput = this.querySelector("#flour");
-    this.waterInput = this.querySelector("#water");
-    this.saltInput = this.querySelector("#salt");
-    this.sourdoughInput = this.querySelector("#sourdough");
+    this.#flourInput = this.querySelector("#flour");
+    this.#waterInput = this.querySelector("#water");
+    this.#saltInput = this.querySelector("#salt");
+    this.#sourdoughInput = this.querySelector("#sourdough");
+    this.#sourdoughRatioInput = this.querySelector("#sourdough_ratio");
 
-    this.weight = this.querySelector("#weight");
-    this.hydration = this.querySelector("#hydration");
+    this.#weight = this.querySelector("#weight");
+    this.#hydration = this.querySelector("#hydration");
 
     const settings = loadCalculatorSettings();
 
     this.updateInputs(settings);
 
-    this.state = reducer(this.state, { type: "initialize", settings, extras: {} });
+    this.#state = reducer(this.#state, { type: "initialize", settings, extras: {} });
   }
 
   render() {}
@@ -56,34 +60,42 @@ class CalculatorForm extends LightElement {
    */
   onChange(e) {
     switch (e.target) {
-      case this.flourInput:
-        this.state = reducer(this.state, {
+      case this.#flourInput:
+        this.#state = reducer(this.#state, {
           type: "setSetting",
           key: "flour",
           value: +e.target.value,
         });
         break;
 
-      case this.waterInput:
-        this.state = reducer(this.state, {
+      case this.#waterInput:
+        this.#state = reducer(this.#state, {
           type: "setSetting",
           key: "water",
           value: +e.target.value,
         });
         break;
 
-      case this.saltInput:
-        this.state = reducer(this.state, {
+      case this.#saltInput:
+        this.#state = reducer(this.#state, {
           type: "setSetting",
           key: "salt",
           value: +e.target.value,
         });
         break;
 
-      case this.sourdoughInput:
-        this.state = reducer(this.state, {
+      case this.#sourdoughInput:
+        this.#state = reducer(this.#state, {
           type: "setSetting",
           key: "sourdough",
+          value: +e.target.value,
+        });
+        break;
+
+      case this.#sourdoughRatioInput:
+        this.#state = reducer(this.#state, {
+          type: "setSetting",
+          key: "sourdoughRatio",
           value: +e.target.value,
         });
         break;
@@ -96,12 +108,12 @@ class CalculatorForm extends LightElement {
   }
 
   updateSummary() {
-    if (this.weight) {
-      this.weight.textContent = this.state.dough.toString();
+    if (this.#weight) {
+      this.#weight.textContent = this.#state.dough.toString();
     }
 
-    if (this.hydration) {
-      this.hydration.textContent = calcHydration(this.state.settings, this.state.liquids);
+    if (this.#hydration) {
+      this.#hydration.textContent = calcHydration(this.#state.settings, this.#state.liquids);
     }
   }
 
@@ -109,20 +121,20 @@ class CalculatorForm extends LightElement {
    * @param {Settings} settings
    */
   updateInputs(settings) {
-    if (this.flourInput && settings.flour) {
-      this.flourInput.value = settings.flour.toString();
+    if (this.#flourInput && settings.flour) {
+      this.#flourInput.value = settings.flour.toString();
     }
 
-    if (this.waterInput && settings.water) {
-      this.waterInput.value = settings.water.toString();
+    if (this.#waterInput && settings.water) {
+      this.#waterInput.value = settings.water.toString();
     }
 
-    if (this.saltInput && settings.salt) {
-      this.saltInput.value = settings.salt.toString();
+    if (this.#saltInput && settings.salt) {
+      this.#saltInput.value = settings.salt.toString();
     }
 
-    if (this.sourdoughInput && settings.sourdough) {
-      this.sourdoughInput.value = settings.sourdough.toString();
+    if (this.#sourdoughInput && settings.sourdough) {
+      this.#sourdoughInput.value = settings.sourdough.toString();
     }
   }
 }
