@@ -50,6 +50,7 @@ class CalculatorForm extends LightElement {
     this.updateInputs(settings);
 
     this.#state = reducer(this.#state, { type: "initialize", settings, extras: {} });
+    this.updateSummary();
   }
 
   render() {}
