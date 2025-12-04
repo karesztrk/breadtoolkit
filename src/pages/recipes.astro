@@ -1,0 +1,27 @@
+---
+import Layout from "@/layouts/Layout.astro";
+import { getCollection } from "astro:content";
+
+const recipes = await getCollection("Recipes");
+
+const sortedRecipes = recipes.sort(
+  (left, right) => right.data.date.getTime() - left.data.date.getTime(),
+);
+---
+
+<Layout>
+  <h1>Recipes</h1>
+  <article>
+    {
+      sortedRecipes.map((recipe) => {
+        return (
+            <article>
+              <a href={`/recipes/${recipe.slug}`} data-astro-prefetch>
+                <h2 id={recipe.slug}>{recipe.data.title}</h2>
+              </a>
+            </article>
+        );
+      })
+    }
+  </article>
+</Layout>

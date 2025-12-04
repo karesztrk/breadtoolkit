@@ -7,7 +7,9 @@
     "paths": {
       "@/*": ["*"],
       "@components/*": ["components/*"],
-      "@service/*": ["service/*"]
+      "@service/*": ["service/*"],
+      "@layouts/*": ["layouts/*"],
+      "@util/*": ["util/*"]
     },
     "target": "es2022",
     "allowJs": true,
