@@ -4,6 +4,7 @@ import { calcHydration, loadCalculatorSettings } from "@/service/calculator";
 
 /**
  * @typedef {import('@service/types').Settings} Settings
+ * @typedef {import('@service/types').SettingName} SettingName
  */
 // TODO: Input validation
 class CalculatorForm extends LightElement {
@@ -62,43 +63,23 @@ class CalculatorForm extends LightElement {
   onChange(e) {
     switch (e.target) {
       case this.#flourInput:
-        this.#state = reducer(this.#state, {
-          type: "setSetting",
-          key: "flour",
-          value: +e.target.value,
-        });
+        this.onNumberInputChange(e.target, "flour");
         break;
 
       case this.#waterInput:
-        this.#state = reducer(this.#state, {
-          type: "setSetting",
-          key: "water",
-          value: +e.target.value,
-        });
+        this.onNumberInputChange(e.target, "water");
         break;
 
       case this.#saltInput:
-        this.#state = reducer(this.#state, {
-          type: "setSetting",
-          key: "salt",
-          value: +e.target.value,
-        });
+        this.onNumberInputChange(e.target, "salt");
         break;
 
       case this.#sourdoughInput:
-        this.#state = reducer(this.#state, {
-          type: "setSetting",
-          key: "sourdough",
-          value: +e.target.value,
-        });
+        this.onNumberInputChange(e.target, "sourdough");
         break;
 
       case this.#sourdoughRatioInput:
-        this.#state = reducer(this.#state, {
-          type: "setSetting",
-          key: "sourdoughRatio",
-          value: +e.target.value,
-        });
+        this.onNumberInputChange(e.target, "sourdoughRatio");
         break;
 
       default:
@@ -106,6 +87,21 @@ class CalculatorForm extends LightElement {
     }
 
     this.updateSummary();
+  }
+
+  /**
+   * @param {HTMLInputElement} element
+   * @param {SettingName} key
+   */
+  onNumberInputChange(element, key) {
+    const value = element.valueAsNumber;
+    if (!Number.isNaN(value)) {
+      this.#state = reducer(this.#state, {
+        type: "setSetting",
+        key,
+        value,
+      });
+    }
   }
 
   updateSummary() {
