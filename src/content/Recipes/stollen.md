@@ -2,7 +2,7 @@
 title: Stollen
 date: 2021-02-01T16:35:21.627Z
 language: hu
-coverImage: /images/blog/img_20201223_205143.jpg
+coverImage: /images/recipes/img_20201223_205143.jpg
 tags:
   - stollen
   - karácsony
@@ -74,4 +74,3 @@ Az első kelesztés után bele rakom a tölteléket és megint kelesztem, amíg 
 Sütő 220 fokra és megkenem kis tojás sárgájával a tesztákat. 30 percet sült, de azonnal lefedem alufóliával, ha nagyon barnul.
 
 Kiveszem és még forrón megkenem 2x vajjal. Ha kihűlt meghintem jó sok porcukorral, ahogy azt illik 😁.
-

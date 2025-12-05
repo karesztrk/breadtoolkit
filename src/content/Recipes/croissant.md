@@ -2,7 +2,7 @@
 title: Croissant
 date: 2020-01-01T23:00:00.000Z
 language: hu
-coverImage: /images/blog/img_20200517_152223.jpg
+coverImage: /images/recipes/img_20200517_152223.jpg
 tags:
   - croissant
   - madre
@@ -19,7 +19,7 @@ tags:
 ---
 Párom kérésére készítettem először ezt a friss, ropogós péksüteményt.
 
-Az eredeti receptet Betti Hobby konyháról szereztem. Javasolom, hogy Ti is próbáljátok ki mihamarabb. 
+Az eredeti receptet Betti Hobby konyháról szereztem. Javasolom, hogy Ti is próbáljátok ki mihamarabb.
 
 > <https://bettyhobbikonyha.cafeblog.hu/2017/01/10/kovaszos-croissant-hosszu-erlelessel/>
 

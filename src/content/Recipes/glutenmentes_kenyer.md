@@ -2,7 +2,7 @@
 title: Gluténmentes kenyér
 date: 2020-01-06T23:00:00.000Z
 language: hu
-coverImage: /images/blog/glutenmentes.jpg
+coverImage: /images/recipes/glutenmentes.jpg
 tags:
   - rizsliszt
   - kukoricaliszt

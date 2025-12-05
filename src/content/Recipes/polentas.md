@@ -1,6 +1,6 @@
 ---
 title: Polentás kenyér
-coverImage: /images/blog/test.jpg
+coverImage: /images/recipes/test.jpg
 date: 2021-01-07T06:12:26.258Z
 language: hu
 tags:

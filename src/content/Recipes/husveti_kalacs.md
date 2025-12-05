@@ -2,7 +2,7 @@
 title: Húsvéti kalács
 date: 2020-01-01T16:39:20.541Z
 language: hu
-coverImage: /images/blog/img_20200410_151126.jpg
+coverImage: /images/recipes/img_20200410_151126.jpg
 tags:
   - kalács
   - húsvét
@@ -26,7 +26,7 @@ Az eredeti recept hozzá itt található: <http://vadkovaszsuli.blogspot.com/201
 * Liszt BL65 270g
 * Cukor 40g
 * 1 egész tojás és egy sárgája
-* Szobahőmérsékletű vaj 50g (egyébként nem lehet begyúrni a tésztába) 
+* Szobahőmérsékletű vaj 50g (egyébként nem lehet begyúrni a tésztába)
 * Fél citrom héja
 * Himalaja só 8g
 

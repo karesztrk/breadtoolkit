@@ -2,7 +2,7 @@
 title: Curry-s mazsolás alakor kenyér
 date: 2021-02-18T17:40:20.720Z
 language: hu
-coverImage: /images/blog/img_20210218_060618.jpg
+coverImage: /images/recipes/img_20210218_060618.jpg
 tags:
   - kenyérliszt
   - alakorliszt
@@ -31,4 +31,3 @@ Két óra autolizálást követően bedagaszottam a már aktív kovit. Pihentett
 Nagyjából 6 órát kelt a pulton. Megformáztam, pihentettem a szakajtóban és a sütőbe helyeztem 230 fokra 30-re, majd további 20 percet sült 200 fokon
 
 A zsűri szerint egyébként nagyon finom lett a végeredmény, de legközelebb inkább a sós vonal felé kellene a kenyér ízvilágát terelni. Noted 🗒️
-

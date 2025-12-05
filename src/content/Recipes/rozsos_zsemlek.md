@@ -2,7 +2,7 @@
 title: Rozsos zsemlék
 date: 2020-01-02T23:00:00.000Z
 language: hu
-coverImage: /images/blog/img_20200524_100241.jpg
+coverImage: /images/recipes/img_20200524_100241.jpg
 tags:
   - rozs
   - kovász

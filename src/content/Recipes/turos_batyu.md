@@ -2,7 +2,7 @@
 title: Túrós batyu
 date: 2020-01-05T23:00:00.000Z
 language: hu
-coverImage: /images/blog/turos_batyu.jpg
+coverImage: /images/recipes/turos_batyu.jpg
 tags:
   - batyu
   - limara
@@ -57,4 +57,3 @@ Elkészítjük közben a töltekéket. A tojásk fehérjét felverve adjuk hozz�
 A megkelt tésztát kinyújtuk és kis téglalapokat formázunk belőle, amikre majd ráhalmozzuk a tölteléket. A négyzeteket a sarkain összefogjuk és csavarunk rajta egyet.
 
 20 percet hagyjuk őket a tepsin kelni, majd 20 perc alatt ki is sütjük 180 fokon.
-

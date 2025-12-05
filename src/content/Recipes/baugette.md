@@ -2,7 +2,7 @@
 title: Baugette
 date: 2021-03-26T15:14:11.403Z
 language: hu
-coverImage: /images/blog/img_20210324_195641.jpg
+coverImage: /images/recipes/img_20210324_195641.jpg
 tags:
   - kenyérliszt
   - élesztő

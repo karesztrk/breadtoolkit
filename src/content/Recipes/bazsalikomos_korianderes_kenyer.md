@@ -2,7 +2,7 @@
 title: Bazsalikomos korianderes kenyér
 date: 2020-01-04T23:00:00.000Z
 language: hu
-coverImage: /images/blog/received_263787441356787.jpg
+coverImage: /images/recipes/received_263787441356787.jpg
 tags:
   - liszt
   - víz

@@ -2,7 +2,7 @@
 title: Tangzhong
 date: 2021-01-28T15:56:35.900Z
 language: hu
-coverImage: /images/blog/img_20210127_214731.jpg
+coverImage: /images/recipes/img_20210127_214731.jpg
 tags:
   - kenyérliszt
   - teljeskiörlésűliszt

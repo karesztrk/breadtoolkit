@@ -17,6 +17,8 @@ const { Content } = await entry.render();
 <Layout>
   <article>
     <h1>{entry.data.title}</h1>
+
+    <img src={entry.data.coverImage} />
     <Content />
   </article>
 </Layout>

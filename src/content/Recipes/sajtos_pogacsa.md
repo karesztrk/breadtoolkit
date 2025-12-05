@@ -2,7 +2,7 @@
 title: Sajtos pogácsa
 date: 2020-01-03T23:00:00.000Z
 language: hu
-coverImage: /images/blog/img_20200527_101618.jpg
+coverImage: /images/recipes/img_20200527_101618.jpg
 tags:
   - tojás
   - sajt
@@ -46,11 +46,11 @@ A hűtőben (vagy konyhapulton) pihenő kovászból kimérünk 50g-ot, kikeverj�
 
 Hozzákeverjük a tejfölt, tojást, krumplit és a lisztet. Lazán összekeverjük, és 30-60 percet állni hagyjuk.
 
-Hozzáadjuk a sót is, majd összedagasztjuk a tésztát. Ha már szépen simára összeállt, hozzáadjuk a vajat és alaposan kidagasztjuk. 
+Hozzáadjuk a sót is, majd összedagasztjuk a tésztát. Ha már szépen simára összeállt, hozzáadjuk a vajat és alaposan kidagasztjuk.
 
 Lisztezett tálba rakjuk és letakarva pihentetjük 1-2 órát, ill. amíg szemmel láthatóan is beindul a növekedés.
 
-Enyhén lisztezett felületen téglalap formára kinyújtjuk, megszórjuk egy kis reszelt sajttal és összehajtogatjuk. Ezt a sajttal szórást, hajtogatást 3-szor végezzük el, kb. 30-60 perces időközönként. Az utolsó után is hagyjuk a tésztát 30-60 percet pihenni. 
+Enyhén lisztezett felületen téglalap formára kinyújtjuk, megszórjuk egy kis reszelt sajttal és összehajtogatjuk. Ezt a sajttal szórást, hajtogatást 3-szor végezzük el, kb. 30-60 perces időközönként. Az utolsó után is hagyjuk a tésztát 30-60 percet pihenni.
 
 Majd kb. 2cm vastagra kinyújtjuk a tésztát, éles késsel bekockázzuk a tetejét, pogácsaszaggatóval kiszaggatjuk vagy kockára vágjuk, kinek mi a szimpatikusabb és mindjárt sütőpapíros tepsire pakoljuk. Letakarva ismét hagyjuk kb. 30-60 percet pihenni.
 

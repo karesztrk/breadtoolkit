@@ -2,7 +2,7 @@
 title: Zabos gluténmentes kenyér
 date: 2021-02-28T09:53:27.078Z
 language: hu
-coverImage: /images/blog/img_20210225_130439.jpg
+coverImage: /images/recipes/img_20210225_130439.jpg
 tags:
   - zabpehely
   - barnarizsliszt
@@ -39,4 +39,3 @@ A kovászt beetetjük és hagyjuk megérni. Nem fog hatalmasra nőni és full bu
 A liszteket összekeverjük, majd megy hozzá a só és az útifűmaghéj. Felöntjük a vízzel. Beledagasztjuk a zsiradékot és hagyjuk érni pulton kb 2 órát, majd hűtős kelesztés esetén egy éjszakát (8-10 óra) vagy formázzuk meg és mehet a formába. Én idő híján most az utóbbit válaszottam, mert már nagyon rá volt éhezve a párom.
 
 230°-ra előmelegített sütőbe raktam 30 percre, majd további 20-25 perc alatt pirult 200°-on.
-
