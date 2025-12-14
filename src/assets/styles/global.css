@@ -1,3 +1,53 @@
+@import url("./reset.css") layer(reset);
+@import url("./fonts.css") layer(base);
+
+@layer reset,
+  base,
+  typography,
+  theme,
+  components,
+  utilities,
+  animations,
+  viewtransition,
+  customproperty,
+  scrollanimation;
+
 :root {
-  --pico-font-family: "ET Book", Charter, "Bitstream Charter", "Sitka Text", Cambria, serif;
+  --font-family: "ET Book", Charter, "Bitstream Charter", "Sitka Text", Cambria, serif;
+  --color-dark: #252525;
+  --color-light: #efefef;
+  --color-primary: #1a8fe3;
+
+  --gap: clamp(1rem, 1vw, 3rem);
+  --full: minmax(var(--gap), 1fr);
+  --content: min(70ch, 100% - var(--gap) * 2);
+  --popout-max: 2rem;
+  --popout: minmax(0, var(--popout-max));
+  --grid-row-nav: min-content;
+}
+
+@layer base {
+  body {
+    display: grid;
+    grid-template-columns:
+      [full-start] var(--full) [popout-start] var(--popout) [content-start] var(--content)
+      [content-end] var(--popout) [popout-end] var(--full) [full-end];
+    grid-template-rows: var(--grid-row-nav) 1fr;
+  }
+
+  body > :is(header, main, footer) {
+    grid-column: content;
+  }
+}
+
+@layer typography {
+  body {
+    font-synthesis: none;
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    font-family: var(--font-family);
+    font-variant-ligatures: common-ligatures no-discretionary-ligatures no-historical-ligatures
+      contextual;
+  }
 }
