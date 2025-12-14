@@ -1,0 +1,517 @@
+---
+
+import Layout from "@/layouts/Layout.astro";
+---
+
+<Layout>
+  <!-- @author Chris Coyier -->
+  <!-- https://codepen.io/editor/chriscoyier/pen/0198772a-a759-7dc4-b8fc-1dfdbed39fdb -->
+  <h1>CSS Starter</h1>
+<p>ffl ffi fl fi ff</p>
+
+  <header>
+    <nav>
+      <ul>
+        <li><a href="#article">Article</a></li>
+        <li><a href="#typography">Typography</a></li>
+        <li><a href="#blockquote">Blockquote</a></li>
+        <li><a href="#table">Table</a></li>
+        <li><a href="#definition">Definition</a></li>
+        <li><a href="#list">List</a></li>
+        <li><a href="#address">Address</a></li>
+        <li><a href="#preformatted">preformatted</a></li>
+        <li><a href="#image">Image</a></li>
+        <li><a href="#form">Form</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <section>
+    <article>
+      <h2 id="article">I'm an h2 with a <a href="#">link</a></h2>
+      <p>
+        Lorem ipsum <a href="#">dolor sit amet</a>, consectetur adipisicing
+        elit. Distinctio dolorem omnis, ducimus iusto necessitatibus quo quam
+        consequatur voluptates sapiente quisquam! Corrupti cum nobis modi eius
+        delectus qui praesentium quisquam deserunt.
+      </p>
+
+      <article>
+        <p>
+          This paragraph is nested inside an article<sup>1</sup>. It contains
+          many different, sometimes useful,
+          <a href="https://www.w3schools.com/tags/">HTML5 tags</a>. Of course
+          there are classics like <em>emphasis</em>, <strong>strong</strong>,
+          and <small>small</small> but there are many others as well. Hover
+          the following text for abbreviation tag:
+          <abbr title="abbreviation">abbr</abbr>. Similarly, you can use
+          acronym tag like this: <acronym title="For The Win">ftw</acronym>.
+          You can define <del>deleted text</del> which often gets replaced
+          with <ins>inserted</ins> text.
+        </p>
+
+        <pre>
+          var x = 2;
+          const y = addNumbers(x, 7);</pre
+        >
+
+        <p>
+          You can also use <kbd>keyboard text</kbd>, which sometimes is styled
+          similarly to the <code>&lt;code&gt;</code> or
+          <samp>samp</samp> tags. Even more specifically, there is a tag just
+          for <var>variables</var>. Not to be mistaken with blockquotes below,
+          the quote tag lets you denote something as <q>quoted text</q>.
+          Lastly don't forget the sub (H<sub>2</sub>O) and sup (E =
+          MC<sup>2</sup>) tags.
+        </p>
+      </article>
+
+      <aside>This is an aside.</aside>
+
+      <footer>This is footer for this section</footer>
+    </article>
+  </section>
+  
+  <hr />
+
+  <section id="typography">
+    <article>
+      <h1>This is an h1</h1>
+      <h2>This is an h2</h2>
+      <h3>This is an h3</h3>
+      <h4>This is an h4</h4>
+      <h5>This is an h5</h5>
+      <h6>This is an h6</h6>
+
+      <h3>Inline text elements</h3>
+      <p><a href="#" onclick="event.preventDefault()">Link</a></p>
+      <p><strong>Bold</strong></p>
+      <p><em>Italic</em></p>
+      <p><u>Underline</u></p>
+      <p><del>Deleted</del></p>
+      <p><ins>Inserted</ins></p>
+      <p><s>Strikethrough</s></p>
+      <p><small>Small </small></p>
+      <p>Text <sub>Sub</sub></p>
+      <p>Text <sup>Sup</sup></p>
+      <p>
+        <abbr title="Abbreviation" data-tooltip="Abbreviation">Abbr.</abbr>
+      </p>
+      <p><kbd>Kbd</kbd></p>
+      <p><mark>Highlighted</mark></p>
+    </article>
+    </article>
+  </section>
+
+
+  <hr />
+
+  <section>
+    <article>
+      <h2 id="blockquote">Blockquote</h2>
+      <blockquote>
+        <p>
+          I'm the first paragraph of a blockquote. This is a mult-line
+          blockquote with a cite reference.
+        </p>
+      </blockquote>
+      <blockquote>
+        <p>
+          People think focus means saying yes to the thing you’ve got to focus
+          on. But that’s not what it means at all. It means saying no to the
+          hundred other good ideas that there are. You have to pick carefully.
+          I’m actually as proud of the things we haven’tdone as the things I
+          have done. Innovation is saying no to 1,000 things.
+        </p>
+        <cite>Steve Jobs – Apple Worldwide Developers’ Conference, 1997</cite>
+      </blockquote>
+
+    </article>
+  </section>
+
+  <hr />
+
+  <section id="table">
+    <article>
+      <h2 id="table">Table</h2>
+      <table id="table">
+        <caption id="caption">
+          This is a table caption
+        </caption>
+        <tbody>
+          <tr>
+            <th>Person</th>
+            <th>Number</th>
+            <th>Third Column</th>
+          </tr>
+          <tr>
+            <td>Someone Lastname</td>
+            <td>900</td>
+            <td>Nullam quis risus eget urna mollis ornare vel eu leo.</td>
+          </tr>
+          <tr>
+            <td><a href="#">Person Name</a></td>
+            <td>1200</td>
+            <td>
+              Vestibulum id ligula porta felis euismod semper. Donec
+              ullamcorper nulla non metus auctor fringilla.
+            </td>
+          </tr>
+          <tr>
+            <td>Another Person</td>
+            <td>1500</td>
+            <td>
+              Vivamus sagittis lacus vel augue laoreet rutrum faucibus dolor
+              auctor. Nullam id dolor id nibh ultricies vehicula ut id elit.
+            </td>
+          </tr>
+          <tr>
+            <td>Last One</td>
+            <td>2800</td>
+            <td>
+              Morbi leo risus, porta ac consectetur ac, vestibulum at eros.
+              Cras mattis consectetur purus sit amet fermentum.
+            </td>
+          </tr>
+        </tbody>
+      </table>
+
+    </article>
+  </section>
+
+  <hr />
+
+  <section>
+    <article>
+      <h3 id="definition">Definition</h3>
+      <dl>
+        <dt>Definition List Title</dt>
+        <dd>Definition list division.</dd>
+        <dt>Kitchen Sink</dt>
+        <dd>
+          Used in expressions to describe work in which all conceivable (and
+          some inconceivable) sources have been mined. In this case, a bunch
+          of markup.
+        </dd>
+        <dt>aside</dt>
+        <dd>Defines content aside from the page content</dd>
+        <dt>blockquote</dt>
+        <dd>Defines a section that is quoted from another source</dd>
+      </dl>
+    </article>
+  </section>
+
+  <hr />
+
+  <section>
+    <article>
+      <h2 id="list">List</h2>
+      <ul>
+        <li>
+          Unordered List item one
+          <ul>
+            <li>
+              Nested list item
+              <ul>
+                <li>Level 3, item one</li>
+                <li>Level 3, item two</li>
+                <li>Level 3, item three</li>
+                <li>Level 3, item four</li>
+              </ul>
+            </li>
+            <li>List item two</li>
+            <li>List item three</li>
+            <li>List item four</li>
+          </ul>
+        </li>
+        <li>List item two</li>
+        <li>List item three</li>
+        <li>List item four</li>
+      </ul>
+
+      <ol>
+        <li>
+          Ordered List item one
+          <ol>
+            <li>
+              List item one
+              <ol>
+                <li>List item one</li>
+                <li>List item two</li>
+                <li>List item three</li>
+                <li>List item four</li>
+              </ol>
+            </li>
+            <li>List item two</li>
+            <li>List item three</li>
+            <li>List item four</li>
+          </ol>
+        </li>
+        <li>List item two</li>
+        <li>List item three</li>
+        <li>List item four</li>
+      </ol>
+    </article>
+  </section>
+
+  <section >
+    <article>
+      <h2 id="address">Address</h2>
+      <address>
+        1 Infinite Loop
+        <br />
+        Cupertino, CA 95014
+        <br />
+        United States
+      </address>
+    </article>
+  </section>
+
+  <hr />
+
+  <section>
+    <article>
+      <h2 id="preformatted">Preformatted</h2>
+      <pre>
+        pre &#123;
+          display: block;
+          padding: 7px;
+          background-color: #F5F5F5;
+          border: 1px solid #E1E1E8;
+          border-radius: 3px;
+          white-space: pre-wrap;
+          word-break: break-all;
+          font-family: Menlo, Monaco;
+          line-height: 160%;
+        &#125;
+      </pre>
+    </article>
+  </section>
+
+  <hr />
+
+  <section>
+    <article>
+      <h2 id="image">Image</h2>
+      <figure id="figure">
+        <img
+          src="https://images.unsplash.com/photo-1750375502807-2c73a829f182?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3wzMjM4NDZ8MHwxfHJhbmRvbXx8fHx8fHx8fDE3NTU4OTUyNjJ8&ixlib=rb-4.1.0&q=80&w=300"
+          alt="starry night with a misty mountain in the background that looks impossibly steep. Below, a yellow-lit cityscape."
+        />
+        <figcaption>
+          This is a beautiful city that may or may not exist but if it does
+          exist, I would like to visit it some day.
+        </figcaption>
+      </figure>
+    </article>
+  </section>
+
+  <hr />
+
+  <section>
+    <article>
+      <h2 id="form">Form</h2>
+      <form>
+        <p>
+          <label for="example-input-email">Email address</label>
+          <input
+            type="email"
+            id="example-input-email"
+            placeholder="Enter email"
+          />
+        </p>
+        <p>
+          <label for="example-input-password1">Number</label>
+          <input
+            type="number"
+            id="example-input-number"
+            placeholder="Number"
+          />
+        </p>
+        <p>
+          <label for="example-input-password">Password</label>
+          <input
+            type="password"
+            id="example-input-password"
+            placeholder="Password"
+          />
+        </p>
+        <p>
+          <label for="example-input-search">Search</label>
+          <input
+            type="search"
+            id="example-input-serach"
+            placeholder="Search .."
+          />
+        </p>
+        <p>
+          <label for="example-input-tel">Telephone number</label>
+          <input
+            type="tel"
+            id="example-input-tel"
+            placeholder="Telephone number"
+          />
+        </p>
+
+        <p>
+          <label for="example-input-text">Text</label>
+          <input
+            type="text"
+            id="example-input-text"
+            placeholder="Enter some text here"
+          />
+        </p>
+        <p>
+          <label for="example-input-url">Url</label>
+          <input
+            type="url"
+            id="example-input-url"
+            placeholder="Enter a url here"
+          />
+        </p>
+        <p>
+          <label for="example-input-color">Color</label>
+          <input type="color" id="example-inupt-color" placeholder="#fff" />
+        </p>
+
+        <fieldset>
+          <legend>Date & Time Related Inputs</legend>
+
+          <p>
+            <label for="example-input-date">Date</label>
+            <input type="date" id="example-input-date" placeholder="date" />
+          </p>
+          <p>
+            <label for="example-input-date-time">Date / Time</label>
+            <input
+              type="datetime"
+              id="example-input-date-time"
+              placeholder="date / time"
+            />
+          </p>
+          <p>
+            <label for="example-input-date-time-local">
+              Date / Time local
+            </label>
+            <input
+              type="datetime-local"
+              id="example-input-date-time-local"
+              placeholder="date / time local"
+            />
+          </p>
+          <p>
+            <label for="example-input-month">Month</label>
+            <input
+              type="month"
+              id="example-input-month"
+              placeholder="Month"
+            />
+          </p>
+          <p>
+            <label for="example-input-week">Week</label>
+            <input type="week" id="example-input-week" placeholder="Week" />
+          </p>
+          <p>
+            <label for="example-input-time">Time</label>
+            <input type="time" id="example-input-time" placeholder="Time" />
+          </p>
+        </fieldset>
+
+        <p>
+          <label for="example-select1">Example select</label>
+          <select id="example-select1">
+            <option>1</option>
+            <option>2</option>
+            <option>3</option>
+            <option>4</option>
+            <option>5</option>
+          </select>
+        </p>
+
+        <p>
+          <label for="example-select2">Example multiple select</label>
+          <select multiple id="example-select2">
+            <option>1</option>
+            <option>2</option>
+            <option>3</option>
+            <option>4</option>
+            <option>5</option>
+          </select>
+        </p>
+
+        <p>
+          <label for="example-textarea">Example textarea</label>
+          <textarea id="example-textarea" rows="3"></textarea>
+        </p>
+
+        <p>
+          <label for="example-input-file">File input</label>
+          <input type="file" id="example-input-file" />
+        </p>
+
+        <fieldset>
+          <legend>I am legend</legend>
+          <div>
+            <label>
+              <input
+                type="radio"
+                name="options-radios"
+                id="options-radios1"
+                value="option1"
+                checked
+              />
+              Option one is this and that&mdash;be sure to include why it's
+              great
+            </label>
+          </div>
+
+          <div>
+            <label>
+              <input
+                type="radio"
+                name="options-radios"
+                id="options-radios2"
+                value="option2"
+              />
+              Option two can be something else and selecting it will deselect
+              option one
+            </label>
+          </div>
+          <div>
+            <label>
+              <input
+                type="radio"
+                name="options-radios"
+                id="options-radios3"
+                value="option3"
+                disabled
+              />
+              Option three is disabled
+            </label>
+          </div>
+        </fieldset>
+
+        <fieldset>
+          <legend>I am also legend</legend>
+
+          <label>
+            <input type="checkbox" />
+            Check me out
+          </label>
+
+          <label>
+            <input type="checkbox" />
+            Or check me out
+          </label>
+        </fieldset>
+
+        <p>
+          <button type="button" name="button">Button</button>
+          <input type="button" name="input" value="Input Button" />
+          <input type="submit" name="submit" value="Submit Button" />
+          <input type="reset" name="reset" value="Reset Button" />
+        </p>
+      </form>
+    </article>
+  </section>
+</Layout>

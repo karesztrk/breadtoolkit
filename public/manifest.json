@@ -1,0 +1,60 @@
+{
+  "short_name": "Bread Toolkit",
+  "name": "Bread Toolkit",
+  "description": "Online tools to help your bread baking journey. Bread toolkit gives your free recipes, guides and calculators to work with high hydration artisan breads.",
+  "icons": [
+    {
+      "src": "favicon.ico",
+      "sizes": "64x64 32x32 24x24 16x16",
+      "type": "image/x-icon"
+    },
+    {
+      "src": "logo16.png",
+      "type": "image/png",
+      "sizes": "16x16"
+    },
+    {
+      "src": "logo32.png",
+      "type": "image/png",
+      "sizes": "32x32"
+    },
+    {
+      "src": "logo192.png",
+      "type": "image/png",
+      "sizes": "192x192"
+    },
+    {
+      "src": "logo512.png",
+      "type": "image/png",
+      "sizes": "512x512"
+    },
+    {
+      "src": "maskable_icon.png",
+      "type": "image/png",
+      "sizes": "349x349",
+      "purpose": "maskable"
+    }
+  ],
+  "dir": "ltr",
+  "lang": "en",
+  "start_url": "/",
+  "orientation": "portrait",
+  "display": "standalone",
+  "theme_color": "#3B3437",
+  "background_color": "#3B3437",
+  "shortcuts": [
+    {
+      "name": "Bread Calculator",
+      "short_name": "Calculator",
+      "url": "/calculator",
+      "description": "Calculate your dough hydration and the amount of ingredients."
+    },
+    {
+      "name": "Recipebook",
+      "short_name": "Recipies",
+      "url": "/recipes",
+      "description": "Find and bake a recipe of your taste."
+    }
+  ]
+}
+

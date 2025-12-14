@@ -14,9 +14,6 @@
 
 :root {
   --font-family: "ET Book", Charter, "Bitstream Charter", "Sitka Text", Cambria, serif;
-  --color-dark: #252525;
-  --color-light: #efefef;
-  --color-primary: #1a8fe3;
 
   --gap: clamp(1rem, 1vw, 3rem);
   --full: minmax(var(--gap), 1fr);
@@ -24,6 +21,18 @@
   --popout-max: 2rem;
   --popout: minmax(0, var(--popout-max));
   --grid-row-nav: min-content;
+
+  /* Perfect Fourth */
+  --type-ratio: 1.33;
+
+  --body-font-size: 1.5rem;
+
+  --font-size-6: calc(var(--body-font-size) * var(--type-ratio));
+  --font-size-5: calc(var(--font-size-6) * var(--type-ratio));
+  --font-size-4: calc(var(--font-size-5) * var(--type-ratio));
+  --font-size-3: calc(var(--font-size-4) * var(--type-ratio));
+  --font-size-2: calc(var(--font-size-3) * var(--type-ratio));
+  --font-size-1: calc(var(--font-size-2) * var(--type-ratio));
 }
 
 @layer base {
@@ -32,11 +41,30 @@
     grid-template-columns:
       [full-start] var(--full) [popout-start] var(--popout) [content-start] var(--content)
       [content-end] var(--popout) [popout-end] var(--full) [full-end];
-    grid-template-rows: var(--grid-row-nav) 1fr;
   }
 
   body > :is(header, main, footer) {
     grid-column: content;
+  }
+
+  main {
+    container: main / inline-size;
+  }
+
+  article > * + * {
+    margin-block-start: var(--flow-space, 1em);
+  }
+
+  p,
+  li,
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    overflow-wrap: break-word;
+    hyphens: auto;
   }
 }
 
@@ -47,7 +75,135 @@
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     font-family: var(--font-family);
+    font-size: var(--body-font-size);
     font-variant-ligatures: common-ligatures no-discretionary-ligatures no-historical-ligatures
       contextual;
+  }
+
+  h1,
+  h2,
+  h3 {
+    font-weight: 700;
+  }
+
+  h4,
+  h5,
+  h6 {
+    font-weight: 400;
+  }
+
+  h1 {
+    --font-size: var(--font-size-1);
+    font-size: var(--font-size);
+  }
+
+  h2 {
+    --font-size: var(--font-size-2);
+    font-size: var(--font-size);
+  }
+
+  h3 {
+    --font-size: var(--font-size-3);
+    font-size: var(--font-size);
+  }
+
+  h4 {
+    --font-size: var(--font-size-4);
+    font-size: var(--font-size);
+  }
+
+  h5 {
+    --font-size: var(--font-size-5);
+    font-size: var(--font-size);
+  }
+
+  h6 {
+    --font-size: var(--font-size-6);
+    font-size: var(--font-size);
+  }
+
+  @supports (font-size: 1cqi) {
+    :is(h1, h2, h3, h4, h5, h6) {
+      --_font-min: calc(var(--font-size) - var(--font-size) * var(--font-size-diff, 0.3));
+
+      /* https://moderncss.dev/container-query-units-and-fluid-typography/ */
+      font-size: clamp(
+        max(var(--body-font-size), var(--_font-min)),
+        var(--_font-min) +
+        1cqi,
+        var(--font-size)
+      );
+    }
+  }
+
+  h1 {
+    max-width: 20ch;
+  }
+
+  h2,
+  h3 {
+    max-width: 28ch;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    /* https://cloudfour.com/thinks/responsive-letter-spacing/ */
+    letter-spacing: clamp(-0.01em, calc((1em - 1rem) / -10), 0em);
+  }
+
+  blockquote::before,
+  q::before {
+    content: open-quote;
+  }
+
+  blockquote::after,
+  q::after {
+    content: close-quote;
+  }
+
+  blockquote {
+    max-width: 60ch;
+    font-size: var(--font-size-6);
+
+    p {
+      display: inline;
+    }
+
+    &:has(footer):after {
+      content: "";
+    }
+  }
+}
+
+@layer components {
+  nav,
+  menu {
+    display: flex;
+    justify-content: space-between;
+    margin: 0;
+    padding: 0;
+    gap: 1rem;
+
+    li {
+      text-transform: capitalize;
+    }
+  }
+}
+
+@layer utilities {
+  .visually-hidden {
+    display: inline-block;
+    position: absolute;
+    overflow: hidden;
+    clip: rect(0 0 0 0);
+    height: 1;
+    width: 1;
+    margin: -1;
+    padding: 0;
+    border: 0;
   }
 }

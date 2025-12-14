@@ -5,12 +5,11 @@ export const pages = ["calculator", "recipes"];
 ---
 
 <nav>
-  <ul>
-    <li>
-      <a href="/"><strong>Breadtoolkit</strong></a>
-    </li>
-  </ul>
-  <ul>
+  <a href="/">
+    <span class="visually-hidden">Navigate to Home</span>
+    <strong aria-hidden>Breadtoolkit</strong>
+  </a>
+  <menu>
     {pages.map((name) => {
       const currentPage = currentPath === `/${name}` ? "page" : undefined;
       return (
@@ -19,11 +18,6 @@ export const pages = ["calculator", "recipes"];
         </li>
       );
     })}
-  </ul>
+  </menu>
 </nav>
 
-<style>
-  a {
-    text-transform: capitalize;
-  }
-</style>
