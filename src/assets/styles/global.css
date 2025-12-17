@@ -197,6 +197,19 @@
       margin-block-start: var(--dt-space, 1em);
     }
   }
+
+  ul:not([class]) {
+    padding-inline-start: 2.5ch;
+  }
+
+  ol:not([class]) ::marker {
+    font-size: 1em;
+    font-weight: var(--font-bold);
+  }
+
+  :is(ol, ul):not([class]) li {
+    margin-block-start: var(--flow-space, 0.75em);
+  }
 }
 
 @layer typography {
