@@ -25,7 +25,8 @@
   /* Perfect Fourth */
   --type-ratio: 1.33;
 
-  --body-font-size: 1.5rem;
+  /* 20px → 24px */
+  --body-font-size: clamp(1.25rem, 1.1477rem + 0.4545vi, 1.5rem);
 
   --font-size-6: calc(var(--body-font-size) * var(--type-ratio));
   --font-size-5: calc(var(--font-size-6) * var(--type-ratio));
@@ -33,6 +34,43 @@
   --font-size-3: calc(var(--font-size-4) * var(--type-ratio));
   --font-size-2: calc(var(--font-size-3) * var(--type-ratio));
   --font-size-1: calc(var(--font-size-2) * var(--type-ratio));
+
+  /* Space 3xs: 5px → 6px */
+  --space-3xs: clamp(0.3125rem, 0.2869rem + 0.1136vw, 0.375rem);
+  /* Space 2xs: 10px → 12px */
+  --space-2xs: clamp(0.625rem, 0.5739rem + 0.2273vw, 0.75rem);
+  /* Space xs: 15px → 18px */
+  --space-xs: clamp(0.9375rem, 0.8608rem + 0.3409vw, 1.125rem);
+  /* Space s: 20px → 24px */
+  --space-s: clamp(1.25rem, 1.1477rem + 0.4545vw, 1.5rem);
+  /* Space m: 30px → 36px */
+  --space-m: clamp(1.875rem, 1.7216rem + 0.6818vw, 2.25rem);
+  /* Space l: 40px → 48px */
+  --space-l: clamp(2.5rem, 2.2955rem + 0.9091vw, 3rem);
+  /* Space xl: 60px → 72px */
+  --space-xl: clamp(3.75rem, 3.4432rem + 1.3636vw, 4.5rem);
+  /* Space 2xl: 80px → 96px */
+  --space-2xl: clamp(5rem, 4.5909rem + 1.8182vw, 6rem);
+  /* Space 3xl: 120px → 144px */
+  --space-3xl: clamp(7.5rem, 6.8864rem + 2.7273vw, 9rem);
+
+  /* One-up pairs */
+  /* Space 3xs-2xs: 5px → 12px */
+  --space-3xs-2xs: clamp(0.3125rem, 0.1335rem + 0.7955vw, 0.75rem);
+  /* Space 2xs-xs: 10px → 18px */
+  --space-2xs-xs: clamp(0.625rem, 0.4205rem + 0.9091vw, 1.125rem);
+  /* Space xs-s: 15px → 24px */
+  --space-xs-s: clamp(0.9375rem, 0.7074rem + 1.0227vw, 1.5rem);
+  /* Space s-m: 20px → 36px */
+  --space-s-m: clamp(1.25rem, 0.8409rem + 1.8182vw, 2.25rem);
+  /* Space m-l: 30px → 48px */
+  --space-m-l: clamp(1.875rem, 1.4148rem + 2.0455vw, 3rem);
+  /* Space l-xl: 40px → 72px */
+  --space-l-xl: clamp(2.5rem, 1.6818rem + 3.6364vw, 4.5rem);
+  /* Space xl-2xl: 60px → 96px */
+  --space-xl-2xl: clamp(3.75rem, 2.8295rem + 4.0909vw, 6rem);
+  /* Space 2xl-3xl: 80px → 144px */
+  --space-2xl-3xl: clamp(5rem, 3.3636rem + 7.2727vw, 9rem);
 }
 
 @layer base {
