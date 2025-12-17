@@ -13,20 +13,16 @@
   scrollanimation;
 
 :root {
+  /* Typography */
   --font-family: "ET Book", Charter, "Bitstream Charter", "Sitka Text", Cambria, serif;
-
-  --gap: clamp(1rem, 1vw, 3rem);
-  --full: minmax(var(--gap), 1fr);
-  --content: min(70ch, 100% - var(--gap) * 2);
-  --popout-max: 2rem;
-  --popout: minmax(0, var(--popout-max));
-  --grid-row-nav: min-content;
-
-  /* Perfect Fourth */
-  --type-ratio: 1.33;
+  --font-normal: 400;
+  --font-bold: 700;
 
   /* 20px → 24px */
   --body-font-size: clamp(1.25rem, 1.1477rem + 0.4545vi, 1.5rem);
+
+  /* Perfect Fourth */
+  --type-ratio: 1.33;
 
   --font-size-6: calc(var(--body-font-size) * var(--type-ratio));
   --font-size-5: calc(var(--font-size-6) * var(--type-ratio));
@@ -71,6 +67,14 @@
   --space-xl-2xl: clamp(3.75rem, 2.8295rem + 4.0909vw, 6rem);
   /* Space 2xl-3xl: 80px → 144px */
   --space-2xl-3xl: clamp(5rem, 3.3636rem + 7.2727vw, 9rem);
+
+  /* Layout */
+  --gap: var(--space-s-m);
+  --full: minmax(var(--gap), 1fr);
+  --content: min(70ch, 100% - var(--gap) * 2);
+  --popout-max: var(--space-m);
+  --popout: minmax(0, var(--popout-max));
+  --grid-row-nav: min-content;
 }
 
 @layer base {
@@ -79,6 +83,7 @@
     grid-template-columns:
       [full-start] var(--full) [popout-start] var(--popout) [content-start] var(--content)
       [content-end] var(--popout) [popout-end] var(--full) [full-end];
+    grid-template-rows: min-content;
   }
 
   body > :is(header, main, footer) {
@@ -121,13 +126,13 @@
   h1,
   h2,
   h3 {
-    font-weight: 700;
+    font-weight: var(--font-bold);
   }
 
   h4,
   h5,
   h6 {
-    font-weight: 400;
+    font-weight: var(--font-normal);
   }
 
   h1 {
@@ -224,10 +229,57 @@
     justify-content: space-between;
     margin: 0;
     padding: 0;
-    gap: 1rem;
+    gap: var(--space-xs);
 
     li {
       text-transform: capitalize;
+    }
+  }
+
+  hr {
+    margin-block: var(--space-l);
+  }
+
+  table {
+    --stroke: 1px solid CanvasText;
+    border: var(--stroke);
+    border-collapse: collapse;
+    width: 100%;
+
+    th {
+      text-align: left;
+      font-weight: var(--font-bold);
+      line-height: var(--leading-fine);
+    }
+
+    thead th {
+      padding-block: var(--space-s);
+    }
+
+    td,
+    th {
+      padding: var(--space-xs) var(--space-s);
+    }
+
+    th:not(:only-of-type) {
+      border-block-end: var(--stroke);
+    }
+
+    th:only-of-type {
+      border-inline-end: var(--stroke);
+    }
+
+    :is(th, td) ~ :is(th, td) {
+      border-inline-start: var(--stroke);
+    }
+
+    tr + tr :is(th, td) {
+      border-block-start: var(--stroke);
+    }
+
+    caption {
+      caption-side: bottom;
+      margin-block-start: var(--space-s);
     }
   }
 }
