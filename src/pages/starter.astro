@@ -20,6 +20,7 @@ import Layout from "@/layouts/Layout.astro";
       <li><a href="#preformatted">preformatted</a></li>
       <li><a href="#image">Image</a></li>
       <li><a href="#form">Form</a></li>
+      <li><a href="#details">Details</a></li>
     </ul>
   </nav>
 
@@ -68,7 +69,7 @@ import Layout from "@/layouts/Layout.astro";
       <footer>This is footer for this section</footer>
     </article>
   </section>
-  
+
   <hr />
 
   <section id="typography">
@@ -136,10 +137,10 @@ import Layout from "@/layouts/Layout.astro";
 
   <hr />
 
-  <section id="table">
+  <section>
     <article>
       <h2 id="table">Table</h2>
-      <table id="table">
+      <table>
         <caption id="caption">
           This is a table caption
         </caption>
@@ -288,8 +289,7 @@ import Layout from "@/layouts/Layout.astro";
           word-break: break-all;
           font-family: Menlo, Monaco;
           line-height: 160%;
-        &#125;
-      </pre>
+        &#125;</pre>
     </article>
   </section>
 
@@ -317,112 +317,109 @@ import Layout from "@/layouts/Layout.astro";
     <article>
       <h2 id="form">Form</h2>
       <form>
-        <p>
+        <div>
           <label for="example-input-email">Email address</label>
           <input
             type="email"
             id="example-input-email"
             placeholder="Enter email"
           />
-        </p>
-        <p>
+        </div>
+        <div>
           <label for="example-input-password1">Number</label>
           <input
             type="number"
             id="example-input-number"
             placeholder="Number"
           />
-        </p>
-        <p>
+        </div>
+        <div>
           <label for="example-input-password">Password</label>
           <input
             type="password"
             id="example-input-password"
             placeholder="Password"
           />
-        </p>
-        <p>
+        </div>
+        <div>
           <label for="example-input-search">Search</label>
           <input
             type="search"
             id="example-input-serach"
             placeholder="Search .."
           />
-        </p>
-        <p>
+        </div>
+        <div>
           <label for="example-input-tel">Telephone number</label>
           <input
             type="tel"
             id="example-input-tel"
             placeholder="Telephone number"
           />
-        </p>
+        </div>
 
-        <p>
+        <div>
           <label for="example-input-text">Text</label>
           <input
             type="text"
             id="example-input-text"
             placeholder="Enter some text here"
           />
-        </p>
-        <p>
+        </div>
+        <div>
           <label for="example-input-url">Url</label>
           <input
             type="url"
             id="example-input-url"
             placeholder="Enter a url here"
           />
-        </p>
-        <p>
+        </div>
+        <div>
           <label for="example-input-color">Color</label>
           <input type="color" id="example-inupt-color" placeholder="#fff" />
-        </p>
+        </div>
 
-        <fieldset>
-          <legend>Date & Time Related Inputs</legend>
+        <div>
+          <label for="example-input-date">Date</label>
+          <input type="date" id="example-input-date" placeholder="date" />
+        </div>
+        <div>
+          <label for="example-input-date-time">Date / Time</label>
+          <input
+            type="datetime"
+            id="example-input-date-time"
+            placeholder="date / time"
+          />
+        </div>
+        <div>
+          <label for="example-input-date-time-local">
+            Date / Time local
+          </label>
+          <input
+            type="datetime-local"
+            id="example-input-date-time-local"
+            placeholder="date / time local"
+          />
+        </div>
+        <div>
+          <label for="example-input-month">Month</label>
+          <input
+            type="month"
+            id="example-input-month"
+            placeholder="Month"
+          />
+        </div>
+        <div>
+          <label for="example-input-week">Week</label>
+          <input type="week" id="example-input-week" placeholder="Week" />
+        </div>
+        <div>
+          <label for="example-input-time">Time</label>
+          <input type="time" id="example-input-time" placeholder="Time" />
+        </div>
 
-          <p>
-            <label for="example-input-date">Date</label>
-            <input type="date" id="example-input-date" placeholder="date" />
-          </p>
-          <p>
-            <label for="example-input-date-time">Date / Time</label>
-            <input
-              type="datetime"
-              id="example-input-date-time"
-              placeholder="date / time"
-            />
-          </p>
-          <p>
-            <label for="example-input-date-time-local">
-              Date / Time local
-            </label>
-            <input
-              type="datetime-local"
-              id="example-input-date-time-local"
-              placeholder="date / time local"
-            />
-          </p>
-          <p>
-            <label for="example-input-month">Month</label>
-            <input
-              type="month"
-              id="example-input-month"
-              placeholder="Month"
-            />
-          </p>
-          <p>
-            <label for="example-input-week">Week</label>
-            <input type="week" id="example-input-week" placeholder="Week" />
-          </p>
-          <p>
-            <label for="example-input-time">Time</label>
-            <input type="time" id="example-input-time" placeholder="Time" />
-          </p>
-        </fieldset>
 
-        <p>
+        <div>
           <label for="example-select1">Example select</label>
           <select id="example-select1">
             <option>1</option>
@@ -431,9 +428,9 @@ import Layout from "@/layouts/Layout.astro";
             <option>4</option>
             <option>5</option>
           </select>
-        </p>
+        </div>
 
-        <p>
+        <div>
           <label for="example-select2">Example multiple select</label>
           <select multiple id="example-select2">
             <option>1</option>
@@ -442,20 +439,39 @@ import Layout from "@/layouts/Layout.astro";
             <option>4</option>
             <option>5</option>
           </select>
-        </p>
+        </div>
 
-        <p>
+        <div>
           <label for="example-textarea">Example textarea</label>
           <textarea id="example-textarea" rows="3"></textarea>
-        </p>
+        </div>
 
-        <p>
+        <div>
           <label for="example-input-file">File input</label>
           <input type="file" id="example-input-file" />
-        </p>
+        </div>
 
         <fieldset>
-          <legend>I am legend</legend>
+          <legend>Pick your favorites</legend>
+
+          <div>
+            <input type="radio" id="html-option" name="favorite" value="html" />
+            <label for="html-option">HTML</label>
+          </div>
+
+          <div>
+            <input type="radio" id="css-option" name="favorite" value="css" />
+            <label for="css-option">CSS</label>
+          </div>
+
+          <div>
+            <input type="radio" id="javascript-option" name="favorite" value="javascript" />
+            <label for="javascript-option">Javascript</label>
+          </div>
+        </fieldset>
+
+        <fieldset>
+          <legend>I am legend of a fieldset</legend>
           <div>
             <label>
               <input
@@ -519,4 +535,20 @@ import Layout from "@/layouts/Layout.astro";
       </form>
     </article>
   </section>
+
+  <hr />
+
+  <section>
+    <article>
+      <h2 id="details">Details</h2>
+      <details>
+        <summary>
+        Check whats inside
+        </summary>
+        I'm the details of a summary.
+      </details>
+    </article>
+  </section>
+
+  <hr />
 </Layout>

@@ -19,7 +19,7 @@
   --font-bold: 700;
 
   /* 15px → 18px */
-  --small-font-size: clamp(0.9377rem, 0.861rem + 0.341vw, 1.1253rem);
+  --small-font-size: clamp(0.9377rem, 0.861rem + 0.341vw, 0.1253rem);
   /* 20px → 24px */
   --body-font-size: clamp(1.25rem, 1.1477rem + 0.4545vi, 1.5rem);
 
@@ -88,6 +88,7 @@
 }
 
 @layer base {
+  /* Layout */
   body {
     display: grid;
     grid-template-columns:
@@ -104,22 +105,6 @@
     container: main / inline-size;
   }
 
-  article > * + * {
-    margin-block-start: var(--flow-space, 1em);
-  }
-
-  p,
-  li,
-  h1,
-  h2,
-  h3,
-  h4,
-  h5,
-  h6 {
-    overflow-wrap: break-word;
-    hyphens: auto;
-  }
-
   nav,
   menu {
     display: flex;
@@ -133,10 +118,30 @@
     }
   }
 
-  hr {
-    margin-block: var(--space-l);
+  /* Spacing */
+  article > * + *,
+  form > * + * {
+    margin-block-start: var(--flow-space, 1em);
   }
 
+  /* Text overflow handling */
+  p,
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    overflow-wrap: break-word;
+    hyphens: auto;
+  }
+
+  /* Divider */
+  hr {
+    margin-block: var(--flow-space, var(--space-l));
+  }
+
+  /* Table */
   table {
     --stroke: 1px solid CanvasText;
     border: var(--stroke);
@@ -180,6 +185,7 @@
     }
   }
 
+  /* Definition list */
   dl {
     dt {
       font-weight: var(--font-bold);
@@ -198,6 +204,7 @@
     }
   }
 
+  /* List */
   ul:not([class]) {
     padding-inline-start: 2.5ch;
   }
@@ -209,6 +216,103 @@
 
   :is(ol, ul):not([class]) li {
     margin-block-start: var(--flow-space, 0.75em);
+  }
+
+  /* Focus management */
+  :focus {
+    outline: none;
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--focus-color, currentColor);
+    outline-offset: var(--focus-offset, 0.25rem);
+  }
+
+  :target {
+    --stroke: 2px solid Highlight;
+    scroll-margin-block: 5lh;
+    border: var(--stroke);
+  }
+
+  /* ::selection { */
+  /*   color: var(--color-dark); */
+  /*   background: var(--color-light); */
+  /* } */
+
+  pre {
+    white-space: pre-wrap;
+    background: CanvasText;
+    color: Canvas;
+    padding: 1.5em;
+  }
+
+  /* Form */
+  :is(input, select, textarea) {
+    accent-color: var(--color-primary);
+  }
+
+  :is(input:not([type="checkbox"], [type="radio"], [type="color"]), select, textarea, button) {
+    padding: var(--padding-block, 0.35em) var(--padding-inline, 0.65em);
+  }
+
+  :is(
+      input:not(
+          [type="checkbox"],
+          [type="radio"],
+          [type="color"],
+          [type="submit"],
+          [type="reset"],
+          [type="button"]
+        ),
+      select,
+      textarea
+    ) {
+    inline-size: 100%;
+  }
+
+  button,
+  input[type="submit"],
+  input[type="reset"],
+  [type="button"] {
+    background: CanvasText;
+    color: Canvas;
+    border: 1px solid transparent;
+  }
+
+  label,
+  legend {
+    font-weight: var(--font-bold);
+  }
+
+  label {
+    line-height: var(--leading-fine);
+  }
+
+  /* The ::after rule creates a line break, allowing the label itself to remain as an inline element. */
+  label::after {
+    content: "\A";
+    white-space: pre;
+  }
+
+  fieldset label {
+    font-weight: revert;
+  }
+
+  legend {
+    padding-inline: var(--space-xs);
+  }
+
+  details {
+    /* Details */
+    summary {
+      font-weight: var(--font-bold);
+      cursor: pointer;
+      display: list-item;
+    }
+
+    &[open] summary {
+      margin-block-end: var(--space-s);
+    }
   }
 }
 
