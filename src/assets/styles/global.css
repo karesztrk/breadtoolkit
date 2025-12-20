@@ -105,6 +105,10 @@
     container: main / inline-size;
   }
 
+  header {
+    padding-block: var(--space-xs-s);
+  }
+
   nav,
   menu {
     display: flex;
@@ -313,6 +317,20 @@
     &[open] summary {
       margin-block-end: var(--space-s);
     }
+  }
+
+  hgroup {
+    margin-block-end: var(--space-l);
+    --title-leading: var(--leading-flat);
+
+    h1 {
+      line-height: var(--title-leading);
+      margin-block-end: auto;
+    }
+  }
+
+  h1 {
+    margin-block-end: var(--space-l);
   }
 }
 

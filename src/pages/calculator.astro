@@ -3,49 +3,50 @@ import Layout from "@layouts/Layout.astro";
 ---
 
 <Layout>
-  <h1>Calculator</h1>
+  <hgroup>
+    <h1>Calculator</h1>
+    <p>Calculate your dough hydration and the amount of ingredients.</p>
+  </hgroup>
+
   <article>
 
     <calculator-form $input="onChange">
       <dl>
         <dt>Dough weights</dt>
-        <dl id="weight" data-unit="gram">...</dl>
+        <dd id="weight" data-unit="gram">...</dd>
 
         <dt>Hydration</dt>
-        <dl id="hydration" data-unit="%">...</dl>
+        <dd id="hydration" data-unit="%">...</dd>
       </dl>
 
       <form aria-labelledby="form-heading">
 
-        <fieldset>
-          <calculator-form-group $input="onInput">
-            <label for="flour">Flour</label>
-            <input type="number" id="flour" name="flour" value="0" inputmode="decimal" min="0" required>
-          </calculator-form-group>
+        <calculator-form-group $input="onInput">
+          <label for="flour">Flour</label>
+          <input type="number" id="flour" name="flour" value="0" inputmode="decimal" min="0" required>
+        </calculator-form-group>
 
-          <calculator-form-group $input="onInput">
-            <label for="water">Water</label>
-            <input type="number" id="water" name="water" value="0" inputmode="decimal" step="any" min="0" required>
-          </calculator-form-group>
+        <calculator-form-group $input="onInput">
+          <label for="water">Water</label>
+          <input type="number" id="water" name="water" value="0" inputmode="decimal" step="any" min="0" required>
+        </calculator-form-group>
 
-          <calculator-form-group $input="onInput">
-            <label for="salt">Salt</label>
-            <input type="number" id="salt" name="salt" value="0" inputmode="decimal" step="any" min="0" required>
-          </calculator-form-group>
+        <calculator-form-group $input="onInput">
+          <label for="salt">Salt</label>
+          <input type="number" id="salt" name="salt" value="0" inputmode="decimal" step="any" min="0" required>
+        </calculator-form-group>
 
-        </fieldset>
 
-        <fieldset>
           <calculator-form-group $input="onInput">
             <label for="sourdough">Sourdough</label>
             <input type="number" id="sourdough" name="sourdough" value="0" inputmode="decimal" step="any" min="0" required>
           </calculator-form-group>
 
           <div>
-            <label>Ratio</label>
+            <label>Sourdough ratio</label>
             <input type="range" value="0" min="0" max="100" id="sourdough_ratio" name="sourdough_ratio" required />
           </div>
-        </fieldset>
+
       </form>
     </calculator-form>
   </article>
@@ -59,10 +60,12 @@ import Layout from "@layouts/Layout.astro";
 
 <style>
 
-dl {
+dd {
   &:after{
     content: ' ' attr(data-unit);
   }
+
+  margin: auto;
 }
 
 input[type="number"]::-webkit-outer-spin-button,
@@ -76,5 +79,9 @@ input[type='number'] {
 
 calculator-form-group {
   display: block;
+}
+
+calculator-form > * + * {
+  margin-block-start: var(--flow-space, 1em); 
 }
 </style>

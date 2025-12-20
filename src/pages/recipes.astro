@@ -10,7 +10,10 @@ const sortedRecipes = recipes.sort(
 ---
 
 <Layout>
-  <h1>Recipes</h1>
+  <hgroup>
+    <h1>Recipes</h1>
+    <p>Find and bake a recipe of your taste</p>
+  </hgroup>
   <article>
     {
       sortedRecipes.map((recipe) => {
@@ -25,3 +28,14 @@ const sortedRecipes = recipes.sort(
     }
   </article>
 </Layout>
+
+<style>
+
+h1 {
+  --title-leading: var(--leading-fine);
+}
+
+h2 {
+  --font-size: var(--font-size-6);
+}
+</style>
