@@ -78,6 +78,9 @@
   --leading-mini: 0.9;
   --leading-micro: 0.8;
 
+  --main-title-leading: var(--leading-flat);
+  --main-title-space: 0.5em;
+
   /* Layout */
   --gap: var(--space-s-m);
   --full: minmax(var(--gap), 1fr);
@@ -85,6 +88,11 @@
   --popout-max: var(--space-m);
   --popout: minmax(0, var(--popout-max));
   --grid-row-nav: min-content;
+
+  color-scheme: dark light;
+
+  background-color: var(--color-bg);
+  color: var(--color-fg);
 }
 
 @layer base {
@@ -95,6 +103,7 @@
       [full-start] var(--full) [popout-start] var(--popout) [content-start] var(--content)
       [content-end] var(--popout) [popout-end] var(--full) [full-end];
     grid-template-rows: min-content;
+    row-gap: var(--gap);
   }
 
   body > :is(header, main, footer) {
@@ -112,13 +121,21 @@
   nav,
   menu {
     display: flex;
-    justify-content: space-between;
+    justify-content: var(--menu-alignment, space-between);
+    flex-wrap: var(--menu-wrap, auto);
     margin: 0;
     padding: 0;
     gap: var(--space-xs);
 
     li {
       text-transform: capitalize;
+    }
+
+    &[data-variant="submenu"] {
+      --menu-wrap: wrap;
+      --menu-alignment: auto;
+
+      margin-block-end: var(--flow-space, 1em);
     }
   }
 
@@ -158,29 +175,19 @@
       line-height: var(--leading-fine);
     }
 
-    thead th {
+    th {
       padding-block: var(--space-s);
+    }
+
+    thead,
+    tfoot {
+      background: var(--color-table-header-bg);
     }
 
     td,
     th {
       padding: var(--space-xs) var(--space-s);
-    }
-
-    th:not(:only-of-type) {
-      border-block-end: var(--stroke);
-    }
-
-    th:only-of-type {
-      border-inline-end: var(--stroke);
-    }
-
-    :is(th, td) ~ :is(th, td) {
-      border-inline-start: var(--stroke);
-    }
-
-    tr + tr :is(th, td) {
-      border-block-start: var(--stroke);
+      border: var(--stroke);
     }
 
     caption {
@@ -228,7 +235,7 @@
   }
 
   :focus-visible {
-    outline: 2px solid var(--focus-color, currentColor);
+    outline: 4px dotted var(--color-focus, currentColor);
     outline-offset: var(--focus-offset, 0.25rem);
   }
 
@@ -238,21 +245,21 @@
     border: var(--stroke);
   }
 
-  /* ::selection { */
-  /*   color: var(--color-dark); */
-  /*   background: var(--color-light); */
-  /* } */
+  ::selection {
+    color: var(--color-selection-txt);
+    background: var(--color-selection-bg);
+  }
 
   pre {
     white-space: pre-wrap;
-    background: CanvasText;
-    color: Canvas;
+    background: var(--color-preformatted-bg);
+    color: var(--color-preformatted-txt);
     padding: 1.5em;
   }
 
   /* Form */
   :is(input, select, textarea) {
-    accent-color: var(--color-primary);
+    accent-color: var(--color-accent);
   }
 
   :is(input:not([type="checkbox"], [type="radio"], [type="color"]), select, textarea, button) {
@@ -274,13 +281,20 @@
     inline-size: 100%;
   }
 
-  button,
-  input[type="submit"],
-  input[type="reset"],
-  [type="button"] {
-    background: CanvasText;
-    color: Canvas;
+  :is(button, input[type="submit"], input[type="reset"], [type="button"]) {
+    --button-bg: var(--color-button-bg);
+    --button-txt: var(--color-button-txt);
+    background: var(--button-bg);
     border: 1px solid transparent;
+    color: var(--button-txt);
+  }
+
+  :is(input[type="submit"], input[data-variant="primary"]) {
+    --button-bg: var(--color-button-primary-bg);
+  }
+
+  input[data-variant="secondary"] {
+    --button-bg: var(--color-button-secondary-bg);
   }
 
   label,
@@ -320,17 +334,36 @@
   }
 
   hgroup {
-    margin-block-end: var(--space-l);
-    --title-leading: var(--leading-flat);
+    margin-block-end: var(--main-title-space, 0.5em);
 
     h1 {
-      line-height: var(--title-leading);
       margin-block-end: auto;
+    }
+
+    &:has(h1) {
+      font-size: var(--font-size-1);
+    }
+
+    p {
+      font-size: var(--body-font-size);
     }
   }
 
   h1 {
-    margin-block-end: var(--space-l);
+    margin-block-end: var(--main-title-space);
+    line-height: var(--main-title-leading);
+  }
+
+  a {
+    color: currentColor;
+    text-decoration-color: var(--color-primary);
+    text-decoration-thickness: 0.3ex;
+    text-underline-offset: 0.3ex;
+  }
+
+  mark {
+    background: var(--color-mark-bg);
+    color: var(--color-mark-txt);
   }
 }
 
@@ -447,6 +480,73 @@
     &:has(footer):after {
       content: "";
     }
+  }
+}
+
+@layer theme {
+  :root {
+    --color-dark: oklch(0.1118 0.0457 29.23);
+    --color-light: oklch(0.9719 0.0152 82.79);
+
+    /* Generated via Harmonizer: https://harmonizer.evilmartians.com/#W1siMTAwIiw5OCxudWxsLCIyMDAiLDczLG51bGwsIjMwMCIsNDUsbnVsbCwiNDAwIiw2MCxudWxsLCI1MDAiLDczLG51bGwsIjYwMCIsOTgsbnVsbF0sWyJSZWQiLDIyLCJDb3JhbCIsMzEsIk1haG9nYW55Iiw0MCwiU2t5IiwyMjBdLFsiYXBjYSIsImZnVG9CZyIsIm1heCIsIm9rbGNoKDAuOTcxOSAwLjAxNTIgODIuNzkpIiwib2tsY2goMC4xMTE4IDAuMDQ1NyAyOS4yMykiLDMsInAzIl1d */
+    --red-100: oklch(0.96 0.03 22);
+    --red-200: oklch(0.84 0.11 22);
+    --red-300: oklch(0.69 0.25 22);
+    --red-400: oklch(0.62 0.28 22);
+    --red-500: oklch(0.52 0.23 22);
+    --red-600: oklch(0.22 0.1 22);
+    --coral-100: oklch(0.96 0.03 31);
+    --coral-200: oklch(0.84 0.11 31);
+    --coral-300: oklch(0.69 0.25 31);
+    --coral-400: oklch(0.63 0.27 31);
+    --coral-500: oklch(0.52 0.23 31);
+    --coral-600: oklch(0.22 0.1 31);
+    --mahogany-100: oklch(0.96 0.03 40);
+    --mahogany-200: oklch(0.84 0.11 40);
+    --mahogany-300: oklch(0.69 0.24 40);
+    --mahogany-400: oklch(0.62 0.22 40);
+    --mahogany-500: oklch(0.52 0.18 40);
+    --mahogany-600: oklch(0.23 0.08 40);
+    --sky-100: oklch(0.95 0.04 220);
+    --sky-200: oklch(0.82 0.14 220);
+    --sky-300: oklch(0.65 0.16 220);
+    --sky-400: oklch(0.59 0.14 220);
+    --sky-500: oklch(0.5 0.12 220);
+    --sky-600: oklch(0.22 0.05 220);
+
+    --color-bg: light-dark(var(--color-light), var(--color-dark));
+    --color-fg: light-dark(var(--mahogany-600), var(--mahogany-100));
+
+    --color-primary: light-dark(var(--red-400), var(--red-300));
+    --color-secondary: light-dark(var(--pelorus-500), var(--amber-300));
+
+    --color-input-txt: var(--color-fg);
+    --color-input-bg: light-dark(var(--mahogany-100), var(--mahogany-600));
+
+    --color-button-bg: CanvasText;
+    --color-button-txt: Canvas;
+
+    --color-button-primary-bg: light-dark(var(--coral-400), var(--coral-300));
+    --color-button-secondary-bg: light-dark(var(--coral-500), var(--coral-200));
+
+    --color-accent: light-dark(var(--mahogany-500), var(--mahogany-300));
+
+    --color-focus: light-dark(var(--mahogany-600), var(--mahogany-100));
+
+    --color-selection-bg: light-dark(var(--sky-500), var(--sky-100));
+    --color-selection-txt: var(--color-bg);
+
+    /* Progressive enhancement: this will fall back to the bg if not supported */
+    --color-table-header-bg: light-dark(
+      lch(from var(--color-bg) calc(l - 10) calc(c + 5) h),
+      lch(from var(--color-bg) calc(l + 10) calc(c + 5) h)
+    );
+
+    --color-mark-bg: var(--color-selection-bg);
+    --color-mark-txt: var(--color-selection-txt);
+
+    --color-preformatted-bg: CanvasText;
+    --color-preformatted-txt: Canvas;
   }
 }
 

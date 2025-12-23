@@ -5,10 +5,7 @@ export const pages = ["calculator", "recipes"];
 ---
 
 <nav>
-  <a href="/">
-    <span class="visually-hidden">Navigate to Home</span>
-    <strong aria-hidden>Breadtoolkit</strong>
-  </a>
+  <a href="/">Home</a>
   <menu>
     {pages.map((name) => {
       const currentPage = currentPath === `/${name}` ? "page" : undefined;

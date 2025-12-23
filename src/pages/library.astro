@@ -9,7 +9,7 @@ import Layout from "@/layouts/Layout.astro";
   <h1>Pattern library</h1>
 
   <nav>
-    <ul>
+    <menu data-variant="submenu">
       <li><a href="#article">Article</a></li>
       <li><a href="#typography">Typography</a></li>
       <li><a href="#blockquote">Blockquote</a></li>
@@ -21,7 +21,7 @@ import Layout from "@/layouts/Layout.astro";
       <li><a href="#image">Image</a></li>
       <li><a href="#form">Form</a></li>
       <li><a href="#details">Details</a></li>
-    </ul>
+    </menu>
   </nav>
 
   <section>
@@ -150,12 +150,14 @@ import Layout from "@/layouts/Layout.astro";
         <caption id="caption">
           This is a table caption
         </caption>
-        <tbody>
+        <thead>
           <tr>
-            <th>Person</th>
-            <th>Number</th>
-            <th>Third Column</th>
+            <th scope="col">Person</th>
+            <th scope="col">Number</th>
+            <th scope="col">Third Column</th>
           </tr>
+        </thead>
+        <tbody>
           <tr>
             <td>Someone Lastname</td>
             <td>900</td>
@@ -186,6 +188,13 @@ import Layout from "@/layouts/Layout.astro";
             </td>
           </tr>
         </tbody>
+        <tfoot>
+          <tr>
+            <th>All</th>
+            <th>6400</th>
+            <th></th>
+          </tr>
+        </tfoot>
       </table>
 
     </article>
@@ -373,6 +382,15 @@ import Layout from "@/layouts/Layout.astro";
           />
         </div>
         <div>
+          <label for="example-disabled-text">Disabled</label>
+          <input
+            type="text"
+            id="example-disabled-text"
+            placeholder="Sorry i'm read-only"
+            disabled
+          />
+        </div>
+        <div>
           <label for="example-input-url">Url</label>
           <input
             type="url"
@@ -386,16 +404,12 @@ import Layout from "@/layouts/Layout.astro";
         </div>
 
         <div>
-          <label for="example-input-date">Date</label>
+          <label for="example-input-time">Date</label>
           <input type="date" id="example-input-date" placeholder="date" />
         </div>
         <div>
-          <label for="example-input-date-time">Date / Time</label>
-          <input
-            type="datetime"
-            id="example-input-date-time"
-            placeholder="date / time"
-          />
+          <label for="example-input-date">Date</label>
+          <input type="date" id="example-input-date" placeholder="date" />
         </div>
         <div>
           <label for="example-input-date-time-local">
@@ -532,12 +546,14 @@ import Layout from "@/layouts/Layout.astro";
           </label>
         </fieldset>
 
-        <p>
+        <div>
           <button type="button" name="button">Button</button>
           <input type="button" name="input" value="Input Button" />
-          <input type="submit" name="submit" value="Submit Button" />
           <input type="reset" name="reset" value="Reset Button" />
-        </p>
+          <input type="submit" name="submit" value="Submit Button" />
+          <input type="button" name="primary" value="Primary button" data-variant="primary" />
+          <input type="button" name="secondary" value="Secondary button" data-variant="secondary"/>
+        </div>
       </form>
     </article>
   </section>
@@ -558,3 +574,5 @@ import Layout from "@/layouts/Layout.astro";
 
   <hr />
 </Layout>
+
+

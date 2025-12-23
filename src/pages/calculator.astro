@@ -4,50 +4,59 @@ import Layout from "@layouts/Layout.astro";
 
 <Layout>
   <hgroup>
-    <h1>Calculator</h1>
-    <p>Calculate your dough hydration and the amount of ingredients.</p>
+    <h1 id="title">Calculator</h1>
+    <p id="description">Calculate your dough hydration and the amount of ingredients.</p>
   </hgroup>
 
   <article>
 
-    <calculator-form $input="onChange">
+    <calculator-form $input="onChange" role="form" aria-labelledby="title" aria-describedby="description">
       <dl>
-        <dt>Dough weights</dt>
+        <dt>Dough weight</dt>
         <dd id="weight" data-unit="gram">...</dd>
 
         <dt>Hydration</dt>
         <dd id="hydration" data-unit="%">...</dd>
       </dl>
 
-      <form aria-labelledby="form-heading">
+      <calculator-form-group $input="onInput">
+        <label for="flour">Flour</label>
+        <input type="number" id="flour" name="flour" value="0" inputmode="decimal" min="0" required enterkeyhint="next">
+      </calculator-form-group>
 
-        <calculator-form-group $input="onInput">
-          <label for="flour">Flour</label>
-          <input type="number" id="flour" name="flour" value="0" inputmode="decimal" min="0" required>
-        </calculator-form-group>
+      <calculator-form-group $input="onInput">
+        <label for="water">Water</label>
+        <input type="number" id="water" name="water" value="0" inputmode="decimal" step="any" min="0" required enterkeyhint="next">
+      </calculator-form-group>
 
-        <calculator-form-group $input="onInput">
-          <label for="water">Water</label>
-          <input type="number" id="water" name="water" value="0" inputmode="decimal" step="any" min="0" required>
-        </calculator-form-group>
+      <calculator-form-group $input="onInput">
+        <label for="salt">Salt</label>
+        <input type="number" id="salt" name="salt" value="0" inputmode="decimal" step="any" min="0" required enterkeyhint="next">
+      </calculator-form-group>
 
-        <calculator-form-group $input="onInput">
-          <label for="salt">Salt</label>
-          <input type="number" id="salt" name="salt" value="0" inputmode="decimal" step="any" min="0" required>
-        </calculator-form-group>
+      <calculator-form-group $input="onInput">
+        <label for="sourdough">Sourdough</label>
+        <input type="number" id="sourdough" name="sourdough" value="0" inputmode="decimal" step="any" min="0" required enterkeyhint="next">
+      </calculator-form-group>
 
+      <div>
+        <label>Sourdough ratio</label>
+        <input type="range" value="0" step="1" min="0" max="100" id="sourdough_ratio" name="sourdough_ratio" required list="ratio-values" />
+        <datalist id="ratio-values">
+          <option value="0" label="0"></option>
+          <option value="10" label="10"></option>
+          <option value="20"></option>
+          <option value="30"></option>
+          <option value="40"></option>
+          <option value="50"></option>
+          <option value="60"></option>
+          <option value="70"></option>
+          <option value="80"></option>
+          <option value="90"></option>
+          <option value="100"></option>
+        </datalist>
+      </div>
 
-          <calculator-form-group $input="onInput">
-            <label for="sourdough">Sourdough</label>
-            <input type="number" id="sourdough" name="sourdough" value="0" inputmode="decimal" step="any" min="0" required>
-          </calculator-form-group>
-
-          <div>
-            <label>Sourdough ratio</label>
-            <input type="range" value="0" min="0" max="100" id="sourdough_ratio" name="sourdough_ratio" required />
-          </div>
-
-      </form>
     </calculator-form>
   </article>
 </Layout>
