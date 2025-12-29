@@ -1,5 +1,6 @@
 ---
 import Layout from "@layouts/Layout.astro";
+import Dialog from "@components/Dialog.astro";
 ---
 
 <Layout>
@@ -8,9 +9,9 @@ import Layout from "@layouts/Layout.astro";
     <p id="description">Calculate your dough hydration and the amount of ingredients.</p>
   </hgroup>
 
-  <article>
+  <calculator-form $input="onChange" $click="onClick" $submit="onSubmit" role="form" aria-labelledby="title" aria-describedby="description">
+    <article>
 
-    <calculator-form $input="onChange" role="form" aria-labelledby="title" aria-describedby="description">
       <dl>
         <dt>Dough weight</dt>
         <dd id="weight" data-unit="gram">...</dd>
@@ -57,8 +58,38 @@ import Layout from "@layouts/Layout.astro";
         </datalist>
       </div>
 
-    </calculator-form>
-  </article>
+      <!-- <button id="hydratation-popover-toggle" popovertarget="hydratation-popover">
+Tip
+
+<div id="hydratation-popover" popover="auto">
+The hydratation is based on the ratio between the whole flour and whole the liquid. Both the sourdough and the extra ingredients affect the liquid content.
+</div>
+</button> -->
+
+      <button id="weight-edit-button">Set weight</button>
+
+      <Dialog id="weight-dialog" aria-labelledby="weight-dialog-title" aria-describedby="weight-dialog-description">
+        <hgroup slot="header">
+          <h2 id="weight-dialog-title">Change dough weight</h2>
+          <p id="weight-dialog-description">Set your target goal weight.</p>
+        </hgroup>
+
+        <Fragment slot="content">
+          <div>
+            <label for="weight-dialog-input">Dough weight</label>
+            <input id="weight-dialog-input" type="number" name="weight" inputmode="decimal" step="any" min="0" required />
+          </div>
+        </Fragment>
+
+        <Fragment slot="actions">
+          <button id="weight-dialog-close-button" type="button" formnovalidate>Cancel</button>
+          <input type="submit" value="Confirm" />
+        </Fragment>
+      </Dialog>
+
+
+    </article>
+  </calculator-form>
 </Layout>
 
 
@@ -77,20 +108,9 @@ dd {
   margin: auto;
 }
 
-input[type="number"]::-webkit-outer-spin-button,
-input[type="number"]::-webkit-inner-spin-button {
-    appearance: none;
-}
-
-input[type='number'] {
-  -moz-appearance: textfield;
-}
 
 calculator-form-group {
   display: block;
 }
 
-calculator-form > * + * {
-  margin-block-start: var(--flow-space, 1em); 
-}
 </style>

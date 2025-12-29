@@ -21,6 +21,7 @@ import Layout from "@/layouts/Layout.astro";
       <li><a href="#image">Image</a></li>
       <li><a href="#form">Form</a></li>
       <li><a href="#details">Details</a></li>
+      <li><a href="#dialog">Dialog</a></li>
     </menu>
   </nav>
 
@@ -552,7 +553,7 @@ import Layout from "@/layouts/Layout.astro";
           <input type="reset" name="reset" value="Reset Button" />
           <input type="submit" name="submit" value="Submit Button" />
           <input type="button" name="primary" value="Primary button" data-variant="primary" />
-          <input type="button" name="secondary" value="Secondary button" data-variant="secondary"/>
+          <button type="button" name="outlined"  data-outline="">Outline button</button>
         </div>
       </form>
     </article>
@@ -573,6 +574,43 @@ import Layout from "@/layouts/Layout.astro";
   </section>
 
   <hr />
+
+  <section>
+    <article>
+      <h2 id="dialog">Dialog</h2>
+
+      <button id="modal-button">Show dialog</button>
+
+      <dialog id="modal" closedby="any">
+        <form method="dialog" aria-labelledby="dialog-title">
+          <article>
+            <hgroup>
+              <h2 id="dialog-title">Modal dialog</h2>
+              <p>Dialog description inside a paragraph.</p>
+            </hgroup>
+            <div>
+              <label for="modal-input">Form input label</label>
+              <input id="modal-input" type="text" />
+            </div>
+            <footer>
+              <button  formnovalidate>Cancel</button>
+              <input type="submit" value="Confirm" />
+            </footer>
+          </article>
+        </form>
+      </dialog>
+    </article>
+  </section>
+
+  <hr />
 </Layout>
 
-
+<script>
+const dialogButton = document.getElementById("modal-button");
+const dialog = document.getElementById("modal") as HTMLDialogElement | null;
+if (dialogButton && dialog) {
+  dialogButton.addEventListener("click", () => {
+    dialog.showModal();
+  })
+}
+</script>

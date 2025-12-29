@@ -1,0 +1,20 @@
+---
+import type { HTMLAttributes } from "astro/types";
+
+interface Props extends HTMLAttributes<"dialog"> {}
+
+const { id, ...rest } = Astro.props;
+const titleId = `${id}-title`;
+---
+
+<dialog id={id} closedby="any" {...rest}>
+  <form method="dialog">
+    <article>
+      <slot name="header" />
+      <slot name="content" />
+      <footer>
+        <slot name="actions"/>
+      </footer>
+    </article>
+  </form>
+</dialog>

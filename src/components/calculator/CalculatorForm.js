@@ -33,6 +33,18 @@ class CalculatorForm extends LightElement {
   /** @type HTMLElement | null */
   #hydration;
 
+  /** @type HTMLInputElement | null */
+  #weightDialogInput;
+
+  /** @type HTMLElement | null */
+  #weightEditButton;
+
+  /** @type HTMLButtonElement | null */
+  #weightDialogCloseButton;
+
+  /** @type HTMLDialogElement | null */
+  #weightDialog;
+
   /** @type {import("@/context/calculator/reducer").CalculatorState} */
   #state = initialState;
 
@@ -42,22 +54,26 @@ class CalculatorForm extends LightElement {
     this.#saltInput = this.querySelector("#salt");
     this.#sourdoughInput = this.querySelector("#sourdough");
     this.#sourdoughRatioInput = this.querySelector("#sourdough_ratio");
+    this.#weightEditButton = this.querySelector("#weight-edit-button");
+    this.#weightDialogCloseButton = this.querySelector("#weight-dialog-close-button");
+    this.#weightDialog = this.querySelector("#weight-dialog");
+    this.#weightDialogInput = this.querySelector("#weight-dialog-input");
 
     this.#weight = this.querySelector("#weight");
     this.#hydration = this.querySelector("#hydration");
 
     const settings = loadCalculatorSettings();
 
-    this.updateInputs(settings);
-
     this.#state = reducer(this.#state, { type: "initialize", settings, extras: {} });
+
+    this.updateInputs();
     this.updateSummary();
   }
 
   render() {}
 
   /**
-   * Add two numbers together
+   * Adds two numbers together.
    * @param {Event & { target: HTMLInputElement }} e
    */
   onChange(e) {
@@ -90,6 +106,46 @@ class CalculatorForm extends LightElement {
   }
 
   /**
+   * Handle every click event inside the form.
+   *
+   * @param {Event & { target: HTMLElement }} e
+   */
+  onClick(e) {
+    switch (e.target) {
+      case this.#weightEditButton:
+        this.#weightDialog?.showModal();
+        break;
+      case this.#weightDialogCloseButton:
+        this.#weightDialog?.close();
+        break;
+    }
+  }
+
+  /**
+   * Handle custom weight submission.
+   *
+   * @param {Event & { target: HTMLFormElement, submitter: HTMLElement }} e
+   */
+  onSubmit(e) {
+    if (e.target.method === "dialog") {
+      const values = new FormData(e.target, e.submitter);
+      const weightValue = /** @type string | null */ (values.get("weight"));
+      if (weightValue) {
+        const weight = +weightValue;
+        if (!Number.isNaN(weight) && weight > 0) {
+          this.#state = reducer(this.#state, {
+            type: "submitDoughGoal",
+            goal: +weight,
+          });
+
+          this.updateSummary();
+          this.updateInputs();
+        }
+      }
+    }
+  }
+
+  /**
    * @param {HTMLInputElement} element
    * @param {SettingName} key
    */
@@ -104,6 +160,9 @@ class CalculatorForm extends LightElement {
     }
   }
 
+  /**
+   * Update the calculator summary fields.
+   */
   updateSummary() {
     if (this.#weight) {
       this.#weight.textContent = this.#state.dough.toString();
@@ -115,9 +174,11 @@ class CalculatorForm extends LightElement {
   }
 
   /**
-   * @param {Settings} settings
+   * Update input field values on the form.
    */
-  updateInputs(settings) {
+  updateInputs() {
+    const { dough, settings } = this.#state;
+
     if (this.#flourInput && settings.flour) {
       this.#flourInput.value = settings.flour.toString();
     }
@@ -132,6 +193,10 @@ class CalculatorForm extends LightElement {
 
     if (this.#sourdoughInput && settings.sourdough) {
       this.#sourdoughInput.value = settings.sourdough.toString();
+    }
+
+    if (this.#weightDialogInput) {
+      this.#weightDialogInput.value = dough.toString();
     }
   }
 }
