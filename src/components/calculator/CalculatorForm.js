@@ -36,14 +36,12 @@ class CalculatorForm extends LightElement {
   /** @type HTMLInputElement | null */
   #weightDialogInput;
 
-  /** @type HTMLElement | null */
-  #weightEditButton;
+  /** @type HTMLFormElement | null */
+  #weightForm;
 
-  /** @type HTMLButtonElement | null */
-  #weightDialogCloseButton;
+  #hydrationTitle;
 
-  /** @type HTMLDialogElement | null */
-  #weightDialog;
+  #hydrationPopover;
 
   /** @type {import("@/context/calculator/reducer").CalculatorState} */
   #state = initialState;
@@ -54,10 +52,10 @@ class CalculatorForm extends LightElement {
     this.#saltInput = this.querySelector("#salt");
     this.#sourdoughInput = this.querySelector("#sourdough");
     this.#sourdoughRatioInput = this.querySelector("#sourdough_ratio");
-    this.#weightEditButton = this.querySelector("#weight-edit-button");
-    this.#weightDialogCloseButton = this.querySelector("#weight-dialog-close-button");
-    this.#weightDialog = this.querySelector("#weight-dialog");
-    this.#weightDialogInput = this.querySelector("#weight-dialog-input");
+    this.#weightDialogInput = this.querySelector("#weight-input");
+    this.#weightForm = this.querySelector("#weight-form");
+    this.#hydrationTitle = this.querySelector("#hydration-title");
+    this.#hydrationPopover = this.querySelector("#hydration-popover");
 
     this.#weight = this.querySelector("#weight");
     this.#hydration = this.querySelector("#hydration");
@@ -68,6 +66,9 @@ class CalculatorForm extends LightElement {
 
     this.updateInputs();
     this.updateSummary();
+
+    if (this.#hydrationTitle && this.#hydrationPopover) {
+    }
   }
 
   render() {}
@@ -106,28 +107,14 @@ class CalculatorForm extends LightElement {
   }
 
   /**
-   * Handle every click event inside the form.
-   *
-   * @param {Event & { target: HTMLElement }} e
-   */
-  onClick(e) {
-    switch (e.target) {
-      case this.#weightEditButton:
-        this.#weightDialog?.showModal();
-        break;
-      case this.#weightDialogCloseButton:
-        this.#weightDialog?.close();
-        break;
-    }
-  }
-
-  /**
    * Handle custom weight submission.
    *
    * @param {Event & { target: HTMLFormElement, submitter: HTMLElement }} e
    */
   onSubmit(e) {
-    if (e.target.method === "dialog") {
+    e.preventDefault();
+    e.stopPropagation();
+    if (e.target === this.#weightForm) {
       const values = new FormData(e.target, e.submitter);
       const weightValue = /** @type string | null */ (values.get("weight"));
       if (weightValue) {
@@ -142,6 +129,8 @@ class CalculatorForm extends LightElement {
           this.updateInputs();
         }
       }
+      const popover = /** @type HTMLElement | null */ (e.target.closest("[popover]"));
+      popover?.hidePopover();
     }
   }
 

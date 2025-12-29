@@ -3,11 +3,10 @@ import type { HTMLAttributes } from "astro/types";
 
 interface Props extends HTMLAttributes<"dialog"> {}
 
-const { id, ...rest } = Astro.props;
-const titleId = `${id}-title`;
+const props = Astro.props;
 ---
 
-<dialog id={id} closedby="any" {...rest}>
+<dialog closedby="any" {...props}>
   <form method="dialog">
     <article>
       <slot name="header" />

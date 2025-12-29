@@ -1,6 +1,5 @@
 ---
 import Layout from "@layouts/Layout.astro";
-import Dialog from "@components/Dialog.astro";
 ---
 
 <Layout>
@@ -16,9 +15,27 @@ import Dialog from "@components/Dialog.astro";
         <dt>Dough weight</dt>
         <dd id="weight" data-unit="gram">...</dd>
 
-        <dt>Hydration</dt>
+        <dt id="hydration-title">Hydration</dt>
         <dd id="hydration" data-unit="%">...</dd>
       </dl>
+
+      <details id="hydratation-popover" >
+        <summary>How is it calculated?</summary>
+        The <dfn>hydratation</dfn> is based on the ratio between the whole flour and whole the liquid. Both the sourdough and the extra ingredients affect the liquid content.
+      </details>
+
+      <button id="weight-edit-button" popovertarget="weight-popover">Set weight</button>
+
+      <div id="weight-popover" popover="auto">
+        <form id="weight-form">
+          <div>
+            <label for="weight-input">Dough weight</label>
+            <input id="weight-input" type="number" name="weight" inputmode="decimal" step="any" min="0" required aria-describedby="weight-hint" />
+            <small id="weight-helper">Set the target dough weight</small>
+          </div>
+          <input type="submit" value="Confirm" />
+        </form>
+      </div>
 
       <calculator-form-group $input="onInput">
         <label for="flour">Flour</label>
@@ -58,36 +75,6 @@ import Dialog from "@components/Dialog.astro";
         </datalist>
       </div>
 
-      <!-- <button id="hydratation-popover-toggle" popovertarget="hydratation-popover">
-Tip
-
-<div id="hydratation-popover" popover="auto">
-The hydratation is based on the ratio between the whole flour and whole the liquid. Both the sourdough and the extra ingredients affect the liquid content.
-</div>
-</button> -->
-
-      <button id="weight-edit-button">Set weight</button>
-
-      <Dialog id="weight-dialog" aria-labelledby="weight-dialog-title" aria-describedby="weight-dialog-description">
-        <hgroup slot="header">
-          <h2 id="weight-dialog-title">Change dough weight</h2>
-          <p id="weight-dialog-description">Set your target goal weight.</p>
-        </hgroup>
-
-        <Fragment slot="content">
-          <div>
-            <label for="weight-dialog-input">Dough weight</label>
-            <input id="weight-dialog-input" type="number" name="weight" inputmode="decimal" step="any" min="0" required />
-          </div>
-        </Fragment>
-
-        <Fragment slot="actions">
-          <button id="weight-dialog-close-button" type="button" formnovalidate>Cancel</button>
-          <input type="submit" value="Confirm" />
-        </Fragment>
-      </Dialog>
-
-
     </article>
   </calculator-form>
 </Layout>
@@ -96,6 +83,10 @@ The hydratation is based on the ratio between the whole flour and whole the liqu
 <script>
   import "@components/calculator/CalculatorForm";
   import "@components/calculator/CalculatorFormGroup";
+  const supportsPopover = () => {
+    return Object.hasOwn(HTMLElement.prototype, "popover");
+  }
+  console.log("Supports popover: " + supportsPopover());
 </script>
 
 <style>
@@ -107,7 +98,6 @@ dd {
 
   margin: auto;
 }
-
 
 calculator-form-group {
   display: block;

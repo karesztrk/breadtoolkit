@@ -395,11 +395,8 @@
 
   dialog {
     margin: auto;
-    padding: var(--space-m);
-    border: 0;
     inline-size: min(100%, 50ch);
-    background-color: var(--color-dialog-bg);
-    box-shadow: 0 2px 8px var(--color-dialog-shadow);
+    padding: var(--space-m);
 
     footer {
       display: flex;
@@ -413,7 +410,6 @@
   }
 
   :popover-open,
-  :popover-open::backdrop,
   [open],
   [open]::backdrop {
     opacity: 1;
@@ -421,20 +417,36 @@
 
   @starting-style {
     :popover-open,
-    :popover-open::backdrop,
     [open],
     [open]::backdrop {
       opacity: 0;
-      transform: translateY(-20px);
+      transform: translateY(calc(-1 * var(--space-s)));
     }
   }
 
-  /* input + input, */
-  /* input + button, */
-  /* button + input, */
-  /* button + button { */
-  /*   margin-inline-start: var(--flow-space, 0.5em); */
-  /* } */
+  /* Hide scroll when the dialog is open */
+  :has([open]) {
+    overflow: hidden;
+  }
+
+  [popover] {
+    inset: unset;
+    position: absolute;
+    inset-block-end: calc(anchor(top) + var(--space-2xs));
+    inset-inline-start: calc(anchor(left));
+    justify-self: anchor-center;
+
+    inline-size: 25ch;
+    padding: var(--space-xs);
+  }
+
+  dialog,
+  [popover] {
+    --stroke: 1px solid CanvasText;
+    background-color: var(--color-dialog-bg);
+    box-shadow: 0 2px 8px var(--color-dialog-shadow);
+    border: var(--stroke);
+  }
 }
 
 @layer typography {
