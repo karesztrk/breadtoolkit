@@ -141,6 +141,7 @@
 
   /* Spacing */
   article > * + *,
+  section > * + *,
   form > * + * {
     margin-block-start: var(--flow-space, 1em);
   }
@@ -200,18 +201,37 @@
   dl {
     dt {
       font-weight: var(--font-bold);
+      line-height: var(--leading-fine);
     }
 
     dd {
-      margin-inline-start: 1.5ch;
+      margin-inline-start: var(--details-inline-space, 1.5ch);
+
+      &[data-variant="emphasized"] {
+        --details-inline-space: 0;
+        --details-block-space: 0;
+        font-size: var(--font-size-4);
+        font-weight: var(--font-bold);
+        line-height: var(--leading-mini);
+      }
     }
 
     dt + dd {
-      margin-block-start: var(--dd-space, 0.75em);
+      margin-block-start: var(--details-block-space, 0.75em);
+      line-height: var(--leading-fine);
     }
 
-    dd + dt {
-      margin-block-start: var(--dt-space, 1em);
+    dd + dt,
+    dd + div {
+      margin-block-start: var(--term-block-space, 1em);
+    }
+
+    dd[data-variant="comment"],
+    dt[data-variant="comment"] {
+      --details-inline-space: 0;
+      --details-block-space: 0;
+      display: inline;
+      font-weight: var(--font-normal);
     }
   }
 
@@ -397,11 +417,18 @@
     margin: auto;
     inline-size: min(100%, 50ch);
     padding: var(--space-m);
+    border: 0;
 
     footer {
       display: flex;
       gap: var(--space-xs);
     }
+  }
+
+  [role="group"] {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-xs);
   }
 
   ::backdrop {
@@ -425,7 +452,7 @@
   }
 
   /* Hide scroll when the dialog is open */
-  :has([open]) {
+  :has(dialog[open]) {
     overflow: hidden;
   }
 
@@ -438,6 +465,7 @@
 
     inline-size: 25ch;
     padding: var(--space-xs);
+    border: var(--stroke);
   }
 
   dialog,
@@ -445,7 +473,6 @@
     --stroke: 1px solid CanvasText;
     background-color: var(--color-dialog-bg);
     box-shadow: 0 2px 8px var(--color-dialog-shadow);
-    border: var(--stroke);
   }
 }
 

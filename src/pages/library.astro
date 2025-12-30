@@ -21,7 +21,7 @@ import Layout from "@/layouts/Layout.astro";
       <li><a href="#image">Image</a></li>
       <li><a href="#form">Form</a></li>
       <li><a href="#details">Details</a></li>
-      <li><a href="#dialog">Dialog</a></li>
+      <li><a href="#modal">Modal</a></li>
     </menu>
   </nav>
 
@@ -547,7 +547,7 @@ import Layout from "@/layouts/Layout.astro";
           </label>
         </fieldset>
 
-        <div>
+        <div role="group">
           <button type="button" name="button">Button</button>
           <input type="button" name="input" value="Input Button" />
           <input type="reset" name="reset" value="Reset Button" />
@@ -577,11 +577,11 @@ import Layout from "@/layouts/Layout.astro";
 
   <section>
     <article>
-      <h2 id="dialog">Dialog</h2>
+      <h2 id="modal">Modal</h2>
 
-      <button id="modal-button">Show dialog</button>
+      <button id="modal-button">Dialog</button>
 
-      <dialog id="modal" closedby="any">
+      <dialog id="modal-dialog" closedby="any">
         <form method="dialog" aria-labelledby="dialog-title">
           <article>
             <hgroup>
@@ -600,6 +600,24 @@ import Layout from "@/layouts/Layout.astro";
         </form>
       </dialog>
     </article>
+
+    <div role="group">
+      <button popovertarget="popover-auto" popovertargetaction="toggle">Auto popover</button>
+      <button popovertarget="popover-manual" popoveraction="toggle">Manual popover</button>
+      <button id="hint-button" popovertarget="popover-hint" popoveraction="toggle">Hint popover</button>
+    </div>
+
+    <div id="popover-auto" popover="auto">
+      Hello, I'm an auto popover. I can be dismissed.
+    </div>
+
+    <div id="popover-manual" popover="manual">
+      Hello, I'm a manual popover. I cannot be dismissed. Use the toggle button.
+    </div>
+    
+    <div id="popover-hint" popover="hint">
+      Hello, I'm a hint popover. I'm bound to the hover state of my trigger button.
+    </div>
   </section>
 
   <hr />
@@ -607,10 +625,31 @@ import Layout from "@/layouts/Layout.astro";
 
 <script>
 const dialogButton = document.getElementById("modal-button");
-const dialog = document.getElementById("modal") as HTMLDialogElement | null;
+const dialog = document.getElementById("modal-dialog") as HTMLDialogElement | null;
 if (dialogButton && dialog) {
   dialogButton.addEventListener("click", () => {
     dialog.showModal();
   })
+}
+
+const hintButton = document.getElementById("hint-button");
+const tooltip = document.getElementById("popover-hint");
+
+if (hintButton && tooltip) {
+  hintButton.addEventListener("mouseover", () => {
+    tooltip.showPopover({ source: hintButton });
+  });
+
+  hintButton.addEventListener("mouseout", () => {
+    tooltip.hidePopover();
+  });
+
+  hintButton.addEventListener("focus", () => {
+    tooltip.showPopover({ source: hintButton });
+  });
+
+  hintButton.addEventListener("blur", () => {
+    tooltip.hidePopover();
+  });
 }
 </script>

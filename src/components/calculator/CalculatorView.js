@@ -1,15 +1,15 @@
 import { LightElement } from "@karesztrk/webcomponent-base";
 import reducer, { initialState } from "@/context/calculator/reducer";
-import { calcHydration, loadCalculatorSettings } from "@/service/calculator";
+import { loadCalculatorSettings } from "@/service/calculator";
+import SummaryController from "./SummaryController";
 
 /**
  * @typedef {import('@service/types').Settings} Settings
  * @typedef {import('@service/types').SettingName} SettingName
  */
-// TODO: Input validation
-class CalculatorForm extends LightElement {
+class CalculatorView extends LightElement {
   static {
-    this.register("calculator-form", CalculatorForm);
+    this.register("calculator-view", CalculatorView);
   }
 
   /** @type HTMLInputElement | null */
@@ -27,51 +27,38 @@ class CalculatorForm extends LightElement {
   /** @type HTMLInputElement | null */
   #sourdoughRatioInput;
 
-  /** @type HTMLElement | null */
-  #weight;
-
-  /** @type HTMLElement | null */
-  #hydration;
-
   /** @type HTMLInputElement | null */
   #weightDialogInput;
 
   /** @type HTMLFormElement | null */
   #weightForm;
 
-  #hydrationTitle;
-
-  #hydrationPopover;
+  /** @type SummaryController */
+  #summaryController;
 
   /** @type {import("@/context/calculator/reducer").CalculatorState} */
-  #state = initialState;
+  state = initialState;
 
   connectedCallback() {
-    this.#flourInput = this.querySelector("#flour");
-    this.#waterInput = this.querySelector("#water");
-    this.#saltInput = this.querySelector("#salt");
-    this.#sourdoughInput = this.querySelector("#sourdough");
-    this.#sourdoughRatioInput = this.querySelector("#sourdough_ratio");
+    this.#flourInput = this.querySelector("#flour-input");
+    this.#waterInput = this.querySelector("#water-input");
+    this.#saltInput = this.querySelector("#salt-input");
+    this.#sourdoughInput = this.querySelector("#sourdough-input");
+    this.#sourdoughRatioInput = this.querySelector("#sourdough-ratio-input");
     this.#weightDialogInput = this.querySelector("#weight-input");
     this.#weightForm = this.querySelector("#weight-form");
-    this.#hydrationTitle = this.querySelector("#hydration-title");
-    this.#hydrationPopover = this.querySelector("#hydration-popover");
-
-    this.#weight = this.querySelector("#weight");
-    this.#hydration = this.querySelector("#hydration");
+    this.#summaryController = new SummaryController(this);
 
     const settings = loadCalculatorSettings();
 
-    this.#state = reducer(this.#state, { type: "initialize", settings, extras: {} });
-
-    this.updateInputs();
-    this.updateSummary();
-
-    if (this.#hydrationTitle && this.#hydrationPopover) {
-    }
+    this.state = reducer(this.state, { type: "initialize", settings, extras: {} });
+    super.connectedCallback();
   }
 
-  render() {}
+  render() {
+    this.#summaryController.update();
+    this.updateInputs();
+  }
 
   /**
    * Adds two numbers together.
@@ -102,8 +89,6 @@ class CalculatorForm extends LightElement {
       default:
         break;
     }
-
-    this.updateSummary();
   }
 
   /**
@@ -120,13 +105,12 @@ class CalculatorForm extends LightElement {
       if (weightValue) {
         const weight = +weightValue;
         if (!Number.isNaN(weight) && weight > 0) {
-          this.#state = reducer(this.#state, {
+          this.state = reducer(this.state, {
             type: "submitDoughGoal",
             goal: +weight,
           });
 
-          this.updateSummary();
-          this.updateInputs();
+          this.render();
         }
       }
       const popover = /** @type HTMLElement | null */ (e.target.closest("[popover]"));
@@ -141,32 +125,20 @@ class CalculatorForm extends LightElement {
   onNumberInputChange(element, key) {
     const value = element.valueAsNumber;
     if (!Number.isNaN(value)) {
-      this.#state = reducer(this.#state, {
+      this.state = reducer(this.state, {
         type: "setSetting",
         key,
         value,
       });
     }
-  }
-
-  /**
-   * Update the calculator summary fields.
-   */
-  updateSummary() {
-    if (this.#weight) {
-      this.#weight.textContent = this.#state.dough.toString();
-    }
-
-    if (this.#hydration) {
-      this.#hydration.textContent = calcHydration(this.#state.settings, this.#state.liquids);
-    }
+    this.render();
   }
 
   /**
    * Update input field values on the form.
    */
   updateInputs() {
-    const { dough, settings } = this.#state;
+    const { dough, settings } = this.state;
 
     if (this.#flourInput && settings.flour) {
       this.#flourInput.value = settings.flour.toString();
@@ -190,4 +162,4 @@ class CalculatorForm extends LightElement {
   }
 }
 
-export default CalculatorForm;
+export default CalculatorView;
