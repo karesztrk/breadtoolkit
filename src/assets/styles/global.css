@@ -316,19 +316,58 @@
     --button-bg: var(--color-button-bg);
     --button-txt: var(--color-button-txt);
     --button-stroke: 0px solid transparent;
-    background: var(--button-bg);
+    --button-hover-bg: light-dark(
+      lch(from var(--button-bg) calc(l + 15) c h),
+      lch(from var(--button-bg) calc(l - 10) c h)
+    );
+    --button-active-bg: light-dark(
+      lch(from var(--button-bg) calc(l + 30) c h),
+      lch(from var(--button-bg) calc(l - 20) c h)
+    );
+    --button-hover-txt: Canvas;
+    --button-active-txt: Canvas;
+
+    background-color: var(--button-bg);
     border: var(--button-stroke);
     color: var(--button-txt);
+
+    &:hover {
+      background-color: var(--button-hover-bg);
+      border: var(--button-hover-stroke);
+      color: var(--button-hover-txt);
+    }
+
+    &:active {
+      background-color: var(--button-active-bg);
+      border: var(--button-active-stroke);
+      color: var(--button-hover-txt);
+    }
   }
 
   :is(input[type="submit"], input[data-variant="primary"]) {
     --button-bg: var(--color-button-primary-bg);
+    --button-hover-bg: light-dark(
+      lch(from var(--button-bg) calc(l - 10) calc(c + 5) h),
+      lch(from var(--button-bg) calc(l + 10) calc(c + 5) h)
+    );
+    --button-active-bg: light-dark(
+      lch(from var(--button-bg) calc(l - 20) calc(c + 5) h),
+      lch(from var(--button-bg) calc(l + 20) calc(c + 5) h)
+    );
   }
 
   :is(input[type="button"][data-outline], button[data-outline]) {
     --button-stroke: 2px solid var(--color-button-outline-border);
     --button-bg: transparent;
     --button-txt: var(--color-button-outline-txt);
+    --button-hover-bg: var(--color-button-outline-txt);
+    --button-hover-stroke: 2px solid var(--button-hover-bg);
+    --button-hover-txt: Canvas;
+    --button-active-bg: light-dark(
+      lch(from var(--button-hover-bg) calc(l - 20) calc(c + 5) h),
+      lch(from var(--button-hover-bg) calc(l + 20) calc(c + 5) h)
+    );
+    --button-active-stroke: 2px solid var(--button-active-bg);
   }
 
   label,
@@ -688,5 +727,19 @@
     margin: -1;
     padding: 0;
     border: 0;
+  }
+}
+
+@layer animations {
+  :is(input[type="button"], input[type="reset"], input[type="submit"], button) { 
+    --entry-easing: linear(0, 0.03 1.1%, 0.125 2.4%, 0.906 9.8%, 1.046 12.3%, 1.11 15%, 1.116 16.3%, 1.11 17.8%, 1.014 25.8%, 0.987 31.2%, 1.001 47.2%, 1);
+    --exit-easing: cubic-bezier(.3, .7, .4, 1);
+
+    transition: color 600ms var(--exit-easing), background-color 600ms var(--exit-easing);
+
+    &:hover {
+      transition: color 300ms var(--entry-easing), background-color 300ms var(--entry-easing);
+    }
+
   }
 }
