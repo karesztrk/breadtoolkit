@@ -1,0 +1,17 @@
+---
+import type { HTMLAttributes } from "astro/types";
+
+interface Props extends HTMLAttributes<"input"> {}
+
+const {id, ...rest} = Astro.props;
+---
+
+<number-input  role="group" $command="onCommand">
+  <button type="button" commandfor={id} command="--decrement">-</button>
+  <input id={id} type="number" {...rest}  />
+  <button type="button" commandfor={id} command="--increment">+</button>
+</number-input>
+
+<script>
+  import "@components/number-input/NumberInput";
+</script>

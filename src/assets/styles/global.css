@@ -465,9 +465,13 @@
   }
 
   [role="group"] {
-    display: flex;
-    flex-wrap: wrap;
-    gap: var(--space-xs);
+    display: inline-flex;
+    inline-size: 100%;
+
+    &[data-spaced] {
+      flex-wrap: wrap;
+      gap: var(--space-xs);
+    }
   }
 
   ::backdrop {

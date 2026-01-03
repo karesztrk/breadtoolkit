@@ -1,5 +1,6 @@
 ---
 import Layout from "@layouts/Layout.astro";
+import NumberInput from "@components/number-input/NumberInput.astro";
 ---
 
 <Layout>
@@ -40,22 +41,22 @@ import Layout from "@layouts/Layout.astro";
         <form aria-labelledby="title">
           <calculator-form-group $input="onInput">
             <label for="flour-input">Flour</label>
-            <input type="number" id="flour-input" name="flour" value="0" inputmode="decimal" min="0" required enterkeyhint="next">
+            <NumberInput type="number" id="flour-input" name="flour" value="0" inputmode="decimal" step="1" min="0" required enterkeyhint="next" />
           </calculator-form-group>
 
           <calculator-form-group $input="onInput">
             <label for="water-input">Water</label>
-            <input type="number" id="water-input" name="water" value="0" inputmode="decimal" step="any" min="0" required enterkeyhint="next">
+            <NumberInput type="number" id="water-input" name="water" value="0" inputmode="decimal" step="1" min="0" required enterkeyhint="next">
           </calculator-form-group>
 
           <calculator-form-group $input="onInput">
             <label for="salt-input">Salt</label>
-            <input type="number" id="salt-input" name="salt" value="0" inputmode="decimal" step="any" min="0" required enterkeyhint="next">
+            <NumberInput type="number" id="salt-input" name="salt" value="0" inputmode="decimal" step="1" min="0" required enterkeyhint="next">
           </calculator-form-group>
 
           <calculator-form-group $input="onInput">
             <label for="sourdough-input">Sourdough</label>
-            <input type="number" id="sourdough-input" name="sourdough" value="0" inputmode="decimal" step="any" min="0" required enterkeyhint="next">
+            <NumberInput type="number" id="sourdough-input" name="sourdough" value="0" inputmode="decimal" step="1" min="0" required enterkeyhint="next">
           </calculator-form-group>
 
           <div>
@@ -90,6 +91,7 @@ import Layout from "@layouts/Layout.astro";
 
 <script>
   import "@components/calculator/CalculatorView";
+  import "@components/calculator/CalculatorFormGroup";
   import "@components/calculator/CalculatorFormGroup";
 
   const supportsPopover = () => {

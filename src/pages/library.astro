@@ -342,12 +342,20 @@ import Layout from "@/layouts/Layout.astro";
           />
         </div>
         <div>
-          <label for="example-input-password1">Number</label>
+          <label for="example-input-number">Number</label>
           <input
             type="number"
             id="example-input-number"
             placeholder="Number"
           />
+        </div>
+        <div>
+          <label for="example-input-number-command">Number with buttons</label>
+          <div role="group">
+            <button type="button" commandfor="example-input-number-command" command="--decrement">-</button>
+            <input id="example-input-number-command" type="number" />
+            <button type="button" commandfor="example-input-number-command" command="--increment">+</button>
+          </div>
         </div>
         <div>
           <label for="example-input-password">Password</label>
@@ -547,7 +555,7 @@ import Layout from "@/layouts/Layout.astro";
           </label>
         </fieldset>
 
-        <div role="group">
+        <div role="group" data-spaced>
           <button type="button" name="button">Button</button>
           <input type="button" name="input" value="Input Button" />
           <input type="reset" name="reset" value="Reset Button" />
@@ -652,4 +660,5 @@ if (hintButton && tooltip) {
     tooltip.hidePopover();
   });
 }
+
 </script>
