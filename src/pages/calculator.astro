@@ -9,7 +9,7 @@ import NumberInput from "@components/number-input/NumberInput.astro";
     <p id="description">Calculate your dough hydration and the amount of ingredients.</p>
   </hgroup>
 
-  <calculator-view $input="onChange" $submit="onSubmit" aria-labelledby="title" aria-describedby="description">
+  <calculator-view $input="onChange" $inputstep="onChange" $submit="onSubmit" aria-labelledby="title" aria-describedby="description">
     <article>
       <section>
         <dl>
@@ -22,6 +22,32 @@ import NumberInput from "@components/number-input/NumberInput.astro";
           </div>
         </dl>
 
+        <details>
+          <summary>Ingredient split</summary>
+          <p>
+            Check the ingredient ratios. We use <a href="https://en.wikipedia.org/wiki/Baker_percentage">baker's math</a> where every ingredient is calculated
+            relative to the flour.
+          </p>
+          <dl>
+            <div>
+              <dt data-variant="comment">Flour</dt>
+              <dd data-variant="comment"><span id="flour-percent" />%</dd>
+            </div>
+            <div>
+              <dt data-variant="comment">Water</dt>
+              <dd data-variant="comment"><span id="water-percent" />%</dd>
+            </div>
+            <div>
+              <dt data-variant="comment">Salt</dt>
+              <dd data-variant="comment"><span id="salt-percent" />%</dd>
+            </div>
+            <div>
+              <dt data-variant="comment">Sourdough</dt>
+              <dd data-variant="comment"><span id="sourdough-percent" />%</dd>
+            </div>
+          </dl>
+        </details>
+
         <button popovertarget="weight-popover">Custom weight</button>
       </section>
 
@@ -29,7 +55,7 @@ import NumberInput from "@components/number-input/NumberInput.astro";
         <form id="weight-form">
           <div>
             <label for="weight-input">Dough weight</label>
-            <input id="weight-input" type="number" name="weight" inputmode="decimal" step="any" min="0" required aria-describedby="weight-hint" />
+            <input id="weight-input" type="number" name="weight" inputmode="decimal" step="1" min="0" required aria-describedby="weight-hint" />
             <small id="weight-helper">Set the target dough weight</small>
           </div>
           <input type="submit" value="Confirm" />
@@ -80,7 +106,7 @@ import NumberInput from "@components/number-input/NumberInput.astro";
 
         <details>
           <summary>How does the <dfn>hydration</dfn> calculated?</summary>
-          The <dfn>hydratation</dfn> is based on the ratio between the whole flour and whole the liquid. Both the sourdough and the extra ingredients affect the liquid content.
+          <p>The <dfn>hydratation</dfn> is based on the ratio between the whole flour and whole the liquid. Both the sourdough and the extra ingredients affect the liquid content.</p>
         </details>
       </section>
 

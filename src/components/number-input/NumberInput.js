@@ -14,7 +14,7 @@ class NumberInput extends LightElement {
   }
 
   connectedCallback() {
-    this.#input?.addEventListener("command", this.onCommand.bind(this))
+    this.#input?.addEventListener("command", this.onCommand.bind(this));
   }
 
   /**
@@ -31,8 +31,10 @@ class NumberInput extends LightElement {
     } else if (e.command === "--decrement") {
       this.#input.stepDown();
     }
-  }
 
+    // Propagate the change to the parent
+    this.#input.dispatchEvent(new CustomEvent("inputstep", { bubbles: true }));
+  }
 }
 
 export default NumberInput;

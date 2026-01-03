@@ -14,7 +14,8 @@
 
 :root {
   /* Typography */
-  --font-family: "ET Book", Charter, "Bitstream Charter", "Sitka Text", Cambria, serif;
+  --font-family:
+    "ET Book", Charter, "Bitstream Charter", "Sitka Text", Cambria, serif;
   --font-normal: 400;
   --font-bold: 700;
 
@@ -78,6 +79,8 @@
   --leading-mini: 0.9;
   --leading-micro: 0.8;
 
+  --shadow-small: 0 2px 8px var(--color-dialog-shadow);
+
   --main-title-leading: var(--leading-flat);
   --main-title-space: 0.5em;
 
@@ -100,7 +103,9 @@
   body {
     display: grid;
     grid-template-columns:
-      [full-start] var(--full) [popout-start] var(--popout) [content-start] var(--content)
+      [full-start] var(--full) [popout-start] var(--popout) [content-start] var(
+        --content
+      )
       [content-end] var(--popout) [popout-end] var(--full) [full-end];
     grid-template-rows: min-content;
     row-gap: var(--gap);
@@ -282,23 +287,28 @@
     accent-color: var(--color-accent);
   }
 
-  :is(input:not([type="checkbox"], [type="radio"], [type="color"]), select, textarea, button) {
+  :is(
+    input:not([type="checkbox"], [type="radio"], [type="color"]),
+    select,
+    textarea,
+    button
+  ) {
     padding: var(--padding-block, 0.35em) var(--padding-inline, 0.65em);
   }
 
   /* Block sized inputs */
   :is(
-      input:not(
-          [type="checkbox"],
-          [type="radio"],
-          [type="color"],
-          [type="submit"],
-          [type="reset"],
-          [type="button"]
-        ),
-      select,
-      textarea
-    ) {
+    input:not(
+      [type="checkbox"],
+      [type="radio"],
+      [type="color"],
+      [type="submit"],
+      [type="reset"],
+      [type="button"]
+    ),
+    select,
+    textarea
+  ) {
     inline-size: 100%;
   }
 
@@ -404,6 +414,10 @@
     &[open] summary {
       margin-block-end: var(--space-s);
     }
+
+    > * + * {
+      margin-block-start: 0.5em;
+    }
   }
 
   hgroup {
@@ -439,19 +453,6 @@
     color: var(--color-mark-txt);
   }
 
-  [popover],
-  dialog,
-  ::backdrop {
-    --transition-duration: 0ms;
-    transition:
-      display var(--transition-duration) allow-discrete,
-      overlay var(--transition-duration) allow-discrete,
-      opacity var(--transition-duration),
-      transform var(--transition-duration);
-    opacity: 0;
-    transform: translateY(0);
-  }
-
   dialog {
     margin: auto;
     inline-size: min(100%, 50ch);
@@ -474,29 +475,21 @@
     }
   }
 
-  ::backdrop {
+  [open]::backdrop {
     background: rgba(0, 0, 0, 0.61);
     backdrop-filter: blur(4px);
-  }
-
-  :popover-open,
-  [open],
-  [open]::backdrop {
-    opacity: 1;
-  }
-
-  @starting-style {
-    :popover-open,
-    [open],
-    [open]::backdrop {
-      opacity: 0;
-      transform: translateY(calc(-1 * var(--space-s)));
-    }
   }
 
   /* Hide scroll when the dialog is open */
   :has(dialog[open]) {
     overflow: hidden;
+  }
+
+  dialog,
+  [popover] {
+    --stroke: 1px solid CanvasText;
+    background-color: var(--color-dialog-bg);
+    box-shadow: var(--shadow-small);
   }
 
   [popover] {
@@ -510,13 +503,6 @@
     padding: var(--space-xs);
     border: var(--stroke);
   }
-
-  dialog,
-  [popover] {
-    --stroke: 1px solid CanvasText;
-    background-color: var(--color-dialog-bg);
-    box-shadow: 0 2px 8px var(--color-dialog-shadow);
-  }
 }
 
 @layer typography {
@@ -527,8 +513,8 @@
     -moz-osx-font-smoothing: grayscale;
     font-family: var(--font-family);
     font-size: var(--body-font-size);
-    font-variant-ligatures: common-ligatures no-discretionary-ligatures no-historical-ligatures
-      contextual;
+    font-variant-ligatures: common-ligatures no-discretionary-ligatures
+      no-historical-ligatures contextual;
   }
 
   h1,
@@ -575,13 +561,14 @@
 
   @supports (font-size: 1cqi) {
     :is(h1, h2, h3, h4, h5, h6) {
-      --_font-min: calc(var(--font-size) - var(--font-size) * var(--font-size-diff, 0.3));
+      --_font-min: calc(
+        var(--font-size) - var(--font-size) * var(--font-size-diff, 0.3)
+      );
 
       /* https://moderncss.dev/container-query-units-and-fluid-typography/ */
       font-size: clamp(
         max(var(--body-font-size), var(--_font-min)),
-        var(--_font-min) +
-        1cqi,
+        var(--_font-min) + 1cqi,
         var(--font-size)
       );
     }
@@ -735,15 +722,77 @@
 }
 
 @layer animations {
-  :is(input[type="button"], input[type="reset"], input[type="submit"], button) { 
-    --entry-easing: linear(0, 0.03 1.1%, 0.125 2.4%, 0.906 9.8%, 1.046 12.3%, 1.11 15%, 1.116 16.3%, 1.11 17.8%, 1.014 25.8%, 0.987 31.2%, 1.001 47.2%, 1);
-    --exit-easing: cubic-bezier(.3, .7, .4, 1);
+  :is(input[type="button"], input[type="reset"], input[type="submit"], button) {
+    --easing: linear(
+      0,
+      0.012 0.9%,
+      0.05 2%,
+      0.411 9.2%,
+      0.517 11.8%,
+      0.611 14.6%,
+      0.694 17.7%,
+      0.765 21.1%,
+      0.824 24.8%,
+      0.872 28.9%,
+      0.91 33.4%,
+      0.939 38.4%,
+      0.977 50.9%,
+      0.994 68.4%,
+      1
+    );
+    --duration: 750ms;
 
-    transition: color 600ms var(--exit-easing), background-color 600ms var(--exit-easing);
+    transition:
+      color var(--duration) var(--easing),
+      background-color var(--duration) var(--easing);
 
     &:hover {
-      transition: color 300ms var(--entry-easing), background-color 300ms var(--entry-easing);
+      --duration: 300ms;
     }
+  }
 
+  :is([popover], dialog, ::backdrop) {
+    --easing: linear(
+      0,
+      0.012 0.9%,
+      0.05 2%,
+      0.411 9.2%,
+      0.517 11.8%,
+      0.611 14.6%,
+      0.694 17.7%,
+      0.765 21.1%,
+      0.824 24.8%,
+      0.872 28.9%,
+      0.91 33.4%,
+      0.939 38.4%,
+      0.977 50.9%,
+      0.994 68.4%,
+      1
+    );
+    --duration: 300ms;
+
+    transition:
+      display var(--duration) var(--easing) allow-discrete,
+      overlay var(--duration) var(--easing) allow-discrete,
+      opacity var(--duration) var(--easing) allow-discrete,
+      transform var(--duration) var(--easing);
+  }
+
+  [popover]:popover-open {
+    opacity: 1;
+    transform: scale(1);
+    transform-origin: 12ch calc(100% + 10px);
+  }
+
+  [popover] {
+    opacity: 0;
+    transform: translateY(var(--space-s)) scale(0.97);
+  }
+
+  @starting-style {
+    [popover]:popover-open {
+      opacity: 0;
+      transform: translateY(var(--space-s)) scale(0.97);
+    }
   }
 }
