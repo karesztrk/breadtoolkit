@@ -95,6 +95,12 @@
   color-scheme: dark light;
 
   background-color: var(--color-bg);
+  /* Possible future improvement on dark mode */
+  /* background-attachment: fixed; */
+  /* background-image: */
+  /*   radial-gradient(circle at 35% 50%, var(--sky-300-t), transparent 50%), */
+  /*   radial-gradient(circle at 65% 50%, var(--red-300-t), transparent 50%), */
+  /*   radial-gradient(circle at 50% 65%, var(--mustard-300-t), transparent 50%); */
   color: var(--color-fg);
 }
 
@@ -231,8 +237,8 @@
       margin-block-start: var(--term-block-space, 1em);
     }
 
-    dd[data-variant="comment"],
-    dt[data-variant="comment"] {
+    dd[data-variant="note"],
+    dt[data-variant="note"] {
       --details-inline-space: 0;
       --details-block-space: 0;
       display: inline;
@@ -442,10 +448,20 @@
   }
 
   a {
-    color: currentColor;
-    text-decoration-color: var(--color-primary);
-    text-decoration-thickness: 0.3ex;
+    --color: currentColor;
+    --underline-color: var(--color-primary);
+    color: var(--color);
+    text-decoration-color: var(--underline-color);
+    text-decoration-thickness: var(--underline-thickness, 0.3ex);
     text-underline-offset: 0.3ex;
+
+    &:hover {
+      --color: light-dark(
+        lch(from var(--color-primary) calc(l - 10) c h),
+        lch(from var(--color-primary) calc(l + 10) c h)
+      );
+      --underline-color: var(--color);
+    }
   }
 
   mark {
@@ -625,6 +641,10 @@
   dialog h2 {
     --font-size: var(--font-size-4);
   }
+
+  p[data-note] {
+    font-style: italic;
+  }
 }
 
 @layer theme {
@@ -666,11 +686,15 @@
     --sky-500: oklch(0.5 0.12 220);
     --sky-600: oklch(0.22 0.05 220);
 
+    --sky-300-t: oklch(0.65 0.16 220 / 0.2);
+    --red-300-t: oklch(0.69 0.25 22 / 0.1);
+    --mustard-300-t: oklch(0.67 0.16 80 / 0.15);
+
     --color-bg: light-dark(var(--color-light), var(--color-dark));
     --color-fg: light-dark(var(--mahogany-600), var(--mahogany-100));
 
     --color-primary: light-dark(var(--red-400), var(--red-300));
-    --color-secondary: light-dark(var(--pelorus-500), var(--amber-300));
+    --color-secondary: light-dark(var(--sky-500), var(--mustard-300));
 
     --color-input-txt: var(--color-fg);
     --color-input-bg: light-dark(var(--mahogany-100), var(--mahogany-600));
@@ -705,6 +729,8 @@
 
     --color-dialog-bg: var(--color-soft);
     --color-dialog-shadow: lch(from var(--color-dark) l c h / 0.5);
+
+    --color-anchor: var(--color-primary);
   }
 }
 
