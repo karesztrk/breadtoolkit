@@ -502,6 +502,7 @@
     inline-size: 25ch;
     padding: var(--space-xs);
     border: var(--stroke);
+    position-try-fallbacks: flip-block;
   }
 }
 
@@ -822,6 +823,7 @@
       &::details-content {
         --duration: 300ms;
         --easing: ease-out;
+
         block-size: 0;
         opacity: 0;
         transition:
@@ -831,6 +833,7 @@
         transition-behavior: allow-discrete;
 
         overflow-y: clip;
+
         @supports not (interpolate-size: allow-keywords) {
           --duration: 0ms;
         }
