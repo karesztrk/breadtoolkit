@@ -722,6 +722,7 @@
 }
 
 @layer animations {
+  /* Buttons */
   :is(input[type="button"], input[type="reset"], input[type="submit"], button) {
     --easing: linear(
       0,
@@ -749,8 +750,13 @@
     &:hover {
       --duration: 300ms;
     }
+
+    @media (prefers-reduced-motion: reduce) {
+      --duration: 10ms;
+    }
   }
 
+  /* Popover */
   :is([popover], dialog, ::backdrop) {
     --easing: linear(
       0,
@@ -776,6 +782,10 @@
       overlay var(--duration) var(--easing) allow-discrete,
       opacity var(--duration) var(--easing) allow-discrete,
       transform var(--duration) var(--easing);
+
+    @media (prefers-reduced-motion: reduce) {
+      --duration: 10ms;
+    }
   }
 
   [popover]:popover-open {
@@ -793,6 +803,43 @@
     [popover]:popover-open {
       opacity: 0;
       transform: translateY(var(--space-s)) scale(0.97);
+    }
+  }
+
+  /* Details */
+  details {
+    overflow: hidden;
+
+    @supports (overflow: clip) {
+      overflow: clip;
+    }
+
+    @supports (interpolate-size: allow-keywords) {
+      interpolate-size: allow-keywords;
+    }
+
+    @supports selector(::details-content) {
+      &::details-content {
+        --duration: 300ms;
+        --easing: ease-out;
+        block-size: 0;
+        opacity: 0;
+        transition:
+          block-size var(--duration) var(--easing),
+          content-visibility var(--duration) var(--easing),
+          opacity var(--duration) var(--easing);
+        transition-behavior: allow-discrete;
+
+        overflow-y: clip;
+        @supports not (interpolate-size: allow-keywords) {
+          --duration: 0ms;
+        }
+      }
+
+      &:open::details-content {
+        block-size: auto;
+        opacity: 1;
+      }
     }
   }
 }
