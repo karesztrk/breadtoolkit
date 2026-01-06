@@ -1,6 +1,7 @@
 ---
 import Layout from "@layouts/Layout.astro";
 import NumberInput from "@components/number-input/NumberInput.astro";
+import BakerFormula from "@components/calculator/BakerFormula.astro";
 ---
 
 <Layout>
@@ -25,8 +26,7 @@ import NumberInput from "@components/number-input/NumberInput.astro";
         <details>
           <summary>Ingredient split</summary>
           <p>
-            Check the ingredient ratios. We use <a href="https://en.wikipedia.org/wiki/Baker_percentage">baker's math</a> where every ingredient is calculated
-            relative to the flour.
+            The ingredients and their distribution. The ratios are expressed using <a href="#bakers-math-details">baker's math</a>.
           </p>
           <dl>
             <div>
@@ -106,7 +106,23 @@ import NumberInput from "@components/number-input/NumberInput.astro";
 
         <details>
           <summary>How does the <dfn>hydration</dfn> calculated?</summary>
-          <p>The <dfn>hydratation</dfn> is based on the ratio between the whole flour and whole the liquid. Both the sourdough and the extra ingredients affect the liquid content.</p>
+          <p>The <dfn>hydratation</dfn> is based on the ratio between the whole flour and whole the liquid.
+            Both the sourdough and the extra ingredients affect the liquid content.</p>
+        </details>
+
+        <details>
+          <summary id="bakers-math-details">What's the <dfn>baker's math</dfn>?</summary>
+          <p>
+            <a href="https://en.wikipedia.org/wiki/Baker_percentage">Baker’s percentage</a> (also known as
+            <dfn>baker’s math</dfn>) is a notation method used by professional and serious home bakers to express the ratio of
+            ingredients in a recipe.
+            Unlike standard percentages where everything adds up to 100%, in Baker’s math every ingredient is
+            calculated relative to the flour.
+          </p>
+          <p>
+            The formula is the following:
+          </p>
+          <BakerFormula />
         </details>
       </section>
 

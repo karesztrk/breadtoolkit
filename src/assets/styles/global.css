@@ -645,6 +645,10 @@
   p[data-note] {
     font-style: italic;
   }
+
+  math {
+    font-family: var(--font-family);
+  }
 }
 
 @layer theme {
