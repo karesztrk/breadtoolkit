@@ -1,3 +1,4 @@
+import sitemap from "@astrojs/sitemap";
 import { defineConfig } from "astro/config";
 import browserslist from "browserslist";
 import { browserslistToTargets } from "lightningcss";
@@ -14,4 +15,10 @@ export default defineConfig({
       cssMinify: "lightningcss",
     },
   },
+  site: process.env.URL,
+  integrations: [
+    sitemap({
+      filter: (page) => !page.includes("library"),
+    }),
+  ],
 });
