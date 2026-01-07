@@ -351,11 +351,11 @@ import Layout from "@/layouts/Layout.astro";
         </div>
         <div>
           <label for="example-input-number-command">Number with buttons</label>
-          <div role="group">
+          <fieldset role="group">
             <button type="button" commandfor="example-input-number-command" command="--decrement">-</button>
             <input id="example-input-number-command" type="number" />
             <button type="button" commandfor="example-input-number-command" command="--increment">+</button>
-          </div>
+          </fieldset>
         </div>
         <div>
           <label for="example-input-password">Password</label>
@@ -389,6 +389,17 @@ import Layout from "@/layouts/Layout.astro";
             id="example-input-text"
             placeholder="Enter some text here"
           />
+        </div>
+        <div>
+          <label for="example-input-invalid">Invalid</label>
+          <input
+            type="text"
+            id="example-input-invalid"
+            value="Bad input"
+            aria-invalid
+            aria-describedby="example-input-invalid-error"
+          />
+          <small id="example-input-invalid-error" data-severity="error">Please fix me</small>
         </div>
         <div>
           <label for="example-disabled-text">Disabled</label>

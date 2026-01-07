@@ -1,0 +1,13 @@
+---
+import type { HTMLAttributes } from "astro/types";
+
+interface Props extends HTMLAttributes<"input"> {}
+
+const { id, ...rest } = Astro.props;
+---
+
+<fieldset role="group">
+  <button type="button" commandfor={id} command="--decrement" aria-label="Decrement">-</button>
+  <input id={id} type="number" {...rest}  />
+  <button type="button" commandfor={id} command="--increment" aria-label="Increment">+</button>
+</fieldset>

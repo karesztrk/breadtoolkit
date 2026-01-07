@@ -1,7 +1,12 @@
 ---
 import Layout from "@layouts/Layout.astro";
-import NumberInput from "@components/number-input/NumberInput.astro";
+import NumberInput from "@components/calculator/NumberInput.astro";
 import BakerFormula from "@components/calculator/BakerFormula.astro";
+
+const flourInput = "flour-input";
+const waterInput = "water-input";
+const saltInput = "salt-input";
+const sourdoughInput = "sourdough-input";
 ---
 
 <Layout>
@@ -66,13 +71,15 @@ import BakerFormula from "@components/calculator/BakerFormula.astro";
 
         <form aria-labelledby="title">
           <calculator-form-group $input="onInput">
-            <label for="flour-input">Flour</label>
-            <NumberInput type="number" id="flour-input" name="flour" value="0" inputmode="decimal" step="1" min="0" required enterkeyhint="next" />
+            <label for={flourInput}>Flour</label>
+            <NumberInput type="number" id={flourInput} name="flour" value="0" inputmode="decimal" step="1" min="0" required enterkeyhint="next" aria-describedby={`${flourInput}-error`}}/>
+            <small id={`${flourInput}-error`} aria-live="polite" data-severity="error"></small>
           </calculator-form-group>
 
           <calculator-form-group $input="onInput">
-            <label for="water-input">Water</label>
-            <NumberInput type="number" id="water-input" name="water" value="0" inputmode="decimal" step="1" min="0" required enterkeyhint="next">
+            <label for={waterInput}>Water</label>
+            <NumberInput type="number" id={waterInput} name="water" value="0" inputmode="decimal" step="1" min="0" required enterkeyhint="next" aria-describedby={`${waterInput}-error`}>
+            <small id={`${flourInput}-error`} aria-live="polite" data-severity="error"></small>
           </calculator-form-group>
 
           <calculator-form-group $input="onInput">
@@ -133,7 +140,6 @@ import BakerFormula from "@components/calculator/BakerFormula.astro";
 
 <script>
   import "@components/calculator/CalculatorView";
-  import "@components/calculator/CalculatorFormGroup";
   import "@components/calculator/CalculatorFormGroup";
 
   const supportsPopover = () => {

@@ -81,6 +81,9 @@
 
   --shadow-small: 0 2px 8px var(--color-dialog-shadow);
 
+  --stroke-flat: 1px solid CanvasText;
+  --stroke-thick: 2px solid CanvasText;
+
   --main-title-leading: var(--leading-flat);
   --main-title-space: 0.5em;
 
@@ -176,7 +179,7 @@
 
   /* Table */
   table {
-    --stroke: 1px solid CanvasText;
+    --stroke: var(--stroke-flat);
     border: var(--stroke);
     border-collapse: collapse;
     width: 100%;
@@ -247,16 +250,16 @@
   }
 
   /* List */
-  ul:not([class]) {
+  ul {
     padding-inline-start: 2.5ch;
   }
 
-  ol:not([class]) ::marker {
+  ol ::marker {
     font-size: 1em;
     font-weight: var(--font-bold);
   }
 
-  :is(ol, ul):not([class]) li {
+  :is(ol, ul) li {
     margin-block-start: var(--flow-space, 0.75em);
   }
 
@@ -299,7 +302,34 @@
     textarea,
     button
   ) {
+    color: var(--color);
     padding: var(--padding-block, 0.35em) var(--padding-inline, 0.65em);
+    background-color: var(--color-input-bg);
+    border: var(--stroke-flat);
+    border-color: var(--stroke-color);
+  }
+
+  /* Field errors */
+  :is(
+    input:not([type="checkbox"], [type="radio"], [type="color"]),
+    select,
+    textarea,
+    button,
+    fieldset
+  ) {
+    & ~ small {
+      color: var(--color);
+    }
+
+    :is(:user-invalid, &[aria-invalid]) {
+      --stroke-color: var(--color-input-invalid-border, red);
+    }
+
+    :is(:has([aria-invalid]), &[aria-invalid]) {
+      & ~ small {
+        --color: var(--color-error-message-txt, red);
+      }
+    }
   }
 
   /* Block sized inputs */
@@ -318,6 +348,7 @@
     inline-size: 100%;
   }
 
+  /* Hide the default number spinners */
   input[type="number"]::-webkit-outer-spin-button,
   input[type="number"]::-webkit-inner-spin-button {
     appearance: none;
@@ -481,16 +512,6 @@
     }
   }
 
-  [role="group"] {
-    display: inline-flex;
-    inline-size: 100%;
-
-    &[data-spaced] {
-      flex-wrap: wrap;
-      gap: var(--space-xs);
-    }
-  }
-
   [open]::backdrop {
     background: rgba(0, 0, 0, 0.61);
     backdrop-filter: blur(4px);
@@ -503,9 +524,9 @@
 
   dialog,
   [popover] {
-    --stroke: 1px solid CanvasText;
     background-color: var(--color-dialog-bg);
     box-shadow: var(--shadow-small);
+    border: var(--stroke-thick);
   }
 
   [popover] {
@@ -517,8 +538,21 @@
 
     inline-size: 25ch;
     padding: var(--space-xs);
-    border: var(--stroke);
     position-try-fallbacks: flip-block;
+  }
+}
+
+@layer component {
+  [role="group"] {
+    display: inline-flex;
+    inline-size: 100%;
+    border: 0;
+    padding: 0;
+
+    &[data-spaced] {
+      flex-wrap: wrap;
+      gap: var(--space-xs);
+    }
   }
 }
 
@@ -690,9 +724,11 @@
     --sky-500: oklch(0.5 0.12 220);
     --sky-600: oklch(0.22 0.05 220);
 
-    --sky-300-t: oklch(0.65 0.16 220 / 0.2);
-    --red-300-t: oklch(0.69 0.25 22 / 0.1);
-    --mustard-300-t: oklch(0.67 0.16 80 / 0.15);
+    /* --sky-300-t: oklch(0.65 0.16 220 / 0.2); */
+    /* --red-300-t: oklch(0.69 0.25 22 / 0.1); */
+    /* --mustard-300-t: oklch(0.67 0.16 80 / 0.15); */
+
+    --color-error: light-dark(var(--red-500), var(--red-200));
 
     --color-bg: light-dark(var(--color-light), var(--color-dark));
     --color-fg: light-dark(var(--mahogany-600), var(--mahogany-100));
@@ -701,7 +737,12 @@
     --color-secondary: light-dark(var(--sky-500), var(--mustard-300));
 
     --color-input-txt: var(--color-fg);
-    --color-input-bg: light-dark(var(--mahogany-100), var(--mahogany-600));
+    --color-input-bg: light-dark(
+      lch(from var(--color-bg) calc(l - 10) calc(c + 5) h),
+      lch(from var(--color-bg) calc(l + 8) calc(c + 5) h)
+    );
+    --color-input-invalid-border: var(--color-error);
+    --color-error-message-txt: var(--color-error);
 
     --color-button-bg: CanvasText;
     --color-button-txt: Canvas;
@@ -731,7 +772,7 @@
     --color-preformatted-bg: CanvasText;
     --color-preformatted-txt: Canvas;
 
-    --color-dialog-bg: var(--color-soft);
+    --color-dialog-bg: var(--color-bg);
     --color-dialog-shadow: lch(from var(--color-dark) l c h / 0.5);
 
     --color-anchor: var(--color-primary);

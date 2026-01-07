@@ -124,14 +124,15 @@ class CalculatorView extends LightElement {
    */
   onNumberInputChange(element, key) {
     const value = element.valueAsNumber;
+    console.log(element.validity, element.value);
     if (!Number.isNaN(value)) {
       this.state = reducer(this.state, {
         type: "setSetting",
         key,
         value,
       });
+      this.render();
     }
-    this.render();
   }
 
   /**
