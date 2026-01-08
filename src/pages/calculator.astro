@@ -73,23 +73,25 @@ const sourdoughInput = "sourdough-input";
           <calculator-form-group $input="onInput">
             <label for={flourInput}>Flour</label>
             <NumberInput type="number" id={flourInput} name="flour" value="0" inputmode="decimal" step="1" min="0" required enterkeyhint="next" aria-describedby={`${flourInput}-error`}}/>
-            <small id={`${flourInput}-error`} aria-live="polite" data-severity="error"></small>
+            <small id={`${flourInput}-error`} aria-live="polite" data-severity="error"/>
           </calculator-form-group>
 
           <calculator-form-group $input="onInput">
             <label for={waterInput}>Water</label>
-            <NumberInput type="number" id={waterInput} name="water" value="0" inputmode="decimal" step="1" min="0" required enterkeyhint="next" aria-describedby={`${waterInput}-error`}>
-            <small id={`${flourInput}-error`} aria-live="polite" data-severity="error"></small>
+            <NumberInput type="number" id={waterInput} name="water" value="0" inputmode="decimal" step="1" min="0" required enterkeyhint="next" aria-describedby={`${waterInput}-error`} />
+              <small id={`${waterInput}-error`} aria-live="polite" data-severity="error" />
           </calculator-form-group>
 
           <calculator-form-group $input="onInput">
             <label for="salt-input">Salt</label>
-            <NumberInput type="number" id="salt-input" name="salt" value="0" inputmode="decimal" step="1" min="0" required enterkeyhint="next">
+            <NumberInput type="number" id="salt-input" name="salt" value="0" inputmode="decimal" step="1" min="0" required enterkeyhint="next" aria-describedby={`${saltInput}-error`} />
+            <small id={`${saltInput}-error`} aria-live="polite" data-severity="error"/>
           </calculator-form-group>
 
           <calculator-form-group $input="onInput">
             <label for="sourdough-input">Sourdough</label>
-            <NumberInput type="number" id="sourdough-input" name="sourdough" value="0" inputmode="decimal" step="1" min="0" required enterkeyhint="next">
+            <NumberInput type="number" id="sourdough-input" name="sourdough" value="0" inputmode="decimal" step="1" min="0" required enterkeyhint="next" aria-describedby={`${sourdoughInput}-error`} />
+            <small id={`${sourdoughInput}-error`} aria-live="polite" data-severity="error"/>
           </calculator-form-group>
 
           <div>
@@ -98,15 +100,15 @@ const sourdoughInput = "sourdough-input";
             <datalist id="ratio-values">
               <option value="0" label="0"></option>
               <option value="10" label="10"></option>
-              <option value="20"></option>
-              <option value="30"></option>
-              <option value="40"></option>
-              <option value="50"></option>
-              <option value="60"></option>
-              <option value="70"></option>
-              <option value="80"></option>
-              <option value="90"></option>
-              <option value="100"></option>
+              <option value="20" label="20"></option>
+              <option value="30" label="30"></option>
+              <option value="40" label="40"></option>
+              <option value="50" label="50"></option>
+              <option value="60" label="60"></option>
+              <option value="70" label="70"></option>
+              <option value="80" label="80"></option>
+              <option value="90" label="90"></option>
+              <option value="100" label="100"></option>
             </datalist>
           </div>
         </form>
