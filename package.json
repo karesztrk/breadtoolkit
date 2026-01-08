@@ -15,6 +15,7 @@
     "lint": "biome lint ./src"
   },
   "dependencies": {
+    "@astrojs/rss": "^4.0.14",
     "@astrojs/sitemap": "^3.6.0",
     "@karesztrk/webcomponent-base": "^1.1.1",
     "astro": "^5.16.0",
