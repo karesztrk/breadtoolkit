@@ -542,7 +542,8 @@
   }
 }
 
-@layer component {
+@layer components {
+  /* Horizontal lists that groups some elements. */
   [role="group"] {
     display: inline-flex;
     inline-size: 100%;
@@ -552,6 +553,14 @@
     &[data-spaced] {
       flex-wrap: wrap;
       gap: var(--space-xs);
+    }
+  }
+
+  /* Nested articles */
+  article article {
+    & > :is(h2, h3, h4, h5, h6) {
+      display: inline;
+      --font-size: var(--font-size-6);
     }
   }
 }
@@ -677,6 +686,7 @@
   }
 
   p[data-note] {
+    --flow-space: 0;
     font-style: italic;
   }
 

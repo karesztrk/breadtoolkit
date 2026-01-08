@@ -18,9 +18,11 @@ const sortedRecipes = recipes.sort(
   <article>
     {sortedRecipes.map((recipe) => (
     <article>
-      <a href={`/recipes/${recipe.slug}`} data-astro-prefetch>
-        <h2 id={recipe.slug}>{recipe.data.title}</h2>
-      </a>
+      <h2 id={recipe.slug}>
+        <a href={`/recipes/${recipe.slug}`} data-astro-prefetch>
+          {recipe.data.title}
+        </a>
+      </h2>
       <p data-note>
         <time datetime={recipe.data.date.toISOString()}>{formatDate(recipe.data.date)}</time>
       </p>
@@ -33,15 +35,8 @@ const sortedRecipes = recipes.sort(
 <style>
 
 h1 {
+  /* Small tweak to add breath between the title and the paragraph */
   --main-title-leading: var(--leading-fine);
-}
-
-h2 {
-  --font-size: var(--font-size-6);
-}
-
-p {
-  --flow-space:0;
 }
 
 </style>
