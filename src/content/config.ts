@@ -6,6 +6,7 @@ const schema = defineCollection({
     tags: z.array(z.string()),
     date: z.date(),
     coverImage: z.string(),
+    coverImageAlt: z.string(),
     title: z.string(),
     language: z.union([z.literal("hu"), z.literal("en")]),
   }),

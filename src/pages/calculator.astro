@@ -16,126 +16,126 @@ const sourdoughInput = "sourdough-input";
   </hgroup>
 
   <calculator-view $input="onChange" $inputstep="onChange" $submit="onSubmit" aria-labelledby="title" aria-describedby="description">
-    <article>
-      <section>
-        <dl>
-          <dt>Dough weight</dt>
-          <dd data-variant="emphasized"><span id="weight">...</span> gram</dd>
+    <section>
+      <dl>
+        <dt>Dough weight</dt>
+        <dd data-variant="emphasized"><span id="weight">...</span> gram</dd>
 
+        <div>
+          <dt data-variant="note">Hydration</dt>
+          <dd data-variant="note"><span id="hydration">...</span> %</dd>
+        </div>
+      </dl>
+
+      <details>
+        <summary>Ingredient split</summary>
+        <p>
+          The ingredients and their distribution. The ratios are expressed using <a href="#bakers-math-details">baker's math</a>.
+        </p>
+        <dl>
           <div>
-            <dt data-variant="note">Hydration</dt>
-            <dd data-variant="note"><span id="hydration">...</span> %</dd>
+            <dt data-variant="note">Flour</dt>
+            <dd data-variant="note"><span id="flour-percent" />%</dd>
+          </div>
+          <div>
+            <dt data-variant="note">Water</dt>
+            <dd data-variant="note"><span id="water-percent" />%</dd>
+          </div>
+          <div>
+            <dt data-variant="note">Salt</dt>
+            <dd data-variant="note"><span id="salt-percent" />%</dd>
+          </div>
+          <div>
+            <dt data-variant="note">Sourdough</dt>
+            <dd data-variant="note"><span id="sourdough-percent" />%</dd>
           </div>
         </dl>
+      </details>
 
-        <details>
-          <summary>Ingredient split</summary>
-          <p>
-            The ingredients and their distribution. The ratios are expressed using <a href="#bakers-math-details">baker's math</a>.
-          </p>
-          <dl>
-            <div>
-              <dt data-variant="note">Flour</dt>
-              <dd data-variant="note"><span id="flour-percent" />%</dd>
-            </div>
-            <div>
-              <dt data-variant="note">Water</dt>
-              <dd data-variant="note"><span id="water-percent" />%</dd>
-            </div>
-            <div>
-              <dt data-variant="note">Salt</dt>
-              <dd data-variant="note"><span id="salt-percent" />%</dd>
-            </div>
-            <div>
-              <dt data-variant="note">Sourdough</dt>
-              <dd data-variant="note"><span id="sourdough-percent" />%</dd>
-            </div>
-          </dl>
-        </details>
+      <button popovertarget="weight-popover">Custom weight</button>
+    </section>
 
-        <button popovertarget="weight-popover">Custom weight</button>
-      </section>
+    <div id="weight-popover" popover="auto">
+      <form id="weight-form">
+        <div>
+          <label for="weight-input">Dough weight</label>
+          <input id="weight-input" type="number" name="weight" inputmode="decimal" step="1" min="0" required aria-describedby="weight-hint" />
+          <small id="weight-helper">Set the target dough weight</small>
+        </div>
+        <input type="submit" value="Confirm" />
+      </form>
+    </div>
 
-      <div id="weight-popover" popover="auto">
-        <form id="weight-form">
-          <div>
-            <label for="weight-input">Dough weight</label>
-            <input id="weight-input" type="number" name="weight" inputmode="decimal" step="1" min="0" required aria-describedby="weight-hint" />
-            <small id="weight-helper">Set the target dough weight</small>
-          </div>
-          <input type="submit" value="Confirm" />
-        </form>
-      </div>
+    <hr/>
 
-      <section>
+    <section>
 
-        <form aria-labelledby="title">
-          <calculator-form-group $input="onInput">
-            <label for={flourInput}>Flour</label>
-            <NumberInput type="number" id={flourInput} name="flour" value="0" inputmode="decimal" step="1" min="0" required enterkeyhint="next" aria-describedby={`${flourInput}-error`}}/>
-            <small id={`${flourInput}-error`} aria-live="polite" data-severity="error"/>
-          </calculator-form-group>
+      <form aria-labelledby="title">
+        <calculator-form-group $input="onInput">
+          <label for={flourInput}>Flour</label>
+          <NumberInput type="number" id={flourInput} name="flour" value="0" inputmode="decimal" step="1" min="0" required enterkeyhint="next" aria-describedby={`${flourInput}-error`}}/>
+          <small id={`${flourInput}-error`} aria-live="polite" data-severity="error"/>
+        </calculator-form-group>
 
-          <calculator-form-group $input="onInput">
-            <label for={waterInput}>Water</label>
-            <NumberInput type="number" id={waterInput} name="water" value="0" inputmode="decimal" step="1" min="0" required enterkeyhint="next" aria-describedby={`${waterInput}-error`} />
-              <small id={`${waterInput}-error`} aria-live="polite" data-severity="error" />
-          </calculator-form-group>
+        <calculator-form-group $input="onInput">
+          <label for={waterInput}>Water</label>
+          <NumberInput type="number" id={waterInput} name="water" value="0" inputmode="decimal" step="1" min="0" required enterkeyhint="next" aria-describedby={`${waterInput}-error`} />
+          <small id={`${waterInput}-error`} aria-live="polite" data-severity="error" />
+        </calculator-form-group>
 
-          <calculator-form-group $input="onInput">
-            <label for="salt-input">Salt</label>
-            <NumberInput type="number" id="salt-input" name="salt" value="0" inputmode="decimal" step="1" min="0" required enterkeyhint="next" aria-describedby={`${saltInput}-error`} />
-            <small id={`${saltInput}-error`} aria-live="polite" data-severity="error"/>
-          </calculator-form-group>
+        <calculator-form-group $input="onInput">
+          <label for="salt-input">Salt</label>
+          <NumberInput type="number" id="salt-input" name="salt" value="0" inputmode="decimal" step="1" min="0" required enterkeyhint="next" aria-describedby={`${saltInput}-error`} />
+          <small id={`${saltInput}-error`} aria-live="polite" data-severity="error"/>
+        </calculator-form-group>
 
-          <calculator-form-group $input="onInput">
-            <label for="sourdough-input">Sourdough</label>
-            <NumberInput type="number" id="sourdough-input" name="sourdough" value="0" inputmode="decimal" step="1" min="0" required enterkeyhint="next" aria-describedby={`${sourdoughInput}-error`} />
-            <small id={`${sourdoughInput}-error`} aria-live="polite" data-severity="error"/>
-          </calculator-form-group>
+        <calculator-form-group $input="onInput">
+          <label for="sourdough-input">Sourdough</label>
+          <NumberInput type="number" id="sourdough-input" name="sourdough" value="0" inputmode="decimal" step="1" min="0" required enterkeyhint="next" aria-describedby={`${sourdoughInput}-error`} />
+          <small id={`${sourdoughInput}-error`} aria-live="polite" data-severity="error"/>
+        </calculator-form-group>
 
-          <div>
-            <label for="sourdough-ratio-input">Sourdough ratio</label>
-            <input type="range" value="0" step="1" min="0" max="100" id="sourdough-ratio-input" name="sourdough_ratio" required list="ratio-values" />
-            <datalist id="ratio-values">
-              <option value="0" label="0"></option>
-              <option value="10" label="10"></option>
-              <option value="20" label="20"></option>
-              <option value="30" label="30"></option>
-              <option value="40" label="40"></option>
-              <option value="50" label="50"></option>
-              <option value="60" label="60"></option>
-              <option value="70" label="70"></option>
-              <option value="80" label="80"></option>
-              <option value="90" label="90"></option>
-              <option value="100" label="100"></option>
-            </datalist>
-          </div>
-        </form>
+        <div>
+          <label for="sourdough-ratio-input">Sourdough ratio</label>
+          <input type="range" value="0" step="1" min="0" max="100" id="sourdough-ratio-input" name="sourdough_ratio" required list="ratio-values" />
+          <datalist id="ratio-values">
+            <option value="0" label="0"></option>
+            <option value="10" label="10"></option>
+            <option value="20" label="20"></option>
+            <option value="30" label="30"></option>
+            <option value="40" label="40"></option>
+            <option value="50" label="50"></option>
+            <option value="60" label="60"></option>
+            <option value="70" label="70"></option>
+            <option value="80" label="80"></option>
+            <option value="90" label="90"></option>
+            <option value="100" label="100"></option>
+          </datalist>
+        </div>
+      </form>
 
-        <details>
-          <summary>How does the <dfn>hydration</dfn> calculated?</summary>
-          <p>The <dfn>hydratation</dfn> is based on the ratio between the whole flour and whole the liquid.
-            Both the sourdough and the extra ingredients affect the liquid content.</p>
-        </details>
+      <details>
+        <summary>How does the <dfn>hydration</dfn> calculated?</summary>
+        <p>The <dfn>hydratation</dfn> is based on the ratio between the whole flour and whole the liquid.
+          Both the sourdough and the extra ingredients affect the liquid content.</p>
+      </details>
 
-        <details>
-          <summary id="bakers-math-details">What's the <dfn>baker's math</dfn>?</summary>
-          <p>
-            <a href="https://en.wikipedia.org/wiki/Baker_percentage">Baker’s percentage</a> (also known as
-            <dfn>baker’s math</dfn>) is a notation method used by professional and serious home bakers to express the ratio of
-            ingredients in a recipe.
-            Unlike standard percentages where everything adds up to 100%, in Baker’s math every ingredient is
-            calculated relative to the flour.
-          </p>
-          <p>
-            The formula is the following:
-          </p>
-          <BakerFormula />
-        </details>
-      </section>
+      <details>
+        <summary id="bakers-math-details">What's the <dfn>baker's math</dfn>?</summary>
+        <p>
+          <a href="https://en.wikipedia.org/wiki/Baker_percentage">Baker’s percentage</a> (also known as
+          <dfn>baker’s math</dfn>) is a notation method used by professional and serious home bakers to express the ratio of
+          ingredients in a recipe.
+          Unlike standard percentages where everything adds up to 100%, in Baker’s math every ingredient is
+          calculated relative to the flour.
+        </p>
+        <p>
+          The formula is the following:
+        </p>
+        <BakerFormula />
+      </details>
+    </section>
 
-    </article>
   </calculator-view>
 </Layout>
 

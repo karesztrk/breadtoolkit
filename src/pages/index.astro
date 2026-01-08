@@ -13,42 +13,39 @@ const recentRecipes = recipes
 <Layout>
   <hgroup>
     <h1>Bread Toolkit</h1>
-    <p>Do you know the secret of baking mouthwatering and soft breads? Are you interested in using sourdough? With the aid of recipes, guides and assets of this page You can learn it.</p>
+    <p>Modest tools, soulful results.</p>
   </hgroup>
 
-  <article>
+  <section>
+    <h2>
+      Tools
+    </h2>
+    <ul role="list">
+      <li>
+        <a data-type="button" data-outline href="/calculator">
+          Calculator
+        </a>
+      </li>
+    </ul>
+  </section>
 
-    <section>
-      <h2>
-        Tools
-      </h2>
-      <ul role="list">
-        <li>
-          <a data-type="button" data-outline href="/calculator">
-            Calculator
-          </a>
-        </li>
-      </ul>
-    </section>
+  <hr/>
 
-    <hr/>
+  <section>
+    <h2>Recent</h2>
 
-    <section>
-      <h2>Recent</h2>
-
-      {recentRecipes.map((recipe) => (
-        <article>
-          <h3 id={recipe.slug}>
-            <a href={`/recipes/${recipe.slug}`} data-astro-prefetch>
-              {recipe.data.title}
-            </a>
-          </h3>
-          <p data-note>
-            <time datetime={recipe.data.date.toISOString()}>{formatDate(recipe.data.date)}</time>
-          </p>
-      </article>
-      ))}
-    </section>
-  </article>
+    {recentRecipes.map((recipe) => (
+    <article data-entry>
+      <h3 id={recipe.slug}>
+        <a href={`/recipes/${recipe.slug}`} data-astro-prefetch>
+          {recipe.data.title}
+        </a>
+      </h3>
+      <p data-note>
+        <time datetime={recipe.data.date.toISOString()}>{formatDate(recipe.data.date)}</time>
+      </p>
+    </article>
+    ))}
+  </section>
 </Layout>
 

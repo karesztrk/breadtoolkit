@@ -3,6 +3,7 @@ title: Croissant
 date: 2020-01-01T23:00:00.000Z
 language: hu
 coverImage: /images/recipes/img_20200517_152223.jpg
+coverImageAlt: Ropogós édes péksütemény
 tags:
   - croissant
   - madre
@@ -17,6 +18,7 @@ tags:
   - tejszín
   - kovász
 ---
+
 Párom kérésére készítettem először ezt a friss, ropogós péksüteményt.
 
 Az eredeti receptet Betti Hobby konyháról szereztem. Javasolom, hogy Ti is próbáljátok ki mihamarabb.
@@ -25,31 +27,31 @@ Az eredeti receptet Betti Hobby konyháról szereztem. Javasolom, hogy Ti is pr�
 
 **Édes kovász első etetés**
 
-* 20g víz
-* 12g barna cukor
-* 50g liszt
-* 25g aktív kovász
+- 20g víz
+- 12g barna cukor
+- 50g liszt
+- 25g aktív kovász
 
 **Második etetés**
 
-* Előző kovász
-* 45g víz
-* 25g barna cukor
-* 100g liszt
+- Előző kovász
+- 45g víz
+- 25g barna cukor
+- 100g liszt
 
 **Tészta**
 
-* 200g az etetett kovászból
-* 500g liszt
-* 205g tej
-* 70g víz
-* 10g só
-* 250g vaj
+- 200g az etetett kovászból
+- 500g liszt
+- 205g tej
+- 70g víz
+- 10g só
+- 250g vaj
 
 **Kenéshez**
 
-* 1 tojás
-* pici tejszín
+- 1 tojás
+- pici tejszín
 
 A kovászok beetetése közben 12 óra telt el kb. Tehát mind a két alkalommal egy éjszakányi időt vett igénybe, míg a duplájára nőtt.
 

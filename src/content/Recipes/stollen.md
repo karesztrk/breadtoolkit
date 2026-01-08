@@ -3,6 +3,7 @@ title: Stollen
 date: 2021-02-01T16:35:21.627Z
 language: hu
 coverImage: /images/recipes/img_20201223_205143.jpg
+coverImageAlt: Karácsonyi meglepetés a családnak
 tags:
   - stollen
   - karácsony
@@ -25,6 +26,7 @@ tags:
   - vaj
   - marcipán
 ---
+
 Karácsonyra valami különleges édes süteményt szerettem volna csinálni. Imádom a bejglit, és sok is készül a családban, de a Stollen igazi különlegességnek számít erre felé. Így gondoltam teszek egy próbát vele.
 
 > Az eredeti recept [Patrik Ryan](https://thefirehouse.ie/about/)-től van, ami a következő linken meg is tekinthető: <https://www.ilovecooking.ie/food-tv/patrick-ryans-stollen-bread/>
@@ -33,37 +35,37 @@ Karácsonyra valami különleges édes süteményt szerettem volna csinálni. Im
 
 **Kovász**
 
-* 50g liszt
-* 40g tej
-* 15g anyakovász
+- 50g liszt
+- 40g tej
+- 15g anyakovász
 
 **Tészta**
 
-*  500g erős kenyér liszt (mínusz 50g a kovászhoz)
-* 10g só
-* 50g cukor
-* 150ml tej (mínusz 40g a kovászhoz)
-* 3g élesztő a kovász mellé (csak a biztonság kedvéért)
-* 3 nagy tojás (~157g lett)
-* 150g vaj olvasztva
+-  500g erős kenyér liszt (mínusz 50g a kovászhoz)
+- 10g só
+- 50g cukor
+- 150ml tej (mínusz 40g a kovászhoz)
+- 3g élesztő a kovász mellé (csak a biztonság kedvéért)
+- 3 nagy tojás (~157g lett)
+- 150g vaj olvasztva
 
 **Mincemeat**
 
 Ez gyakorlatilag a töltelék a tésztában: főképp kandírozott gyümölcsök és a magok keveréke. Szerintem bátran variálható és testreszabható ki-mit szeret benne és mennyire édesen. Én a narancs, citrom héjat, valamint a rumot erősen ajánlom, mert nagyon aromás lesz tőle.
 
-* 100g hántolt mandula
-* 100g mazsola mix
-* 100g kandírozott citrom
-* vaníliás cukor
-* pár löttyintés rum aroma
-* fél narancs héj és leve
-* fél citrom héj és leve
+- 100g hántolt mandula
+- 100g mazsola mix
+- 100g kandírozott citrom
+- vaníliás cukor
+- pár löttyintés rum aroma
+- fél narancs héj és leve
+- fél citrom héj és leve
 
 **Marcipán**
 
 A stollen fontos része a marcipán töltelék, amit vagy házilag vagy boltban is megvehetünk. Nekem sikerült beszerezni egy 500g-os rudat.
 
-* 500g marcipán
+- 500g marcipán
 
 **Elkészítés**
 

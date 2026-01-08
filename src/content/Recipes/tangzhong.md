@@ -3,6 +3,7 @@ title: Tangzhong
 date: 2021-01-28T15:56:35.900Z
 language: hu
 coverImage: /images/recipes/img_20210127_214731.jpg
+coverImageAlt: Keleti technikával készült kenyér
 tags:
   - kenyérliszt
   - teljeskiörlésűliszt
@@ -12,25 +13,26 @@ tags:
   - olíviaolaj
   - víz
 ---
+
 Már nagyon régóta szerettem volna kipróbálni ezt a technikát. Egyes vélemények szerint akár "csalás" számba is mehet a kenyérbe helyezhető folyadék mennyiségét illetően.
 
-A recept alapja *A kovásziskola* (Vanessa Kimbell) c. könyvből van, amiben a szerző az ősi *Tangzhong* technikát veti be a kenyér elkészítéséhez, megfűszerezve egy kis miszóval.
+A recept alapja _A kovásziskola_ (Vanessa Kimbell) c. könyvből van, amiben a szerző az ősi _Tangzhong_ technikát veti be a kenyér elkészítéséhez, megfűszerezve egy kis miszóval.
 
 Az eljárás lényege, hogy egy rántást kell készíteni a recept alapjául szolgáló liszt és víz egy részéből. A vizet fel kell melegíteni és lassan adagolni bele a lisztet, míg egy sűrű de folyós masszát nem kapunk. Állagát tekintve nagyon hasonló egy besamel mártáshoz.
 
 **A rántás**
 
-* 50 kenyérliszt
-* 162,5g víz (nálam túl sűrű lett, ezért 2x raktam még bele ezen kívül: ~+35g)
-* 10g olívaolaj
+- 50 kenyérliszt
+- 162,5g víz (nálam túl sűrű lett, ezért 2x raktam még bele ezen kívül: ~+35g)
+- 10g olívaolaj
 
 **A tészta**
 
-* 300g kenyérliszt
-* 150g teljeskiörlésű liszt
-* 10g himalája só
-* 237,5g víz (400g a teljes mennyiség, aminek egy része már a rántásban van), nálam egy kicsit megcsúszott 257g-ra
-* 100g kovász (80%)
+- 300g kenyérliszt
+- 150g teljeskiörlésű liszt
+- 10g himalája só
+- 237,5g víz (400g a teljes mennyiség, aminek egy része már a rántásban van), nálam egy kicsit megcsúszott 257g-ra
+- 100g kovász (80%)
 
 Így a hidratáltság elég meredek: 500g liszt, \~450g víz + 40g a kovászból = \~98%!!! 😵
 
@@ -45,4 +47,3 @@ A sütőt felmelegítettem 230 fokra a jénaival együtt. Beleraktam a tésztát
 Az eredmény egészen jó lett, szép fület kaptam és nagyon-nagyon piha bélzetet, de egyáltalán nem volt nyers. A bélzet és a lyukak tekintetében még lehet fejlődni, de hát nem is ez volt a cél, hanem, hogy egy szép és magas hidratáltságú kenyér készüljön, amire öröm ránézni.
 
 Próbáljátok ki, ha valami újdonságra vágytok 😉
-

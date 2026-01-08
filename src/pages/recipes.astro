@@ -13,11 +13,11 @@ const sortedRecipes = recipes.sort(
 <Layout>
   <hgroup>
     <h1>Recipes</h1>
-    <p>Find and bake a recipe of your taste</p>
+    <p>Find and bake a recipe of your taste.</p>
   </hgroup>
-  <article>
+  <section>
     {sortedRecipes.map((recipe) => (
-    <article>
+    <article data-entry>
       <h2 id={recipe.slug}>
         <a href={`/recipes/${recipe.slug}`} data-astro-prefetch>
           {recipe.data.title}
@@ -29,7 +29,7 @@ const sortedRecipes = recipes.sort(
     </article>
     )
     )}
-  </article>
+  </section>
 </Layout>
 
 <style>

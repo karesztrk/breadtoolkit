@@ -3,6 +3,7 @@ title: Zabos gluténmentes kenyér
 date: 2021-02-28T09:53:27.078Z
 language: hu
 coverImage: /images/recipes/img_20210225_130439.jpg
+coverImageAlt: Első gluténmentes kenyerem
 tags:
   - zabpehely
   - barnarizsliszt
@@ -15,24 +16,25 @@ tags:
   - kovász
   - só
 ---
+
 Párom kérésére újra neki láttam egy gluténmentes recept kidolgozásának. Ezúttal kicsit limitált volt a gyorsan elérhető hozzávalók sora. Így ezt a receptet azoknak ajánlom, akik nem szeretnének méreg drága lisztkeveréket venni, de egy jó gluténmentes kenyérkét szeretnének enni 😊
 
 **Kovász**
 
-* 15g gluténmentes kovászmag
-* 50g gluténmentes liszt (nálam fele-fele arányban barna rizs és kukorica)
-* 40g víz
+- 15g gluténmentes kovászmag
+- 50g gluténmentes liszt (nálam fele-fele arányban barna rizs és kukorica)
+- 40g víz
 
 **Tészta**
 
-* 100g zabpehely
-* 100g barna rizsliszt
-* 100g kukoricaliszt
-* 15g útifűmaghéj
-* 15g zsiradék (nálam egy kicsi kacsazsír és olivaolaj került bele)
-* 8g só
-* 350g víz
-* Érett kovász
+- 100g zabpehely
+- 100g barna rizsliszt
+- 100g kukoricaliszt
+- 15g útifűmaghéj
+- 15g zsiradék (nálam egy kicsi kacsazsír és olivaolaj került bele)
+- 8g só
+- 350g víz
+- Érett kovász
 
 A kovászt beetetjük és hagyjuk megérni. Nem fog hatalmasra nőni és full bubis lenni, mint a gluténes párja. Kb. 8 óra elég is neki a pulton.
 

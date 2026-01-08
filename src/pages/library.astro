@@ -595,30 +595,28 @@ import Layout from "@/layouts/Layout.astro";
   <hr />
 
   <section>
-    <article>
-      <h2 id="modal">Modal</h2>
+    <h2 id="modal">Modal</h2>
 
-      <button id="modal-button">Dialog</button>
+    <button id="modal-button">Dialog</button>
 
-      <dialog id="modal-dialog" closedby="any">
-        <form method="dialog" aria-labelledby="dialog-title">
-          <article>
-            <hgroup>
-              <h2 id="dialog-title">Modal dialog</h2>
-              <p>Dialog description inside a paragraph.</p>
-            </hgroup>
-            <div>
-              <label for="modal-input">Form input label</label>
-              <input id="modal-input" type="text" />
-            </div>
-            <footer>
-              <button  formnovalidate>Cancel</button>
-              <input type="submit" value="Confirm" />
-            </footer>
-          </article>
-        </form>
-      </dialog>
-    </article>
+    <dialog id="modal-dialog" closedby="any">
+      <form method="dialog" aria-labelledby="dialog-title">
+        <article>
+          <hgroup>
+            <h2 id="dialog-title">Modal dialog</h2>
+            <p>Dialog description inside a paragraph.</p>
+          </hgroup>
+          <div>
+            <label for="modal-input">Form input label</label>
+            <input id="modal-input" type="text" />
+          </div>
+          <footer>
+            <button  formnovalidate>Cancel</button>
+            <input type="submit" value="Confirm" />
+          </footer>
+        </article>
+      </form>
+    </dialog>
 
     <div role="group" data-spaced>
       <button popovertarget="popover-auto" popovertargetaction="toggle">Auto popover</button>

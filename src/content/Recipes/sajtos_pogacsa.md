@@ -3,6 +3,7 @@ title: Sajtos pogácsa
 date: 2020-01-03T23:00:00.000Z
 language: hu
 coverImage: /images/recipes/img_20200527_101618.jpg
+coverImageAlt: Vendégvárós
 tags:
   - tojás
   - sajt
@@ -14,6 +15,7 @@ tags:
   - kovász
   - víz
 ---
+
 Egyszerű "vendégvárós" pogácsa készült.
 
 A receptet Betty Hobbi konyhájáról vettem kölcsön ezúttal.
@@ -22,25 +24,25 @@ A receptet Betty Hobbi konyhájáról vettem kölcsön ezúttal.
 
 **Előtészta (nagyobb mennyiségű kovász):**
 
-* 50g kovász
-* 100g víz
-* 100g kenyérliszt
+- 50g kovász
+- 100g víz
+- 100g kenyérliszt
 
 **Pogácsatészta:**
 
-* egész előtészta
-* 150g főtt, összetört burgonya
-* 250g tejföl
-* 1db tojás
-* 600g liszt
-* kb. 15-20g só ízlés szerint
-* 100g vaj
-* kb. 100-150g reszelt sajt
+- egész előtészta
+- 150g főtt, összetört burgonya
+- 250g tejföl
+- 1db tojás
+- 600g liszt
+- kb. 15-20g só ízlés szerint
+- 100g vaj
+- kb. 100-150g reszelt sajt
 
 **Tetejére:**
 
-* 1db tojás
-* reszelt sajt
+- 1db tojás
+- reszelt sajt
 
 A hűtőben (vagy konyhapulton) pihenő kovászból kimérünk 50g-ot, kikeverjük a vízzel, majd a lisztet is belekeverjük. Folpackkal letakarva konyhapulton hagyjuk 10-12 órát.
 

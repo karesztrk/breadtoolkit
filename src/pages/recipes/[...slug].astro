@@ -1,6 +1,7 @@
 ---
 import { getCollection } from "astro:content";
 import Layout from "@/layouts/Layout.astro";
+import { formatDate } from "@util/recipes.util";
 
 export async function getStaticPaths() {
   const recipes = await getCollection("Recipes");
@@ -10,15 +11,45 @@ export async function getStaticPaths() {
   }));
 }
 
-const { entry } = Astro.props;
-const { Content } = await entry.render();
+const { entry: recipe } = Astro.props;
+const { Content } = await recipe.render();
 ---
 
 <Layout>
-  <h1>{entry.data.title}</h1>
   <article>
-
-    <img src={entry.data.coverImage} />
-    <Content />
+    <header>
+      <hgroup>
+        <h1>{recipe.data.title}</h1>
+        <p data-note>
+          <time datetime={recipe.data.date.toISOString()}>{formatDate(recipe.data.date)}</time>
+        </p>
+      </hgroup>
+      <hr />
+      {recipe.data.coverImage && (
+      <figure>
+        <img src={recipe.data.coverImage} alt="Cover image" />
+        <figcaption>{recipe.data.coverImageAlt}</figcaption>
+      </figure>
+      )}
+    </header>
+    <section>
+      <Content />
+    </section>
+    <hr />
+    <footer>
+      <ul role="list" data-spaced>
+        {recipe.data.tags.map((tag => (
+          <li>{tag}</li>
+        )))}
+      </ul>
+    </footer>
   </article>
 </Layout>
+
+<style>
+li {
+  &:before {
+    content: '# ';
+  }
+}
+</style>
