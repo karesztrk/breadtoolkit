@@ -15,13 +15,13 @@ const { entry: recipe } = Astro.props;
 const { Content } = await recipe.render();
 ---
 
-<Layout>
+<Layout title={recipe.data.title} lang={recipe.data.language}>
   <article>
     <header>
       <hgroup>
         <h1>{recipe.data.title}</h1>
         <p data-note>
-          <time datetime={recipe.data.date.toISOString()}>{formatDate(recipe.data.date)}</time>
+          <time datetime={recipe.data.date.toISOString()}>{formatDate(recipe.data.date, recipe.data.language)}</time>
         </p>
       </hgroup>
       <hr />
@@ -39,17 +39,10 @@ const { Content } = await recipe.render();
     <footer>
       <ul role="list" data-spaced>
         {recipe.data.tags.map((tag => (
-          <li>{tag}</li>
+        <li>
+          <span data-symbol="#">{tag}</span></li>
         )))}
       </ul>
     </footer>
   </article>
 </Layout>
-
-<style>
-li {
-  &:before {
-    content: '# ';
-  }
-}
-</style>

@@ -1,7 +1,7 @@
 ---
-import Layout from "@layouts/Layout.astro";
 import { getCollection } from "astro:content";
-import { formatDate } from "@util/recipes.util";
+import RecipeEntry from "@components/recipe/RecipeEntry.astro";
+import Layout from "@layouts/Layout.astro";
 
 const recipes = await getCollection("Recipes");
 
@@ -33,18 +33,8 @@ const recentRecipes = recipes
 
   <section>
     <h2>Recent</h2>
-
     {recentRecipes.map((recipe) => (
-    <article data-entry>
-      <h3 id={recipe.slug}>
-        <a href={`/recipes/${recipe.slug}`} data-astro-prefetch>
-          {recipe.data.title}
-        </a>
-      </h3>
-      <p data-note>
-        <time datetime={recipe.data.date.toISOString()}>{formatDate(recipe.data.date)}</time>
-      </p>
-    </article>
+      <RecipeEntry recipe={recipe} />
     ))}
   </section>
 </Layout>

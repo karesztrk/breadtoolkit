@@ -2,10 +2,17 @@
 import Menu from "@components/Menu.astro";
 import "@/assets/styles/global.css";
 import "@/assets/styles/fonts.css";
+
+interface Props {
+  title?: string;
+  lang?: string;
+}
+
+const { title = "Bread Toolkit", lang = "en" } = Astro.props;
 ---
 
 <!doctype html>
-<html lang="en">
+<html lang={lang}>
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width" />
@@ -13,7 +20,7 @@ import "@/assets/styles/fonts.css";
     <meta name="generator" content={Astro.generator} />
     <link rel="sitemap" href="/sitemap-index.xml" />
     <link rel="alternate" type="application/rss+xml" title="Breadtoolkit" href="/rss.xml" />
-    <title>Breadtoolkit</title>
+    <title>{title}</title>
   </head>
   <body>
     <header>

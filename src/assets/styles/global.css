@@ -111,13 +111,13 @@
 @layer layout {
   /* Layout */
   body {
+    min-block-size: auto;
     display: grid;
     grid-template-columns:
       [full-start] var(--full) [popout-start] var(--popout) [content-start] var(
         --content
       )
       [content-end] var(--popout) [popout-end] var(--full) [full-end];
-    grid-template-rows: min-content;
     row-gap: var(--gap);
   }
 
@@ -600,6 +600,15 @@
     & > :is(h2, h3, h4, h5, h6) {
       display: inline;
       --font-size: var(--font-size-6);
+    }
+  }
+
+  /* A text fragment that has a preceeding symbol */
+  span[data-symbol] {
+    &:before {
+      content: attr(data-symbol);
+      font-size: 0.85em;
+      margin-inline-end: 0.5ch;
     }
   }
 }

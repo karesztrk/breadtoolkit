@@ -1,34 +1,26 @@
 ---
 import Layout from "@/layouts/Layout.astro";
 import { getCollection } from "astro:content";
-import { formatDate } from "@util/recipes.util";
+import RecipeEntry from "@components/recipe/RecipeEntry.astro";
 
 const recipes = await getCollection("Recipes");
 
 const sortedRecipes = recipes.sort(
   (left, right) => right.data.date.getTime() - left.data.date.getTime(),
 );
+
+const title = "Recipes";
 ---
 
-<Layout>
+<Layout title={title}>
   <hgroup>
-    <h1>Recipes</h1>
+    <h1>{title}</h1>
     <p>Find and bake a recipe of your taste.</p>
   </hgroup>
   <section>
     {sortedRecipes.map((recipe) => (
-    <article data-entry>
-      <h2 id={recipe.slug}>
-        <a href={`/recipes/${recipe.slug}`} data-astro-prefetch>
-          {recipe.data.title}
-        </a>
-      </h2>
-      <p data-note>
-        <time datetime={recipe.data.date.toISOString()}>{formatDate(recipe.data.date)}</time>
-      </p>
-    </article>
-    )
-    )}
+      <RecipeEntry recipe={recipe} />
+    ))}
   </section>
 </Layout>
 
