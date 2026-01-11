@@ -33,6 +33,9 @@ class CalculatorView extends LightElement {
   /** @type HTMLFormElement | null */
   #weightForm;
 
+  /** @type HTMLFormElement | null */
+  #resetForm;
+
   /** @type SummaryController */
   #summaryController;
 
@@ -47,6 +50,7 @@ class CalculatorView extends LightElement {
     this.#sourdoughRatioInput = this.querySelector("#sourdough-ratio-input");
     this.#weightDialogInput = this.querySelector("#weight-input");
     this.#weightForm = this.querySelector("#weight-form");
+    this.#resetForm = this.querySelector("#reset-form");
     this.#summaryController = new SummaryController(this);
 
     const settings = loadCalculatorSettings();
@@ -92,30 +96,66 @@ class CalculatorView extends LightElement {
   }
 
   /**
-   * Handle custom weight submission.
+   * Handle form submission.
    *
    * @param {Event & { target: HTMLFormElement, submitter: HTMLElement }} e
    */
   onSubmit(e) {
     e.preventDefault();
     e.stopPropagation();
-    if (e.target === this.#weightForm) {
-      const values = new FormData(e.target, e.submitter);
-      const weightValue = /** @type string | null */ (values.get("weight"));
-      if (weightValue) {
-        const weight = +weightValue;
-        if (!Number.isNaN(weight) && weight > 0) {
-          this.state = reducer(this.state, {
-            type: "submitDoughGoal",
-            goal: +weight,
-          });
 
-          this.render();
-        }
+    switch (e.target) {
+      case this.#weightForm: {
+        this.onWeightFormSubmit(e);
+        break;
       }
-      const popover = /** @type HTMLElement | null */ (e.target.closest("[popover]"));
-      popover?.hidePopover();
+
+      case this.#resetForm: {
+        this.onResetFormSubmit(e);
+        break;
+      }
+
+      default:
+        break;
     }
+  }
+
+  /**
+   * Handle weight form submission.
+   *
+   * @param {Event & { target: HTMLFormElement, submitter: HTMLElement }} e
+   */
+  onWeightFormSubmit(e) {
+    const values = new FormData(e.target, e.submitter);
+    const weightValue = /** @type string | null */ (values.get("weight"));
+    if (weightValue) {
+      const weight = +weightValue;
+      if (!Number.isNaN(weight) && weight > 0) {
+        this.state = reducer(this.state, {
+          type: "submitDoughGoal",
+          goal: +weight,
+        });
+
+        this.render();
+      }
+    }
+    const popover = /** @type HTMLElement | null */ (e.target.closest("[popover]"));
+    popover?.hidePopover();
+  }
+
+  /**
+   * Handle reset form submission.
+   *
+   * @param {Event & { target: HTMLFormElement, submitter: HTMLElement }} e
+   */
+  onResetFormSubmit(e) {
+    this.state = reducer(this.state, {
+      type: "resetSettings",
+    });
+
+    this.render();
+    const popover = /** @type HTMLElement | null */ (e.target.closest("[popover]"));
+    popover?.hidePopover();
   }
 
   /**
@@ -124,7 +164,6 @@ class CalculatorView extends LightElement {
    */
   onNumberInputChange(element, key) {
     const value = element.valueAsNumber;
-    console.log(element.validity, element.value);
     if (!Number.isNaN(value)) {
       this.state = reducer(this.state, {
         type: "setSetting",
@@ -155,6 +194,10 @@ class CalculatorView extends LightElement {
 
     if (this.#sourdoughInput && settings.sourdough) {
       this.#sourdoughInput.value = settings.sourdough.toString();
+    }
+
+    if (this.#sourdoughRatioInput) {
+      this.#sourdoughRatioInput.value = settings.sourdoughRatio.toString();
     }
 
     if (this.#weightDialogInput) {

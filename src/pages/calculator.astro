@@ -54,19 +54,35 @@ const title = "Calculator";
         </dl>
       </details>
 
-      <button popovertarget="weight-popover">Custom weight</button>
+      <fieldset role="group" data-spaced>
+        <button popovertarget="weight-popover">Custom weight</button>
+        <button popovertarget="reset-popover">Reset</button>
+      </fieldset>
     </section>
 
     <div id="weight-popover" popover="auto">
       <form id="weight-form">
         <div>
           <label for="weight-input">Dough weight</label>
-          <input id="weight-input" type="number" name="weight" inputmode="decimal" step="1" min="0" required aria-describedby="weight-hint" />
+          <input autofocus id="weight-input" type="number" name="weight" inputmode="decimal" step="1" min="0" required aria-describedby="weight-hint" />
           <small id="weight-helper">Set the target dough weight</small>
         </div>
-        <input type="submit" value="Confirm" />
+        <fieldset role="group" data-spaced>
+          <button type="button" popovertarget="weight-popover" popovertargetaction="hide">Cancel</button>
+          <input type="submit" value="Submit" />
+        </fieldset>
       </form>
     </div>
+
+    <dialog id="reset-popover" popover="auto">
+      <form id="reset-form">
+        <p>Reset all user settings to their default value?</p>
+        <fieldset role="group" data-spaced>
+          <button autofocus type="button" popovertarget="reset-popover" popovertargetaction="hide">Cancel</button>
+          <input type="submit" value="Confirm" />
+        </fieldset>
+      </form>
+    </dialog>
 
     <hr/>
 
