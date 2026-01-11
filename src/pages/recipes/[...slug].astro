@@ -2,6 +2,7 @@
 import { getCollection } from "astro:content";
 import Layout from "@/layouts/Layout.astro";
 import { formatDate } from "@util/recipes.util";
+import ShareActions from "@components/recipe/ShareActions.astro";
 
 export async function getStaticPaths() {
   const recipes = await getCollection("Recipes");
@@ -37,12 +38,18 @@ const { Content } = await recipe.render();
     </section>
     <hr />
     <footer>
-      <ul role="list" data-spaced>
-        {recipe.data.tags.map((tag => (
-        <li>
-          <span data-symbol="#">{tag}</span></li>
-        )))}
-      </ul>
+      <section>
+        <ShareActions />
+      </section>
+      <hr />
+      <section>
+        <ul role="list" data-spaced>
+          {recipe.data.tags.map((tag => (
+          <li>
+            <span data-symbol="#">{tag}</span></li>
+          )))}
+        </ul>
+      </section>
     </footer>
   </article>
 </Layout>

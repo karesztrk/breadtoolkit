@@ -611,6 +611,13 @@
       margin-inline-end: 0.5ch;
     }
   }
+
+  share-actions {
+    button {
+      /* Button are hidden by default */
+      display: none;
+    }
+  }
 }
 
 @layer typography {
