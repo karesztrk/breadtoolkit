@@ -1,11 +1,12 @@
 import { LightElement } from "@karesztrk/webcomponent-base";
 import reducer, { initialState } from "@/context/calculator/reducer";
-import { loadCalculatorSettings } from "@/service/calculator";
+import { loadCalculatorSettings, saveCalculatorSettings } from "@/service/calculator";
 import SummaryController from "./SummaryController";
 
 /**
  * @typedef {import('@service/types').Settings} Settings
  * @typedef {import('@service/types').SettingName} SettingName
+ * @typedef {import("@/context/calculator/reducer").CalculatorState} State
  */
 class CalculatorView extends LightElement {
   static {
@@ -39,8 +40,8 @@ class CalculatorView extends LightElement {
   /** @type SummaryController */
   #summaryController;
 
-  /** @type {import("@/context/calculator/reducer").CalculatorState} */
-  state = initialState;
+  /** @type {State} */
+  #state = initialState;
 
   connectedCallback() {
     this.#flourInput = this.querySelector("#flour-input");
@@ -203,6 +204,23 @@ class CalculatorView extends LightElement {
     if (this.#weightDialogInput) {
       this.#weightDialogInput.value = dough.toString();
     }
+  }
+
+  /**
+   * Returns the current state of the calculator.
+   * @return {State}
+   */
+  get state() {
+    return this.#state;
+  }
+
+  /**
+   * Overwrites the current state of the calculator.
+   * @param {State} state
+   */
+  set state(state) {
+    this.#state = state;
+    saveCalculatorSettings(state.settings);
   }
 }
 
