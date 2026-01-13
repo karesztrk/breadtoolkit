@@ -2,8 +2,9 @@
 title: Zabos gluténmentes kenyér
 date: 2021-02-28T09:53:27.078Z
 language: hu
-coverImage: /images/recipes/img_20210225_130439.jpg
-coverImageAlt: Első gluténmentes kenyerem
+cover: ../../assets/images/recipes/img_20210225_130439.jpg
+coverAlt: Tömör, vaskos szerkezetű gluténmentes kenyér egy deszkán kínálva
+coverCaption: Első gluténmentes kenyerem
 tags:
   - zabpehely
   - barnarizsliszt

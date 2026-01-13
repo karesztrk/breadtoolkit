@@ -315,13 +315,19 @@ const title = "Pattern library";
   <section>
     <article>
       <h2 id="image">Image</h2>
-      <figure id="figure">
+      <figure>
         <img
-          src="https://images.unsplash.com/photo-1750375502807-2c73a829f182?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3wzMjM4NDZ8MHwxfHJhbmRvbXx8fHx8fHx8fDE3NTU4OTUyNjJ8&ixlib=rb-4.1.0&q=80&w=300"
-          alt="starry night with a misty mountain in the background that looks impossibly steep. Below, a yellow-lit cityscape."
+          srcset="https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=400&q=80 400w,
+                  https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=800&q=80 800w,
+                  https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=1200&q=80 1200w,
+                  https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=1600&q=80 1600w"
+          sizes="(min-width: 70ch) calc(70ch - 2em),
+                 calc(100vw - 2em)"
+          src="https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=800&q=80"
+          alt="Mountain landscape with lake reflection"
         />
         <figcaption>
-          This is a beautiful city that may or may not exist but if it does
+          This is a beautiful valley that may or may not exist but if it does
           exist, I would like to visit it some day.
         </figcaption>
       </figure>

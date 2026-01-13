@@ -2,8 +2,9 @@
 title: Túrós batyu
 date: 2020-01-05T23:00:00.000Z
 language: hu
-coverImage: /images/recipes/turos_batyu.jpg
-coverImageAlt: Jól eső túrós édesség a munka után
+cover: ../../assets/images/recipes/turos_batyu.jpg
+coverAlt: Három darab dundi túrós péksütemény a tepsiben
+coverCaption: Jól eső túrós édesség a munka után
 tags:
   - batyu
   - limara

@@ -2,8 +2,9 @@
 title: Sajtos pogácsa
 date: 2020-01-03T23:00:00.000Z
 language: hu
-coverImage: /images/recipes/img_20200527_101618.jpg
-coverImageAlt: Vendégvárós
+cover: ../../assets/images/recipes/img_20200527_101618.jpg
+coverAlt: Négy darab kis pogácsa (jó sok sajttal) egy fehér tálban kínálva
+coverCaption: Vendégvárós
 tags:
   - tojás
   - sajt

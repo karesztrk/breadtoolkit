@@ -1,7 +1,8 @@
 ---
 title: Polentás kenyér
-coverImage: /images/recipes/test.jpg
-coverImageAlt: Rozmaringos és foszlós puha kenyér
+cover: ../../assets/images/recipes/test.jpg
+coverAlt: Egy félbe vágott fehér cipő, lyukacsos bélzettel
+coverCaption: Rozmaringos és foszlós puha kenyér
 date: 2021-01-07T06:12:26.258Z
 language: hu
 tags:

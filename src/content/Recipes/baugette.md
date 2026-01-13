@@ -2,8 +2,9 @@
 title: Baugette
 date: 2021-03-26T15:14:11.403Z
 language: hu
-coverImage: /images/recipes/img_20210324_195641.jpg
-coverImageAlt: Illatozó finomság
+cover: ../../assets/images/recipes/img_20210324_195641.jpg
+coverAlt: Szeletelt francia kenyér egy deszkán kínálva, egyenletes bélzet és belesütött illatozó medvehagyma
+coverCaption: Illatozó finomság egy kis csavarral
 tags:
   - kenyérliszt
   - élesztő

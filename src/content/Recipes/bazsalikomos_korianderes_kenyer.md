@@ -2,8 +2,9 @@
 title: Bazsalikomos korianderes kenyér
 date: 2020-01-04T23:00:00.000Z
 language: hu
-coverImage: /images/recipes/received_263787441356787.jpg
-coverImageAlt: Bazsalikom-mentés pék módra
+cover: ../../assets/images/recipes/received_263787441356787.jpg
+coverAlt: Egy kézben tartott kenyér, melyen jól látszik a belesütött, illatozó bazsalikom
+coverCaption: Bazsalikom-mentés pék módra
 tags:
   - liszt
   - víz

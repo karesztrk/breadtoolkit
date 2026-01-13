@@ -2,8 +2,9 @@
 title: Rozsos zsemlék
 date: 2020-01-02T23:00:00.000Z
 language: hu
-coverImage: /images/recipes/img_20200524_100241.jpg
-coverImageAlt: Édeskés zsömlék
+cover: ../../assets/images/recipes/img_20200524_100241.jpg
+coverAlt: Sötét barna zsemblék a tepsiben kis rozsliszttel és szezámmaggal meghintve
+coverCaption: Édeskés zsömlék
 tags:
   - rozs
   - kovász

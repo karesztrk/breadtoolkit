@@ -2,8 +2,9 @@
 title: Curry-s mazsolás alakor kenyér
 date: 2021-02-18T17:40:20.720Z
 language: hu
-coverImage: /images/recipes/img_20210218_060618.jpg
-coverImageAlt: Pikáns ízvilágú kenyér
+cover: ../../assets/images/recipes/img_20210218_060618.jpg
+coverAlt: Nagyon élénk sárga színű lyukacsos kenyér félbe vágva
+coverCaption: Pikáns ízvilágú kenyér
 tags:
   - kenyérliszt
   - alakorliszt

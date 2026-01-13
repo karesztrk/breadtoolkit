@@ -2,8 +2,9 @@
 title: Húsvéti kalács
 date: 2020-01-01T16:39:20.541Z
 language: hu
-coverImage: /images/recipes/img_20200410_151126.jpg
-coverImageAlt: Kívül ropogós, belül puha húsvéti magyar finomság
+cover: ../../assets/images/recipes/img_20200410_151126.jpg
+coverAlt: Egy éppen az asztalon gőzőlgő húsvéti aranybarna kalács
+coverCaption: Kívül ropogós, belül puha húsvéti magyar finomság
 tags:
   - kalács
   - húsvét

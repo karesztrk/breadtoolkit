@@ -2,8 +2,9 @@
 title: Gluténmentes kenyér
 date: 2020-01-06T23:00:00.000Z
 language: hu
-coverImage: /images/recipes/glutenmentes.jpg
-coverImageAlt: Gluténmentes családi ebédre
+cover: ../../assets/images/recipes/glutenmentes.jpg
+coverAlt: Sok magvas gluténmentes kenyér egy szakajtóban, virágmintázatú bevágással
+coverCaption: Gluténmentes családi ebédre
 tags:
   - rizsliszt
   - kukoricaliszt

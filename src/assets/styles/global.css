@@ -184,6 +184,8 @@
   hr {
     margin-inline: 0;
     margin-block: var(--flow-space, var(--space-l));
+    border-top: none;
+    border-bottom-width: var(--rule-thickness, 0.2ex);
   }
 
   /* Table */
@@ -572,11 +574,13 @@
     padding: var(--space-s-m);
   }
 
+  picture,
   img {
     inline-size: var(--width, 100%);
     block-size: var(--height, auto);
     aspect-ratio: var(--ratio, 16 / 9);
     object-fit: var(--fit, cover);
+    object-position: var(--pos, center);
   }
 }
 

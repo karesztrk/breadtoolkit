@@ -2,8 +2,9 @@
 title: Stollen
 date: 2021-02-01T16:35:21.627Z
 language: hu
-coverImage: /images/recipes/img_20201223_205143.jpg
-coverImageAlt: Karácsonyi meglepetés a családnak
+cover: ../../assets/images/recipes/img_20201223_205143.jpg
+coverAlt: Megérkezett a hószállingózás, mely a tepsibe helyezett süteményen is jól látszik
+coverCaption: Karácsonyi meglepetés a családnak
 tags:
   - stollen
   - karácsony

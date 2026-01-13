@@ -2,8 +2,9 @@
 title: Tangzhong
 date: 2021-01-28T15:56:35.900Z
 language: hu
-coverImage: /images/recipes/img_20210127_214731.jpg
-coverImageAlt: Keleti technikával készült kenyér
+cover: ../../assets/images/recipes/img_20210127_214731.jpg
+coverAlt: Felvágott kenyérszeletek egy kínáló deszkán, melyeken jól látszik a kisült cipó füle
+coverCaption: Keleti technikával készült kenyér
 tags:
   - kenyérliszt
   - teljeskiörlésűliszt

@@ -1,8 +1,9 @@
 ---
+import { Image } from "astro:assets";
 import { getCollection } from "astro:content";
-import Layout from "@/layouts/Layout.astro";
-import { formatDate } from "@util/recipes.util";
 import ShareActions from "@components/recipe/ShareActions.astro";
+import { formatDate } from "@util/recipes.util";
+import Layout from "@/layouts/Layout.astro";
 
 export async function getStaticPaths() {
   const recipes = await getCollection("Recipes");
@@ -26,11 +27,18 @@ const { Content } = await recipe.render();
         </p>
       </hgroup>
       <hr />
-      {recipe.data.coverImage && (
-      <figure>
-        <img src={recipe.data.coverImage} alt="Cover image" />
-        <figcaption>{recipe.data.coverImageAlt}</figcaption>
-      </figure>
+      {recipe.data.cover && (
+        <figure>
+        <!-- There will be a small image and the original -->
+        <!-- Below 64em (1024px) the image occupies 90% of the viewport, above that its 75% -->
+        <Image 
+          src={recipe.data.cover} 
+          alt={recipe.data.coverAlt} 
+          widths={[540, recipe.data.cover.width]}
+          sizes="(min-width: 64em) 75vw, 90vw"
+        />
+          <figcaption>{recipe.data.coverCaption}</figcaption>
+        </figure>
       )}
     </header>
     <section>

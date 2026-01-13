@@ -2,8 +2,9 @@
 title: Croissant
 date: 2020-01-01T23:00:00.000Z
 language: hu
-coverImage: /images/recipes/img_20200517_152223.jpg
-coverImageAlt: Ropogós édes péksütemény
+cover: ../../assets/images/recipes/img_20200517_152223.jpg
+coverAlt: Három darab croissant péksütemény egy fa deszkán kínálva
+coverCaption: Ropogós édes péksütemény
 tags:
   - croissant
   - madre
