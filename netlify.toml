@@ -1,0 +1,31 @@
+[build]
+  publish = "dist"
+  command = "pnpm run build"
+
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 200
+
+[[headers]]
+  for = "/manifest.webmanifest"
+  [headers.values]
+    Content-Type = "application/manifest+json"
+
+[[headers]]
+  for = "/*.woff2"
+  [headers.values]
+    # Cache fonts for one year
+    Cache-Control = "public, max-age=31536000"
+
+[[headers]]
+  for = "/*.(svg|webp|png|avif|png|jpeg|jpg)"
+  [headers.values]
+    # Store cache-busted assets for one year
+    Cache-Control = "public, max-age=31536000, immutable"
+
+[[headers]]
+  for = "/*.css"
+  [headers.values]
+    # Store cache-busted CSS for one year
+    Cache-Control = "public, max-age=31536000, immutable"
