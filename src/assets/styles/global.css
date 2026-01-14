@@ -85,8 +85,9 @@
   --stroke-flat: 1px solid CanvasText;
   --stroke-thick: 2px solid CanvasText;
 
-  --main-title-leading: var(--leading-flat);
-  --main-title-space: 0.5em;
+  --main-title-leading: var(--leading-mini);
+  --main-title-space: 1em;
+  --main-title-inline-size: 12ch;
 
   /* Layout */
   --gap: var(--space-s-m);
@@ -492,8 +493,8 @@
 
     p {
       font-size: var(--body-font-size);
-      max-inline-size: 30ch;
       text-wrap: pretty;
+      max-inline-size: 40ch;
     }
   }
 
@@ -694,7 +695,7 @@
   }
 
   h1 {
-    max-inline-size: 20ch;
+    max-inline-size: var(--main-title-inline-size);
   }
 
   h2,
