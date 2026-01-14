@@ -4,9 +4,9 @@ const currentPath = Astro.url.pathname;
 export const pages = ["calculator", "recipes"];
 ---
 
-<nav class="navbar">
-  <a class="logo" href="/">Breadtoolkit</a>
-  <ul>
+<nav>
+  <a href="/">Home</a>
+  <menu>
     {pages.map((name) => {
       const currentPage = currentPath === `/${name}` ? "page" : undefined;
       return (
@@ -15,11 +15,6 @@ export const pages = ["calculator", "recipes"];
         </li>
       );
     })}
-  </ul>
+  </menu>
 </nav>
 
-<style>
-  a {
-    text-transform: capitalize;
-  }
-</style>

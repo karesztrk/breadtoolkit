@@ -1,0 +1,34 @@
+---
+import Layout from "@/layouts/Layout.astro";
+import { getCollection } from "astro:content";
+import RecipeEntry from "@components/recipe/RecipeEntry.astro";
+
+const recipes = await getCollection("Recipes");
+
+const sortedRecipes = recipes.sort(
+  (left, right) => right.data.date.getTime() - left.data.date.getTime(),
+);
+
+const title = "Recipes";
+---
+
+<Layout title={title}>
+  <hgroup>
+    <h1>{title}</h1>
+    <p>Find and bake a recipe of your taste.</p>
+  </hgroup>
+  <section>
+    {sortedRecipes.map((recipe) => (
+      <RecipeEntry recipe={recipe} />
+    ))}
+  </section>
+</Layout>
+
+<style>
+
+h1 {
+  /* Small tweak to add breath between the title and the paragraph */
+  --main-title-leading: var(--leading-fine);
+}
+
+</style>

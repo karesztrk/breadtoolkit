@@ -1,0 +1,21 @@
+---
+import type { CollectionEntry } from "astro:content";
+import { formatDate, translateLocale } from "@util/recipes.util";
+import type { HTMLAttributes } from "astro/types";
+
+interface Props extends HTMLAttributes<"article"> {
+  recipe: CollectionEntry<"Recipes">;
+}
+const { recipe } = Astro.props;
+---
+<article data-entry>
+  <h2 id={recipe.slug} lang={recipe.data.language}>
+    <a href={`/recipes/${recipe.slug}`} data-astro-prefetch>
+      {recipe.data.title}
+    </a>
+  </h2>
+  <p data-note>
+    <time datetime={recipe.data.date.toISOString()}>{formatDate(recipe.data.date)}</time>,
+    <span data-symbol="文">{translateLocale(recipe.data.language)}</span> 
+  </p>
+</article>

@@ -1,8 +1,41 @@
 ---
-import Welcome from "../components/Welcome.astro";
-import Layout from "../layouts/Layout.astro";
+import { getCollection } from "astro:content";
+import RecipeEntry from "@components/recipe/RecipeEntry.astro";
+import Layout from "@layouts/Layout.astro";
+
+const recipes = await getCollection("Recipes");
+
+const recentRecipes = recipes
+  .sort((left, right) => right.data.date.getTime() - left.data.date.getTime())
+  .slice(0, 3);
 ---
 
 <Layout>
-	<Welcome />
+  <hgroup>
+    <h1>Bread Toolkit</h1>
+    <p>Modest tools, soulful results.</p>
+  </hgroup>
+
+  <section>
+    <h2>
+      Tools
+    </h2>
+    <ul role="list">
+      <li>
+        <a data-type="button" data-outline href="/calculator">
+          Calculator
+        </a>
+      </li>
+    </ul>
+  </section>
+
+  <hr/>
+
+  <section>
+    <h2>Recent</h2>
+    {recentRecipes.map((recipe) => (
+      <RecipeEntry recipe={recipe} />
+    ))}
+  </section>
 </Layout>
+

@@ -1,0 +1,63 @@
+---
+import { Image } from "astro:assets";
+import { getCollection } from "astro:content";
+import ShareActions from "@components/recipe/ShareActions.astro";
+import { formatDate } from "@util/recipes.util";
+import Layout from "@/layouts/Layout.astro";
+
+export async function getStaticPaths() {
+  const recipes = await getCollection("Recipes");
+  return recipes.map((recipe) => ({
+    params: { slug: recipe.slug },
+    props: { entry: recipe },
+  }));
+}
+
+const { entry: recipe } = Astro.props;
+const { Content } = await recipe.render();
+---
+
+<Layout title={recipe.data.title} lang={recipe.data.language}>
+  <article>
+    <header>
+      <hgroup>
+        <h1>{recipe.data.title}</h1>
+        <p data-note>
+          <time datetime={recipe.data.date.toISOString()}>{formatDate(recipe.data.date, recipe.data.language)}</time>
+        </p>
+      </hgroup>
+      <hr />
+      {recipe.data.cover && (
+        <figure>
+        <!-- There will be a small image and the original -->
+        <!-- Below 64em (1024px) the image occupies 90% of the viewport, above that its 75% -->
+        <Image 
+          src={recipe.data.cover} 
+          alt={recipe.data.coverAlt} 
+          widths={[540, recipe.data.cover.width]}
+          sizes="(min-width: 64em) 75vw, 90vw"
+        />
+          <figcaption>{recipe.data.coverCaption}</figcaption>
+        </figure>
+      )}
+    </header>
+    <section>
+      <Content />
+    </section>
+    <hr />
+    <footer>
+      <section>
+        <ShareActions />
+      </section>
+      <hr />
+      <section>
+        <ul role="list" data-spaced>
+          {recipe.data.tags.map((tag => (
+          <li>
+            <span data-symbol="#">{tag}</span></li>
+          )))}
+        </ul>
+      </section>
+    </footer>
+  </article>
+</Layout>
