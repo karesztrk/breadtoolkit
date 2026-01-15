@@ -40,6 +40,9 @@ class CalculatorView extends LightElement {
   /** @type SummaryController */
   #summaryController;
 
+  /** @type HTMLElement | null */
+  #shareActions;
+
   /** @type {State} */
   #state = initialState;
 
@@ -52,6 +55,7 @@ class CalculatorView extends LightElement {
     this.#weightDialogInput = this.querySelector("#weight-input");
     this.#weightForm = this.querySelector("#weight-form");
     this.#resetForm = this.querySelector("#reset-form");
+    this.#shareActions = this.querySelector("share-actions");
     this.#summaryController = new SummaryController(this);
 
     const settings = loadCalculatorSettings();
@@ -63,6 +67,7 @@ class CalculatorView extends LightElement {
   render() {
     this.#summaryController.update();
     this.updateInputs();
+    this.updateShareActions();
   }
 
   /**
@@ -203,6 +208,23 @@ class CalculatorView extends LightElement {
 
     if (this.#weightDialogInput) {
       this.#weightDialogInput.value = dough.toString();
+    }
+  }
+
+  /**
+   * Updates the share actions.
+   */
+  updateShareActions() {
+    if (this.#shareActions) {
+      const url = new URL(window.location.href);
+      const { bakersMath: _bm, imperialUnits: _iu, ...settings } = { ...this.#state.settings };
+      for (const key in settings) {
+        url.searchParams.set(key, settings[key].toString());
+      }
+
+      if ("url" in this.#shareActions) {
+        this.#shareActions.url = url.toString();
+      }
     }
   }
 

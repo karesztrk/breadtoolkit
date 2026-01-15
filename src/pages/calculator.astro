@@ -1,7 +1,8 @@
 ---
-import Layout from "@layouts/Layout.astro";
-import NumberInput from "@components/calculator/NumberInput.astro";
 import BakerFormula from "@components/calculator/BakerFormula.astro";
+import NumberInput from "@components/calculator/NumberInput.astro";
+import ShareActions from "@components/recipe/ShareActions.astro";
+import Layout from "@layouts/Layout.astro";
 
 const flourInput = "flour-input";
 const waterInput = "water-input";
@@ -152,6 +153,12 @@ const title = "Calculator";
         </p>
         <BakerFormula />
       </details>
+    </section>
+
+    <hr />
+
+    <section>
+      <ShareActions />
     </section>
 
   </calculator-view>

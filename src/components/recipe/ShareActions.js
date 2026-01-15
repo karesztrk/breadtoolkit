@@ -11,18 +11,28 @@ class Share extends LightElement {
     this.register("share-actions", Share);
   }
 
-  /** @type HTMLButtonElement | null */
+  /** @type {HTMLButtonElement | null} */
   #shareButton;
 
-  /** @type HTMLButtonElement | null */
+  /** @type {HTMLButtonElement | null} */
   #copyButton;
+
+  /** @type {string | undefined} */
+  #url;
 
   /**
    * Returns a url prop value or the current page url as a fallback.
    * @returns {string}
    */
   get url() {
-    return this.getAttribute("url") || window.location.href;
+    return this.#url || window.location.href;
+  }
+
+  /**
+   * Updates the URL state.
+   */
+  set url(url) {
+    this.#url = url;
   }
 
   /**
