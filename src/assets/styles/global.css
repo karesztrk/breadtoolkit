@@ -85,8 +85,9 @@
   --stroke-flat: 1px solid CanvasText;
   --stroke-thick: 2px solid CanvasText;
 
-  --main-title-leading: var(--leading-flat);
-  --main-title-space: 0.5em;
+  --main-title-leading: var(--leading-mini);
+  --main-title-space: 1em;
+  --main-title-inline-size: 12ch;
 
   /* Layout */
   --gap: var(--space-s-m);
@@ -97,15 +98,6 @@
   --grid-row-nav: min-content;
 
   color-scheme: dark light;
-
-  background-color: var(--color-bg);
-  /* Possible future improvement on dark mode */
-  /* background-attachment: fixed; */
-  /* background-image: */
-  /*   radial-gradient(circle at 35% 50%, var(--sky-300-t), transparent 50%), */
-  /*   radial-gradient(circle at 65% 50%, var(--red-300-t), transparent 50%), */
-  /*   radial-gradient(circle at 50% 65%, var(--mustard-300-t), transparent 50%); */
-  color: var(--color-fg);
 }
 
 @layer layout {
@@ -492,8 +484,8 @@
 
     p {
       font-size: var(--body-font-size);
-      max-inline-size: 30ch;
       text-wrap: pretty;
+      max-inline-size: 40ch;
     }
   }
 
@@ -694,7 +686,7 @@
   }
 
   h1 {
-    max-inline-size: 20ch;
+    max-inline-size: var(--main-title-inline-size);
   }
 
   h2,
@@ -793,10 +785,6 @@
     --sky-500: oklch(0.5 0.12 220);
     --sky-600: oklch(0.22 0.05 220);
 
-    /* --sky-300-t: oklch(0.65 0.16 220 / 0.2); */
-    /* --red-300-t: oklch(0.69 0.25 22 / 0.1); */
-    /* --mustard-300-t: oklch(0.67 0.16 80 / 0.15); */
-
     --color-error: light-dark(var(--red-500), var(--red-200));
 
     --color-bg: light-dark(var(--color-light), var(--color-dark));
@@ -845,6 +833,29 @@
     --color-dialog-shadow: lch(from var(--color-dark) l c h / 0.5);
 
     --color-anchor: var(--color-primary);
+
+    @media (prefers-color-scheme: dark) {
+      background-attachment: fixed;
+      background-image:
+        radial-gradient(
+          circle at 35% 20%,
+          lch(from var(--sky-300) l c h / 0.2),
+          transparent 50%
+        ),
+        radial-gradient(
+          circle at 65% 20%,
+          lch(from var(--red-300) l c h / 0.15),
+          transparent 50%
+        ),
+        radial-gradient(
+          circle at 50% 30%,
+          lch(from var(--mustard-300) l c h / 0.15),
+          transparent 50%
+        );
+    }
+
+    background-color: var(--color-bg);
+    color: var(--color-fg);
   }
 }
 

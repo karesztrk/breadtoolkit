@@ -5,7 +5,9 @@ export const pages = ["calculator", "recipes"];
 ---
 
 <nav>
-  <a href="/">Home</a>
+  <a href="/" aria-label="Navigat to Home">
+    Bread Toolkit
+  </a>
   <menu>
     {pages.map((name) => {
       const currentPage = currentPath === `/${name}` ? "page" : undefined;
