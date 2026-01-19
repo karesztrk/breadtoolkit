@@ -37,6 +37,8 @@ Az eljárás lényege, hogy egy rántást kell készíteni a recept alapjául sz
 
 Így a hidratáltság elég meredek: 500g liszt, \~450g víz + 40g a kovászból = \~98%!!! 😵
 
+[Kalkulátor](/calculator?flour=500&water=490&salt=10&sourdough=100&sourdoughRatio=80&yeast=0)
+
 **Elkészítés**
 
 A tészta vizét és a lisztet összekevertem és autolizáltam nagyjából 2 órát. Közben pedig elkészítettem a kis rántást. Ha gluténháló megfelelően kialakult (tesztelni kell) és kihűlt a rántás, akkor össze is lehet gyúrni a kettőt. Kicsit pihentettem, majd belekerült a kovász. Újboli fél órás pihentetés következett, amit követően bele helyzetem a sót is. Pihentettem és megkezdtem a hajtogatásokat: 30-40 percenként egy "strech-and-fold" vagy "coil", a legvégén pedig egy laminálás, ahol ... hát ... nem bírtam ki, hogy ne rakjak bele fűszert: kömény és zöldfűszer ízesítést kapott. Az összehajtást követően ismét pihent és megformáztam, majd a szakajtóval együtt a hűtőbe raktam kb 8 órára.
