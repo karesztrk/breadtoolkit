@@ -46,7 +46,10 @@ class CalculatorView extends LightElement {
   /** @type {State} */
   #state = initialState;
 
-  connectedCallback() {
+  /**
+   * Create HTML element references.
+   */
+  bindElements() {
     this.#flourInput = this.querySelector("#flour-input");
     this.#waterInput = this.querySelector("#water-input");
     this.#saltInput = this.querySelector("#salt-input");
@@ -57,13 +60,49 @@ class CalculatorView extends LightElement {
     this.#resetForm = this.querySelector("#reset-form");
     this.#shareActions = this.querySelector("share-actions");
     this.#summaryController = new SummaryController(this);
-
-    const settings = loadCalculatorSettings();
-
-    this.state = reducer(this.state, { type: "initialize", settings, extras: {} });
-    super.connectedCallback();
   }
 
+  /**
+   * Initialize the calculator local state.
+   */
+  initState() {
+    // Load from storage
+    const storedSettings = loadCalculatorSettings();
+
+    // Load from URL
+    const queryParams = new URLSearchParams(window.location.search);
+    const flour = Number(queryParams.get("flour"));
+    const water = Number(queryParams.get("water"));
+    const salt = Number(queryParams.get("salt"));
+    const yeast = Number(queryParams.get("yeast"));
+    const sourdough = Number(queryParams.get("sourdough"));
+    const sourdoughRatio = Number(queryParams.get("sourdoughRatio"));
+    const settings = {
+      ...storedSettings,
+      ...(flour && { flour }),
+      ...(water && { water }),
+      ...(salt && { salt }),
+      ...(yeast && { yeast }),
+      ...(sourdough && { sourdough }),
+      ...(sourdoughRatio && { sourdoughRatio }),
+    };
+
+    this.state = reducer(this.state, { type: "initialize", settings, extras: {} });
+  }
+
+  /**
+   * Load component dependencies.
+   * @override
+   */
+  dependencies() {
+    this.bindElements();
+    this.initState();
+  }
+
+  /**
+   * Updates the UI.
+   * @override
+   */
   render() {
     this.#summaryController.update();
     this.updateInputs();
