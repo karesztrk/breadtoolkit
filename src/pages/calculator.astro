@@ -13,10 +13,7 @@ const title = "Calculator";
 ---
 
 <Layout title={title}>
-  <hgroup>
-    <h1 id="title">{title}</h1>
-    <p id="description">Calculate your dough hydration and the amount of ingredients.</p>
-  </hgroup>
+  <h1 id="title" class="visually-hidden">{title}</h1>
 
   <calculator-view $input="onChange" $inputstep="onChange" $submit="onSubmit" aria-labelledby="title" aria-describedby="description">
     <section>
