@@ -33,6 +33,8 @@ A héten a piacra tévedtem és valahogya kezembe akadt egy kis medvehagyma mire
 - 380g víz (350+20g, ami az élesztővel került bele)
 - egy marék aprított medvehagyma
 
+[Kalkulátor](/calculator?flour=500&water=380&salt=10&sourdough=105&sourdoughRatio=80)
+
 Autolízis kb 2 óra volt, de a recept szerint több kellett volna. Én window-paint teszttel úgy éreztem, hogy megfelelően kialakult a gluténháló és bele is gyúrtam a kovászt. Picit pihentettem és ment bele a sót. Újabb pihentetés után pedig a medvehagyma. 2 óra volt a bulk, ami közben 2x hajtogattam. Nem sokat emelt a tésztán az élesztő, mivel valószínűleg hideg volt neki.
 
 A megkelt tésztát 2 felé osztottam (~500g) és előformáztam. Pihentettem, ami után egy újabb formázást követelt 😊.

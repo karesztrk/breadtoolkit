@@ -26,4 +26,6 @@ A recept eredetileg [Paul Hollywood](https://en.wikipedia.org/wiki/Paul_Hollywoo
 - 1 marék koriander aprítva/mozsolva
 - 1 marék bazsalikom aprítva/morzsolva
 
+[Kalkulátor](/calculator?flour=375&water=175&salt=10&sourdough=250&sourdoughRatio=80&yeast=0)
+
 Elkészítését tekintve a szokásos módszert alkalmaztam. Miután beérett a kovász autolizáltam a lisztet egy kevés vízzel, majd jött bele a kovász és egy óra után a só is. Háromszor hajtogattam és egy éjszakát hűtőzött. Majd onnan ment a sütőbe először 230 fokon 25 percre, majd ismét 25 percre 200 fokon.

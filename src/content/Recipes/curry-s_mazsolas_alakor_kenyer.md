@@ -27,6 +27,8 @@ Ezúttal kicsit indiai ízvilágba kalandoztam el. Mi nagyon szeretjük az india
 - 2 púpos kanál currypor
 - 50g áztatott mazsola
 
+[Kalkulátor](/calculator?flour=500&water=370&salt=11&sourdough=105&sourdoughRatio=80&yeast=0)
+
 Két óra autolizálást követően bedagaszottam a már aktív kovit. Pihentettem és bele raktam a sót is, amit alaposan begyúrtam. Pihentettem és begyúrtam a mazsolát és a curry-t is. Utóbbit fokozatosan, amíg azt nem éreztem, hogy megkaptam a nekem tetsző sárgás árnyalatot (egyébként gyönörű lesz a végeredmény 🌈). (Vagy az alakor vagy a por miatt én folyamatosan azt éreztem, hogy még elbírna több vizet a tészta) 3x hajtogattam kb 40 perces szünetekkel. Majd egy kiolajozott tálba helyeztem, hogy nyomon tudjam követni a kelés folyamatát.
 
 > Általában a hűtős kelesztést szoktam választani, de ezúttal szerettem volna, ha még aznap megkóstolhatnám a curry-s cipómat.

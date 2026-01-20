@@ -40,10 +40,16 @@ class CalculatorView extends LightElement {
   /** @type SummaryController */
   #summaryController;
 
+  /** @type HTMLElement | null */
+  #shareActions;
+
   /** @type {State} */
   #state = initialState;
 
-  connectedCallback() {
+  /**
+   * Create HTML element references.
+   */
+  bindElements() {
     this.#flourInput = this.querySelector("#flour-input");
     this.#waterInput = this.querySelector("#water-input");
     this.#saltInput = this.querySelector("#salt-input");
@@ -52,17 +58,55 @@ class CalculatorView extends LightElement {
     this.#weightDialogInput = this.querySelector("#weight-input");
     this.#weightForm = this.querySelector("#weight-form");
     this.#resetForm = this.querySelector("#reset-form");
+    this.#shareActions = this.querySelector("share-actions");
     this.#summaryController = new SummaryController(this);
-
-    const settings = loadCalculatorSettings();
-
-    this.state = reducer(this.state, { type: "initialize", settings, extras: {} });
-    super.connectedCallback();
   }
 
+  /**
+   * Initialize the calculator local state.
+   */
+  initState() {
+    // Load from storage
+    const storedSettings = loadCalculatorSettings();
+
+    // Load from URL
+    const queryParams = new URLSearchParams(window.location.search);
+    const flour = Number(queryParams.get("flour"));
+    const water = Number(queryParams.get("water"));
+    const salt = Number(queryParams.get("salt"));
+    const yeast = Number(queryParams.get("yeast"));
+    const sourdough = Number(queryParams.get("sourdough"));
+    const sourdoughRatio = Number(queryParams.get("sourdoughRatio"));
+    const settings = {
+      ...storedSettings,
+      ...(flour && { flour }),
+      ...(water && { water }),
+      ...(salt && { salt }),
+      ...(yeast && { yeast }),
+      ...(sourdough && { sourdough }),
+      ...(sourdoughRatio && { sourdoughRatio }),
+    };
+
+    this.state = reducer(this.state, { type: "initialize", settings, extras: {} });
+  }
+
+  /**
+   * Load component dependencies.
+   * @override
+   */
+  dependencies() {
+    this.bindElements();
+    this.initState();
+  }
+
+  /**
+   * Updates the UI.
+   * @override
+   */
   render() {
     this.#summaryController.update();
     this.updateInputs();
+    this.updateShareActions();
   }
 
   /**
@@ -203,6 +247,23 @@ class CalculatorView extends LightElement {
 
     if (this.#weightDialogInput) {
       this.#weightDialogInput.value = dough.toString();
+    }
+  }
+
+  /**
+   * Updates the share actions.
+   */
+  updateShareActions() {
+    if (this.#shareActions) {
+      const url = new URL(window.location.href);
+      const { bakersMath: _bm, imperialUnits: _iu, ...settings } = { ...this.#state.settings };
+      for (const key in settings) {
+        url.searchParams.set(key, settings[key].toString());
+      }
+
+      if ("url" in this.#shareActions) {
+        this.#shareActions.url = url.toString();
+      }
     }
   }
 
