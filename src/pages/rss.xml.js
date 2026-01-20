@@ -51,8 +51,12 @@ export const GET = async (context) => {
     items.push({
       title: post.data.title,
       pubDate: post.data.date,
-      link: `/recipes/${post.id}/`,
-      content: `<![CDATA[${content}]]>`,
+      link: `/recipes/${post.slug}`,
+      content: `
+        <![CDATA[
+          ${content}
+        ]]>
+        `,
     });
   }
   return rss({
@@ -66,5 +70,7 @@ export const GET = async (context) => {
     customData: `
       <language>en-GB</language>
       `,
+    stylesheet: "/rss.xsl",
+    trailingSlash: false,
   });
 };
