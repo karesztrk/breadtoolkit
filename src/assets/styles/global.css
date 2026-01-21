@@ -614,6 +614,16 @@
       display: none;
     }
   }
+
+  /* Display focus around the number-input */
+  fieldset[role="group"]:has(input:focus) {
+    outline: 4px dotted var(--color-focus, currentColor);
+    outline-offset: var(--focus-offset, 0.25rem);
+
+    input {
+      outline: none;
+    }
+  }
 }
 
 @layer typography {
