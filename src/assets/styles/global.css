@@ -82,11 +82,10 @@
 
   --shadow-small: 0 2px 8px var(--color-dialog-shadow);
 
-  --stroke-flat: 1px solid CanvasText;
+  --stroke-thin: 1px solid CanvasText;
   --stroke-thick: 2px solid CanvasText;
 
   --main-title-leading: var(--leading-mini);
-  --main-title-space: 1em;
   --main-title-inline-size: 12ch;
 
   /* Layout */
@@ -97,7 +96,11 @@
   --popout: minmax(0, var(--popout-max));
   --grid-row-nav: min-content;
 
+  --blur-hard: blur(4px);
+
   color-scheme: dark light;
+
+  scroll-behavior: smooth;
 }
 
 @layer layout {
@@ -120,6 +123,7 @@
   body > :is(main, header) {
     display: grid;
     grid-template-columns: subgrid;
+    row-gap: var(--space-l-xl);
 
     & > * {
       grid-column: content;
@@ -178,11 +182,12 @@
     margin-block: var(--flow-space, var(--space-l));
     border-top: none;
     border-bottom-width: var(--rule-thickness, 0.2ex);
+    border-color: var(--color-hr);
   }
 
   /* Table */
   table {
-    --stroke: var(--stroke-flat);
+    --stroke: var(--stroke-thin);
     border: var(--stroke);
     border-collapse: collapse;
     width: 100%;
@@ -309,7 +314,7 @@
     color: var(--color);
     padding: var(--padding-block, 0.35em) var(--padding-inline, 0.65em);
     background-color: var(--color-input-bg);
-    border: var(--stroke-flat);
+    border: var(--stroke-thin);
     border-color: var(--stroke-color);
     text-decoration: none;
   }
@@ -472,25 +477,18 @@
   }
 
   hgroup {
-    margin-block-end: var(--main-title-space, 0.5em);
-
     h1 {
-      margin-block-end: auto;
-    }
-
-    &:has(h1) {
-      font-size: var(--font-size-1);
+      --main-title-space: auto;
     }
 
     p {
-      font-size: var(--body-font-size);
       text-wrap: pretty;
       max-inline-size: 40ch;
     }
   }
 
   h1 {
-    margin-block-end: var(--main-title-space);
+    margin-block-end: var(--main-title-space, 1em);
     line-height: var(--main-title-leading);
   }
 
@@ -535,7 +533,7 @@
 
   [open]::backdrop {
     background: rgba(0, 0, 0, 0.61);
-    backdrop-filter: blur(4px);
+    backdrop-filter: var(--blur-hard);
   }
 
   /* Hide scroll when the dialog is open */
@@ -582,8 +580,14 @@
   [role="group"] {
     display: inline-flex;
     inline-size: 100%;
-    border: 0;
-    padding: 0;
+    border: var(--stroke, none);
+    border-bottom: var(--stroke-bottom, none);
+    border-color: var(--stroke-color, transparent);
+    padding-inline: 0;
+    padding-block: var(--flow, 0);
+    margin-inline: 0;
+    margin-block-end: 0;
+    --flow-space: 1em;
 
     &[data-spaced] {
       flex-wrap: wrap;
@@ -608,7 +612,13 @@
     }
   }
 
+  calculator-view,
+  calculator-form-group {
+    display: block;
+  }
+
   share-actions {
+    display: block;
     button {
       /* Button are hidden by default */
       display: none;
@@ -622,6 +632,38 @@
 
     input {
       outline: none;
+    }
+  }
+
+  ::highlight(speech-synth) {
+    color: var(--color-selection-txt);
+    background: var(--color-selection-bg);
+  }
+
+  speech-synth {
+    display: block;
+    --flow-space: 0;
+
+    &[data-playing] {
+      position: sticky;
+      top: 0;
+      backdrop-filter: var(--blur-hard) grayscale(0.25);
+      container: speech-synth / scroll-state;
+    }
+
+    button {
+      /* Button are hidden by default but the space is reserved for them */
+      visibility: hidden;
+    }
+
+    fieldset {
+      --flow: var(--space-2xs);
+      --stroke-bottom: var(--stroke-thick);
+      --stroke-color: var(--border-color, transparent);
+
+      @container speech-synth scroll-state(stuck: top) {
+        --border-color: var(--color-hr);
+      }
     }
   }
 }
@@ -844,23 +886,31 @@
 
     --color-anchor: var(--color-primary);
 
+    --color-hr: light-dark(
+      color-mix(in lch, var(--color-bg), black 60%),
+      color-mix(in lch, var(--color-bg), white 80%)
+    );
+
     @media (prefers-color-scheme: dark) {
-      background-attachment: fixed;
+      background-position: center;
+      background-repeat: no-repeat;
+      /* Fixed attachment caused some jankiness */
+      background-attachment: scroll;
       background-image:
         radial-gradient(
-          circle at 35% 20%,
+          circle at 35% 10%,
           lch(from var(--sky-300) l c h / 0.2),
-          transparent 50%
+          transparent 20%
         ),
         radial-gradient(
-          circle at 65% 20%,
+          circle at 65% 10%,
           lch(from var(--red-300) l c h / 0.15),
-          transparent 50%
+          transparent 20%
         ),
         radial-gradient(
-          circle at 50% 30%,
+          circle at 50% 20%,
           lch(from var(--mustard-300) l c h / 0.15),
-          transparent 50%
+          transparent 20%
         );
     }
 
@@ -1012,6 +1062,18 @@
         block-size: auto;
         opacity: 1;
       }
+    }
+  }
+
+  speech-synth {
+    --duration: 150ms;
+    --easing: ease;
+
+    fieldset {
+      transition:
+        box-shadow var(--duration) var(--easing),
+        background-color var(--duration) var(--easing),
+        border-color var(--duation) var(--easing);
     }
   }
 }
