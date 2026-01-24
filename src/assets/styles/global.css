@@ -477,10 +477,6 @@
   }
 
   hgroup {
-    h1 {
-      --main-title-space: auto;
-    }
-
     p {
       text-wrap: pretty;
       max-inline-size: 40ch;
@@ -488,7 +484,6 @@
   }
 
   h1 {
-    margin-block-end: var(--main-title-space, 1em);
     line-height: var(--main-title-leading);
   }
 

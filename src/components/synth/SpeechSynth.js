@@ -30,6 +30,22 @@ export default class SpeechSynth extends LightElement {
   constructor() {
     super();
     this.#controller = new AbortController();
+
+    globalThis.speechSynthesis.addEventListener("voiceschanged", this.checkVoices.bind(this), {
+      signal: this.#controller.signal,
+      once: true,
+    });
+  }
+
+  /**
+   * Async check for the Speech API voices.
+   */
+  checkVoices() {
+    const voices = window.speechSynthesis.getVoices();
+    const voicesLoaded = voices.length > 0;
+    if (voicesLoaded && this.#playButton) {
+      this.showButton(this.#playButton);
+    }
   }
 
   /**
@@ -45,7 +61,11 @@ export default class SpeechSynth extends LightElement {
    * @returns boolean
    */
   get hasSpeechSupport() {
-    return "speechSynthesis" in window;
+    if (!("speechSynthesis" in window)) {
+      return false;
+    }
+    const voices = window.speechSynthesis.getVoices();
+    return voices.length > 0;
   }
 
   /**
