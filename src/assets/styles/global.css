@@ -661,6 +661,12 @@
       }
     }
   }
+
+  /* Add a simple notation to the currently spoken html element */
+  [data-speech-synth-highlight] {
+    outline: 4px dotted var(--color-focus, currentColor);
+    outline-offset: var(--focus-offset, 0.25rem);
+  }
 }
 
 @layer typography {
