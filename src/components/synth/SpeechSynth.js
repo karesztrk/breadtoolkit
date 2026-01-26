@@ -1,3 +1,4 @@
+import SpeechSynthesisChecker from "@components/browser/SpeechSynthesisChecker";
 import { LightElement } from "@karesztrk/webcomponent-base";
 
 /**
@@ -27,33 +28,26 @@ export default class SpeechSynth extends LightElement {
 
   #skipNodes = new Set(["[popover]", "button", "iframe", "pre"]);
 
+  speechChecker;
+
+  #nodeParent;
+
   constructor() {
     super();
     this.#controller = new AbortController();
-
-    globalThis.speechSynthesis.addEventListener("voiceschanged", this.checkVoices.bind(this), {
-      signal: this.#controller.signal,
-      once: true,
-    });
+    this.speechChecker = new SpeechSynthesisChecker();
+    this.#nodeParent = new Set();
   }
 
   /**
    * Async check for the Speech API voices.
    */
   checkVoices() {
-    const voices = window.speechSynthesis.getVoices();
-    const voicesLoaded = voices.length > 0;
-    if (voicesLoaded && this.#playButton) {
-      this.showButton(this.#playButton);
-    }
-  }
-
-  /**
-   * Determine if this browser can use the CSS Highlight API.
-   * @returns boolean
-   */
-  get hasHighlightSupport() {
-    return CSS.supports("selector(::highlight(test))");
+    this.speechChecker.detect().then(() => {
+      if (this.speechChecker.isFullySupported() && this.#playButton) {
+        this.showButton(this.#playButton);
+      }
+    });
   }
 
   /**
@@ -82,14 +76,7 @@ export default class SpeechSynth extends LightElement {
    */
   dependencies() {
     this.bindElements();
-
-    if (!this.hasHighlightSupport || !this.hasSpeechSupport) {
-      return;
-    }
-
-    if (this.#playButton) {
-      this.showButton(this.#playButton);
-    }
+    this.checkVoices();
   }
 
   /**
@@ -168,6 +155,11 @@ export default class SpeechSynth extends LightElement {
     if (this.#stopButton) {
       this.hideButton(this.#stopButton);
     }
+    // Clear data attr.
+    for (const element of this.#nodeParent) {
+      delete element.dataset.speechSynthHighlight;
+    }
+    this.#nodeParent.clear();
   }
 
   /**
@@ -188,8 +180,6 @@ export default class SpeechSynth extends LightElement {
     if (!target) {
       throw new Error("Target not found");
     }
-
-    const nodeParent = new WeakMap();
 
     const nodeList = this.collectNodes(target);
 
@@ -214,6 +204,10 @@ export default class SpeechSynth extends LightElement {
       this.#utterance.addEventListener(
         "end",
         () => {
+          if (text.parentElement) {
+            delete text.parentElement.dataset.speechSynthHighlight;
+            this.#nodeParent.delete(text.parentElement);
+          }
           nextWord();
         },
         { signal: this.#controller.signal, once: true },
@@ -224,6 +218,10 @@ export default class SpeechSynth extends LightElement {
         this.stop();
         this.renderAlert(ev.error);
       });
+      if (text.parentElement) {
+        this.#nodeParent.add(text.parentElement);
+        text.parentElement.dataset.speechSynthHighlight = "true";
+      }
       this.#utterance.addEventListener(
         "boundary",
         (ev) => {
@@ -231,11 +229,6 @@ export default class SpeechSynth extends LightElement {
           if (highlightNode) {
             delete highlightNode.dataset.speechSynthHighlight;
             highlightNode = null;
-          }
-          if (nodeParent.has(text)) {
-            highlightNode = nodeParent.get(text);
-            highlightNode.dataset.speechSynthHighlight = "true";
-            return;
           }
           const range = new Range();
           range.setStart(text, ev.charIndex);
@@ -245,7 +238,7 @@ export default class SpeechSynth extends LightElement {
         { signal: this.#controller.signal },
       );
 
-      const parent = text.parentElement ?? nodeParent.get(text);
+      const parent = text.parentElement;
       if (parent) {
         parent.style.scrollMarginBlock = "200px";
         parent.scrollIntoView({

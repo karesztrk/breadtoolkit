@@ -79,24 +79,18 @@ const title = "Browser API Detector";
 </Layout>
 
 <script>
-let support = {
-  speechSynthesis: {
-    available: false,
-    voicesLoaded: false,
-    voiceCount: 0,
-    features: {},
-    errors: []
-  },
-  cssHighlight: {
-    available: false,
-    features: {},
-    errors: []
-  },
-  browser: ''
-};
+import BrowserApiChecker from "@components/browser/BrowserApiChecker";
+
+// DOM manipulation and rendering
+let checker = new BrowserApiChecker();
 let testing = false;
 
-function createIcon(status) {
+/**
+ * Creates an icon character based on status
+ * @param {boolean|null} status - Status to represent (true = ✓, false = ✗, other = !)
+ * @returns {string} Icon character
+ */
+const createIcon = (status: boolean | null): string => {
   if (status === true) {
     return '✓';
   } else if (status === false) {
@@ -106,175 +100,89 @@ function createIcon(status) {
   }
 }
 
-function createIconElement(status) {
+/**
+ * Creates a span element containing an icon
+ * @param {boolean} status - Status to represent
+ * @returns {HTMLSpanElement} Span element with icon text
+ */
+const createIconElement = (status: boolean): HTMLSpanElement => {
   const span = document.createElement('span');
   span.textContent = createIcon(status);
   return span;
 }
 
-function getBrowserInfo() {
-  const ua = navigator.userAgent;
-  if (ua.includes('Edg')) return 'Edge';
-  if (ua.includes('Chrome')) return 'Chrome';
-  if (ua.includes('Safari') && !ua.includes('Chrome')) return 'Safari';
-  if (ua.includes('Firefox')) return 'Firefox';
-  if (ua.includes('Opera') || ua.includes('OPR')) return 'Opera';
-  return 'Unknown Browser';
-}
-
-function detectSupport() {
-  support = {
-    speechSynthesis: {
-      available: false,
-      voicesLoaded: false,
-      voiceCount: 0,
-      features: {},
-      errors: []
-    },
-    cssHighlight: {
-      available: false,
-      features: {},
-      errors: []
-    },
-    browser: getBrowserInfo()
-  };
-
-  detectSpeechSynthesis();
-  detectCSSHighlight();
-  updateUI();
-}
-
-function detectSpeechSynthesis() {
-  try {
-    if (!window.speechSynthesis || !('speechSynthesis' in window)) {
-      support.speechSynthesis.errors.push('Speech Synthesis API not available in this browser');
-      return;
-    }
-
-    support.speechSynthesis.available = true;
-
-    support.speechSynthesis.features = {
-      speak: typeof window.speechSynthesis.speak === 'function',
-      cancel: typeof window.speechSynthesis.cancel === 'function',
-      pause: typeof window.speechSynthesis.pause === 'function',
-      resume: typeof window.speechSynthesis.resume === 'function',
-      getVoices: typeof window.speechSynthesis.getVoices === 'function',
-      speechSynthesisUtterance: typeof window.SpeechSynthesisUtterance === 'function'
-    };
-
-    const checkVoices = () => {
-      try {
-        const voices = window.speechSynthesis.getVoices();
-        support.speechSynthesis.voiceCount = voices.length;
-        support.speechSynthesis.voicesLoaded = voices.length > 0;
-
-        if (voices.length === 0) {
-          support.speechSynthesis.errors = support.speechSynthesis.errors.filter(e => !e.includes('voices'));
-          support.speechSynthesis.errors.push('No voices available (they may still be loading)');
-        } else {
-          support.speechSynthesis.errors = support.speechSynthesis.errors.filter(e => !e.includes('voices'));
-        }
-
-        updateUI();
-      } catch (err) {
-        support.speechSynthesis.errors.push('Error loading voices: ' + err.message);
-        updateUI();
-      }
-    };
-
-    checkVoices();
-
-    if (window.speechSynthesis.addEventListener) {
-      window.speechSynthesis.addEventListener('voiceschanged', checkVoices);
-    } else if (window.speechSynthesis.onvoiceschanged !== undefined) {
-      window.speechSynthesis.onvoiceschanged = checkVoices;
-    }
-
-    setTimeout(checkVoices, 100);
-
-  } catch (err) {
-    support.speechSynthesis.errors.push('Detection error: ' + err.message);
-  }
-}
-
-function detectCSSHighlight() {
-  try {
-    const selectorSupport = CSS.supports("selector(::highlight(test))");
-    if (!window.CSS || !CSS.highlights || !selectorSupport) {
-      support.cssHighlight.errors.push('CSS Custom Highlight API not available in this browser');
-      return;
-    }
-
-    support.cssHighlight.available = true;
-
-    support.cssHighlight.features = {
-      highlights: typeof CSS.highlights === 'object',
-      set: typeof CSS.highlights.set === 'function',
-      delete: typeof CSS.highlights.delete === 'function',
-      clear: typeof CSS.highlights.clear === 'function',
-      has: typeof CSS.highlights.has === 'function',
-      highlight: typeof window.Highlight === 'function',
-      range: typeof window.Range === 'function'
-    };
-
-  } catch (err) {
-    support.cssHighlight.errors.push('Detection error: ' + err.message);
-  }
-}
-
-function updateUI() {
-  const speechFullSupport = support.speechSynthesis.available &&
-    support.speechSynthesis.voicesLoaded &&
-    Object.values(support.speechSynthesis.features).every(f => f === true);
-
-  const highlightFullSupport = support.cssHighlight.available &&
-    Object.values(support.cssHighlight.features).every(f => f === true);
+/**
+ * Updates the UI with current browser support information
+ * Manipulates DOM elements to display support status, features, and errors
+ */
+const updateUI = () => {
+  const speechChecker = checker.speechChecker;
+  const highlightChecker = checker.highlightChecker;
+  
+  const speechFullSupport = speechChecker.isFullySupported();
+  const highlightFullSupport = highlightChecker.isFullySupported();
 
   // Overall Status
   const bothFullySupported = speechFullSupport && highlightFullSupport;
-  const anySupported = support.speechSynthesis.available || support.cssHighlight.available;
+  const anySupported = speechChecker.available || highlightChecker.available;
 
-
-  document.getElementById('statusText').textContent =
-    (bothFullySupported ? '✓ All APIs Fully Supported' :
-      anySupported ? '! Some APIs Supported' :
-        '✗ No APIs Supported');
+  const statusText = document.getElementById('statusText');
+  if (statusText) {
+    statusText.textContent =
+      (bothFullySupported ? '✓ All APIs Fully Supported' :
+        anySupported ? '! Some APIs Supported' :
+          '✗ No APIs Supported');
+  }
 
   // Browser Info
-  document.getElementById('browserInfo').textContent = support.browser;
+  const browserInfo = document.getElementById('browserInfo');
+  if (browserInfo) {
+    browserInfo.textContent = checker.browser;
+  }
 
   // Speech Synthesis Status
   const speechStatus = document.getElementById('speechStatus');
-  speechStatus.className = speechFullSupport ? 'success' : support.speechSynthesis.available ? 'warning' : 'error';
+  if (speechStatus) {
+    speechStatus.className = speechFullSupport ? 'success' : speechChecker.available ? 'warning' : 'error';
+  }
 
-  document.getElementById('speechStatusText').textContent =
-    (speechFullSupport ? '✓ Fully Supported' :
-      support.speechSynthesis.available ? '! Partially Supported' :
-        '✗ Not Supported');
+  const speechStatusText = document.getElementById('speechStatusText');
+  if (speechStatusText) {
+    speechStatusText.textContent =
+      (speechFullSupport ? '✓ Fully Supported' :
+        speechChecker.available ? '! Partially Supported' :
+          '✗ Not Supported');
+  }
 
   // Speech API Status
   const apiAvailable = document.getElementById('apiAvailable');
-  apiAvailable.textContent = createIcon(support.speechSynthesis.available);
+  if (apiAvailable) {
+    apiAvailable.textContent = createIcon(speechChecker.available);
+  }
 
   const voicesLoaded = document.getElementById('voicesLoaded');
-  voicesLoaded.textContent = createIcon(support.speechSynthesis.voicesLoaded);
+  if (voicesLoaded) {
+    voicesLoaded.textContent = createIcon(speechChecker.voicesLoaded);
+  }
 
-  document.getElementById('voiceCount').textContent = `${support.speechSynthesis.voiceCount}`;
+  const voiceCount = document.getElementById('voiceCount');
+  if (voiceCount) {
+    voiceCount.textContent = `${speechChecker.voiceCount}`;
+  }
 
   // Speech Features
   const speechFeaturesList = document.getElementById('speechFeaturesList');
 
-  if (support.speechSynthesis.available) {
+  if (speechFeaturesList && speechChecker.available) {
     speechFeaturesList.innerHTML = '';
 
-    Object.entries(support.speechSynthesis.features).forEach(function(entry) {
+    Object.entries(speechChecker.features).forEach((entry) => {
       const [feature, available] = entry;
 
       const title = document.createElement('dt');
       title.textContent = feature.replace(/([A-Z])/g, ' $1').trim();
 
       const term = document.createElement('dd');
-
       term.appendChild(createIconElement(available));
       term.append(` ${feature.replace(/([A-Z])/g, '$1')}`);
 
@@ -286,10 +194,10 @@ function updateUI() {
   // Speech Errors
   const speechErrorsList = document.getElementById('speechErrorsList');
 
-  if (support.speechSynthesis.errors.length > 0) {
+  if (speechErrorsList && speechChecker.errors.length > 0) {
     speechErrorsList.innerHTML = '';
 
-    support.speechSynthesis.errors.forEach(function(error) {
+    speechChecker.errors.forEach((error) => {
       const li = document.createElement('li');
       li.textContent = '! ' + error;
       speechErrorsList.appendChild(li);
@@ -298,25 +206,29 @@ function updateUI() {
 
   // CSS Highlight Status
   const highlightStatus = document.getElementById('highlightStatus');
-  highlightStatus.className = highlightFullSupport ? 'success' : support.cssHighlight.available ? 'warning' : 'error';
+  if (highlightStatus) {
+    highlightStatus.className = highlightFullSupport ? 'success' : highlightChecker.available ? 'warning' : 'error';
+  }
 
-  document.getElementById('highlightStatusText').textContent =
-    (highlightFullSupport ? '✓ Fully Supported' :
-      support.cssHighlight.available ? '! Partially Supported' :
-        '✗ Not Supported');
+  const highlightStatusText = document.getElementById('highlightStatusText');
+  if (highlightStatusText) {
+    highlightStatusText.textContent =
+      (highlightFullSupport ? '✓ Fully Supported' :
+        highlightChecker.available ? '! Partially Supported' :
+          '✗ Not Supported');
+  }
 
   // CSS Highlight Features
   const highlightFeaturesList = document.getElementById('highlightFeaturesList');
 
-  if (support.cssHighlight.available) {
+  if (highlightFeaturesList && highlightChecker.available) {
     highlightFeaturesList.innerHTML = '';
 
-    Object.entries(support.cssHighlight.features).forEach(function(entry) {
+    Object.entries(highlightChecker.features).forEach((entry) => {
       const [feature, available] = entry;
 
       const title = document.createElement('dt');
       title.textContent = feature.replace(/([A-Z])/g, ' $1').trim();
-
 
       const term = document.createElement('dd');
       term.appendChild(createIconElement(available));
@@ -330,10 +242,10 @@ function updateUI() {
   // CSS Highlight Errors
   const highlightErrorsList = document.getElementById('highlightErrorsList');
 
-  if (support.cssHighlight.errors.length > 0) {
+  if (highlightErrorsList && highlightChecker.errors.length > 0) {
     highlightErrorsList.innerHTML = '';
 
-    support.cssHighlight.errors.forEach(function(error) {
+    highlightChecker.errors.forEach((error) => {
       const li = document.createElement('li');
       li.textContent = '! ' + error;
       highlightErrorsList.appendChild(li);
@@ -341,45 +253,56 @@ function updateUI() {
   }
 }
 
-function testSpeech() {
-  if (!support.speechSynthesis.available || !support.speechSynthesis.voicesLoaded || testing) return;
-
-  testing = true;
-  const testBtn = document.getElementById('testBtn');
-  testBtn.disabled = true;
-  testBtn.textContent = 'Speaking...';
-
-  try {
-    window.speechSynthesis.cancel();
-
-    const utterance = new window.SpeechSynthesisUtterance('Speech synthesis is working correctly.');
-
-    utterance.onend = function() {
-      testing = false;
-      testBtn.disabled = false;
-      testBtn.textContent = 'Test Speech Synthesis';
-    };
-
-    utterance.onerror = function(e) {
-      testing = false;
-      testBtn.disabled = false;
-      testBtn.textContent = 'Test Speech Synthesis';
-      alert('Speech Error: ' + e.error);
-    };
-
-    window.speechSynthesis.speak(utterance);
-  } catch (err) {
-    testing = false;
-    testBtn.disabled = false;
-    testBtn.textContent = 'Test Speech Synthesis';
-    alert('Error: ' + err.message);
-  }
+/**
+ * Runs browser detection checks
+ */
+const detectSupport = async () =>{
+  checker.detect().then(()=>{
+  updateUI();
+  });
 }
 
-document.getElementById('testBtn').addEventListener('click', testSpeech);
-document.getElementById('refreshBtn').addEventListener('click', detectSupport);
+/**
+ * Tests speech synthesis functionality
+ */
+const testSpeech = () => {
+  if (testing) return;
 
-window.addEventListener('beforeunload', function() {
+  const testBtn =  (document.getElementById('testBtn')) as HTMLButtonElement | null;
+  if (!testBtn) return;
+  
+  testing = true;
+  
+  checker.testSpeech(
+    () => {
+      testBtn.disabled = true;
+      testBtn.textContent = 'Speaking...';
+    },
+    () => {
+      testing = false;
+      testBtn.disabled = false;
+      testBtn.textContent = 'Test Speech Synthesis';
+    },
+    (error: unknown) => {
+      testing = false;
+      testBtn.disabled = false;
+      testBtn.textContent = 'Test Speech Synthesis';
+      alert('Speech Error: ' + error);
+    }
+  );
+}
+
+const testBtn = document.getElementById('testBtn');
+if (testBtn) {
+  testBtn.addEventListener('click', testSpeech);
+}
+
+const refreshBtn = document.getElementById('refreshBtn');
+if (refreshBtn) {
+  refreshBtn.addEventListener('click', detectSupport);
+}
+
+window.addEventListener('beforeunload', () =>{
   if (window.speechSynthesis) {
     window.speechSynthesis.cancel();
   }
