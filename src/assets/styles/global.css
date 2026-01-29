@@ -91,9 +91,14 @@
   /* Layout */
   --gap: var(--space-s-m);
   --full: minmax(var(--gap), 1fr);
-  --content: min(70ch, 100% - var(--gap) * 2);
-  --popout-max: var(--space-m);
-  --popout: minmax(0, var(--popout-max));
+  --content-size: 70ch;
+  --narrow-content-size: 64ch;
+  --content: minmax(
+    0,
+    calc((var(--content-size) - var(--narrow-content-size)) / 2)
+  );
+  --popout: minmax(0, var(--space-l));
+  --narrow: min(var(--narrow-content-size), 100% - var(--gap) * 2);
   --grid-row-nav: min-content;
 
   --blur-hard: blur(4px);
@@ -106,32 +111,51 @@
 @layer layout {
   /* Layout */
   body {
-    min-block-size: auto;
     display: grid;
     grid-template-columns:
-      [full-start] var(--full) [popout-start] var(--popout) [content-start] var(
-        --content
-      )
-      [content-end] var(--popout) [popout-end] var(--full) [full-end];
+      [full-start] var(--full) [popout-start] var(--popout)
+      [content-start] var(--content) [narrow-start] var(--narrow)
+      [narrow-end] var(--content) [content-end] var(--popout)
+      [popout-end] var(--full) [full-end];
     row-gap: var(--gap);
+    grid-template-rows: min-content 1fr min-content;
   }
 
   :where(body) > * {
     grid-column: full;
   }
 
-  body > :is(main, header) {
+  :where(main > *, footer > *, header > *, main > article > *) {
+    grid-column: content;
+  }
+
+  body > :is(header, main, footer) {
     display: grid;
     grid-template-columns: subgrid;
-    row-gap: var(--space-l-xl);
+    align-content: start;
 
-    & > * {
-      grid-column: content;
+    & > article {
+      display: grid;
+      grid-template-columns: subgrid;
     }
   }
 
-  body > header {
-    padding-block: var(--space-xs-s);
+  main {
+    row-gap: var(--layout-space, var(--space-l-xl));
+  }
+
+  body > header,
+  body > footer {
+    padding-block: var(--inner-space, var(--space-s));
+    margin-block: var(--outer-space, 0);
+  }
+
+  body > footer {
+    --inner-space: var(--space-s);
+    --outer-space: var(--space-3xl) 0;
+    background-color: var(--color-footer-bg);
+    color: var(--color-footer-txt);
+    border-block-start: 0.2ex solid var(--color-fg);
   }
 
   nav,
@@ -153,6 +177,10 @@
 
       margin-block-end: var(--flow-space, 1em);
     }
+  }
+
+  figure {
+    grid-column: narrow;
   }
 }
 
@@ -180,8 +208,8 @@
   hr {
     margin-inline: 0;
     margin-block: var(--flow-space, var(--space-l));
-    border-top: none;
-    border-bottom-width: var(--rule-thickness, 0.2ex);
+    border-block-start: none;
+    border-block-end-width: var(--rule-thickness, 0.2ex);
     border-color: var(--color-hr);
   }
 
@@ -392,6 +420,7 @@
     background-color: var(--button-bg);
     border: var(--button-stroke);
     color: var(--button-txt);
+    user-select: none;
 
     &:hover {
       background-color: var(--button-hover-bg);
@@ -507,6 +536,14 @@
     &[data-type="button"] {
       display: inline-block;
     }
+
+    &[data-inverted] {
+      --underline-color: var(--color);
+
+      &:hover {
+        --color: var(--red-100);
+      }
+    }
   }
 
   mark {
@@ -556,7 +593,7 @@
   }
 
   figure {
-    padding: var(--space-s-m);
+    padding-block: var(--space-s-m);
   }
 
   picture,
@@ -576,7 +613,7 @@
     display: inline-flex;
     inline-size: 100%;
     border: var(--stroke, none);
-    border-bottom: var(--stroke-bottom, none);
+    border-block-start: var(--stroke-bottom, none);
     border-color: var(--stroke-color, transparent);
     padding-inline: 0;
     padding-block: var(--flow, 0);
@@ -891,6 +928,9 @@
       color-mix(in lch, var(--color-bg), black 60%),
       color-mix(in lch, var(--color-bg), white 80%)
     );
+
+    --color-footer-bg: var(--red-400);
+    --color-footer-txt: black;
 
     @media (prefers-color-scheme: dark) {
       background-position: center;

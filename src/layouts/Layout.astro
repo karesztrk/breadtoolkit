@@ -1,6 +1,7 @@
 ---
 import { pwaInfo } from "virtual:pwa-info";
 import Menu from "@components/Menu.astro";
+import SecondaryMenu from "@components/SecondaryMenu.astro";
 import "@/assets/styles/global.css";
 import "@/assets/styles/fonts.css";
 
@@ -42,6 +43,7 @@ const fonts = [
     <!-- <script src="/src/pwa.js"></script> -->
     { pwaInfo && <Fragment set:html={pwaInfo.webManifest.linkTag} /> }
   </head>
+
   <body>
     <header>
       <Menu />
@@ -50,5 +52,13 @@ const fonts = [
       <slot />
     </main>
   </body>
-  <footer></footer>
+
+  <footer>
+    <SecondaryMenu />
+    <p>
+      <small>This site is built using Web Standards without AI by a real person who deeply cares about accessibility and user-experience.</small>
+      <small>&copy; Károly Török</small>
+    </p>
+  </footer>
+    
 </html>

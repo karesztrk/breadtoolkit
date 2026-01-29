@@ -19,7 +19,7 @@ export default defineConfig({
   site: process.env.URL,
   integrations: [
     sitemap({
-      filter: (page) => !page.includes("library"),
+      filter: (page) => page !== "library" && page !== "browser-api",
     }),
     AstroPWA({
       registerType: "autoUpdate",

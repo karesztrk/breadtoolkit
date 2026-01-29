@@ -1,0 +1,48 @@
+---
+import Layout from "@layouts/Layout.astro";
+import socials from "./socials.json";
+
+const title = "Contact";
+---
+<Layout title={title}>
+
+  <hgroup>
+    <h1 id="title">{title}</h1>
+    <p>
+      Get in touch with the author of this site
+    </p>
+  </hgroup>
+
+  <section>
+    <address>
+      {Object.values(socials).map(({title, url})=>(
+        <a href={url}>{title}</a><br />
+      ))}
+    </address>
+  </section>
+
+  <section>
+    <hgroup>
+      <h2 id="form-section-title">Form</h2>
+      <p>Drop a comment or just say hello to the author</p>
+    </hgroup>
+
+    <form name="contact" method="POST" data-netlify="true" aria-labelledby="title form-section-title">
+      <div>
+        <label for="name">Name</label>
+        <input type="text" id="name" />
+      </div>
+      <div>
+        <label for="email">Email address</label>
+        <input type="email" id="email" />
+      </div>
+      <div>
+        <label for="message">Message</label>
+        <textarea id="message" />
+      </div>
+
+      <input type="submit" value="Submit" />
+    </form>
+  </section>
+
+</Layout>
