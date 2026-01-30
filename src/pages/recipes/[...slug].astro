@@ -1,7 +1,7 @@
 ---
 import { Image } from "astro:assets";
 import { getCollection } from "astro:content";
-import ShareActions from "@components/recipe/ShareActions.astro";
+import ShareActions from "@components/share/ShareActions.astro";
 import { formatDate } from "@util/recipes.util";
 import Layout from "@/layouts/Layout.astro";
 
@@ -26,22 +26,30 @@ const { Content } = await recipe.render();
           <time datetime={recipe.data.date.toISOString()}>{formatDate(recipe.data.date, recipe.data.language)}</time>
         </p>
       </hgroup>
-      <hr />
-      {recipe.data.cover && (
-        <figure>
-        <!-- There will be a small image and the original -->
-        <!-- Below 64em (1024px) the image occupies 90% of the viewport, above that its 75% -->
-        <Image 
-          src={recipe.data.cover} 
-          alt={recipe.data.coverAlt} 
-          widths={[540, recipe.data.cover.width]}
-          sizes="(min-width: 64em) 75vw, 90vw"
-        />
-          <figcaption>{recipe.data.coverCaption}</figcaption>
-        </figure>
-      )}
     </header>
-    <section>
+
+    <speech-synth $click="onClick" target="content">
+      <fieldset role="group" data-spaced>
+        <button id="play-button" type="button">Play</button>
+        <button id="stop-button" type="button">Stop</button>
+      </fieldset>
+      <div role="alert"></div>
+    </speech-synth>
+
+    {recipe.data.cover && (
+      <figure>
+      <!-- There will be a small image and the original -->
+      <!-- Below 64em (1024px) the image occupies 90% of the viewport, above that its 75% -->
+      <Image 
+        src={recipe.data.cover} 
+        alt={recipe.data.coverAlt} 
+        widths={[540, recipe.data.cover.width]}
+        sizes="(min-width: 64em) 75vw, 90vw"
+      />
+        <figcaption>{recipe.data.coverCaption}</figcaption>
+      </figure>
+    )}
+    <section id="content">
       <Content />
     </section>
     <hr />
@@ -49,7 +57,6 @@ const { Content } = await recipe.render();
       <section>
         <ShareActions />
       </section>
-      <hr />
       <section>
         <ul role="list" data-spaced>
           {recipe.data.tags.map((tag => (
@@ -61,3 +68,7 @@ const { Content } = await recipe.render();
     </footer>
   </article>
 </Layout>
+
+<script>
+  import "@components/synth/SpeechSynth";
+</script>

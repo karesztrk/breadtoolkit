@@ -39,4 +39,8 @@
  * @property {number} liquid
  */
 
+/**
+ * @typedef {Object<string, boolean>} Features
+ */
+
 export {};

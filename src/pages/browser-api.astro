@@ -1,0 +1,312 @@
+---
+import Layout from "@layouts/Layout.astro";
+
+const title = "Browser API Detector";
+---
+
+<Layout title={title}>
+  <header>
+    <h1>{title}</h1>
+  </header>
+
+  <section id="overallStatus" role="status" aria-live="polite">
+    <h2>Status</h2>
+    <p id="statusText">Detecting...</p>
+  </section>
+
+  <section>
+    <h2>Browser</h2>
+    <p id="browserInfo">...</p>
+  </section>
+
+  <section>
+    <h2>Speech Synthesis API</h2>
+    <aside id="speechStatus" role="status" aria-live="polite">
+      <p id="speechStatusText">Detecting...</p>
+    </aside>
+
+    <dl>
+      <dt>API</dt>
+      <dd>
+        <span id="apiAvailable"></span>
+        API Available
+      </dd>
+      <dt>Voices</dt>
+      <dd>
+        <span id="voicesLoaded"></span>
+        Voices Loaded
+      </dd>
+      <dt>Voice Count</dt>
+      <dd id="voiceCount">0</dd>
+    </dl>
+
+    <section>
+      <h3>Speech Synthesis Features</h3>
+      <dl id="speechFeaturesList"></dl>
+    </section>
+
+    <section id="speechErrorsSection">
+      <h3>Speech Synthesis Issues</h3>
+      <ul id="speechErrorsList"></ul>
+    </section>
+  </section>
+
+
+  <section>
+    <h2>CSS Custom Highlight API</h2>
+    <aside id="highlightStatus" role="status" aria-live="polite">
+      <p id="highlightStatusText">Detecting...</p>
+    </aside>
+
+    <section id="highlightFeaturesSection">
+      <h3>CSS Highlight Features</h3>
+      <dl id="highlightFeaturesList"></dl>
+    </section>
+
+    <section id="highlightErrorsSection">
+      <h3>CSS Highlight Issues</h3>
+      <ul id="highlightErrorsList"></ul>
+    </section>
+  </section>
+
+
+  <section>
+    <fieldset role="group" data-spaced>
+      <button id="testBtn" type="button">Test Speech Synthesis</button>
+      <button id="refreshBtn" type="button">Re-detect</button>
+    </fieldset>
+  </section>
+</Layout>
+
+<script>
+import BrowserApiChecker from "@components/browser/BrowserApiChecker";
+
+// DOM manipulation and rendering
+let checker = new BrowserApiChecker();
+let testing = false;
+
+/**
+ * Creates an icon character based on status
+ * @param {boolean|null} status - Status to represent (true = ✓, false = ✗, other = !)
+ * @returns {string} Icon character
+ */
+const createIcon = (status: boolean | null): string => {
+  if (status === true) {
+    return '✓';
+  } else if (status === false) {
+    return '✗';
+  } else {
+    return '!';
+  }
+}
+
+/**
+ * Creates a span element containing an icon
+ * @param {boolean} status - Status to represent
+ * @returns {HTMLSpanElement} Span element with icon text
+ */
+const createIconElement = (status: boolean): HTMLSpanElement => {
+  const span = document.createElement('span');
+  span.textContent = createIcon(status);
+  return span;
+}
+
+/**
+ * Updates the UI with current browser support information
+ * Manipulates DOM elements to display support status, features, and errors
+ */
+const updateUI = () => {
+  const speechChecker = checker.speechChecker;
+  const highlightChecker = checker.highlightChecker;
+  
+  const speechFullSupport = speechChecker.isFullySupported();
+  const highlightFullSupport = highlightChecker.isFullySupported();
+
+  // Overall Status
+  const bothFullySupported = speechFullSupport && highlightFullSupport;
+  const anySupported = speechChecker.available || highlightChecker.available;
+
+  const statusText = document.getElementById('statusText');
+  if (statusText) {
+    statusText.textContent =
+      (bothFullySupported ? '✓ All APIs Fully Supported' :
+        anySupported ? '! Some APIs Supported' :
+          '✗ No APIs Supported');
+  }
+
+  // Browser Info
+  const browserInfo = document.getElementById('browserInfo');
+  if (browserInfo) {
+    browserInfo.textContent = checker.browser;
+  }
+
+  // Speech Synthesis Status
+  const speechStatus = document.getElementById('speechStatus');
+  if (speechStatus) {
+    speechStatus.className = speechFullSupport ? 'success' : speechChecker.available ? 'warning' : 'error';
+  }
+
+  const speechStatusText = document.getElementById('speechStatusText');
+  if (speechStatusText) {
+    speechStatusText.textContent =
+      (speechFullSupport ? '✓ Fully Supported' :
+        speechChecker.available ? '! Partially Supported' :
+          '✗ Not Supported');
+  }
+
+  // Speech API Status
+  const apiAvailable = document.getElementById('apiAvailable');
+  if (apiAvailable) {
+    apiAvailable.textContent = createIcon(speechChecker.available);
+  }
+
+  const voicesLoaded = document.getElementById('voicesLoaded');
+  if (voicesLoaded) {
+    voicesLoaded.textContent = createIcon(speechChecker.voicesLoaded);
+  }
+
+  const voiceCount = document.getElementById('voiceCount');
+  if (voiceCount) {
+    voiceCount.textContent = `${speechChecker.voiceCount}`;
+  }
+
+  // Speech Features
+  const speechFeaturesList = document.getElementById('speechFeaturesList');
+
+  if (speechFeaturesList && speechChecker.available) {
+    speechFeaturesList.innerHTML = '';
+
+    Object.entries(speechChecker.features).forEach((entry) => {
+      const [feature, available] = entry;
+
+      const title = document.createElement('dt');
+      title.textContent = feature.replace(/([A-Z])/g, ' $1').trim();
+
+      const term = document.createElement('dd');
+      term.appendChild(createIconElement(available));
+      term.append(` ${feature.replace(/([A-Z])/g, '$1')}`);
+
+      speechFeaturesList.appendChild(title);
+      speechFeaturesList.appendChild(term);
+    });
+  }
+
+  // Speech Errors
+  const speechErrorsList = document.getElementById('speechErrorsList');
+
+  if (speechErrorsList && speechChecker.errors.length > 0) {
+    speechErrorsList.innerHTML = '';
+
+    speechChecker.errors.forEach((error) => {
+      const li = document.createElement('li');
+      li.textContent = '! ' + error;
+      speechErrorsList.appendChild(li);
+    });
+  }
+
+  // CSS Highlight Status
+  const highlightStatus = document.getElementById('highlightStatus');
+  if (highlightStatus) {
+    highlightStatus.className = highlightFullSupport ? 'success' : highlightChecker.available ? 'warning' : 'error';
+  }
+
+  const highlightStatusText = document.getElementById('highlightStatusText');
+  if (highlightStatusText) {
+    highlightStatusText.textContent =
+      (highlightFullSupport ? '✓ Fully Supported' :
+        highlightChecker.available ? '! Partially Supported' :
+          '✗ Not Supported');
+  }
+
+  // CSS Highlight Features
+  const highlightFeaturesList = document.getElementById('highlightFeaturesList');
+
+  if (highlightFeaturesList && highlightChecker.available) {
+    highlightFeaturesList.innerHTML = '';
+
+    Object.entries(highlightChecker.features).forEach((entry) => {
+      const [feature, available] = entry;
+
+      const title = document.createElement('dt');
+      title.textContent = feature.replace(/([A-Z])/g, ' $1').trim();
+
+      const term = document.createElement('dd');
+      term.appendChild(createIconElement(available));
+      term.append(` ${feature.replace(/([A-Z])/g, '$1')}`);
+
+      highlightFeaturesList.appendChild(title);
+      highlightFeaturesList.appendChild(term);
+    });
+  }
+
+  // CSS Highlight Errors
+  const highlightErrorsList = document.getElementById('highlightErrorsList');
+
+  if (highlightErrorsList && highlightChecker.errors.length > 0) {
+    highlightErrorsList.innerHTML = '';
+
+    highlightChecker.errors.forEach((error) => {
+      const li = document.createElement('li');
+      li.textContent = '! ' + error;
+      highlightErrorsList.appendChild(li);
+    });
+  }
+}
+
+/**
+ * Runs browser detection checks
+ */
+const detectSupport = async () =>{
+  checker.detect().then(()=>{
+  updateUI();
+  });
+}
+
+/**
+ * Tests speech synthesis functionality
+ */
+const testSpeech = () => {
+  if (testing) return;
+
+  const testBtn =  (document.getElementById('testBtn')) as HTMLButtonElement | null;
+  if (!testBtn) return;
+  
+  testing = true;
+  
+  checker.testSpeech(
+    () => {
+      testBtn.disabled = true;
+      testBtn.textContent = 'Speaking...';
+    },
+    () => {
+      testing = false;
+      testBtn.disabled = false;
+      testBtn.textContent = 'Test Speech Synthesis';
+    },
+    (error: unknown) => {
+      testing = false;
+      testBtn.disabled = false;
+      testBtn.textContent = 'Test Speech Synthesis';
+      alert('Speech Error: ' + error);
+    }
+  );
+}
+
+const testBtn = document.getElementById('testBtn');
+if (testBtn) {
+  testBtn.addEventListener('click', testSpeech);
+}
+
+const refreshBtn = document.getElementById('refreshBtn');
+if (refreshBtn) {
+  refreshBtn.addEventListener('click', detectSupport);
+}
+
+window.addEventListener('beforeunload', () =>{
+  if (window.speechSynthesis) {
+    window.speechSynthesis.cancel();
+  }
+});
+
+detectSupport();
+</script>
