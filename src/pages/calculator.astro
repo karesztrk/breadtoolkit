@@ -62,7 +62,7 @@ const title = "Calculator";
       <form id="weight-form">
         <div>
           <label for="weight-input">Dough weight</label>
-          <input autofocus id="weight-input" type="number" name="weight" inputmode="decimal" step="1" min="0" required aria-describedby="weight-hint" />
+          <input autofocus id="weight-input" type="number" name="weight" inputmode="decimal" step="1" min="0" required aria-describedby="weight-hint" autocorrect="off" autocomplete="off" spellcheck="false" />
           <small id="weight-helper">Set the target dough weight</small>
         </div>
         <fieldset role="group" data-spaced>
@@ -89,25 +89,25 @@ const title = "Calculator";
       <form aria-labelledby="title">
         <calculator-form-group $input="onInput">
           <label for={flourInput}>Flour</label>
-          <NumberInput type="number" id={flourInput} name="flour" value="0" inputmode="decimal" step="1" min="0" required enterkeyhint="next" aria-describedby={`${flourInput}-error`}}/>
+          <NumberInput type="number" id={flourInput} name="flour" value="0" inputmode="decimal" step="1" min="0" required enterkeyhint="next" aria-describedby={`${flourInput}-error`}} autocorrect="off" autocomplete="off" spellcheck="false" />
           <small id={`${flourInput}-error`} aria-live="polite" data-severity="error"/>
         </calculator-form-group>
 
         <calculator-form-group $input="onInput">
           <label for={waterInput}>Water</label>
-          <NumberInput type="number" id={waterInput} name="water" value="0" inputmode="decimal" step="1" min="0" required enterkeyhint="next" aria-describedby={`${waterInput}-error`} />
+          <NumberInput type="number" id={waterInput} name="water" value="0" inputmode="decimal" step="1" min="0" required enterkeyhint="next" aria-describedby={`${waterInput}-error`} autocorrect="off" autocomplete="off" spellcheck="false" />
           <small id={`${waterInput}-error`} aria-live="polite" data-severity="error" />
         </calculator-form-group>
 
         <calculator-form-group $input="onInput">
           <label for="salt-input">Salt</label>
-          <NumberInput type="number" id="salt-input" name="salt" value="0" inputmode="decimal" step="1" min="0" required enterkeyhint="next" aria-describedby={`${saltInput}-error`} />
+          <NumberInput type="number" id="salt-input" name="salt" value="0" inputmode="decimal" step="1" min="0" required enterkeyhint="next" aria-describedby={`${saltInput}-error`} autocorrect="off" autocomplete="off" spellcheck="false" />
           <small id={`${saltInput}-error`} aria-live="polite" data-severity="error"/>
         </calculator-form-group>
 
         <calculator-form-group $input="onInput">
           <label for="sourdough-input">Sourdough</label>
-          <NumberInput type="number" id="sourdough-input" name="sourdough" value="0" inputmode="decimal" step="1" min="0" required enterkeyhint="next" aria-describedby={`${sourdoughInput}-error`} />
+          <NumberInput type="number" id="sourdough-input" name="sourdough" value="0" inputmode="decimal" step="1" min="0" required enterkeyhint="next" aria-describedby={`${sourdoughInput}-error`} autocorrect="off" autocomplete="off" spellcheck="false" />
           <small id={`${sourdoughInput}-error`} aria-live="polite" data-severity="error"/>
         </calculator-form-group>
 
