@@ -18,7 +18,10 @@ export const GET = async (context) => {
   let baseUrl = context.site?.href || "";
   if (baseUrl.at(-1) === "/") baseUrl = baseUrl.slice(0, -1);
 
-  const posts = await getCollection("Recipes");
+  const posts = (await getCollection("Recipes")).sort((a, b) =>
+    // Sort by publication date descending.
+    a.data.date > b.data.date ? -1 : 1,
+  );
 
   const container = await AstroContainer.create();
 
