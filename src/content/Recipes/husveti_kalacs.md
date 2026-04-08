@@ -48,3 +48,7 @@ Az adagot _megdupláztam_ (így két kalácska készült) és a Lievito madre he
 A tészta elég lágyra sikerült, így a formázásnál volt, hogy visszaraktam a hűtőbe dermedni, mert már nagyon folyt a tészta. Itt jegyezném meg, hogy a tojássárgája csak a kenéshez kell, így azt duplázni nem kell. A _2 egész tojás_ tökéletesen elég a tésztába.
 
 Az érést _időzítését_ tekintve az első dagasztás után elég gyorsan ment. Korábn reggel begyúrtam, hűtőbe raktam egy lezárt dobozba, de már este formázhattam is. Estére újra visszahelyeztem a hűtőbe kelni (bár _Szabi Pék_ atyánk szerint a kalácsnak a sütőben kell kellnie), majd reggel ki is sütöttem.
+
+### Frissítve 2026
+
+Idén dupla adag tésztát csináltam egyetlen kenyérformában. Nagy tanulság, hogy sokkal tovább kell sütni, hogy a tésztát. Nálam kb. 50 perc volt. Érdemesebb a tűpróba használata, ha nem szeretnénk nyers tésztát.
