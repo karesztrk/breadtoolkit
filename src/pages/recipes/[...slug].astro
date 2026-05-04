@@ -1,20 +1,20 @@
 ---
 import { Image } from "astro:assets";
-import { getCollection } from "astro:content";
+import { getCollection, render } from "astro:content";
 import ShareActions from "@components/share/ShareActions.astro";
 import { formatDate } from "@util/recipes.util";
 import Layout from "@/layouts/Layout.astro";
 
 export async function getStaticPaths() {
-  const recipes = await getCollection("Recipes");
+  const recipes = await getCollection("recipes");
   return recipes.map((recipe) => ({
-    params: { slug: recipe.slug },
+    params: { slug: recipe.id },
     props: { entry: recipe },
   }));
 }
 
 const { entry: recipe } = Astro.props;
-const { Content } = await recipe.render();
+const { Content } = await render(recipe);
 ---
 
 <Layout title={recipe.data.title} lang={recipe.data.language}>

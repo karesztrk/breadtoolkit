@@ -3,7 +3,7 @@ import { getCollection } from "astro:content";
 import RecipeEntry from "@components/recipe/RecipeEntry.astro";
 import Layout from "@layouts/Layout.astro";
 
-const recipes = await getCollection("Recipes");
+const recipes = await getCollection("recipes");
 
 const recentRecipes = recipes
   .sort((left, right) => right.data.date.getTime() - left.data.date.getTime())

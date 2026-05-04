@@ -1,7 +1,9 @@
-import { defineCollection, z } from "astro:content";
+import { defineCollection } from "astro:content";
+import { glob } from "astro/loaders";
+import { z } from "astro/zod";
 
 const schema = defineCollection({
-  type: "content",
+  loader: glob({ pattern: "**/*.md", base: "./src/content/Recipes" }),
   schema: ({ image }) =>
     z.object({
       tags: z.array(z.string()),
@@ -14,6 +16,4 @@ const schema = defineCollection({
     }),
 });
 
-export const collections = {
-  Recipes: schema,
-};
+export const collections = { recipes: schema };
